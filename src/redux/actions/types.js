@@ -1,0 +1,5 @@
+//filter  definition
+export const GET_LISTDATA = 'GET_LISTDATA';
+export const GET_LISTDATA_START = 'GET_LISTDATA_START';
+export const GET_LISTDATA_SUCCESS = 'GET_LISTDATA_SUCCESS';
+export const GET_LISTDATA_FAILED = 'GET_LISTDATA_FAILED';

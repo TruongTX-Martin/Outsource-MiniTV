@@ -1,0 +1,67 @@
+import React, {Component} from 'react';
+import {
+  View,
+  TextInput,
+  Dimensions,
+  StyleSheet,
+  Platform,
+  Text,
+} from 'react-native';
+const {width} = Dimensions.get('window');
+
+class index extends Component {
+  render() {
+    return (
+      <View
+        style={[
+          {
+            backgroundColor: this.props.backgroundColor || '#f0f2f4',
+            borderRadius: 5,
+            height: 40,
+            marginBottom: Platform.OS === 'ios' ? 4 : 0,
+          },
+          this.props.style,
+        ]}>
+        <TextInput
+          style={[Styles.text, {width: this.props.widthText || width - 55}]}
+          value={this.props.value}
+          secureTextEntry={this.props.isPassword ? true : false}
+          returnKeyType={this.props.keyType ? this.props.keyType : 'next'}
+          keyboardType={
+            this.props.keyboardType ? this.props.keyboardType : 'default'
+          }
+          onChangeText={(text) =>
+            this.props.onChangeText && this.props.onChangeText(text)
+          }
+          onBlur={() =>
+            this.props.onBlur ? this.props.onBlur() : console.log('')
+          }
+          placeholder={this.props.placeholder ? this.props.placeholder : ''}
+          onSubmitEditing={() => this.props.onSearch && this.props.onSearch()}
+        />
+        {this.props.error != null && this.props.error.length > 0 && (
+          <Text>{this.props.error}</Text>
+        )}
+      </View>
+    );
+  }
+}
+
+export default index;
+const Styles = StyleSheet.create({
+  itemInput: {
+    height: 39,
+    borderWidth: 1,
+    borderColor: '#CACACA',
+    borderBottomColor: 'white',
+    borderRadius: 5,
+    marginTop: 5,
+  },
+  text: {
+    fontSize: 16,
+    paddingLeft: 5,
+    height: 40,
+    width: width - 55,
+    paddingTop: Platform.OS === 'android' ? 5 : 0,
+  },
+});
