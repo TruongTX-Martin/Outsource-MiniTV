@@ -137,12 +137,13 @@ class index extends Component {
                         justifyContent: 'space-between',
                       }}
                       onPress={() => this.handleClickOption(e)}>
-                      <View
+                      <TouchableOpacity
                         style={{
                           display: 'flex',
                           flexDirection: 'row',
                           alignItems: 'center',
-                        }}>
+                        }}
+                        onPress={() => this.handleClickOption(e)}>
                         <Image
                           source={
                             e.isCheck ? Images.imgIcCheck : Images.imgIcUnCheck
@@ -153,11 +154,22 @@ class index extends Component {
                           style={{color: e.isCheck ? '#222222' : '#555555'}}>
                           {e.title}
                         </Text>
-                      </View>
-                      <Image
-                        style={{width: 15, height: 15}}
-                        source={Images.imgIcArrowRight}
-                      />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={{
+                          width: 50,
+                          height: 20,
+                          display: 'flex',
+                          alignItems: 'flex-end',
+                        }}
+                        onPress={() =>
+                          this.props.navigation.navigate('TermChild')
+                        }>
+                        <Image
+                          style={{width: 15, height: 15}}
+                          source={Images.imgIcArrowRight}
+                        />
+                      </TouchableOpacity>
                     </TouchableOpacity>
                   );
                 })}

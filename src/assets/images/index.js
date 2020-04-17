@@ -8,4 +8,5 @@ export default {
   imgIcCheck: require('./icon_select2.png'),
   imgIcUnCheck: require('./icon_s4.png'),
   imgIcArrowRight: require('./icon_right.png'),
+  imgIcBack: require('./icon_back.png'),
 };

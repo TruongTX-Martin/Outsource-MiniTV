@@ -12,10 +12,7 @@ class index extends Component {
             <TouchableOpacity
               style={styles.buttonLeft}
               onPress={() => this.props.navigation.goBack()}>
-              <Image
-                style={styles.imageButtonLeft}
-                source={Images.imageArrowLeftWhite}
-              />
+              <Image style={styles.imageButtonLeft} source={Images.imgIcBack} />
             </TouchableOpacity>
           )}
         </View>
