@@ -10,6 +10,7 @@ import {EventRegister} from 'react-native-event-listeners';
 class index extends Component {
   componentDidMount() {
     this.props.getListData();
+    this.props.navigation.navigate('SignIn');
   }
 
   renderItem({item, index}) {

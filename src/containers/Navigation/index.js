@@ -2,7 +2,8 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {fromRight} from 'react-navigation-transitions';
 import HomeScreen from '../Home';
-import DetailScreen from '../Detail';
+import SignInScreen from '../Auth/SignIn';
+import TermAndCondition from '../Auth/TermAndCondition';
 
 //use with case don't need slidemenu
 // export default StackNavigator({
@@ -21,8 +22,15 @@ const stackNavigator = createStackNavigator(
         drawerLockMode: 'locked-open',
       }),
     },
-    Detail: {
-      screen: DetailScreen,
+    SignIn: {
+      screen: SignInScreen,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    TermAndCondition: {
+      screen: TermAndCondition,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',
