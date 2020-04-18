@@ -5,6 +5,9 @@ import HomeScreen from '../Home';
 import SignInScreen from '../Auth/SignIn';
 import TermAndCondition from '../Auth/TermAndCondition';
 import TermChild from '../Auth/TermChild';
+import SignUp from '../Auth/SignUp';
+import SignUpMoreInfor from '../Auth/SignUpMoreInfor';
+import FindPassword from '../Auth/FindPassword';
 
 //use with case don't need slidemenu
 // export default StackNavigator({
@@ -39,6 +42,27 @@ const stackNavigator = createStackNavigator(
     },
     TermChild: {
       screen: TermChild,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    SignUp: {
+      screen: SignUp,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    SignUpMoreInfor: {
+      screen: SignUpMoreInfor,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    FindPassword: {
+      screen: FindPassword,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

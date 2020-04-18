@@ -38,7 +38,7 @@ class index extends Component {
   }
 
   handleClickOption(option) {
-    var {listOption} = this.state;
+    var {listOption, optionAll} = this.state;
     listOption = listOption.map((e) => {
       if (e.key == option.key) {
         return {
@@ -48,10 +48,16 @@ class index extends Component {
       }
       return e;
     });
+    if (option.isCheck) {
+      optionAll = {
+        ...optionAll,
+        isCheck: false,
+      };
+    }
     const canNext = !(
       listOption.filter((e) => e.isMust && !e.isCheck).length > 0
     );
-    this.setState({listOption, canNext});
+    this.setState({listOption, canNext, optionAll});
   }
 
   handleClickOptionAll() {
@@ -179,13 +185,15 @@ class index extends Component {
         </Body>
         <Footer>
           <TouchableOpacity
+            disabled={!canNext}
             style={{
               backgroundColor: canNext ? '#499DA7' : '#999999',
               width,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-            }}>
+            }}
+            onPress={() => this.props.navigation.navigate('SignUp')}>
             <Text style={{color: 'white', fontSize: 18}}>다음</Text>
           </TouchableOpacity>
         </Footer>

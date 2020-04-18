@@ -72,8 +72,8 @@ const Styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    paddingLeft: 5,
     height: 45,
+    paddingLeft: 5,
     width: width - 55,
     paddingTop: Platform.OS === 'android' ? 5 : 0,
   },

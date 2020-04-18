@@ -43,6 +43,7 @@ class index extends Component {
                   width={width - 42}
                   styleIcon={{width: 15, height: 18}}
                   placeholder="비밀번호"
+                  isPassword
                 />
                 <View style={{marginTop: 20}}>
                   <ButtonBase width={width - 46} text={'로그인'} />
@@ -60,7 +61,10 @@ class index extends Component {
                       회원가입
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('FindPassword')
+                    }>
                     <Text style={{color: '#797979', marginRight: 10}}>
                       비밀번호 찾기
                     </Text>
