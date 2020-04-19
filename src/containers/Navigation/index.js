@@ -11,6 +11,9 @@ import SignUp from '../Auth/SignUp';
 import SignUpMoreInfor from '../Auth/SignUpMoreInfor';
 import FindPassword from '../Auth/FindPassword';
 import SlideMenu from '../SlideMenu';
+import MiniTVChannel from '../Home/MiniTVChannel';
+import PokeList from '../Home/PokeList';
+import ReplayProgram from '../Home/ReplayProgram';
 const {width} = Dimensions.get('window');
 
 //use with case don't need slidemenu
@@ -66,6 +69,27 @@ const stackNavigator = createStackNavigator(
     },
     FindPassword: {
       screen: FindPassword,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    MiniTVChannel: {
+      screen: MiniTVChannel,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    PokeList: {
+      screen: PokeList,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    ReplayProgram: {
+      screen: ReplayProgram,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

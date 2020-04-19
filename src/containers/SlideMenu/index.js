@@ -103,7 +103,8 @@ class index extends Component {
                       alignItems: 'center',
                       borderRightWidth: 0.5,
                       borderRightColor: '#cccccc',
-                    }}>
+                    }}
+                    onPress={() => this.props.navigation.navigate('PokeList')}>
                     <Image
                       style={{width: 40, height: 35}}
                       source={Images.imgIcPokeProgram}
@@ -118,7 +119,10 @@ class index extends Component {
                       width: (width - 60) / 2,
                       display: 'flex',
                       alignItems: 'center',
-                    }}>
+                    }}
+                    onPress={() =>
+                      this.props.navigation.navigate('ReplayProgram')
+                    }>
                     <Image
                       style={{width: 40, height: 32}}
                       source={Images.imgIcReplayProgram}
@@ -155,7 +159,10 @@ class index extends Component {
                     alignItems: 'center',
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#cccccc',
-                  }}>
+                  }}
+                  onPress={() =>
+                    this.props.navigation.navigate('MiniTVChannel')
+                  }>
                   <Text>채널 리스트</Text>
                   <Image
                     style={{width: 15, height: 15}}

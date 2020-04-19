@@ -13,6 +13,7 @@ import Config from '../../config';
 import {connect} from 'react-redux';
 import Images from '../../assets/images';
 import * as listDataAction from '../../redux/actions/getListDataAction';
+import ItemChannel from './Component/ItemChannel';
 const {width, height} = Dimensions.get('window');
 
 const widthView = width - 30;
@@ -231,62 +232,7 @@ class index extends Component {
                     paddingLeft: 5,
                   }}>
                   {this.listHotChannel.map((e) => {
-                    return (
-                      <View
-                        style={{
-                          height: ((widthView - 20) * 450) / 950 + 70,
-                          marginRight: 20,
-                          borderRadius: 20,
-                          borderBottomLeftRadius: 10,
-                          borderBottomRightRadius: 10,
-                        }}>
-                        <Image
-                          style={{
-                            width: widthView - 20,
-                            height: ((widthView - 20) * 450) / 950,
-                            borderTopLeftRadius: 10,
-                            borderTopRightRadius: 10,
-                          }}
-                          source={{uri: e.image}}
-                        />
-                        <View
-                          style={{
-                            height: 70,
-                            borderBottomLeftRadius: 10,
-                            borderBottomRightRadius: 10,
-                            shadowColor: '#000',
-                            shadowOffset: {
-                              width: 0,
-                              height: 2,
-                            },
-                            shadowOpacity: 0.25,
-                            shadowRadius: 3.84,
-                            elevation: 5,
-                            backgroundColor: '#ffffff',
-                          }}>
-                          <Text style={{marginLeft: 10, marginTop: 10}}>
-                            {e.title}
-                          </Text>
-                          <View
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              marginLeft: 10,
-                            }}>
-                            {e.tags.map((tag) => {
-                              return (
-                                <TouchableOpacity>
-                                  <Text
-                                    style={{color: '#999999', marginRight: 5}}>
-                                    {tag}
-                                  </Text>
-                                </TouchableOpacity>
-                              );
-                            })}
-                          </View>
-                        </View>
-                      </View>
-                    );
+                    return <ItemChannel item={e} widthView={widthView - 30} />;
                   })}
                 </ScrollView>
               </View>
