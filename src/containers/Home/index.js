@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from 'react-native';
 import {Container, Body, Header, Content} from 'native-base';
-import HeaderBase from '../../components/HeaderBase';
 import Config from '../../config';
 import {connect} from 'react-redux';
 import Images from '../../assets/images';
@@ -102,7 +101,8 @@ class index extends Component {
               style={{width: 100, height: 23, marginLeft: 15}}
               source={Images.imgLogo}
             />
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer()}>
               <Image
                 style={{width: 25, height: 19, marginRight: 10}}
                 source={Images.imgIcMenuBar}

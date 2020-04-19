@@ -11,4 +11,9 @@ export default {
   imgIcBack: require('./icon_back.png'),
   imgIcMenuBar: require('./icon_bar.png'),
   imgIcPlay: require('./play_btn.png'),
+  imgIcClose: require('./icon_x.png'),
+  imgIcBell: require('./icon_bell3.png'),
+  imgIcPokeProgram: require('./ic_poke_program.png'),
+  imgIcReplayProgram: require('./ic_replay_program.png'),
+  imgIcProfile: require('./profile1.png'),
 };

@@ -1,5 +1,7 @@
+import {Dimensions} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import {createDrawerNavigator} from 'react-navigation-drawer';
 import {fromRight} from 'react-navigation-transitions';
 import HomeScreen from '../Home';
 import SignInScreen from '../Auth/SignIn';
@@ -8,6 +10,8 @@ import TermChild from '../Auth/TermChild';
 import SignUp from '../Auth/SignUp';
 import SignUpMoreInfor from '../Auth/SignUpMoreInfor';
 import FindPassword from '../Auth/FindPassword';
+import SlideMenu from '../SlideMenu';
+const {width} = Dimensions.get('window');
 
 //use with case don't need slidemenu
 // export default StackNavigator({
@@ -15,7 +19,6 @@ import FindPassword from '../Auth/FindPassword';
 //   Detail: { screen: DetailScreen }
 // }, {
 //       headerMode: 'none'
-//   });
 
 const stackNavigator = createStackNavigator(
   {
@@ -100,20 +103,21 @@ stackNavigator.navigationOptions = ({navigation}) => {
     drawerLockMode,
   };
 };
-// const MyDrawerNavigator = createDrawerNavigator(
-//   {
-//     stackNavigator,
-//   },
-//   {
-//     navigationOptions: {
-//       gesturesEnabled: true,
-//       drawerLockMode: 'locked-open',
-//     },
-//     contentComponent: SideMenu,
-//     drawerBackgroundColor: 'white',
-//     drawerWidth: 300,
-//   },
-// );
+const MyDrawerNavigator = createDrawerNavigator(
+  {
+    stackNavigator,
+  },
+  {
+    navigationOptions: {
+      gesturesEnabled: true,
+      drawerLockMode: 'locked-open',
+    },
+    contentComponent: SlideMenu,
+    drawerBackgroundColor: 'white',
+    drawerWidth: width - 30,
+    drawerPosition: 'right',
+  },
+);
 
-const MyApp = createAppContainer(stackNavigator);
+const MyApp = createAppContainer(MyDrawerNavigator);
 export default MyApp;
