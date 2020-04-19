@@ -16,6 +16,7 @@ import PokeList from '../Home/PokeList';
 import ReplayProgram from '../Home/ReplayProgram';
 import ChannelDetail from '../Home/ChannelDetail';
 import Alert from '../Home/Alert';
+import Setting from '../Home/Setting';
 const {width} = Dimensions.get('window');
 
 //use with case don't need slidemenu
@@ -106,6 +107,13 @@ const stackNavigator = createStackNavigator(
     },
     Alert: {
       screen: Alert,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    Setting: {
+      screen: Setting,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

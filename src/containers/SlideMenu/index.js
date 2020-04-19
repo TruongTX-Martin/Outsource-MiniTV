@@ -180,7 +180,8 @@ class index extends Component {
                     alignItems: 'center',
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#cccccc',
-                  }}>
+                  }}
+                  onPress={() => this.props.navigation.navigate('Setting')}>
                   <Text>설정</Text>
                   <Image
                     style={{width: 15, height: 15}}
