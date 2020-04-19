@@ -9,4 +9,6 @@ export default {
   imgIcUnCheck: require('./icon_s4.png'),
   imgIcArrowRight: require('./icon_right.png'),
   imgIcBack: require('./icon_back.png'),
+  imgIcMenuBar: require('./icon_bar.png'),
+  imgIcPlay: require('./play_btn.png'),
 };
