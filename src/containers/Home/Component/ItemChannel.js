@@ -9,7 +9,7 @@ class index extends Component {
   render() {
     const {item, widthView} = this.props;
     return (
-      <View
+      <TouchableOpacity
         style={{
           width: widthView,
           height: (widthView * 450) / 950 + 70,
@@ -19,7 +19,8 @@ class index extends Component {
           borderBottomRightRadius: 10,
           marginBottom: 30,
           marginLeft: 5,
-        }}>
+        }}
+        onPress={() => this.props.navigation.navigate('ChannelDetail')}>
         <Image
           style={{
             width: widthView,
@@ -61,7 +62,7 @@ class index extends Component {
             })}
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

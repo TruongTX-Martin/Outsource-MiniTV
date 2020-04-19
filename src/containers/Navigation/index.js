@@ -14,6 +14,8 @@ import SlideMenu from '../SlideMenu';
 import MiniTVChannel from '../Home/MiniTVChannel';
 import PokeList from '../Home/PokeList';
 import ReplayProgram from '../Home/ReplayProgram';
+import ChannelDetail from '../Home/ChannelDetail';
+import Alert from '../Home/Alert';
 const {width} = Dimensions.get('window');
 
 //use with case don't need slidemenu
@@ -90,6 +92,20 @@ const stackNavigator = createStackNavigator(
     },
     ReplayProgram: {
       screen: ReplayProgram,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    ChannelDetail: {
+      screen: ChannelDetail,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    Alert: {
+      screen: Alert,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

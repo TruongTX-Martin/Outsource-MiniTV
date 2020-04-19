@@ -67,10 +67,6 @@ class index extends Component {
         </Header>
         <Body>
           <View style={{width: widthView}}>
-            <Text
-              style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
-              Poke list
-            </Text>
             <FlatList
               data={this.listHotChannel}
               style={{marginBottom: 30}}
@@ -78,11 +74,31 @@ class index extends Component {
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => {
                 return (
-                  <ItemChannel
-                    item={item}
-                    widthView={widthView - 10}
-                    navigation={this.props.navigation}
-                  />
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      borderBottomWidth: 1,
+                      borderBottomColor: '#cccccc',
+                      marginVertical: 10,
+                      paddingBottom: 10,
+                    }}>
+                    <Image
+                      style={{width: 60, height: 60, borderRadius: 5}}
+                      source={{uri: item.image}}
+                    />
+                    <View
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        paddingLeft: 10,
+                      }}>
+                      <Text>
+                        30분 후에 찜한 방송 “한글을 찾아라”가 시작됩니다.
+                      </Text>
+                      <Text>Come back home</Text>
+                    </View>
+                  </View>
                 );
               }}
             />

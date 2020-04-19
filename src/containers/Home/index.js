@@ -232,7 +232,13 @@ class index extends Component {
                     paddingLeft: 5,
                   }}>
                   {this.listHotChannel.map((e) => {
-                    return <ItemChannel item={e} widthView={widthView - 30} />;
+                    return (
+                      <ItemChannel
+                        item={e}
+                        widthView={widthView - 30}
+                        navigation={this.props.navigation}
+                      />
+                    );
                   })}
                 </ScrollView>
               </View>

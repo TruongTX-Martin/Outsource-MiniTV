@@ -44,7 +44,9 @@ class index extends Component {
                       source={Images.imgIcClose}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity style={{width: 40, height: 40}}>
+                  <TouchableOpacity
+                    style={{width: 40, height: 40}}
+                    onPress={() => this.props.navigation.navigate('Alert')}>
                     <Image
                       style={{width: 20, height: 20}}
                       source={Images.imgIcBell}

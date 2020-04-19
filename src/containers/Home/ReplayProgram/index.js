@@ -77,7 +77,13 @@ class index extends Component {
               keyExtractor={(item) => item.id}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => {
-                return <ItemChannel item={item} widthView={widthView - 10} />;
+                return (
+                  <ItemChannel
+                    item={item}
+                    widthView={widthView - 10}
+                    navigation={this.props.navigation}
+                  />
+                );
               }}
             />
           </View>

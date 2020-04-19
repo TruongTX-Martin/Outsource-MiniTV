@@ -16,4 +16,8 @@ export default {
   imgIcPokeProgram: require('./ic_poke_program.png'),
   imgIcReplayProgram: require('./ic_replay_program.png'),
   imgIcProfile: require('./profile1.png'),
+  imgIcTarget: require('./ic_target.png'),
+  imgIcDuration: require('./ic_duration.png'),
+  imgIcShare: require('./share.png'),
+  imgIcHear: require('./heart-w.png'),
 };
