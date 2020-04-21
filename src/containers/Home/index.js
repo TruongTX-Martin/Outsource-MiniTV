@@ -7,6 +7,7 @@ import {
   Dimensions,
   ImageBackground,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import {Container, Body, Header, Content} from 'native-base';
 import Config from '../../config';
@@ -14,6 +15,8 @@ import {connect} from 'react-redux';
 import Images from '../../assets/images';
 import * as listDataAction from '../../redux/actions/getListDataAction';
 import ItemChannel from './Component/ItemChannel';
+import {EventRegister} from 'react-native-event-listeners';
+import DataLocal from '../../services/DataLocal';
 const {width, height} = Dimensions.get('window');
 
 const widthView = width - 30;
@@ -48,11 +51,17 @@ class index extends Component {
         tags: ['#4~5세', '#영어게임', '#놀이'],
       },
     ];
+    this.state = {
+      loading: true,
+    };
   }
 
   componentDidMount() {
     this.props.getListData();
-    // this.props.navigation.navigate('Intro1');
+    const timeoutLoading = setTimeout(() => {
+      this.setState({loading: false});
+      clearTimeout(timeoutLoading);
+    }, 2000);
   }
 
   renderItem({item, index}) {
@@ -70,16 +79,41 @@ class index extends Component {
     );
   }
 
-  componentWillMount() {
-    // this.listener = EventRegister.addEventListener('TokenExpired', (data) => {
-    //   console.log('Token expired, please lgout');
-    // });
+  async componentWillMount() {
+    this.listenerGoToSignIn = EventRegister.addEventListener(
+      Config.Constant.EVENT_GOTO_SIGNIN,
+      (data) => {
+        this.props.navigation.navigate('SignIn');
+      },
+    );
+    const hasShowIntro = await DataLocal.getHasShowIntro();
+    console.log('hasShowIntro:', hasShowIntro);
+    if (hasShowIntro == null) {
+      this.props.navigation.navigate('Intro1');
+    } else {
+      this.props.navigation.navigate('SignIn');
+    }
   }
   componentWillUnmount() {
-    // EventRegister.removeEventListener(this.listener);
+    EventRegister.removeEventListener(this.listenerGoToSignIn);
   }
 
   render() {
+    const {loading} = this.state;
+    if (loading) {
+      return (
+        <View
+          style={{
+            width,
+            height,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <ActivityIndicator size="large" color="#499DA7" />
+        </View>
+      );
+    }
     return (
       <Container>
         <Header

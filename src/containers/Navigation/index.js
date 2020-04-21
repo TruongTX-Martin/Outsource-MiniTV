@@ -19,7 +19,8 @@ import Alert from '../Home/Alert';
 import Setting from '../Home/Setting';
 import ChangePassword from '../Home/Setting/ChangePassword';
 import MyInfor from '../Home/Setting/MyInfor';
-import Intro1 from '../Intro';
+import Intro1 from '../Intro1';
+import Intro2 from '../Intro2';
 const {width} = Dimensions.get('window');
 
 //use with case don't need slidemenu
@@ -138,6 +139,13 @@ const stackNavigator = createStackNavigator(
     },
     Intro1: {
       screen: Intro1,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    Intro2: {
+      screen: Intro2,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

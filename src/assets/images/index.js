@@ -22,4 +22,6 @@ export default {
   imgIcHear: require('./heart-w.png'),
   imgProfile2: require('./profile2.png'),
   imgIcCamera: require('./ic_camera.png'),
+  imgIntro1: require('./intro1.png'),
+  imgIntro2: require('./intro2.png'),
 };
