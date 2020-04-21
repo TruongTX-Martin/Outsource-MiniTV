@@ -24,7 +24,13 @@ class index extends Component {
             showsVerticalScrollIndicator={false}
             style={{backgroundColor: '#EFEDED'}}>
             <View
-              style={{width, height: height - 100, backgroundColor: '#EFEDED'}}>
+              style={{
+                width,
+                height: height - 100,
+                backgroundColor: '#EFEDED',
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}>
               <View>
                 <TouchableOpacity
                   style={{marginTop: 50}}

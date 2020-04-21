@@ -7,6 +7,7 @@ import HomeScreen from '../Home';
 import SignInScreen from '../Auth/SignIn';
 import TermAndCondition from '../Auth/TermAndCondition';
 import TermChild from '../Auth/TermChild';
+import TermOfUse from '../Auth/TermChild/TermOfUse';
 import SignUp from '../Auth/SignUp';
 import SignUpMoreInfor from '../Auth/SignUpMoreInfor';
 import FindPassword from '../Auth/FindPassword';
@@ -146,6 +147,13 @@ const stackNavigator = createStackNavigator(
     },
     Intro2: {
       screen: Intro2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    TermOfUse: {
+      screen: TermOfUse,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

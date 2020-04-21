@@ -37,6 +37,14 @@ class index extends Component {
     };
   }
 
+  onPressChild(item) {
+    if (item.key == 'termOfUse') {
+      this.props.navigation.navigate('TermOfUse');
+    } else if (item.key == 'privacyTerm') {
+    } else if (item.key == 'marketing') {
+    }
+  }
+
   handleClickOption(option) {
     var {listOption, optionAll} = this.state;
     listOption = listOption.map((e) => {
@@ -168,9 +176,7 @@ class index extends Component {
                           display: 'flex',
                           alignItems: 'flex-end',
                         }}
-                        onPress={() =>
-                          this.props.navigation.navigate('TermChild')
-                        }>
+                        onPress={() => this.onPressChild(e)}>
                         <Image
                           style={{width: 15, height: 15}}
                           source={Images.imgIcArrowRight}

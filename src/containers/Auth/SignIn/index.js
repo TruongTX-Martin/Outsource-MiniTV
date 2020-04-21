@@ -29,7 +29,8 @@ class index extends Component {
                   }}
                 />
               </View>
-              <View style={{display: 'flex', alignItems: 'center'}}>
+              <View
+                style={{display: 'flex', alignItems: 'center', marginTop: 30}}>
                 <View style={{marginBottom: 10}}>
                   <TextInput
                     icon={Images.imgIcUserName}
@@ -45,7 +46,7 @@ class index extends Component {
                   placeholder="비밀번호"
                   isPassword
                 />
-                <View style={{marginTop: 20}}>
+                <View style={{marginTop: 40}}>
                   <ButtonBase width={width - 46} text={'로그인'} />
                 </View>
                 <View
@@ -112,12 +113,6 @@ class index extends Component {
                     />
                   </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{marginTop: 40}}>
-                  <Text
-                    style={{color: '#797979', textDecorationLine: 'underline'}}>
-                    둘러보기
-                  </Text>
-                </TouchableOpacity>
               </View>
             </View>
           </Content>
