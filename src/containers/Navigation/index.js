@@ -17,6 +17,9 @@ import ReplayProgram from '../Home/ReplayProgram';
 import ChannelDetail from '../Home/ChannelDetail';
 import Alert from '../Home/Alert';
 import Setting from '../Home/Setting';
+import ChangePassword from '../Home/Setting/ChangePassword';
+import MyInfor from '../Home/Setting/MyInfor';
+import Intro1 from '../Intro';
 const {width} = Dimensions.get('window');
 
 //use with case don't need slidemenu
@@ -114,6 +117,27 @@ const stackNavigator = createStackNavigator(
     },
     Setting: {
       screen: Setting,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    ChangePassword: {
+      screen: ChangePassword,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    MyInfor: {
+      screen: MyInfor,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    Intro1: {
+      screen: Intro1,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

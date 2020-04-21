@@ -61,7 +61,7 @@ class index extends Component {
                 borderBottomWidth: 0.5,
                 borderBottomColor: '#cccccc',
               }}
-              onPress={() => this.props.navigation.navigate('Setting')}>
+              onPress={() => this.props.navigation.navigate('MyInfor')}>
               <Text>내 정보 수정</Text>
               <Image
                 style={{width: 15, height: 15}}
@@ -78,7 +78,7 @@ class index extends Component {
                 borderBottomWidth: 0.5,
                 borderBottomColor: '#cccccc',
               }}
-              onPress={() => this.props.navigation.navigate('Setting')}>
+              onPress={() => this.props.navigation.navigate('ChangePassword')}>
               <Text>비밀번호 변경</Text>
               <Image
                 style={{width: 15, height: 15}}

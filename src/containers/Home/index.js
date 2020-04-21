@@ -52,7 +52,7 @@ class index extends Component {
 
   componentDidMount() {
     this.props.getListData();
-    // this.props.navigation.navigate('SignIn');
+    // this.props.navigation.navigate('Intro1');
   }
 
   renderItem({item, index}) {

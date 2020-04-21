@@ -20,4 +20,6 @@ export default {
   imgIcDuration: require('./ic_duration.png'),
   imgIcShare: require('./share.png'),
   imgIcHear: require('./heart-w.png'),
+  imgProfile2: require('./profile2.png'),
+  imgIcCamera: require('./ic_camera.png'),
 };
