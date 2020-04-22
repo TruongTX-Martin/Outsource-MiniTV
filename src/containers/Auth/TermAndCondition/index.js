@@ -96,7 +96,6 @@ class index extends Component {
               style={{
                 width,
                 paddingHorizontal: 20,
-                height,
                 backgroundColor: '#f7f7f7',
               }}>
               <Text style={{color: '#222222', fontSize: 25, paddingTop: 100}}>
@@ -189,7 +188,7 @@ class index extends Component {
             </View>
           </Content>
         </Body>
-        <Footer>
+        <Footer style={{backgroundColor: '#499DA7'}}>
           <TouchableOpacity
             disabled={!canNext}
             style={{

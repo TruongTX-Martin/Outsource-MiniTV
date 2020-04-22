@@ -13,7 +13,7 @@ import {Container, Body, Header, Content} from 'native-base';
 import Config from '../../config';
 import {connect} from 'react-redux';
 import Images from '../../assets/images';
-import * as listDataAction from '../../redux/actions/getListDataAction';
+import * as authActions from '../../redux/actions/authActions';
 import ItemChannel from './Component/ItemChannel';
 import {EventRegister} from 'react-native-event-listeners';
 import DataLocal from '../../services/DataLocal';
@@ -57,7 +57,6 @@ class index extends Component {
   }
 
   componentDidMount() {
-    this.props.getListData();
     const timeoutLoading = setTimeout(() => {
       this.setState({loading: false});
       clearTimeout(timeoutLoading);
@@ -80,6 +79,7 @@ class index extends Component {
   }
 
   async componentWillMount() {
+    this.props.generateAccessToken();
     this.listenerGoToSignIn = EventRegister.addEventListener(
       Config.Constant.EVENT_GOTO_SIGNIN,
       (data) => {
@@ -87,7 +87,6 @@ class index extends Component {
       },
     );
     const hasShowIntro = await DataLocal.getHasShowIntro();
-    console.log('hasShowIntro:', hasShowIntro);
     if (hasShowIntro == null) {
       this.props.navigation.navigate('Intro1');
     } else {
@@ -285,14 +284,12 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    listData: state.listDataReducer.listData.list,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getListData: () => dispatch(listDataAction.getListData()),
+    generateAccessToken: () => dispatch(authActions.generateAccessToken()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

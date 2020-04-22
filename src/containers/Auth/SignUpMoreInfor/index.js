@@ -10,6 +10,10 @@ import {
 import {Container, Body, Content, Footer} from 'native-base';
 import TextInputCustom from '../../../components/TextField';
 import Images from '../../../assets/images';
+import Modal, {ModalContent} from 'react-native-modals';
+import {connect} from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
+import * as authActions from '../../../redux/actions/authActions';
 const {width} = Dimensions.get('window');
 
 const widthView = width - 40;
@@ -31,7 +35,34 @@ class index extends Component {
       isValidMonth: false,
       isValidDay: false,
       isValidAll: false,
+      isModalVisible: false,
     };
+    this.showModal = this.showModal.bind(this);
+  }
+
+  componentDidMount() {}
+
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('getDerivedStateFromProps props:', props);
+  //   console.log('getDerivedStateFromProps state:', state);
+  //   if (props.isSuccess) {
+  //     this.showModal();
+  //   }
+  //   return null;
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isSuccess) {
+      this.showModal();
+    }
+  }
+
+  showModal() {
+    this.setState({isModalVisible: true});
+  }
+
+  componentWillUnmount() {
+    this.props.clearSignUpData();
   }
 
   checkValidAll() {
@@ -54,7 +85,19 @@ class index extends Component {
     });
   }
 
-  handleUpdateInfor() {}
+  handleSignUp() {
+    const email = this.props.navigation.getParam('email', null);
+    const password = this.props.navigation.getParam('password', null);
+    const {childName, year, month, day, gender} = this.state;
+    const params = {
+      email,
+      password,
+      student_name: childName,
+      birthday: year.toString() + month.toString() + day.toString(),
+      sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
+    };
+    this.props.signUp(params);
+  }
 
   render() {
     const {
@@ -67,7 +110,9 @@ class index extends Component {
       isValidDay,
       childName,
       isValidAll,
+      isModalVisible,
     } = this.state;
+    const {loading, reason} = this.props;
     return (
       <Container>
         <Body>
@@ -77,6 +122,7 @@ class index extends Component {
                 padding: 20,
                 width,
               }}>
+              <Spinner visible={loading} textStyle={{color: '#fff'}} />
               <Text style={{color: '#222222', fontSize: 25, paddingTop: 50}}>
                 회원가입
               </Text>
@@ -330,10 +376,13 @@ class index extends Component {
                   </Text>
                 </TouchableOpacity>
               </View>
+              {reason != null && (
+                <Text style={{color: 'red', marginTop: 5}}>{reason}</Text>
+              )}
             </View>
           </Content>
         </Body>
-        <Footer>
+        <Footer style={{backgroundColor: '#499DA7'}}>
           <TouchableOpacity
             disabled={!isValidAll}
             style={{
@@ -343,13 +392,87 @@ class index extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onPress={() => this.handleUpdateInfor()}>
+            onPress={() => this.handleSignUp()}>
             <Text style={{color: 'white', fontSize: 18}}>완료</Text>
           </TouchableOpacity>
         </Footer>
+        <Modal
+          visible={this.state.isModalVisible}
+          onTouchOutside={() => {
+            this.setState({isModalVisible: false});
+          }}
+          onHardwareBackPress={() => {
+            this.setState({isModalVisible: false});
+            return true;
+          }}>
+          <View
+            style={{
+              width: width - 40,
+              height: 300,
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'space-between',
+              borderRadius: 5,
+            }}>
+            <View
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 225,
+              }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 25,
+                  width: width - 50,
+                  textAlign: 'center',
+                }}>
+                수정이 완료되었습니다.
+              </Text>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingBottom: 20,
+              }}>
+              <TouchableOpacity
+                style={{
+                  width: width - 60,
+                  backgroundColor: '#499DA7',
+                  height: 55,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 5,
+                }}
+                onPress={() => {
+                  this.setState({isModalVisible: false});
+                  this.props.navigation.pop(3);
+                }}>
+                <Text style={{color: 'white', fontSize: 17}}>확인</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </Container>
     );
   }
 }
 
-export default index;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.signUpReducer.loading,
+    isSuccess: state.signUpReducer.isSuccess,
+    reason: state.signUpReducer.reason,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (params) => dispatch(authActions.signUp(params)),
+    clearSignUpData: () => dispatch(authActions.signUpClearData()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(index);

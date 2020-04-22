@@ -12,11 +12,10 @@ import axios from 'axios';
 import MyApp from './containers/Navigation';
 import {store} from './redux/store';
 import SplashScreen from 'react-native-splash-screen';
-
 import {Provider} from 'react-redux';
 
 //setup default axios
-axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+axios.defaults.baseURL = 'http://dev-api.minitv.io/v1';
 
 export default class App extends Component {
   componentDidMount() {

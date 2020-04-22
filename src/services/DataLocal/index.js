@@ -11,7 +11,19 @@ const getHasShowIntro = async () => {
   return hasShow;
 };
 
+const setAccessToken = (accessToken) => {
+  try {
+    AsyncStorage.setItem(Constants.ACCESS_TOKEN, accessToken);
+  } catch (error) {}
+};
+const getAccessToken = async () => {
+  const accessToken = await AsyncStorage.getItem(Constants.ACCESS_TOKEN);
+  return accessToken;
+};
+
 export default {
   setHasShowIntro,
   getHasShowIntro,
+  setAccessToken,
+  getAccessToken,
 };

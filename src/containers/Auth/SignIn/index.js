@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Image, Dimensions} from 'react-native';
 import {Container, Body, Content, Header} from 'native-base';
 import Images from '../../../assets/images';
-import HeaderBase from '../../../components/HeaderBase';
-import Config from '../../../config';
+import {connect} from 'react-redux';
+import * as authActions from '../../../redux/actions/authActions';
 import TextInput from '../../../components/TextField';
 import ButtonBase from '../../../components/ButtonBase';
 const {width} = Dimensions.get('window');
@@ -12,6 +12,8 @@ class index extends Component {
   gotoSignUp() {
     this.props.navigation.navigate('TermAndCondition');
   }
+
+  componentDidMount() {}
   render() {
     return (
       <Container>
@@ -122,4 +124,13 @@ class index extends Component {
   }
 }
 
-export default index;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    generateAccessToken: () => dispatch(authActions.generateAccessToken()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(index);

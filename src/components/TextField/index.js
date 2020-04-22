@@ -17,6 +17,7 @@ class index extends Component {
         style={[
           {
             borderRadius: 5,
+            marginTop: 5,
             height: 40,
             marginBottom: Platform.OS === 'ios' ? 4 : 0,
             borderBottomWidth: 1,
@@ -53,7 +54,15 @@ class index extends Component {
           />
         </View>
         {this.props.error != null && this.props.error.length > 0 && (
-          <Text>{this.props.error}</Text>
+          <Text
+            style={{
+              color: 'red',
+              fontSize: 10,
+              marginBottom: 5,
+              paddingLeft: 5,
+            }}>
+            {this.props.error}
+          </Text>
         )}
       </View>
     );
