@@ -14,7 +14,7 @@ export function signUpStart() {
   };
 }
 
-export function singUpSuccess() {
+export function signUpSuccess() {
   return {
     type: Types.SIGN_UP_SUCCESS,
   };
@@ -37,5 +37,37 @@ export function signUpClearData() {
 export function generateAccessToken() {
   return {
     type: Types.GENERATE_ACCESS_TOKEN,
+  };
+}
+
+//sign in
+export function signIn(params) {
+  return {
+    type: Types.SIGN_IN,
+    params,
+  };
+}
+
+export function signInClear() {
+  return {
+    type: Types.SIGN_IN_CLEAR,
+  };
+}
+
+export function signInStart() {
+  return {
+    type: Types.SIGN_IN_START,
+  };
+}
+
+export function signInSuccess() {
+  return {
+    type: Types.SIGN_IN_SUCCESS,
+  };
+}
+
+export function signInFailed() {
+  return {
+    type: Types.SIGN_IN_FAILED,
   };
 }

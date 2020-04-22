@@ -1,25 +1,104 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Image, Dimensions} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  Dimensions,
+  // BackHandler,
+} from 'react-native';
 import {Container, Body, Content, Header} from 'native-base';
 import Images from '../../../assets/images';
 import {connect} from 'react-redux';
 import * as authActions from '../../../redux/actions/authActions';
 import TextInput from '../../../components/TextField';
+import {EventRegister} from 'react-native-event-listeners';
+import Constants from '../../../config/Constant';
+import validateInput from '../../../helpers/Validate';
 import ButtonBase from '../../../components/ButtonBase';
+import Spinner from 'react-native-loading-spinner-overlay';
 const {width} = Dimensions.get('window');
 
 class index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      emailError: '',
+      password: '',
+      passwordError: '',
+    };
+    this.validation = {
+      email: {
+        presence: {
+          message: '^Please enter an email address',
+        },
+        email: {
+          message: '^Please enter a valid email address',
+        },
+      },
+      password: {
+        presence: {
+          message: '^Please enter password',
+        },
+        length: {
+          minimum: 6,
+          message: '^Your password must be at least 6 characters',
+        },
+      },
+    };
+  }
+
   gotoSignUp() {
     this.props.navigation.navigate('TermAndCondition');
   }
 
-  componentDidMount() {}
+  handleSignIn() {
+    const {email, password} = this.state;
+    const emailError = validateInput('email', email, this.validation);
+    const passwordError = validateInput('password', password, this.validation);
+    if (emailError || passwordError) {
+      this.setState({emailError, passwordError});
+      return;
+    }
+    const params = {
+      email,
+      password,
+    };
+    this.props.signIn(params);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isSuccess) {
+      this.props.navigation.goBack();
+      EventRegister.emit(Constants.EVENT_SIGNIN_SUCCESS);
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.signInClear();
+    // BackHandler.removeEventListener(
+    //   'hardwareBackPress',
+    //   this.onAndroidBackPress,
+    // );
+  }
+
+  // componentWillMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
+  // }
+  // onAndroidBackPress = () => {
+  //   return true;
+  // };
+
   render() {
+    const {email, emailError, password, passwordError} = this.state;
+    const {loading, reason} = this.props;
     return (
       <Container>
         <Body>
           <Content>
             <View>
+              <Spinner visible={loading} textStyle={{color: '#fff'}} />
               <View style={{display: 'flex', alignItems: 'center'}}>
                 <Image
                   source={Images.imgLogo}
@@ -39,6 +118,11 @@ class index extends Component {
                     width={width - 42}
                     styleIcon={{width: 15, height: 14}}
                     placeholder="이메일"
+                    value={email}
+                    onChangeText={(email) =>
+                      this.setState({email, emailError: null})
+                    }
+                    error={emailError}
                   />
                 </View>
                 <TextInput
@@ -47,10 +131,29 @@ class index extends Component {
                   styleIcon={{width: 15, height: 18}}
                   placeholder="비밀번호"
                   isPassword
+                  value={password}
+                  onChangeText={(password) =>
+                    this.setState({password, passwordError: null})
+                  }
+                  error={passwordError}
                 />
                 <View style={{marginTop: 40}}>
-                  <ButtonBase width={width - 46} text={'로그인'} />
+                  <ButtonBase
+                    width={width - 46}
+                    text={'로그인'}
+                    onPress={() => this.handleSignIn()}
+                  />
                 </View>
+                {reason != null && (
+                  <Text
+                    style={{
+                      color: 'red',
+                      textAlign: 'center',
+                      paddingHorizontal: 20,
+                    }}>
+                    {reason}
+                  </Text>
+                )}
                 <View
                   style={{
                     display: 'flex',
@@ -125,12 +228,18 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    loading: state.signInReducer.loading,
+    isSuccess: state.signInReducer.isSuccess,
+    reason: state.signInReducer.reason,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     generateAccessToken: () => dispatch(authActions.generateAccessToken()),
+    signIn: (params) => dispatch(authActions.signIn(params)),
+    signInClear: () => dispatch(authActions.signInClear()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

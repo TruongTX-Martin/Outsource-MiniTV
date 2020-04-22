@@ -15,6 +15,7 @@ class index extends Component {
   render() {
     return (
       <TouchableOpacity
+        onPress={() => this.props.onPress && this.props.onPress()}
         style={{
           width: this.props.width || width,
           height: 50,

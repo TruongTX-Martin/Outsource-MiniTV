@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
 import {Container, Body, Content, Footer} from 'native-base';
 import TextInput from '../../../components/TextField';
-import Modal, {ModalContent} from 'react-native-modals';
 import validateInput from '../../../helpers/Validate';
 const {width} = Dimensions.get('window');
 
@@ -48,8 +47,6 @@ class index extends Component {
     };
   }
 
-  async componentDidMount() {}
-
   handleSignUp() {
     const {email, password, rePassword} = this.state;
     const emailError = validateInput('email', email, this.validation);
@@ -81,7 +78,6 @@ class index extends Component {
       passwordError,
       rePassword,
       rePasswordError,
-      isModalVisible,
     } = this.state;
     return (
       <Container>

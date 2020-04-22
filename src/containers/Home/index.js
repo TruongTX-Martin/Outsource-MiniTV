@@ -61,6 +61,19 @@ class index extends Component {
       this.setState({loading: false});
       clearTimeout(timeoutLoading);
     }, 2000);
+    this.checkScreenAndLoadData();
+  }
+
+  async checkScreenAndLoadData() {
+    //check login or show intro
+    const hasShowIntro = await DataLocal.getHasShowIntro();
+    const userToken = await DataLocal.getUserToken();
+    console.log('userToken:', userToken);
+    if (hasShowIntro == null) {
+      this.props.navigation.navigate('Intro1');
+    } else if (userToken == null || userToken == 'null') {
+      this.props.navigation.navigate('SignIn');
+    }
   }
 
   renderItem({item, index}) {
@@ -86,15 +99,24 @@ class index extends Component {
         this.props.navigation.navigate('SignIn');
       },
     );
-    const hasShowIntro = await DataLocal.getHasShowIntro();
-    if (hasShowIntro == null) {
-      this.props.navigation.navigate('Intro1');
-    } else {
-      this.props.navigation.navigate('SignIn');
-    }
+    this.listenerSignInSuccess = EventRegister.addEventListener(
+      Config.Constant.EVENT_SIGNIN_SUCCESS,
+      (data) => {
+        console.log('Call data home');
+      },
+    );
+    this.listenerSignOut = EventRegister.addEventListener(
+      Config.Constant.EVENT_SIGN_OUT,
+      (data) => {
+        DataLocal.setUserToken('null');
+        this.props.navigation.navigate('SignIn');
+      },
+    );
   }
   componentWillUnmount() {
     EventRegister.removeEventListener(this.listenerGoToSignIn);
+    EventRegister.removeEventListener(this.listenerSignInSuccess);
+    EventRegister.removeEventListener(this.listenerSignOut);
   }
 
   render() {

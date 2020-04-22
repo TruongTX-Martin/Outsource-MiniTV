@@ -1,17 +1,9 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  ImageBackground,
-  ScrollView,
-} from 'react-native';
-import {Container, Body, Header, Content} from 'native-base';
-import HeaderBase from '../../components/HeaderBase';
-import Config from '../../config';
+import {Text, View, TouchableOpacity, Image, Dimensions} from 'react-native';
+import {Container, Body, Content} from 'native-base';
 import {connect} from 'react-redux';
+import {EventRegister} from 'react-native-event-listeners';
+import Constants from '../../config/Constant';
 import Images from '../../assets/images';
 import * as listDataAction from '../../redux/actions/getListDataAction';
 const {width, height} = Dimensions.get('window');
@@ -183,6 +175,23 @@ class index extends Component {
                   }}
                   onPress={() => this.props.navigation.navigate('Setting')}>
                   <Text>설정</Text>
+                  <Image
+                    style={{width: 15, height: 15}}
+                    source={Images.imgIcArrowRight}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    height: 50,
+                    alignItems: 'center',
+                    borderBottomWidth: 0.5,
+                    borderBottomColor: '#cccccc',
+                  }}
+                  onPress={() => EventRegister.emit(Constants.EVENT_SIGN_OUT)}>
+                  <Text>Sign Out</Text>
                   <Image
                     style={{width: 15, height: 15}}
                     source={Images.imgIcArrowRight}

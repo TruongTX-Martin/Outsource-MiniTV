@@ -397,7 +397,7 @@ class index extends Component {
           </TouchableOpacity>
         </Footer>
         <Modal
-          visible={this.state.isModalVisible}
+          visible={isModalVisible}
           onTouchOutside={() => {
             this.setState({isModalVisible: false});
           }}

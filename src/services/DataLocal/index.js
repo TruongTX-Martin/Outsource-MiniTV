@@ -21,9 +21,21 @@ const getAccessToken = async () => {
   return accessToken;
 };
 
+const setUserToken = (userToken) => {
+  try {
+    AsyncStorage.setItem(Constants.USER_TOKEN, userToken);
+  } catch (error) {}
+};
+const getUserToken = async () => {
+  const userToken = await AsyncStorage.getItem(Constants.USER_TOKEN);
+  return userToken;
+};
+
 export default {
   setHasShowIntro,
   getHasShowIntro,
   setAccessToken,
   getAccessToken,
+  setUserToken,
+  getUserToken,
 };

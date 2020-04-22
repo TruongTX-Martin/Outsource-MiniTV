@@ -11,5 +11,12 @@ export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILED = 'SIGN_UP_FAILED';
 export const SIGN_UP_CLEAR = 'SIGN_UP_CLEAR';
 
+//sign in
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_IN_CLEAR = 'SIGN_IN_CLEAR';
+export const SIGN_IN_START = 'SIGN_IN_START';
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
+export const SIGN_IN_FAILED = 'SIGN_IN_FAILED';
+
 //generate access token
 export const GENERATE_ACCESS_TOKEN = 'GENERATE_ACCESS_TOKEN';

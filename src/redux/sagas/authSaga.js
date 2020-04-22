@@ -5,11 +5,10 @@ import DataLocal from '../../services/DataLocal';
 
 export function* signUp(action) {
   try {
-    console.log('Sign up saga:', action);
     yield put(authActions.signUpStart());
     const signUpResult = yield DataRemote.signUp(action.params);
     if (signUpResult.status == 200) {
-      yield put(authActions.singUpSuccess());
+      yield put(authActions.signUpSuccess());
     } else {
       yield put(authActions.signUpFailed());
     }
@@ -25,4 +24,18 @@ export function* generateAccessToken() {
       DataLocal.setAccessToken(generateResult.data.access_token);
     }
   } catch (error) {}
+}
+
+export function* signIn(action) {
+  try {
+    console.log('Sign in saga:', action);
+    yield put(authActions.signInStart());
+    const signInResult = yield DataRemote.signIn(action.params);
+    if (signInResult.status == 200) {
+      DataLocal.setUserToken(signInResult.data.user_token);
+      yield put(authActions.signInSuccess());
+    }
+  } catch (error) {
+    yield put(authActions.signInFailed());
+  }
 }

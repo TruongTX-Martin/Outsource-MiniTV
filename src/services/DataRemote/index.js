@@ -57,7 +57,18 @@ const signUp = async (params) => {
   });
 };
 
+const signIn = async (params) => {
+  const accessToken = await DataLocal.getAccessToken();
+  return await axios.post('/auth/user-token', params, {
+    headers: {
+      'X-Access-Token': accessToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
+  signIn,
 };
