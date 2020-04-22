@@ -10,7 +10,7 @@ import {
 import {Container, Body, Content, Footer} from 'native-base';
 import TextInputCustom from '../../../components/TextField';
 import Images from '../../../assets/images';
-import Modal, {ModalContent} from 'react-native-modals';
+import Modal from 'react-native-modals';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as authActions from '../../../redux/actions/authActions';

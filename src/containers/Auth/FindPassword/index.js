@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Image, Dimensions} from 'react-native';
-import {Container, Body, Content, Footer, Header} from 'native-base';
+import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
+import {Container, Body, Content, Footer} from 'native-base';
 import TextInput from '../../../components/TextField';
-import Modal from 'react-native-modal';
+import {connect} from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
+import Modal from 'react-native-modals';
 import validateInput from '../../../helpers/Validate';
+import * as authActions from '../../../redux/actions/authActions';
 
 const {width, height} = Dimensions.get('window');
 
@@ -28,7 +31,7 @@ class index extends Component {
   }
 
   findPassword() {
-    this.setState({isModalVisible: true});
+    this.props.findPassword(this.state.email);
   }
 
   checkValidEmail() {
@@ -37,15 +40,22 @@ class index extends Component {
     this.setState({
       isValidEmail: emailError == null,
     });
-    console.log('emailError:', emailError);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isSuccess) {
+      this.setState({isModalVisible: true});
+    }
   }
 
   render() {
-    const {email, isValidEmail} = this.state;
+    const {email, isValidEmail, isModalVisible} = this.state;
+    const {loading} = this.props;
     return (
       <Container>
         <Body>
           <Content>
+            <Spinner visible={loading} textStyle={{color: '#fff'}} />
             <View
               style={{
                 padding: 20,
@@ -78,7 +88,7 @@ class index extends Component {
             </View>
           </Content>
         </Body>
-        <Footer>
+        <Footer style={{backgroundColor: '#499DA7'}}>
           <TouchableOpacity
             style={{
               backgroundColor: isValidEmail ? '#499DA7' : '#999999',
@@ -92,7 +102,15 @@ class index extends Component {
             <Text style={{color: 'white', fontSize: 18}}>확인</Text>
           </TouchableOpacity>
         </Footer>
-        <Modal isVisible={this.state.isModalVisible}>
+        <Modal
+          visible={isModalVisible}
+          onTouchOutside={() => {
+            this.setState({isModalVisible: false});
+          }}
+          onHardwareBackPress={() => {
+            this.setState({isModalVisible: false});
+            return true;
+          }}>
           <View
             style={{
               width: width - 40,
@@ -151,4 +169,16 @@ class index extends Component {
   }
 }
 
-export default index;
+const mapStateToProps = (state) => {
+  return {
+    isSuccess: state.findPasswordReducer.isSuccess,
+    loading: state.findPasswordReducer.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    findPassword: (email) => dispatch(authActions.findPassword(email)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(index);

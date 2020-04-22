@@ -71,3 +71,27 @@ export function signInFailed() {
     type: Types.SIGN_IN_FAILED,
   };
 }
+
+//find password
+export function findPassword(email) {
+  return {
+    type: Types.FIND_PASSWORD,
+    email,
+  };
+}
+
+export function findPasswordStart() {
+  return {
+    type: Types.FIND_PASSWORD_START,
+  };
+}
+export function findPasswordSuccess() {
+  return {
+    type: Types.FIND_PASSWORD_SUCCESS,
+  };
+}
+export function findPasswordFailed() {
+  return {
+    type: Types.FIND_PASSWORD_FAILED,
+  };
+}

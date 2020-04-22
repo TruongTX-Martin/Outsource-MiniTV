@@ -67,8 +67,19 @@ const signIn = async (params) => {
   });
 };
 
+const findPassword = async (email) => {
+  const accessToken = await DataLocal.getAccessToken();
+  return await axios.get('/auth/find-password', {
+    headers: {
+      'X-Access-Token': accessToken,
+      'X-User-Email': email,
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
   signIn,
+  findPassword,
 };

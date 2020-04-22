@@ -53,6 +53,10 @@ class index extends Component {
     this.props.navigation.navigate('TermAndCondition');
   }
 
+  componentDidMount() {
+    this.props.generateAccessToken();
+  }
+
   handleSignIn() {
     const {email, password} = this.state;
     const emailError = validateInput('email', email, this.validation);

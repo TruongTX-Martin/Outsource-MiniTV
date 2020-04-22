@@ -18,5 +18,11 @@ export const SIGN_IN_START = 'SIGN_IN_START';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILED = 'SIGN_IN_FAILED';
 
+//find password
+export const FIND_PASSWORD = 'FIND_PASSWORD';
+export const FIND_PASSWORD_START = 'FIND_PASSWORD_START';
+export const FIND_PASSWORD_SUCCESS = 'FIND_PASSWORD_SUCCESS';
+export const FIND_PASSWORD_FAILED = 'FIND_PASSWORD_FAILED';
+
 //generate access token
 export const GENERATE_ACCESS_TOKEN = 'GENERATE_ACCESS_TOKEN';

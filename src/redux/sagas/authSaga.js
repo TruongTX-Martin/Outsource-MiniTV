@@ -28,7 +28,6 @@ export function* generateAccessToken() {
 
 export function* signIn(action) {
   try {
-    console.log('Sign in saga:', action);
     yield put(authActions.signInStart());
     const signInResult = yield DataRemote.signIn(action.params);
     if (signInResult.status == 200) {
@@ -37,5 +36,17 @@ export function* signIn(action) {
     }
   } catch (error) {
     yield put(authActions.signInFailed());
+  }
+}
+
+export function* findPassword(action) {
+  try {
+    yield put(authActions.findPasswordStart());
+    const findPasswordResult = yield DataRemote.findPassword(action.email);
+    if (findPasswordResult.status == 200) {
+      yield put(authActions.findPasswordSuccess());
+    }
+  } catch (error) {
+    yield put(authActions.findPasswordFailed());
   }
 }

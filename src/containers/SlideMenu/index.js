@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {EventRegister} from 'react-native-event-listeners';
 import Constants from '../../config/Constant';
 import Images from '../../assets/images';
-import * as listDataAction from '../../redux/actions/getListDataAction';
 const {width, height} = Dimensions.get('window');
 
 class index extends Component {
@@ -207,14 +206,10 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    listData: state.listDataReducer.listData.list,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    getListData: () => dispatch(listDataAction.getListData()),
-  };
+  return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);
