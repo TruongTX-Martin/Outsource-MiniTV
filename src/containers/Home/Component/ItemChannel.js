@@ -28,7 +28,7 @@ class index extends Component {
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
           }}
-          source={{uri: item.image}}
+          source={{uri: item.thumbnail}}
         />
         <View
           style={{
@@ -53,13 +53,11 @@ class index extends Component {
               flexDirection: 'row',
               marginLeft: 10,
             }}>
-            {item.tags.map((tag) => {
-              return (
-                <TouchableOpacity>
-                  <Text style={{color: '#999999', marginRight: 5}}>{tag}</Text>
-                </TouchableOpacity>
-              );
-            })}
+            <TouchableOpacity>
+              <Text style={{color: '#999999', marginRight: 5}}>
+                {item.tags}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>

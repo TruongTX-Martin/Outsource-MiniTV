@@ -26,3 +26,9 @@ export const FIND_PASSWORD_FAILED = 'FIND_PASSWORD_FAILED';
 
 //generate access token
 export const GENERATE_ACCESS_TOKEN = 'GENERATE_ACCESS_TOKEN';
+
+//live main
+export const LIVE_MAIN_GET = 'LIVE_MAIN_GET';
+export const LIVE_MAIN_START = 'LIVE_MAIN_START';
+export const LIVE_MAIN_SUCCESS = 'LIVE_MAIN_SUCCESS';
+export const LIVE_MAIN_FAILED = 'LIVE_MAIN_FAILED';

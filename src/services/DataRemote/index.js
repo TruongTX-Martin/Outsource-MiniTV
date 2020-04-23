@@ -77,9 +77,21 @@ const findPassword = async (email) => {
   });
 };
 
+const getMainLive = async () => {
+  const accessToken = await DataLocal.getAccessToken();
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get('/live/main', {
+    headers: {
+      'X-Access-Token': accessToken,
+      'X-User-Token': userToken,
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
   signIn,
   findPassword,
+  getMainLive,
 };

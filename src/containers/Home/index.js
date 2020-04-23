@@ -8,12 +8,14 @@ import {
   ImageBackground,
   ScrollView,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import {Container, Body, Header, Content} from 'native-base';
 import Config from '../../config';
 import {connect} from 'react-redux';
 import Images from '../../assets/images';
 import * as authActions from '../../redux/actions/authActions';
+import * as liveActions from '../../redux/actions/liveActions';
 import ItemChannel from './Component/ItemChannel';
 import {EventRegister} from 'react-native-event-listeners';
 import DataLocal from '../../services/DataLocal';
@@ -52,13 +54,13 @@ class index extends Component {
       },
     ];
     this.state = {
-      loading: true,
+      loadingFirst: true,
     };
   }
 
   componentDidMount() {
     const timeoutLoading = setTimeout(() => {
-      this.setState({loading: false});
+      this.setState({loadingFirst: false});
       clearTimeout(timeoutLoading);
     }, 2000);
     this.checkScreenAndLoadData();
@@ -68,11 +70,12 @@ class index extends Component {
     //check login or show intro
     const hasShowIntro = await DataLocal.getHasShowIntro();
     const userToken = await DataLocal.getUserToken();
-    console.log('userToken:', userToken);
     if (hasShowIntro == null) {
       this.props.navigation.navigate('Intro1');
     } else if (userToken == null || userToken == 'null') {
       this.props.navigation.navigate('SignIn');
+    } else {
+      this.props.getMainList();
     }
   }
 
@@ -102,7 +105,7 @@ class index extends Component {
     this.listenerSignInSuccess = EventRegister.addEventListener(
       Config.Constant.EVENT_SIGNIN_SUCCESS,
       (data) => {
-        console.log('Call data home');
+        this.props.getMainList();
       },
     );
     this.listenerSignOut = EventRegister.addEventListener(
@@ -120,8 +123,9 @@ class index extends Component {
   }
 
   render() {
-    const {loading} = this.state;
-    if (loading) {
+    const {loadingFirst} = this.state;
+    const {loading, onAir, hotLists} = this.props;
+    if (loadingFirst) {
       return (
         <View
           style={{
@@ -169,7 +173,13 @@ class index extends Component {
         <Body>
           <Content
             style={{backgroundColor: '#fefefe'}}
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={() => this.props.getMainList()}
+              />
+            }>
             <View>
               <View
                 style={{
@@ -188,7 +198,7 @@ class index extends Component {
                 />
                 <Text
                   style={{color: '#333333', fontWeight: 'bold', fontSize: 20}}>
-                  쿠리와 함께하는 단어게임
+                  {onAir && onAir.title}
                 </Text>
                 <View
                   style={{
@@ -196,20 +206,15 @@ class index extends Component {
                     flexDirection: 'row',
                     marginVertical: 5,
                   }}>
-                  {this.listTag.map((e) => {
-                    return (
-                      <TouchableOpacity>
-                        <Text style={{color: '#4E9DA6', marginRight: 10}}>
-                          {e}
-                        </Text>
-                      </TouchableOpacity>
-                    );
-                  })}
+                  <TouchableOpacity>
+                    <Text style={{color: '#4E9DA6', marginRight: 10}}>
+                      {onAir && onAir.tags}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
                 <ImageBackground
                   source={{
-                    uri:
-                      'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
+                    uri: onAir && onAir.thumbnail,
                   }}
                   imageStyle={{borderRadius: 5}}
                   style={{
@@ -286,15 +291,16 @@ class index extends Component {
                     paddingBottom: 10,
                     paddingLeft: 5,
                   }}>
-                  {this.listHotChannel.map((e) => {
-                    return (
-                      <ItemChannel
-                        item={e}
-                        widthView={widthView - 30}
-                        navigation={this.props.navigation}
-                      />
-                    );
-                  })}
+                  {hotLists &&
+                    hotLists.map((e) => {
+                      return (
+                        <ItemChannel
+                          item={e}
+                          widthView={widthView - 30}
+                          navigation={this.props.navigation}
+                        />
+                      );
+                    })}
                 </ScrollView>
               </View>
             </View>
@@ -306,12 +312,17 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    onAir: state.liveMainGetReducer.onAir,
+    hotLists: state.liveMainGetReducer.hotLists,
+    loading: state.liveMainGetReducer.loading,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     generateAccessToken: () => dispatch(authActions.generateAccessToken()),
+    getMainList: () => dispatch(liveActions.liveMainGet()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

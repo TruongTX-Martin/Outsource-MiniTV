@@ -1,5 +1,6 @@
 import {all, takeLatest} from 'redux-saga/effects';
 import {signUp, generateAccessToken, signIn, findPassword} from './authSaga';
+import {getLiveMain} from './liveSaga';
 import * as Types from '../actions/types';
 
 // Redux Saga: Root Saga
@@ -9,5 +10,6 @@ export function* rootSaga() {
     takeLatest(Types.GENERATE_ACCESS_TOKEN, generateAccessToken),
     takeLatest(Types.SIGN_IN, signIn),
     takeLatest(Types.FIND_PASSWORD, findPassword),
+    takeLatest(Types.LIVE_MAIN_GET, getLiveMain),
   ]);
 }
