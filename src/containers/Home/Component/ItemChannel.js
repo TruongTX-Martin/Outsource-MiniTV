@@ -54,9 +54,11 @@ class index extends Component {
               marginLeft: 10,
             }}>
             <TouchableOpacity>
-              <Text style={{color: '#999999', marginRight: 5}}>
-                {item.tags}
-              </Text>
+              {item.tags && (
+                <Text style={{color: '#999999', marginRight: 5}}>
+                  {item.tags}
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>

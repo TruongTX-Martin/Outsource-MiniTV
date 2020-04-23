@@ -30,3 +30,17 @@ export function* getListNotice(action) {
     yield put(liveActions.noticeFailed());
   }
 }
+
+export function* getListReplay(action) {
+  try {
+    yield put(liveActions.replayStart());
+    const result = yield DataRemote.getListReplay();
+    if (result.status == 200) {
+      yield put(liveActions.replaySuccess(result.data));
+    } else {
+      yield put(liveActions.replayFailed());
+    }
+  } catch (error) {
+    yield put(liveActions.replayFailed());
+  }
+}

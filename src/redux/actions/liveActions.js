@@ -56,3 +56,34 @@ export function noticeFailed() {
     type: Types.NOTICE_FAILED,
   };
 }
+
+//replay
+export function replayGet() {
+  return {
+    type: Types.REPLAY_GET,
+  };
+}
+
+export function replayStart() {
+  return {
+    type: Types.REPLAY_START,
+  };
+}
+export function replayClear() {
+  return {
+    type: Types.REPLAY_CLEAR,
+  };
+}
+
+export function replaySuccess(list) {
+  return {
+    type: Types.REPLAY_SUCCESS,
+    list,
+  };
+}
+
+export function replayFailed() {
+  return {
+    type: Types.REPLAY_FAILED,
+  };
+}

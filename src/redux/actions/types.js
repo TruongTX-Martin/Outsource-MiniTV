@@ -39,3 +39,10 @@ export const NOTICE_CLEAR = 'NOTICE_CLEAR';
 export const NOTICE_START = 'NOTICE_START';
 export const NOTICE_SUCCESS = 'NOTICE_SUCCESS';
 export const NOTICE_FAILED = 'NOTICE_FAILED';
+
+//list review (replay)
+export const REPLAY_GET = 'REPLAY_GET';
+export const REPLAY_CLEAR = 'REPLAY_CLEAR';
+export const REPLAY_START = 'REPLAY_START';
+export const REPLAY_SUCCESS = 'REPLAY_SUCCESS';
+export const REPLAY_FAILED = 'REPLAY_FAILED';

@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  FlatList,
-} from 'react-native';
-import {Container, Body, Header} from 'native-base';
+import {Text, View, Dimensions, FlatList, RefreshControl} from 'react-native';
+import {Container, Body, Header, Content} from 'native-base';
 import {connect} from 'react-redux';
-import Images from '../../../assets/images';
 import ItemChannel from '../Component/ItemChannel';
+import HeaderBase from '../../../components/HeaderBase';
+import Config from '../../../config';
+import * as liveActions from '../../../redux/actions/liveActions';
 const {width} = Dimensions.get('window');
 
 const widthView = width - 20;
@@ -50,43 +45,55 @@ class index extends Component {
     ];
   }
 
+  componentDidMount() {
+    this.props.getListReplay();
+  }
+
   render() {
+    const {list, loading} = this.props;
     return (
       <Container>
-        <Header>
-          <View style={{width, paddingLeft: 15}}>
-            <TouchableOpacity
-              style={{width: 50}}
-              onPress={() => this.props.navigation.goBack()}>
-              <Image
-                style={{width: 13, height: 25}}
-                source={Images.imgIcBack}
-              />
-            </TouchableOpacity>
-          </View>
+        <Header style={Config.Styles.header}>
+          <HeaderBase navigation={this.props.navigation} title="" />
         </Header>
         <Body>
-          <View style={{width: widthView}}>
-            <Text
-              style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
-              Replay program
-            </Text>
-            <FlatList
-              data={this.listHotChannel}
-              style={{marginBottom: 30}}
-              keyExtractor={(item) => item.id}
-              showsVerticalScrollIndicator={false}
-              renderItem={({item}) => {
-                return (
-                  <ItemChannel
-                    item={item}
-                    widthView={widthView - 10}
-                    navigation={this.props.navigation}
-                  />
-                );
-              }}
-            />
-          </View>
+          <Content
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={() => this.props.getListReplay()}
+              />
+            }>
+            <View style={{width: widthView}}>
+              <Text
+                style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
+                Replay program
+              </Text>
+              {list && list.length > 0 && (
+                <FlatList
+                  data={list}
+                  showsVerticalScrollIndicator={false}
+                  style={{marginBottom: 30}}
+                  keyExtractor={(item) => item.live_uid}
+                  renderItem={({item}) => {
+                    return (
+                      <ItemChannel
+                        item={item}
+                        widthView={widthView - 10}
+                        navigation={this.props.navigation}
+                      />
+                    );
+                  }}
+                />
+              )}
+              {(!list || list.length == 0) && !loading && (
+                <Text style={{textAlign: 'center', marginTop: 100}}>
+                  Items is empty
+                </Text>
+              )}
+            </View>
+          </Content>
         </Body>
       </Container>
     );
@@ -94,10 +101,16 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    list: state.liveReplayGetReducer.list,
+    loading: state.liveReplayGetReducer.loading,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getListReplay: () => dispatch(liveActions.replayGet()),
+    clearListReplay: () => dispatch(liveActions.replayClear()),
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

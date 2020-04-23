@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, Image, Dimensions} from 'react-native';
 import {Container, Body, Header, Content, Footer} from 'native-base';
 import Config from '../../../config';
-
+import HeaderBase from '../../../components/HeaderBase';
 import {connect} from 'react-redux';
 import Images from '../../../assets/images';
-import ItemChannel from '../Component/ItemChannel';
 const {width} = Dimensions.get('window');
 
 const widthView = width - 30;
@@ -26,24 +25,8 @@ class index extends Component {
     const {currentTab} = this.state;
     return (
       <Container>
-        <Header
-          style={[
-            Config.Styles.header,
-            {
-              borderBottomWidth: 1,
-              borderBottomColor: 'white',
-            },
-          ]}>
-          <View style={{width, paddingLeft: 15}}>
-            <TouchableOpacity
-              style={{width: 50}}
-              onPress={() => this.props.navigation.goBack()}>
-              <Image
-                style={{width: 13, height: 25}}
-                source={Images.imgIcBack}
-              />
-            </TouchableOpacity>
-          </View>
+        <Header style={Config.Styles.header}>
+          <HeaderBase navigation={this.props.navigation} title="" />
         </Header>
         <Body>
           <Content>
@@ -208,7 +191,7 @@ class index extends Component {
             </View>
           </Content>
         </Body>
-        <Footer style={{height: 60, width}}>
+        <Footer style={{height: 60, width, backgroundColor: 'white'}}>
           <View
             style={{
               display: 'flex',

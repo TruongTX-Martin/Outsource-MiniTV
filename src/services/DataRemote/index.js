@@ -97,6 +97,15 @@ const getListNotice = async () => {
   });
 };
 
+const getListReplay = async () => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get('/live/review-list', {
+    headers: {
+      'X-User-Token': userToken,
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -104,4 +113,5 @@ export default {
   findPassword,
   getMainLive,
   getListNotice,
+  getListReplay,
 };
