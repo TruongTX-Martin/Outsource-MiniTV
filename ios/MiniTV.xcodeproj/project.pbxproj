@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* MiniTVTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MiniTVTests.m */; };
+		0496EB2EE3754DFDB588CFB2 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFDE88BDD0B14B2E8E295029 /* Roboto.ttf */; };
+		04D851ED5ED748FF890B388F /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4F5CC38C803418F86439A0E /* FontAwesome5_Brands.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -16,28 +18,26 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* MiniTVTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MiniTVTests.m */; };
-		6CCA7B316679BBA313F61CE9 /* libPods-MiniTV-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD424F9A5C487314613FD2F /* libPods-MiniTV-tvOSTests.a */; };
-		BD959335E456D9C2EA32DCEA /* libPods-MiniTV-MiniTVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B06D6B1FF1F3A69882967B0 /* libPods-MiniTV-MiniTVTests.a */; };
-		DBDAA0D3D2B232EEE472F6EB /* libPods-MiniTV-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E034F20A1F97C74EA19DA4E5 /* libPods-MiniTV-tvOS.a */; };
-		E558DCE355347D3CC17DBA55 /* libPods-MiniTV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F68E22DC6D729DE4CA01CDA /* libPods-MiniTV.a */; };
-		8451AE06D893404993529908 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84912772E1C4B6589124908 /* AntDesign.ttf */; };
-		EC92E8ABB3AE42DD83D77242 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73D73F55CC9B4A53B5C8E72F /* Entypo.ttf */; };
-		E945A0119E664A08AF1BA3EF /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D59457ED4434084BC8BBEA1 /* EvilIcons.ttf */; };
-		CB34C0F71F5549B2AC734A84 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 993AED29FBAC40CF86D761F6 /* Feather.ttf */; };
-		7F77A9615E1C443A93567101 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7461322E38524E37903C18EF /* FontAwesome.ttf */; };
-		04D851ED5ED748FF890B388F /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4F5CC38C803418F86439A0E /* FontAwesome5_Brands.ttf */; };
-		7AC5D09B7A0A42E5BE2F2EA6 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A28349935B36461FB8584234 /* FontAwesome5_Regular.ttf */; };
-		9FD757917F1449BCA2FE8ED2 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */; };
 		314272B761E34CEC98F4E836 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CA98FD4F4914F40AFCE6545 /* Fontisto.ttf */; };
-		6991C7D6CF024E7AA19AF0F7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66C9C6A42B05445FA4B4C1F8 /* Foundation.ttf */; };
 		48C91953B83E4C78B2D80D30 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B10910A367A4684B6204F6A /* Ionicons.ttf */; };
 		658887B549F74FA696B7D7E2 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF471961C6ED4F43A472034C /* MaterialCommunityIcons.ttf */; };
-		A3A8B43778DD4910A03C6A72 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E94944C4EC8246BAB2D44977 /* MaterialIcons.ttf */; };
-		9A0E3599671E4961A4975191 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B77AE29A0D64CD280146483 /* Octicons.ttf */; };
-		897E0FF00919474F92E4B0AE /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FB5FE5A44C547A88B42F550 /* Roboto_medium.ttf */; };
-		0496EB2EE3754DFDB588CFB2 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFDE88BDD0B14B2E8E295029 /* Roboto.ttf */; };
-		C6D1BA9F0B7842F88579C0F9 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */; };
 		694B2CEE817C4689A96F478B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4546325AF43BEBF786140 /* SimpleLineIcons.ttf */; };
+		6991C7D6CF024E7AA19AF0F7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66C9C6A42B05445FA4B4C1F8 /* Foundation.ttf */; };
+		6CCA7B316679BBA313F61CE9 /* libPods-MiniTV-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD424F9A5C487314613FD2F /* libPods-MiniTV-tvOSTests.a */; };
+		7AC5D09B7A0A42E5BE2F2EA6 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A28349935B36461FB8584234 /* FontAwesome5_Regular.ttf */; };
+		7F77A9615E1C443A93567101 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7461322E38524E37903C18EF /* FontAwesome.ttf */; };
+		8451AE06D893404993529908 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84912772E1C4B6589124908 /* AntDesign.ttf */; };
+		897E0FF00919474F92E4B0AE /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FB5FE5A44C547A88B42F550 /* Roboto_medium.ttf */; };
+		9A0E3599671E4961A4975191 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B77AE29A0D64CD280146483 /* Octicons.ttf */; };
+		9FD757917F1449BCA2FE8ED2 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */; };
+		A3A8B43778DD4910A03C6A72 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E94944C4EC8246BAB2D44977 /* MaterialIcons.ttf */; };
+		BD959335E456D9C2EA32DCEA /* libPods-MiniTV-MiniTVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B06D6B1FF1F3A69882967B0 /* libPods-MiniTV-MiniTVTests.a */; };
+		C6D1BA9F0B7842F88579C0F9 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */; };
+		CB34C0F71F5549B2AC734A84 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 993AED29FBAC40CF86D761F6 /* Feather.ttf */; };
+		DBDAA0D3D2B232EEE472F6EB /* libPods-MiniTV-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E034F20A1F97C74EA19DA4E5 /* libPods-MiniTV-tvOS.a */; };
+		E558DCE355347D3CC17DBA55 /* libPods-MiniTV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F68E22DC6D729DE4CA01CDA /* libPods-MiniTV.a */; };
+		E945A0119E664A08AF1BA3EF /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D59457ED4434084BC8BBEA1 /* EvilIcons.ttf */; };
+		EC92E8ABB3AE42DD83D77242 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73D73F55CC9B4A53B5C8E72F /* Entypo.ttf */; };
 		F1151098B82344CBAEFBB6D7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04243F2BD2244993B491A6C5 /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +63,8 @@
 		00E356EE1AD99517003FC87E /* MiniTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiniTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MiniTVTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiniTVTests.m; sourceTree = "<group>"; };
+		04243F2BD2244993B491A6C5 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		1265C4623E2F85F105707198 /* Pods-MiniTV-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-MiniTV-tvOSTests/Pods-MiniTV-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MiniTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MiniTV/AppDelegate.h; sourceTree = "<group>"; };
@@ -71,40 +73,38 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MiniTV/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MiniTV/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MiniTV/main.m; sourceTree = "<group>"; };
+		1B10910A367A4684B6204F6A /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		1B77AE29A0D64CD280146483 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		1CA98FD4F4914F40AFCE6545 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		25641A0388A03B447D523EE7 /* Pods-MiniTV-MiniTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-MiniTVTests.release.xcconfig"; path = "Target Support Files/Pods-MiniTV-MiniTVTests/Pods-MiniTV-MiniTVTests.release.xcconfig"; sourceTree = "<group>"; };
 		2C6F1988BA122359ACC880C4 /* Pods-MiniTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV.debug.xcconfig"; path = "Target Support Files/Pods-MiniTV/Pods-MiniTV.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* MiniTV-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MiniTV-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* MiniTV-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MiniTV-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D59457ED4434084BC8BBEA1 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		3B06D6B1FF1F3A69882967B0 /* libPods-MiniTV-MiniTVTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniTV-MiniTVTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		66C9C6A42B05445FA4B4C1F8 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		6EC4546325AF43BEBF786140 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		6FB5FE5A44C547A88B42F550 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		73D73F55CC9B4A53B5C8E72F /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		7461322E38524E37903C18EF /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		7F68E22DC6D729DE4CA01CDA /* libPods-MiniTV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniTV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC8E0662B98DD6377DC7979 /* Pods-MiniTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV.release.xcconfig"; path = "Target Support Files/Pods-MiniTV/Pods-MiniTV.release.xcconfig"; sourceTree = "<group>"; };
 		8465ECDCC6D44EE0A25F5568 /* Pods-MiniTV-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-MiniTV-tvOSTests/Pods-MiniTV-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		9221A6891B199B9D035A4CEA /* Pods-MiniTV-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-MiniTV-tvOS/Pods-MiniTV-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		993AED29FBAC40CF86D761F6 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		9BB384614CED473044F9DC9C /* Pods-MiniTV-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-tvOS.release.xcconfig"; path = "Target Support Files/Pods-MiniTV-tvOS/Pods-MiniTV-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		A28349935B36461FB8584234 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		A34A63D7E2114C917300C846 /* Pods-MiniTV-MiniTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-MiniTVTests.debug.xcconfig"; path = "Target Support Files/Pods-MiniTV-MiniTVTests/Pods-MiniTV-MiniTVTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4F5CC38C803418F86439A0E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		CFDE88BDD0B14B2E8E295029 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
+		DF471961C6ED4F43A472034C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		DFD424F9A5C487314613FD2F /* libPods-MiniTV-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniTV-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E034F20A1F97C74EA19DA4E5 /* libPods-MiniTV-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniTV-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E94944C4EC8246BAB2D44977 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F84912772E1C4B6589124908 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		73D73F55CC9B4A53B5C8E72F /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2D59457ED4434084BC8BBEA1 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		993AED29FBAC40CF86D761F6 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7461322E38524E37903C18EF /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A4F5CC38C803418F86439A0E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A28349935B36461FB8584234 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1CA98FD4F4914F40AFCE6545 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		66C9C6A42B05445FA4B4C1F8 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1B10910A367A4684B6204F6A /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DF471961C6ED4F43A472034C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E94944C4EC8246BAB2D44977 /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1B77AE29A0D64CD280146483 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6FB5FE5A44C547A88B42F550 /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CFDE88BDD0B14B2E8E295029 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6EC4546325AF43BEBF786140 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		04243F2BD2244993B491A6C5 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F84912772E1C4B6589124908 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,24 +221,8 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A1F3169423129E4D1B8877FF /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2C6F1988BA122359ACC880C4 /* Pods-MiniTV.debug.xcconfig */,
-				7FC8E0662B98DD6377DC7979 /* Pods-MiniTV.release.xcconfig */,
-				A34A63D7E2114C917300C846 /* Pods-MiniTV-MiniTVTests.debug.xcconfig */,
-				25641A0388A03B447D523EE7 /* Pods-MiniTV-MiniTVTests.release.xcconfig */,
-				9221A6891B199B9D035A4CEA /* Pods-MiniTV-tvOS.debug.xcconfig */,
-				9BB384614CED473044F9DC9C /* Pods-MiniTV-tvOS.release.xcconfig */,
-				1265C4623E2F85F105707198 /* Pods-MiniTV-tvOSTests.debug.xcconfig */,
-				8465ECDCC6D44EE0A25F5568 /* Pods-MiniTV-tvOSTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		8B455982ED1B46299300EE03 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				F84912772E1C4B6589124908 /* AntDesign.ttf */,
 				73D73F55CC9B4A53B5C8E72F /* Entypo.ttf */,
@@ -261,8 +245,24 @@
 				04243F2BD2244993B491A6C5 /* Zocial.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
+		};
+		A1F3169423129E4D1B8877FF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2C6F1988BA122359ACC880C4 /* Pods-MiniTV.debug.xcconfig */,
+				7FC8E0662B98DD6377DC7979 /* Pods-MiniTV.release.xcconfig */,
+				A34A63D7E2114C917300C846 /* Pods-MiniTV-MiniTVTests.debug.xcconfig */,
+				25641A0388A03B447D523EE7 /* Pods-MiniTV-MiniTVTests.release.xcconfig */,
+				9221A6891B199B9D035A4CEA /* Pods-MiniTV-tvOS.debug.xcconfig */,
+				9BB384614CED473044F9DC9C /* Pods-MiniTV-tvOS.release.xcconfig */,
+				1265C4623E2F85F105707198 /* Pods-MiniTV-tvOSTests.debug.xcconfig */,
+				8465ECDCC6D44EE0A25F5568 /* Pods-MiniTV-tvOSTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -275,6 +275,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				2B3E5395D79E474C233D69B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -296,6 +297,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				83FA3D11E0434DF4A10AD1A4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -460,6 +462,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		2B3E5395D79E474C233D69B5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MiniTV-MiniTVTests/Pods-MiniTV-MiniTVTests-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MiniTV-MiniTVTests/Pods-MiniTV-MiniTVTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -560,6 +580,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83FA3D11E0434DF4A10AD1A4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MiniTV/Pods-MiniTV-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MiniTV/Pods-MiniTV-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {

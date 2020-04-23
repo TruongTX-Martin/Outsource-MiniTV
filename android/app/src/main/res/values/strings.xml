@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MiniTV</string>
+    <string name="facebook_app_id">2853284351423652</string>
+    <string name="fb_login_protocol_scheme">fb2853284351423652</string>
 </resources>

@@ -7,7 +7,7 @@ import {
   Dimensions,
   // BackHandler,
 } from 'react-native';
-import {Container, Body, Content, Header} from 'native-base';
+import {Container, Body, Content} from 'native-base';
 import Images from '../../../assets/images';
 import {connect} from 'react-redux';
 import * as authActions from '../../../redux/actions/authActions';
@@ -17,6 +17,7 @@ import Constants from '../../../config/Constant';
 import validateInput from '../../../helpers/Validate';
 import ButtonBase from '../../../components/ButtonBase';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {AccessToken, LoginManager} from 'react-native-fbsdk';
 const {width} = Dimensions.get('window');
 
 class index extends Component {
@@ -93,6 +94,28 @@ class index extends Component {
   // onAndroidBackPress = () => {
   //   return true;
   // };
+
+  handleLoginFacebook() {
+    console.log('Handle login facebook');
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+      function (result) {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          console.log(
+            'Login success with permissions: ' +
+              result.grantedPermissions.toString(),
+          );
+        }
+      },
+      function (error) {
+        console.log('Login fail with error: ' + error);
+      },
+    );
+    // AccessToken.getCurrentAccessToken().then((token) => {
+    //   console.log('Token:', token);
+    // });
+  }
 
   render() {
     const {email, emailError, password, passwordError} = this.state;
@@ -208,7 +231,7 @@ class index extends Component {
                         height: 50,
                         borderRadius: 25,
                       }}
-                      source={Images.imgFacebook}
+                      source={Images.imgIcNavor}
                     />
                   </TouchableOpacity>
                   <TouchableOpacity>
