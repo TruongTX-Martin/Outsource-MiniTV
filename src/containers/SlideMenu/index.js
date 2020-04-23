@@ -42,7 +42,7 @@ class index extends Component {
                       style={{width: 20, height: 20}}
                       source={Images.imgIcBell}
                     />
-                    <View
+                    {/* <View
                       style={{
                         width: 8,
                         height: 8,
@@ -52,7 +52,7 @@ class index extends Component {
                         top: 3,
                         left: 4,
                       }}
-                    />
+                    /> */}
                   </TouchableOpacity>
                 </View>
                 <TouchableOpacity

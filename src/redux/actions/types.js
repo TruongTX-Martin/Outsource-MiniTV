@@ -32,3 +32,10 @@ export const LIVE_MAIN_GET = 'LIVE_MAIN_GET';
 export const LIVE_MAIN_START = 'LIVE_MAIN_START';
 export const LIVE_MAIN_SUCCESS = 'LIVE_MAIN_SUCCESS';
 export const LIVE_MAIN_FAILED = 'LIVE_MAIN_FAILED';
+
+//notice
+export const NOTICE_GET = 'NOTICE_GET';
+export const NOTICE_CLEAR = 'NOTICE_CLEAR';
+export const NOTICE_START = 'NOTICE_START';
+export const NOTICE_SUCCESS = 'NOTICE_SUCCESS';
+export const NOTICE_FAILED = 'NOTICE_FAILED';

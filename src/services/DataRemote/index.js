@@ -88,10 +88,20 @@ const getMainLive = async () => {
   });
 };
 
+const getListNotice = async () => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get('/mypage/notice', {
+    headers: {
+      'X-User-Token': userToken,
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
   signIn,
   findPassword,
   getMainLive,
+  getListNotice,
 };

@@ -56,7 +56,12 @@ class index extends Component {
       }
       return e;
     });
-    if (option.isCheck) {
+    if (listOption.filter((e) => e.isCheck).length == 3) {
+      optionAll = {
+        ...optionAll,
+        isCheck: true,
+      };
+    } else {
       optionAll = {
         ...optionAll,
         isCheck: false,

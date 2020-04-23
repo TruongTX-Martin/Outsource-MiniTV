@@ -11,11 +11,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonLeft: {
-    alignSelf: 'flex-start',
+    display: 'flex',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
   },
   imageButtonLeft: {
-    width: 12,
-    height: 21,
+    width: 13,
+    height: 25,
     marginRight: 5,
   },
   viewCenter: {
