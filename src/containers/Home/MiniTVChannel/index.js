@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Container, Body, Header} from 'native-base';
 import {connect} from 'react-redux';
+import Config from '../../../config';
 import Images from '../../../assets/images';
 import ItemChannel from '../Component/ItemChannel';
 const {width} = Dimensions.get('window');
@@ -18,45 +19,17 @@ const widthView = width - 20;
 class index extends Component {
   constructor(props) {
     super(props);
-    this.listHotChannel = [
-      {
-        id: 1,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 2,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 3,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 4,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-    ];
   }
 
   render() {
+    const {todayList} = this.props;
+    console.log('Todaylist:', todayList);
     return (
       <Container>
-        <Header>
-          <View style={{width, paddingLeft: 15}}>
+        <Header style={Config.Styles.header}>
+          <View style={{width, paddingLeft: 15, height: 50}}>
             <TouchableOpacity
-              style={{width: 50}}
+              style={{width: 50, height: 50}}
               onPress={() => this.props.navigation.goBack()}>
               <Image
                 style={{width: 13, height: 25}}
@@ -72,7 +45,7 @@ class index extends Component {
               MiniTV Channel
             </Text>
             <FlatList
-              data={this.listHotChannel}
+              data={todayList}
               style={{marginBottom: 30}}
               keyExtractor={(item) => item.id}
               showsVerticalScrollIndicator={false}
@@ -94,7 +67,9 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    todayList: state.liveMainGetReducer.todayList,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
