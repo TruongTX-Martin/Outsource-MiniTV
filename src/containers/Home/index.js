@@ -9,6 +9,7 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
+  BackHandler,
 } from 'react-native';
 import {Container, Body, Header, Content} from 'native-base';
 import Config from '../../config';
@@ -19,6 +20,7 @@ import * as liveActions from '../../redux/actions/liveActions';
 import ItemChannel from './Component/ItemChannel';
 import {EventRegister} from 'react-native-event-listeners';
 import DataLocal from '../../services/DataLocal';
+import {getCurrentRouter} from '../../helpers/routerHelper';
 const {width, height} = Dimensions.get('window');
 
 const widthView = width - 30;
@@ -115,12 +117,25 @@ class index extends Component {
         this.props.navigation.navigate('SignIn');
       },
     );
+    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
   componentWillUnmount() {
     EventRegister.removeEventListener(this.listenerGoToSignIn);
     EventRegister.removeEventListener(this.listenerSignInSuccess);
     EventRegister.removeEventListener(this.listenerSignOut);
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      this.onAndroidBackPress,
+    );
   }
+
+  onAndroidBackPress = () => {
+    console.log('Home on back', getCurrentRouter());
+    if (getCurrentRouter() == 'SignIn' || getCurrentRouter() == 'Home') {
+      return true;
+    }
+    return false;
+  };
 
   render() {
     const {loadingFirst} = this.state;
