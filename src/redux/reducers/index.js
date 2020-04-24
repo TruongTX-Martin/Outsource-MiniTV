@@ -5,6 +5,7 @@ import findPasswordReducer from './findPasswordReducer';
 import liveMainGetReducer from './liveMainGetReducer';
 import liveNoticeGetReducer from './liveNoticeGetReducer';
 import liveReplayGetReducer from './liveReplayGetReducer';
+import liveDetailReducer from './liveDetailReducer';
 const rootReducer = combineReducers({
   signUpReducer,
   signInReducer,
@@ -12,5 +13,6 @@ const rootReducer = combineReducers({
   liveMainGetReducer,
   liveNoticeGetReducer,
   liveReplayGetReducer,
+  liveDetailReducer,
 });
 export default rootReducer;

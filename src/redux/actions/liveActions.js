@@ -87,3 +87,35 @@ export function replayFailed() {
     type: Types.REPLAY_FAILED,
   };
 }
+
+//detail
+export function detailGet(id) {
+  return {
+    type: Types.DETAIL_GET,
+    id,
+  };
+}
+
+export function detailClear() {
+  return {
+    type: Types.DETAIL_CLEAR,
+  };
+}
+
+export function detailStart() {
+  return {
+    type: Types.DETAIL_START,
+  };
+}
+
+export function detailSuccess(detail) {
+  return {
+    type: Types.DETAIL_SUCCESS,
+    detail,
+  };
+}
+export function detailFailed() {
+  return {
+    type: Types.DETAIL_FAILED,
+  };
+}

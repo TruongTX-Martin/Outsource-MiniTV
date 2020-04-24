@@ -44,3 +44,15 @@ export function* getListReplay(action) {
     yield put(liveActions.replayFailed());
   }
 }
+
+export function* getDetail(action) {
+  try {
+    yield put(liveActions.detailStart());
+    const result = yield DataRemote.getDetail(action.id);
+    if (result.status == 200) {
+      yield put(liveActions.detailSuccess(result.data));
+    }
+  } catch (error) {
+    yield put(liveActions.detailFailed());
+  }
+}

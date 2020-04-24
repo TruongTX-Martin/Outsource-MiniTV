@@ -5,6 +5,7 @@ import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
 import {connect} from 'react-redux';
 import Images from '../../../assets/images';
+import * as liveActions from '../../../redux/actions/liveActions';
 const {width} = Dimensions.get('window');
 
 const widthView = width - 30;
@@ -21,8 +22,15 @@ class index extends Component {
     };
   }
 
+  componentDidMount() {
+    const id = this.props.navigation.getParam('id', null);
+    this.props.getDetail(id);
+  }
+
   render() {
     const {currentTab} = this.state;
+    const {detail} = this.props;
+    console.log('Detail:', detail);
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -234,10 +242,14 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    detail: state.liveDetailReducer.detail,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getDetail: (id) => dispatch(liveActions.detailGet(id)),
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

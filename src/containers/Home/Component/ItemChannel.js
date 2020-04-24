@@ -20,7 +20,9 @@ class index extends Component {
           marginBottom: 30,
           marginLeft: 5,
         }}
-        onPress={() => this.props.navigation.navigate('ChannelDetail')}>
+        onPress={() =>
+          this.props.navigation.navigate('ChannelDetail', {id: item.live_uid})
+        }>
         <Image
           style={{
             width: widthView,

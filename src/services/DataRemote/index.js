@@ -88,6 +88,17 @@ const getMainLive = async () => {
   });
 };
 
+const getDetail = async (id) => {
+  const accessToken = await DataLocal.getAccessToken();
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get(`/live/${id}`, {
+    headers: {
+      'X-Access-Token': accessToken,
+      'X-User-Token': userToken,
+    },
+  });
+};
+
 const getListNotice = async () => {
   const userToken = await DataLocal.getUserToken();
   return await axios.get('/mypage/notice', {
@@ -114,4 +125,5 @@ export default {
   getMainLive,
   getListNotice,
   getListReplay,
+  getDetail,
 };

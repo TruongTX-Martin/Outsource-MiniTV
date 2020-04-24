@@ -46,3 +46,10 @@ export const REPLAY_CLEAR = 'REPLAY_CLEAR';
 export const REPLAY_START = 'REPLAY_START';
 export const REPLAY_SUCCESS = 'REPLAY_SUCCESS';
 export const REPLAY_FAILED = 'REPLAY_FAILED';
+
+//live detail
+export const DETAIL_GET = 'DETAIL_GET';
+export const DETAIL_CLEAR = 'DETAIL_CLEAR';
+export const DETAIL_START = 'DETAIL_START';
+export const DETAIL_SUCCESS = 'DETAIL_SUCCESS';
+export const DETAIL_FAILED = 'DETAIL_FAILED';
