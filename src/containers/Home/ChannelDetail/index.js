@@ -30,7 +30,6 @@ class index extends Component {
   render() {
     const {currentTab} = this.state;
     const {detail} = this.props;
-    console.log('Detail:', detail);
     return (
       <Container>
         <Header style={Config.Styles.header}>

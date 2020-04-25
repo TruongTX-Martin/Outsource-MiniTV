@@ -17,7 +17,7 @@ import Constants from '../../../config/Constant';
 import validateInput from '../../../helpers/Validate';
 import ButtonBase from '../../../components/ButtonBase';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {AccessToken, LoginManager} from 'react-native-fbsdk';
+import {AccessToken, LoginManager, LoginButton} from 'react-native-fbsdk';
 const {width} = Dimensions.get('window');
 
 class index extends Component {
@@ -48,6 +48,7 @@ class index extends Component {
         },
       },
     };
+    this.initUser = this.initUser.bind(this);
   }
 
   gotoSignUp() {
@@ -82,21 +83,11 @@ class index extends Component {
 
   componentWillUnmount() {
     this.props.signInClear();
-    // BackHandler.removeEventListener(
-    //   'hardwareBackPress',
-    //   this.onAndroidBackPress,
-    // );
   }
-
-  // componentWillMount() {
-  //   BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
-  // }
-  // onAndroidBackPress = () => {
-  //   return true;
-  // };
 
   handleLoginFacebook() {
     console.log('Handle login facebook');
+    LoginManager.setLoginBehavior('web_only');
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       function (result) {
         if (result.isCancelled) {
@@ -106,15 +97,55 @@ class index extends Component {
             'Login success with permissions: ' +
               result.grantedPermissions.toString(),
           );
+          AccessToken.getCurrentAccessToken().then((data) => {
+            console.log('Accesstoken:', data.accessToken.toString());
+            const {accessToken} = data;
+            fetch(
+              'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
+                accessToken,
+            )
+              .then((response) => response.json())
+              .then((json) => {
+                // Some user object has been set up somewhere, build that user here
+                console.log('User information:', json);
+                const email = json.email;
+                const id = json.id;
+                console.log('Email:', email);
+                console.log('id:', id);
+                const params = {
+                  email: email,
+                  sns_connect_info: {
+                    type: 'facebook',
+                    id: id,
+                    token: accessToken,
+                  },
+                };
+              })
+              .catch((error) => {
+                console.log('Get user error:', error);
+              });
+          });
         }
       },
       function (error) {
         console.log('Login fail with error: ' + error);
       },
     );
-    // AccessToken.getCurrentAccessToken().then((token) => {
-    //   console.log('Token:', token);
-    // });
+  }
+
+  initUser(token) {
+    fetch(
+      'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
+        token,
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        // Some user object has been set up somewhere, build that user here
+        console.log('User information:', json);
+      })
+      .catch((error) => {
+        console.log('Get user error:', error);
+      });
   }
 
   render() {
@@ -214,7 +245,7 @@ class index extends Component {
                     justifyContent: 'space-between',
                     marginTop: 20,
                   }}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.handleLoginFacebook()}>
                     <Image
                       style={{
                         width: 50,
@@ -267,6 +298,7 @@ const mapDispatchToProps = (dispatch) => {
     generateAccessToken: () => dispatch(authActions.generateAccessToken()),
     signIn: (params) => dispatch(authActions.signIn(params)),
     signInClear: () => dispatch(authActions.signInClear()),
+    signUp: (params) => dispatch(authActions.signUp(params)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);
