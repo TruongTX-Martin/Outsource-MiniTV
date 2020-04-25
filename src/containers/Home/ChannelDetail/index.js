@@ -41,7 +41,7 @@ class index extends Component {
             <View style={{width, display: 'flex', alignItems: 'center'}}>
               <View style={{width: widthView}}>
                 <Text style={{fontSize: 18, fontWeight: 'bold', marginTop: 20}}>
-                  쿠리와 함께하는 단어게임
+                  {detail?.title}
                 </Text>
                 <Text
                   style={{
@@ -59,8 +59,7 @@ class index extends Component {
                     marginTop: 10,
                   }}
                   source={{
-                    uri:
-                      'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
+                    uri: `${detail?.thumbnail}`,
                   }}
                 />
                 <Text style={{fontWeight: 'bold', marginTop: 10, fontSize: 15}}>
@@ -93,7 +92,7 @@ class index extends Component {
                     />
                     <Text
                       style={{color: '#222222', fontSize: 13, marginLeft: 5}}>
-                      4~6세 대상
+                      {`${detail?.target_age}세 대상`}
                     </Text>
                   </View>
                   <View
@@ -109,7 +108,7 @@ class index extends Component {
                     />
                     <Text
                       style={{color: '#222222', fontSize: 13, marginLeft: 5}}>
-                      4~6세 대상
+                      {`${detail?.duration} 세 대상`}
                     </Text>
                   </View>
                   <TouchableOpacity
