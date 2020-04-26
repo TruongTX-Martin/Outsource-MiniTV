@@ -104,8 +104,9 @@ class index extends Component {
     this.props.signInClear();
   }
 
-  handleLoginFacebook() {
+  async handleLoginFacebook() {
     console.log('Handle login facebook');
+    await LoginManager.logOut();
     LoginManager.setLoginBehavior('web_only');
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       function (result) {
