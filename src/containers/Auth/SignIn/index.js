@@ -17,7 +17,13 @@ import Constants from '../../../config/Constant';
 import validateInput from '../../../helpers/Validate';
 import ButtonBase from '../../../components/ButtonBase';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {AccessToken, LoginManager, LoginButton} from 'react-native-fbsdk';
+import {AccessToken, LoginManager} from 'react-native-fbsdk';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from 'react-native-google-signin';
+
 const {width} = Dimensions.get('window');
 
 class index extends Component {
@@ -48,7 +54,6 @@ class index extends Component {
         },
       },
     };
-    this.initUser = this.initUser.bind(this);
   }
 
   gotoSignUp() {
@@ -57,6 +62,20 @@ class index extends Component {
 
   componentDidMount() {
     this.props.generateAccessToken();
+    GoogleSignin.configure({
+      // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+      webClientId:
+        '68351548425-qsou5lr4g8qghae5ajjp7ko1k7eh66be.apps.googleusercontent.com',
+      offlineAccess: true,
+      hostedDomain: '',
+      loginHint: '',
+      forceConsentPrompt: true,
+      accountName: '',
+      androidClientId:
+        '68351548425-v3oplo93abbtf1qpj7e2emnt72igh06e.apps.googleusercontent.com',
+      iosClientId:
+        'XXXXXX-krv1hjXXXXXXp51pisuc1104q5XXXXXXe.apps.googleusercontent.com',
+    });
   }
 
   handleSignIn() {
@@ -133,19 +152,24 @@ class index extends Component {
     );
   }
 
-  initUser(token) {
-    fetch(
-      'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
-        token,
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        // Some user object has been set up somewhere, build that user here
-        console.log('User information:', json);
-      })
-      .catch((error) => {
-        console.log('Get user error:', error);
-      });
+  async handleLoginGoogle() {
+    try {
+      await GoogleSignin.signOut();
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log('userInfo:', userInfo);
+    } catch (error) {
+      console.log('error:', error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (f.e. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
   }
 
   render() {
@@ -265,7 +289,7 @@ class index extends Component {
                       source={Images.imgIcNavor}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.handleLoginGoogle()}>
                     <Image
                       style={{
                         width: 50,
