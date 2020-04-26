@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "68351548425",
+    "firebase_url": "https://minitv-cd739.firebaseio.com",
+    "project_id": "minitv-cd739",
+    "storage_bucket": "minitv-cd739.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68351548425:android:7a3727c66536fa1a4b6cd8",
+        "android_client_info": {
+          "package_name": "com.minitv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68351548425-v3oplo93abbtf1qpj7e2emnt72igh06e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minitv",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "68351548425-qsou5lr4g8qghae5ajjp7ko1k7eh66be.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKiR3el4RBPjQ4KiN95wW6mBWvGa2x1Hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68351548425-qsou5lr4g8qghae5ajjp7ko1k7eh66be.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
