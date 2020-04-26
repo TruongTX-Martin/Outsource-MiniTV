@@ -5,6 +5,7 @@ import {
   Text,
   Image,
   Dimensions,
+  Platform,
   // BackHandler,
 } from 'react-native';
 import {Container, Body, Content} from 'native-base';
@@ -18,12 +19,23 @@ import validateInput from '../../../helpers/Validate';
 import ButtonBase from '../../../components/ButtonBase';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AccessToken, LoginManager} from 'react-native-fbsdk';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from 'react-native-google-signin';
+import {GoogleSignin, statusCodes} from 'react-native-google-signin';
+import {NaverLogin, getProfile} from '@react-native-seoul/naver-login';
 
+//naver
+const ioskeys = {
+  kConsumerKey: 'VC5CPfjRigclJV_TFACU',
+  kConsumerSecret: 'f7tLFw0AHn',
+  kServiceAppName: '테스트앱(iOS)',
+  kServiceAppUrlScheme: 'testapp', // only for iOS
+};
+
+//naver
+const androidkeys = {
+  kConsumerKey: 'QfXNXVO8RnqfbPS9x0LR',
+  kConsumerSecret: '6ZGEYZabM9',
+  kServiceAppName: '테스트앱(안드로이드)',
+};
 const {width} = Dimensions.get('window');
 
 class index extends Component {
@@ -173,9 +185,26 @@ class index extends Component {
     }
   }
 
+  async handleLoginNaver() {}
+
+  naverLogin = (props) => {
+    return new Promise((resolve, reject) => {
+      NaverLogin.login(props, (err, token) => {
+        console.log(`\n\n  Token is fetched  :: ${token} \n\n`);
+        // setNaverToken(token);
+        // if (err) {
+        //   reject(err);
+        //   return;
+        // }
+        // resolve(token);
+      });
+    });
+  };
+
   render() {
     const {email, emailError, password, passwordError} = this.state;
     const {loading, reason} = this.props;
+    const initials = Platform.OS === 'ios' ? ioskeys : androidkeys;
     return (
       <Container>
         <Body>
@@ -280,7 +309,7 @@ class index extends Component {
                       source={Images.imgFacebook}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.naverLogin(initials)}>
                     <Image
                       style={{
                         width: 50,
