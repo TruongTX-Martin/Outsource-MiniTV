@@ -1,0 +1,11 @@
+Google signIn
+- Create project firebase
+- Enable google sign signIn
+- Add sha1 -> when release need to sha1 ? check
+- Goto https://console.developers.google.com/apis/credentials?authuser=3&folder=&hl=vi&organizationId=&project=minitv-cd739 
+=> get webClientId, androidClientId and add to config 
+
+Facebook signin 
+- Goto facebook developer
+- Create project and add keyhash 
+- add some config to android : manifresh, strings with application id 
