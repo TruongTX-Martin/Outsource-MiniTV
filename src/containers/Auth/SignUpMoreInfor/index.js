@@ -13,6 +13,8 @@ import Images from '../../../assets/images';
 import Modal from 'react-native-modals';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {EventRegister} from 'react-native-event-listeners';
+import Constants from '../../../config/Constant';
 import * as authActions from '../../../redux/actions/authActions';
 const {width} = Dimensions.get('window');
 
@@ -37,6 +39,8 @@ class index extends Component {
       isValidAll: false,
       isModalVisible: false,
     };
+    this.isSnsSignUp = props.navigation.getParam('isSnsSignUp', null);
+    this.snsSignUpParams = props.navigation.getParam('snsSignUpParams', null);
     this.showModal = this.showModal.bind(this);
   }
 
@@ -53,7 +57,12 @@ class index extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSuccess) {
-      this.showModal();
+      if (this.isSnsSignUp) {
+        this.props.navigation.goBack();
+        EventRegister.emit(Constants.EVENT_SNS_SIGNIN_AGAIN);
+      } else {
+        this.showModal();
+      }
     }
   }
 
@@ -89,13 +98,23 @@ class index extends Component {
     const email = this.props.navigation.getParam('email', null);
     const password = this.props.navigation.getParam('password', null);
     const {childName, year, month, day, gender} = this.state;
-    const params = {
-      email,
-      password,
-      student_name: childName,
-      birthday: year.toString() + month.toString() + day.toString(),
-      sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
-    };
+    let params = null;
+    if (this.isSnsSignUp && this.snsSignUpParams != null) {
+      params = {
+        ...this.snsSignUpParams,
+        student_name: childName,
+        birthday: year.toString() + month.toString() + day.toString(),
+        sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
+      };
+    } else {
+      params = {
+        email,
+        password,
+        student_name: childName,
+        birthday: year.toString() + month.toString() + day.toString(),
+        sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
+      };
+    }
     this.props.signUp(params);
   }
 

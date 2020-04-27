@@ -33,6 +33,8 @@ export function* signIn(action) {
     if (signInResult.status == 200) {
       DataLocal.setUserToken(signInResult.data.user_token);
       yield put(authActions.signInSuccess());
+    } else {
+      yield put(authActions.signInFailed());
     }
   } catch (error) {
     yield put(authActions.signInFailed());
@@ -45,8 +47,28 @@ export function* findPassword(action) {
     const findPasswordResult = yield DataRemote.findPassword(action.email);
     if (findPasswordResult.status == 200) {
       yield put(authActions.findPasswordSuccess());
+    } else {
+      yield put(authActions.findPasswordFailed());
     }
   } catch (error) {
     yield put(authActions.findPasswordFailed());
+  }
+}
+
+export function* snsSignIn(action) {
+  try {
+    console.log('Sns sign in saga:', action);
+    yield put(authActions.snsSignInStart());
+    const results = yield DataRemote.snsSignIn(action.params);
+    console.log('Result:', results);
+    if (results && results.status == 200) {
+      DataLocal.setUserToken(results.data.user_token);
+      yield put(authActions.snsSignInSuccess());
+    } else {
+      yield put(authActions.snsSignInFailed());
+    }
+  } catch (error) {
+    yield put(authActions.snsSignInFailed());
+    console.log('Error:', error);
   }
 }

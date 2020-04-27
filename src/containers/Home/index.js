@@ -20,6 +20,7 @@ import * as liveActions from '../../redux/actions/liveActions';
 import ItemChannel from './Component/ItemChannel';
 import {EventRegister} from 'react-native-event-listeners';
 import DataLocal from '../../services/DataLocal';
+import {showToast} from '../../utils';
 import {getCurrentRouter} from '../../helpers/routerHelper';
 const {width, height} = Dimensions.get('window');
 
@@ -108,6 +109,7 @@ class index extends Component {
       Config.Constant.EVENT_SIGNIN_SUCCESS,
       (data) => {
         this.props.getMainList();
+        showToast('Login Success');
       },
     );
     this.listenerSignOut = EventRegister.addEventListener(
