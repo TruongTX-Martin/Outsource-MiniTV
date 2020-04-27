@@ -6,8 +6,9 @@ import {fromRight} from 'react-navigation-transitions';
 import HomeScreen from '../Home';
 import SignInScreen from '../Auth/SignIn';
 import TermAndCondition from '../Auth/TermAndCondition';
-import TermChild from '../Auth/TermChild';
 import TermOfUse from '../Auth/TermChild/TermOfUse';
+import PrivacyTerm from '../Auth/TermChild/PrivacyTerm';
+import MarketingTerm from '../Auth/TermChild/MarketingTerm';
 import SignUp from '../Auth/SignUp';
 import SignUpMoreInfor from '../Auth/SignUpMoreInfor';
 import FindPassword from '../Auth/FindPassword';
@@ -49,13 +50,6 @@ const stackNavigator = createStackNavigator(
     },
     TermAndCondition: {
       screen: TermAndCondition,
-      navigationOptions: () => ({
-        header: null,
-        drawerLockMode: 'locked-closed',
-      }),
-    },
-    TermChild: {
-      screen: TermChild,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',
@@ -154,6 +148,20 @@ const stackNavigator = createStackNavigator(
     },
     TermOfUse: {
       screen: TermOfUse,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    PrivacyTerm: {
+      screen: PrivacyTerm,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    MarketingTerm: {
+      screen: MarketingTerm,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

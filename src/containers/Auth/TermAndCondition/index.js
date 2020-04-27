@@ -41,7 +41,9 @@ class index extends Component {
     if (item.key == 'termOfUse') {
       this.props.navigation.navigate('TermOfUse');
     } else if (item.key == 'privacyTerm') {
+      this.props.navigation.navigate('PrivacyTerm');
     } else if (item.key == 'marketing') {
+      this.props.navigation.navigate('MarketingTerm');
     }
   }
 
