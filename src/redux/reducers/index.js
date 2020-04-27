@@ -6,6 +6,7 @@ import liveMainGetReducer from './liveMainGetReducer';
 import liveNoticeGetReducer from './liveNoticeGetReducer';
 import liveReplayGetReducer from './liveReplayGetReducer';
 import liveDetailReducer from './liveDetailReducer';
+import snsSignInReducer from './snsSignInReducer';
 const rootReducer = combineReducers({
   signUpReducer,
   signInReducer,
@@ -14,5 +15,6 @@ const rootReducer = combineReducers({
   liveNoticeGetReducer,
   liveReplayGetReducer,
   liveDetailReducer,
+  snsSignInReducer,
 });
 export default rootReducer;

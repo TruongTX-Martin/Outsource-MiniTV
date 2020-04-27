@@ -95,3 +95,33 @@ export function findPasswordFailed() {
     type: Types.FIND_PASSWORD_FAILED,
   };
 }
+
+//sns sign in
+export function snsSignIn(params) {
+  return {
+    type: Types.SNS_SIGNIN,
+    params,
+  };
+}
+
+export function snsSignInClear() {
+  return {
+    type: Types.SNS_SIGNIN_CLEAR,
+  };
+}
+
+export function snsSignInStart() {
+  return {
+    type: Types.SNS_SIGNIN_START,
+  };
+}
+export function snsSignInSuccess() {
+  return {
+    type: Types.SNS_SIGNIN_SUCCESS,
+  };
+}
+export function snsSignInFailed() {
+  return {
+    type: Types.SNS_SIGNIN_FAILED,
+  };
+}

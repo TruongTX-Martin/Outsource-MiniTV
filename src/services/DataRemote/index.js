@@ -67,6 +67,16 @@ const signIn = async (params) => {
   });
 };
 
+const snsSignIn = async (params) => {
+  const accessToken = await DataLocal.getAccessToken();
+  return await axios.post('/auth/sns-signin', params, {
+    headers: {
+      'X-Access-Token': accessToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 const findPassword = async (email) => {
   const accessToken = await DataLocal.getAccessToken();
   return await axios.get('/auth/find-password', {
@@ -121,6 +131,7 @@ export default {
   generateAccessToken,
   signUp,
   signIn,
+  snsSignIn,
   findPassword,
   getMainLive,
   getListNotice,

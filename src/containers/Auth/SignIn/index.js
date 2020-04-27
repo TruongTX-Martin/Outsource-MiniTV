@@ -18,11 +18,7 @@ import validateInput from '../../../helpers/Validate';
 import ButtonBase from '../../../components/ButtonBase';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AccessToken, LoginManager} from 'react-native-fbsdk';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from 'react-native-google-signin';
+import {GoogleSignin, statusCodes} from 'react-native-google-signin';
 
 const {width} = Dimensions.get('window');
 
@@ -34,6 +30,8 @@ class index extends Component {
       emailError: '',
       password: '',
       passwordError: '',
+      paramSignUp: null,
+      paramsSNS: null,
     };
     this.validation = {
       email: {
@@ -94,64 +92,123 @@ class index extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isSuccess) {
+    const {snsMessage, snsSuccess} = nextProps;
+    if (nextProps.isSuccess || snsSuccess) {
       this.props.navigation.goBack();
       EventRegister.emit(Constants.EVENT_SIGNIN_SUCCESS);
     }
+    if (!snsSuccess && snsMessage == 'failed') {
+      console.log('Goto sign up', this.state.paramSignUp);
+      this.props.navigation.navigate('SignUpMoreInfor', {
+        isSnsSignUp: true,
+        snsSignUpParams: this.state.paramSignUp,
+      });
+    }
+    console.log('Next props:', nextProps);
   }
 
   componentWillUnmount() {
     this.props.signInClear();
+    this.props.snsSignInClear();
+    EventRegister.removeEventListener(this.listenerSNSSignInAgain);
+  }
+
+  componentWillMount() {
+    this.listenerSNSSignInAgain = EventRegister.addEventListener(
+      Constants.EVENT_SNS_SIGNIN_AGAIN,
+      (data) => {
+        this.props.snsSignIn(this.state.paramsSNS);
+      },
+    );
   }
 
   async handleLoginFacebook() {
     console.log('Handle login facebook');
     await LoginManager.logOut();
     LoginManager.setLoginBehavior('web_only');
-    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
-      function (result) {
-        if (result.isCancelled) {
-          console.log('Login cancelled');
-        } else {
-          console.log(
-            'Login success with permissions: ' +
-              result.grantedPermissions.toString(),
-          );
-          AccessToken.getCurrentAccessToken().then((data) => {
-            console.log('Accesstoken:', data.accessToken.toString());
-            const {accessToken} = data;
-            fetch(
-              'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
-                accessToken,
-            )
-              .then((response) => response.json())
-              .then((json) => {
-                // Some user object has been set up somewhere, build that user here
-                console.log('User information:', json);
-                const email = json.email;
-                const id = json.id;
-                console.log('Email:', email);
-                console.log('id:', id);
-                const params = {
-                  email: email,
-                  sns_connect_info: {
-                    type: 'facebook',
-                    id: id,
-                    token: accessToken,
-                  },
-                };
-              })
-              .catch((error) => {
-                console.log('Get user error:', error);
-              });
-          });
-        }
-      },
-      function (error) {
-        console.log('Login fail with error: ' + error);
-      },
-    );
+    const result = await LoginManager.logInWithPermissions([
+      'public_profile',
+      'email',
+    ]);
+    if (result.isCancelled) {
+      console.log('Login cancelled');
+    } else {
+      const data = await AccessToken.getCurrentAccessToken();
+      const {accessToken} = data;
+      const response = await fetch(
+        'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
+          accessToken,
+      );
+      console.log('response:', response);
+      const json = await response.json();
+      console.log('JSON:', json);
+      const paramSignUp = {
+        email: json.email,
+        sns_connect_info: {
+          type: 'facebook',
+          id: json.id,
+          token: accessToken,
+        },
+      };
+      const paramsSNS = {
+        email: json.email,
+        sns_type: 'facebook',
+        id: json.id,
+        token: accessToken,
+      };
+      console.log('paramsSNS:', paramsSNS);
+      console.log('paramSignUp:', paramSignUp);
+      this.setState({paramSignUp, paramsSNS});
+      this.props.snsSignIn(paramsSNS);
+    }
+    // LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+    //   function (result) {
+    //     if (result.isCancelled) {
+    //       console.log('Login cancelled');
+    //     } else {
+    //       AccessToken.getCurrentAccessToken().then((data) => {
+    //         console.log('Accesstoken:', data.accessToken.toString());
+    //         const {accessToken} = data;
+    //         fetch(
+    //           'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
+    //             accessToken,
+    //         )
+    //           .then((response) => response.json())
+    //           .then((json) => {
+    //             // Some user object has been set up somewhere, build that user here
+    //             console.log('User information:', json);
+    //             const paramSignUp = {
+    //               email: json.email,
+    //               sns_connect_info: {
+    //                 type: 'facebook',
+    //                 id: json.id,
+    //                 token: accessToken,
+    //               },
+    //             };
+    //             const paramsSNS = {
+    //               email: json.email,
+    //               sns_type: 'facebook',
+    //               id: json.id,
+    //               token: accessToken,
+    //             };
+    //             console.log('paramsSNS:', paramsSNS);
+    //             console.log('paramSignUp:', paramSignUp);
+    //             // this.setState({paramSignUp, paramsSNS});
+    //             this.props.snsSignIn(paramsSNS);
+    //           })
+    //           .catch((error) => {
+    //             console.log('Get user error:', error);
+    //           });
+    //       });
+    //     }
+    //   },
+    //   function (error) {
+    //     console.log('Login fail with error: ' + error);
+    //   },
+    // );
   }
+
+  async getFacebookUserInfor() {}
 
   async handleLoginGoogle() {
     try {
@@ -159,6 +216,24 @@ class index extends Component {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log('userInfo:', userInfo);
+      const paramSignUp = {
+        email: userInfo.user.email,
+        sns_connect_info: {
+          type: 'google',
+          id: userInfo.user.id,
+          token: userInfo.idToken,
+        },
+      };
+      const paramsSNS = {
+        email: userInfo.user.email,
+        sns_type: 'google',
+        id: userInfo.user.id,
+        token: userInfo.idToken,
+      };
+      console.log('paramsSNS:', paramsSNS);
+      console.log('paramSignUp:', paramSignUp);
+      this.setState({paramSignUp, paramsSNS});
+      this.props.snsSignIn(paramsSNS);
     } catch (error) {
       console.log('error:', error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -175,13 +250,16 @@ class index extends Component {
 
   render() {
     const {email, emailError, password, passwordError} = this.state;
-    const {loading, reason} = this.props;
+    const {loading, reason, snsLoading} = this.props;
     return (
       <Container>
         <Body>
           <Content>
             <View>
-              <Spinner visible={loading} textStyle={{color: '#fff'}} />
+              <Spinner
+                visible={loading || snsLoading}
+                textStyle={{color: '#fff'}}
+              />
               <View style={{display: 'flex', alignItems: 'center'}}>
                 <Image
                   source={Images.imgLogo}
@@ -315,6 +393,10 @@ const mapStateToProps = (state) => {
     loading: state.signInReducer.loading,
     isSuccess: state.signInReducer.isSuccess,
     reason: state.signInReducer.reason,
+
+    snsLoading: state.snsSignInReducer.snsLoading,
+    snsSuccess: state.snsSignInReducer.snsSuccess,
+    snsMessage: state.snsSignInReducer.snsMessage,
   };
 };
 
@@ -324,6 +406,8 @@ const mapDispatchToProps = (dispatch) => {
     signIn: (params) => dispatch(authActions.signIn(params)),
     signInClear: () => dispatch(authActions.signInClear()),
     signUp: (params) => dispatch(authActions.signUp(params)),
+    snsSignIn: (params) => dispatch(authActions.snsSignIn(params)),
+    snsSignInClear: (params) => dispatch(authActions.snsSignInClear()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);
