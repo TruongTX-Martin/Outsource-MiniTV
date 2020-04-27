@@ -25,4 +25,5 @@ export default {
   imgIntro1: require('./intro1.png'),
   imgIntro2: require('./intro2.png'),
   imgIcNavor: require('./naver.png'),
+  imgIcGoogle: require('./ic_google.jpg'),
 };

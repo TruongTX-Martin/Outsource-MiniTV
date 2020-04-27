@@ -1,12 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  Image,
-  Dimensions,
-  // BackHandler,
-} from 'react-native';
+import {View, TouchableOpacity, Text, Image, Dimensions} from 'react-native';
 import {Container, Body, Content} from 'native-base';
 import Images from '../../../assets/images';
 import {connect} from 'react-redux';
@@ -19,7 +12,14 @@ import ButtonBase from '../../../components/ButtonBase';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AccessToken, LoginManager} from 'react-native-fbsdk';
 import {GoogleSignin, statusCodes} from 'react-native-google-signin';
+import {NaverLogin, getProfile} from '@react-native-seoul/naver-login';
 
+//naver
+const androidkeys = {
+  kConsumerKey: 'QfXNXVO8RnqfbPS9x0LR',
+  kConsumerSecret: '6ZGEYZabM9',
+  kServiceAppName: '테스트앱(안드로이드)',
+};
 const {width} = Dimensions.get('window');
 
 class index extends Component {
@@ -161,54 +161,7 @@ class index extends Component {
       this.setState({paramSignUp, paramsSNS});
       this.props.snsSignIn(paramsSNS);
     }
-    // LoginManager.logInWithPermissions(['public_profile', 'email']).then(
-    //   function (result) {
-    //     if (result.isCancelled) {
-    //       console.log('Login cancelled');
-    //     } else {
-    //       AccessToken.getCurrentAccessToken().then((data) => {
-    //         console.log('Accesstoken:', data.accessToken.toString());
-    //         const {accessToken} = data;
-    //         fetch(
-    //           'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
-    //             accessToken,
-    //         )
-    //           .then((response) => response.json())
-    //           .then((json) => {
-    //             // Some user object has been set up somewhere, build that user here
-    //             console.log('User information:', json);
-    //             const paramSignUp = {
-    //               email: json.email,
-    //               sns_connect_info: {
-    //                 type: 'facebook',
-    //                 id: json.id,
-    //                 token: accessToken,
-    //               },
-    //             };
-    //             const paramsSNS = {
-    //               email: json.email,
-    //               sns_type: 'facebook',
-    //               id: json.id,
-    //               token: accessToken,
-    //             };
-    //             console.log('paramsSNS:', paramsSNS);
-    //             console.log('paramSignUp:', paramSignUp);
-    //             // this.setState({paramSignUp, paramsSNS});
-    //             this.props.snsSignIn(paramsSNS);
-    //           })
-    //           .catch((error) => {
-    //             console.log('Get user error:', error);
-    //           });
-    //       });
-    //     }
-    //   },
-    //   function (error) {
-    //     console.log('Login fail with error: ' + error);
-    //   },
-    // );
   }
-
-  async getFacebookUserInfor() {}
 
   async handleLoginGoogle() {
     try {
@@ -248,8 +201,25 @@ class index extends Component {
     }
   }
 
+  async handleLoginNaver() {}
+
+  naverLogin = (props) => {
+    return new Promise((resolve, reject) => {
+      NaverLogin.login(props, (err, token) => {
+        console.log(`\n\n  Token is fetched  :: ${token} \n\n`);
+        // setNaverToken(token);
+        // if (err) {
+        //   reject(err);
+        //   return;
+        // }
+        // resolve(token);
+      });
+    });
+  };
+
   render() {
     const {email, emailError, password, passwordError} = this.state;
+    const initials = androidkeys;
     const {loading, reason, snsLoading} = this.props;
     return (
       <Container>
@@ -358,7 +328,7 @@ class index extends Component {
                       source={Images.imgFacebook}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.naverLogin(initials)}>
                     <Image
                       style={{
                         width: 50,
@@ -375,7 +345,7 @@ class index extends Component {
                         height: 50,
                         borderRadius: 25,
                       }}
-                      source={Images.imgFacebook}
+                      source={Images.imgIcGoogle}
                     />
                   </TouchableOpacity>
                 </View>
