@@ -57,10 +57,8 @@ export function* findPassword(action) {
 
 export function* snsSignIn(action) {
   try {
-    console.log('Sns sign in saga:', action);
     yield put(authActions.snsSignInStart());
     const results = yield DataRemote.snsSignIn(action.params);
-    console.log('Result:', results);
     if (results && results.status == 200) {
       DataLocal.setUserToken(results.data.user_token);
       yield put(authActions.snsSignInSuccess());
@@ -69,6 +67,5 @@ export function* snsSignIn(action) {
     }
   } catch (error) {
     yield put(authActions.snsSignInFailed());
-    console.log('Error:', error);
   }
 }

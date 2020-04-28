@@ -17,7 +17,8 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error);
+    console.log('Interceptors error:', error);
+    console.log('Interceptors error code:', error.response.status);
     console.log(JSON.stringify(error));
   },
 );
@@ -127,6 +128,16 @@ const getListReplay = async () => {
   });
 };
 
+const changePassword = async (params) => {
+  const accessToken = await DataLocal.getAccessToken();
+  return await axios.post('/mypage/change-password', params, {
+    headers: {
+      'X-Access-Token': accessToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -137,4 +148,5 @@ export default {
   getListNotice,
   getListReplay,
   getDetail,
+  changePassword,
 };
