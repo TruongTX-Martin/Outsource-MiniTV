@@ -26,4 +26,8 @@ export default {
   imgIntro2: require('./intro2.png'),
   imgIcNavor: require('./naver.png'),
   imgIcGoogle: require('./ic_google.jpg'),
+  imgMiniTVMain: require('./main-img.png'),
+  imgMiniTVImg1: require('./mini-img1.png'),
+  imgMiniTVImg2: require('./mini-img2.png'),
+  imgMiniTVIcon: require('./img111.png'),
 };

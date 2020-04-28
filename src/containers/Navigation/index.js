@@ -14,6 +14,7 @@ import SignUpMoreInfor from '../Auth/SignUpMoreInfor';
 import FindPassword from '../Auth/FindPassword';
 import SlideMenu from '../SlideMenu';
 import MiniTVChannel from '../Home/MiniTVChannel';
+import ChannelList from '../Home/ChannelList';
 import PokeList from '../Home/PokeList';
 import ReplayProgram from '../Home/ReplayProgram';
 import ChannelDetail from '../Home/ChannelDetail';
@@ -78,6 +79,13 @@ const stackNavigator = createStackNavigator(
     },
     MiniTVChannel: {
       screen: MiniTVChannel,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    ChannelList: {
+      screen: ChannelList,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

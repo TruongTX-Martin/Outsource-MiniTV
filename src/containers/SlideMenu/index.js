@@ -136,7 +136,10 @@ class index extends Component {
                     alignItems: 'center',
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#cccccc',
-                  }}>
+                  }}
+                  onPress={() =>
+                    this.props.navigation.navigate('MiniTVChannel')
+                  }>
                   <Text>미니티비</Text>
                   <Image
                     style={{width: 15, height: 15}}
@@ -153,9 +156,7 @@ class index extends Component {
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#cccccc',
                   }}
-                  onPress={() =>
-                    this.props.navigation.navigate('MiniTVChannel')
-                  }>
+                  onPress={() => this.props.navigation.navigate('ChannelList')}>
                   <Text>채널 리스트</Text>
                   <Image
                     style={{width: 15, height: 15}}
