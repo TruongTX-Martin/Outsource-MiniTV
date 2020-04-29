@@ -10,8 +10,11 @@ import {
 import {Container, Body, Header, Footer, Content} from 'native-base';
 import HeaderBase from '../../../../components/HeaderBase';
 import Images from '../../../../assets/images';
+import {connect} from 'react-redux';
 import Config from '../../../../config';
 import TextInputCustom from '../../../../components/TextField';
+import Spinner from 'react-native-loading-spinner-overlay';
+import * as myPageActions from '../../../../redux/actions/myPageActions';
 const {width} = Dimensions.get('window');
 const widthView = width - 20;
 
@@ -37,6 +40,53 @@ class index extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getMe();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps:', nextProps);
+    if (nextProps.meData) {
+      const childName = nextProps.meData.student_name;
+      const gender =
+        nextProps.meData.sex == 'MALE' ? GENDER.MALE : GENDER.FEMALE;
+      const birthDay = nextProps.meData.birthday;
+      const year = birthDay.substring(0, 4);
+      const month = birthDay.substring(4, 6);
+      const day = birthDay.substring(6, 8);
+      this.setState({
+        childName,
+        gender,
+        year,
+        month,
+        day,
+        isValidYear: true,
+        isValidMonth: true,
+        isValidDay: true,
+      });
+    }
+  }
+
+  handleUpdateInfor() {
+    const {
+      childName,
+      year,
+      month,
+      day,
+      isValidYear,
+      isValidMonth,
+      isValidDay,
+    } = this.state;
+    if (
+      childName.trim().length == 0 ||
+      !isValidYear ||
+      !isValidMonth ||
+      !isValidDay
+    ) {
+      return;
+    }
+  }
+
   render() {
     const {
       year,
@@ -50,14 +100,16 @@ class index extends Component {
       isValidAll,
       isModalVisible,
     } = this.state;
+    const {loadingMe} = this.props;
     return (
       <Container>
         <Header style={Config.Styles.header}>
           <HeaderBase navigation={this.props.navigation} title="내 정보 수정" />
         </Header>
         <Body>
-          <Content>
+          <Content showsVerticalScrollIndicator={false}>
             <View style={{width}}>
+              <Spinner visible={loadingMe} textStyle={{color: '#fff'}} />
               <View
                 style={{
                   width,
@@ -324,8 +376,7 @@ class index extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            // onPress={() => this.setState({isModalVisible: true})}
-          >
+            onPress={() => this.handleUpdateInfor()}>
             <Text style={{color: 'white', fontSize: 17}}>
               Confirm to Change
             </Text>
@@ -336,4 +387,16 @@ class index extends Component {
   }
 }
 
-export default index;
+const mapStateToProps = (state) => {
+  return {
+    meData: state.getMeReducers.meData,
+    loadingMe: state.getMeReducers.loadingMe,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getMe: () => dispatch(myPageActions.getMe()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(index);

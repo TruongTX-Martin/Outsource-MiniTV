@@ -129,11 +129,20 @@ const getListReplay = async () => {
 };
 
 const changePassword = async (params) => {
-  const accessToken = await DataLocal.getAccessToken();
+  const userToken = await DataLocal.getUserToken();
   return await axios.post('/mypage/change-password', params, {
     headers: {
-      'X-Access-Token': accessToken,
+      'X-User-Token': userToken,
       'Content-Type': 'application/json',
+    },
+  });
+};
+
+const getMe = async () => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get('/mypage/member-account', {
+    headers: {
+      'X-User-Token': userToken,
     },
   });
 };
@@ -149,4 +158,5 @@ export default {
   getListReplay,
   getDetail,
   changePassword,
+  getMe,
 };

@@ -7,7 +7,7 @@ import {
   snsSignIn,
 } from './authSaga';
 import {getLiveMain, getListNotice, getListReplay, getDetail} from './liveSaga';
-import {changePassword} from './myPageSaga';
+import {changePassword, getMe} from './myPageSaga';
 import * as Types from '../actions/types';
 
 // Redux Saga: Root Saga
@@ -23,5 +23,6 @@ export function* rootSaga() {
     takeLatest(Types.DETAIL_GET, getDetail),
     takeLatest(Types.SNS_SIGNIN, snsSignIn),
     takeLatest(Types.CHANGE_PASSWORD, changePassword),
+    takeLatest(Types.GET_ME, getMe),
   ]);
 }

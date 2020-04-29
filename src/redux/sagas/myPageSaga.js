@@ -19,3 +19,19 @@ export function* changePassword(action) {
     // yield put(authActions.signUpFailed());
   }
 }
+
+export function* getMe() {
+  try {
+    console.log('Get Me saga');
+    yield put(myPageAction.getMeStart());
+    const results = yield DataRemote.getMe();
+    console.log('Result:', results);
+    if (results.status == 200) {
+      yield put(myPageAction.getMeSuccess(results.data));
+    } else {
+      yield put(myPageAction.getMeFailed());
+    }
+  } catch (error) {
+    yield put(myPageAction.getMeFailed());
+  }
+}

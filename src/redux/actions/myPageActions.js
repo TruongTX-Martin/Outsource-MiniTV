@@ -1,6 +1,6 @@
 import * as Types from './types';
 
-//sign up
+//change password
 export function changePassword(params) {
   return {
     type: Types.CHANGE_PASSWORD,
@@ -29,5 +29,31 @@ export function changePasswordFailed() {
 export function changePasswordClear() {
   return {
     type: Types.CHANGE_PASSWORD_CLEAR,
+  };
+}
+
+//get me
+export function getMe() {
+  return {
+    type: Types.GET_ME,
+  };
+}
+
+export function getMeStart() {
+  return {
+    type: Types.GET_ME_START,
+  };
+}
+
+export function getMeSuccess(meData) {
+  return {
+    type: Types.GET_ME_SUCCESS,
+    meData,
+  };
+}
+
+export function getMeFailed() {
+  return {
+    type: Types.GET_ME_FAILED,
   };
 }
