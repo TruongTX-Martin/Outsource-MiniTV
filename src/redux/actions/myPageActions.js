@@ -95,3 +95,29 @@ export function updateProfileFailed() {
     type: Types.UPDATE_PROFILE_FAILED,
   };
 }
+
+//update profile image
+export function updateImageProfile(params) {
+  return {
+    type: Types.UPDATE_IMAGE_PROFILE,
+    params,
+  };
+}
+
+export function updateImageProfileStart() {
+  return {
+    type: Types.UPDATE_IMAGE_PROFILE_START,
+  };
+}
+
+export function updateImageProfileSuccess() {
+  return {
+    type: Types.UPDATE_IMAGE_PROFILE_SUCCESS,
+  };
+}
+
+export function updateImageProfileFailed() {
+  return {
+    type: Types.UPDATE_IMAGE_PROFILE_FAILED,
+  };
+}

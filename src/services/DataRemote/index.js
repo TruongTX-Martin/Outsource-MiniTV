@@ -3,6 +3,7 @@ import {Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Constants from '../../config/Constant';
 import DataLocal from '../DataLocal';
+import RNFetchBlob from 'rn-fetch-blob';
 
 let axiosConfig = {
   headers: {
@@ -157,6 +158,19 @@ const updateProfile = async (params) => {
   });
 };
 
+const updateProfileImage = async (params) => {
+  const userToken = await DataLocal.getUserToken();
+  return RNFetchBlob.fetch(
+    'POST',
+    Constants.BASE_URL + '/mypage/change-image',
+    {
+      'X-User-Token': userToken,
+      'Content-Type': 'multipart/form-data',
+    },
+    params,
+  );
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -170,4 +184,5 @@ export default {
   changePassword,
   getMe,
   updateProfile,
+  updateProfileImage,
 };

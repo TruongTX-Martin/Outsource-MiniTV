@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import {Container, Body, Header, Footer, Content} from 'native-base';
 import HeaderBase from '../../../../components/HeaderBase';
@@ -16,7 +17,8 @@ import TextInputCustom from '../../../../components/TextField';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as myPageActions from '../../../../redux/actions/myPageActions';
 import Modal from 'react-native-modals';
-
+import RNFetchBlob from 'rn-fetch-blob';
+import ImagePicker from 'react-native-image-picker';
 const {width} = Dimensions.get('window');
 const widthView = width - 20;
 
@@ -39,6 +41,8 @@ class index extends Component {
       isValidDay: false,
       isValidAll: false,
       isModalVisible: false,
+      imageSource: null,
+      profileImage: null,
     };
   }
 
@@ -47,9 +51,9 @@ class index extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps:', nextProps);
     if (nextProps.meData) {
       const childName = nextProps.meData.student_name;
+      const profileImage = nextProps.meData.profile_image_url;
       const gender =
         nextProps.meData.sex == 'MALE' ? GENDER.MALE : GENDER.FEMALE;
       const birthDay = nextProps.meData.birthday;
@@ -65,6 +69,7 @@ class index extends Component {
         isValidYear: true,
         isValidMonth: true,
         isValidDay: true,
+        profileImage,
       });
       this.props.clearMe();
     }
@@ -101,6 +106,43 @@ class index extends Component {
     this.props.updateProfile(params);
   }
 
+  onHandleChooseImage() {
+    const options = {
+      title: 'Select Images',
+      cancelButtonTitle: 'Cancel',
+      takePhotoButtonTitle: 'Take photo',
+      chooseFromLibraryButtonTitle: 'Choose image from library',
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const params = [];
+        params.push({
+          name: 'file',
+          filename: 'test.jpeg',
+          type: 'image/jpeg',
+          data: RNFetchBlob.wrap(response.uri.split('file://').pop()),
+        });
+        this.props.updateProfileImage(params);
+        const source = {uri: response.uri};
+        this.setState({imageSource: source});
+      }
+    });
+  }
+
   render() {
     const {
       year,
@@ -112,8 +154,11 @@ class index extends Component {
       isValidDay,
       childName,
       isModalVisible,
+      imageSource,
+      profileImage,
     } = this.state;
-    const {loadingMe, isUpdating} = this.props;
+    const {loadingMe, isUpdating, isUpdatingImage} = this.props;
+    console.log('isUpdatingImage:', isUpdatingImage);
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -135,10 +180,19 @@ class index extends Component {
                   paddingTop: 50,
                 }}>
                 <View style={{width: 100, height: 100, borderRadius: 50}}>
-                  <Image
-                    style={{width: 100, height: 100, borderRadius: 50}}
-                    source={Images.imgProfile2}
-                  />
+                  {imageSource != null && (
+                    <Image
+                      style={{width: 100, height: 100, borderRadius: 50}}
+                      source={imageSource}
+                    />
+                  )}
+                  {imageSource == null && profileImage != null && (
+                    <Image
+                      style={{width: 100, height: 100, borderRadius: 50}}
+                      source={{uri: profileImage}}
+                    />
+                  )}
+
                   <TouchableOpacity
                     style={{
                       width: 100,
@@ -149,17 +203,32 @@ class index extends Component {
                       opacity: 0.4,
                       display: 'flex',
                     }}
-                  />
-                  <Image
-                    style={{
-                      width: 30,
-                      height: 30,
-                      position: 'absolute',
-                      bottom: 30,
-                      left: 35,
+                    onPress={() => {
+                      if (isUpdatingImage) {
+                        return;
+                      }
+                      this.onHandleChooseImage();
                     }}
-                    source={Images.imgIcCamera}
                   />
+                  {!isUpdatingImage && (
+                    <Image
+                      style={{
+                        width: 30,
+                        height: 30,
+                        position: 'absolute',
+                        bottom: 30,
+                        left: 35,
+                      }}
+                      source={Images.imgIcCamera}
+                    />
+                  )}
+                  {isUpdatingImage && (
+                    <ActivityIndicator
+                      style={{position: 'absolute', bottom: 30, left: 35}}
+                      size="large"
+                      color="#499DA7"
+                    />
+                  )}
                 </View>
               </View>
               <Text style={{textAlign: 'center', marginTop: 20}}>
@@ -468,6 +537,7 @@ const mapStateToProps = (state) => {
     loadingMe: state.getMeReducers.loadingMe,
     isUpdating: state.updateProfileReducer.isUpdating,
     isUpdateSuccess: state.updateProfileReducer.isUpdateSuccess,
+    isUpdatingImage: state.updateProfileImageReducer.isUpdatingImage,
   };
 };
 
@@ -477,6 +547,8 @@ const mapDispatchToProps = (dispatch) => {
     clearMe: () => dispatch(myPageActions.clearMe()),
     updateProfile: (params) => dispatch(myPageActions.updateProfile(params)),
     clearProfileReducer: () => dispatch(myPageActions.clearProfileReducer()),
+    updateProfileImage: (params) =>
+      dispatch(myPageActions.updateImageProfile(params)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

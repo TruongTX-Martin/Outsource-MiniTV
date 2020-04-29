@@ -50,3 +50,17 @@ export function* updateProfile(action) {
     yield put(myPageAction.updateProfileFailed());
   }
 }
+
+export function* updateProfileImage(action) {
+  try {
+    yield put(myPageAction.updateImageProfileStart());
+    const results = yield DataRemote.updateProfileImage(action.params);
+    if (results.data) {
+      yield put(myPageAction.updateImageProfileSuccess());
+    } else {
+      yield put(myPageAction.updateImageProfileFailed());
+    }
+  } catch (error) {
+    yield put(myPageAction.updateImageProfileFailed());
+  }
+}

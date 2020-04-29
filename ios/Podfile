@@ -84,6 +84,10 @@ target 'MiniTV' do
   pod 'RNNaverLogin', :path => '../node_modules/@react-native-seoul/naver-login'
   pod 'react-native-simple-toast', :path => '../node_modules/react-native-simple-toast'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
+
   target 'MiniTVTests' do
     inherit! :complete
     # Pods for testing
