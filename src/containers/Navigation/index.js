@@ -24,6 +24,7 @@ import ChangePassword from '../Home/Setting/ChangePassword';
 import MyInfor from '../Home/Setting/MyInfor';
 import Intro1 from '../Intro1';
 import Intro2 from '../Intro2';
+import DeleteAccount from '../Home/Setting/DeleteAccount';
 const {width} = Dimensions.get('window');
 
 //use with case don't need slidemenu
@@ -170,6 +171,13 @@ const stackNavigator = createStackNavigator(
     },
     MarketingTerm: {
       screen: MarketingTerm,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    DeleteAccount: {
+      screen: DeleteAccount,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

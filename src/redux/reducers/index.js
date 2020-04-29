@@ -11,6 +11,7 @@ import changePasswordReducer from './changePasswordReducer';
 import getMeReducers from './getMeReducers';
 import updateProfileReducer from './updateProfileReducer';
 import updateProfileImageReducer from './updateProfileImageReducer';
+import deleteAccountReducer from './deleteAccountReducer';
 const rootReducer = combineReducers({
   signUpReducer,
   signInReducer,
@@ -24,5 +25,6 @@ const rootReducer = combineReducers({
   getMeReducers,
   updateProfileReducer,
   updateProfileImageReducer,
+  deleteAccountReducer,
 });
 export default rootReducer;

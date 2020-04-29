@@ -5,18 +5,15 @@ import DataLocal from '../../services/DataLocal';
 
 export function* changePassword(action) {
   try {
-    console.log('Changepasswordsaaga', action);
     yield put(myPageAction.changePasswordStart());
     const results = yield DataRemote.changePassword(action.params);
-    console.log('Result:', results);
-    // if (signUpResult.status == 200) {
-    //   yield put(authActions.signUpSuccess());
-    // } else {
-    //   yield put(authActions.signUpFailed());
-    // }
+    if (results.status == 200) {
+      yield put(myPageAction.changePasswordSuccess());
+    } else {
+      yield put(myPageAction.changePasswordFailed());
+    }
   } catch (error) {
-    console.log('Error:', error);
-    // yield put(authActions.signUpFailed());
+    yield put(myPageAction.changePasswordFailed());
   }
 }
 
@@ -37,7 +34,6 @@ export function* getMe() {
 
 export function* updateProfile(action) {
   try {
-    console.log('updateProfile saga', action);
     yield put(myPageAction.updateProfileStart());
     const results = yield DataRemote.updateProfile(action.params);
     console.log('Result:', results);
@@ -62,5 +58,19 @@ export function* updateProfileImage(action) {
     }
   } catch (error) {
     yield put(myPageAction.updateImageProfileFailed());
+  }
+}
+
+export function* deleteAccount(action) {
+  try {
+    yield put(myPageAction.deleteAccountStart());
+    const results = yield DataRemote.deleteAccount(action.params);
+    if (results.status == 200) {
+      yield put(myPageAction.deleteAccountSuccess());
+    } else {
+      yield put(myPageAction.deleteAccountFailed());
+    }
+  } catch (error) {
+    yield put(myPageAction.deleteAccountFailed());
   }
 }

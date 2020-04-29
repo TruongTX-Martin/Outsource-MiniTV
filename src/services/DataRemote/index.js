@@ -171,6 +171,16 @@ const updateProfileImage = async (params) => {
   );
 };
 
+const deleteAccount = async (params) => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.post('/mypage/cancel-membership', params, {
+    headers: {
+      'X-User-Token': userToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -185,4 +195,5 @@ export default {
   getMe,
   updateProfile,
   updateProfileImage,
+  deleteAccount,
 };

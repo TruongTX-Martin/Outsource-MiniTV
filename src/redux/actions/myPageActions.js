@@ -121,3 +121,29 @@ export function updateImageProfileFailed() {
     type: Types.UPDATE_IMAGE_PROFILE_FAILED,
   };
 }
+
+//delete account
+export function deleteAccount(params) {
+  return {
+    type: Types.DELETE_ACCOUNT,
+    params,
+  };
+}
+
+export function deleteAccountStart() {
+  return {
+    type: Types.DELETE_ACCOUNT_START,
+  };
+}
+
+export function deleteAccountSuccess() {
+  return {
+    type: Types.DELETE_ACCOUNT_SUCCESS,
+  };
+}
+
+export function deleteAccountFailed() {
+  return {
+    type: Types.DELETE_ACCOUNT_FAILED,
+  };
+}

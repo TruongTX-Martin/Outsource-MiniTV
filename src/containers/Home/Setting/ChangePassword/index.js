@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, Dimensions, TouchableOpacity, Modal} from 'react-native';
+import {Text, View, Dimensions, TouchableOpacity} from 'react-native';
 import {Container, Body, Header, Footer, Content} from 'native-base';
 import HeaderBase from '../../../../components/HeaderBase';
 import Config from '../../../../config';
 import TextInput from '../../../../components/TextField';
 import validateInput from '../../../../helpers/Validate';
+import Spinner from 'react-native-loading-spinner-overlay';
+import Modal from 'react-native-modals';
 import {connect} from 'react-redux';
 import * as myPageAction from '../../../../redux/actions/myPageActions';
 
@@ -98,6 +100,12 @@ class index extends Component {
     this.props.changePassword(params);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isSuccess) {
+      this.setState({isModalVisible: true});
+    }
+  }
+
   render() {
     const {
       currentPassword,
@@ -106,18 +114,21 @@ class index extends Component {
       newPasswordError,
       reNewPassword,
       reNewPasswordError,
+      isModalVisible,
     } = this.state;
+    const {loading} = this.props;
     return (
       <Container>
         <Header style={Config.Styles.header}>
           <HeaderBase
             navigation={this.props.navigation}
-            title="Change password"
+            title="비밀번호 변경"
           />
         </Header>
         <Body>
           <Content>
             <View style={{width: widthView}}>
+              <Spinner visible={loading} textStyle={{color: '#fff'}} />
               <Text
                 style={{
                   color: '#333333',
@@ -200,13 +211,77 @@ class index extends Component {
             </Text>
           </TouchableOpacity>
         </Footer>
+        <Modal
+          visible={isModalVisible}
+          onTouchOutside={() => {
+            this.setState({isModalVisible: false});
+          }}
+          onHardwareBackPress={() => {
+            this.setState({isModalVisible: false});
+            return true;
+          }}>
+          <View
+            style={{
+              width: width - 40,
+              height: 300,
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'space-between',
+              borderRadius: 5,
+            }}>
+            <View
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 225,
+              }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 20,
+                  width: width - 50,
+                  textAlign: 'center',
+                }}>
+                비밀번호가 성공적으로 변경되었습니다.
+              </Text>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingBottom: 20,
+              }}>
+              <TouchableOpacity
+                style={{
+                  width: width - 60,
+                  backgroundColor: '#499DA7',
+                  height: 55,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 5,
+                }}
+                onPress={() => {
+                  this.setState({isModalVisible: false});
+                  this.props.navigation.goBack();
+                }}>
+                <Text style={{color: 'white', fontSize: 17}}>확인</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </Container>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    loading: state.changePasswordReducer.loading,
+    isSuccess: state.changePasswordReducer.isSuccess,
+    reason: state.changePasswordReducer.reason,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

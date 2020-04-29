@@ -12,6 +12,7 @@ import {
   getMe,
   updateProfile,
   updateProfileImage,
+  deleteAccount,
 } from './myPageSaga';
 import * as Types from '../actions/types';
 
@@ -31,5 +32,6 @@ export function* rootSaga() {
     takeLatest(Types.GET_ME, getMe),
     takeLatest(Types.UPDATE_PROFILE, updateProfile),
     takeLatest(Types.UPDATE_IMAGE_PROFILE, updateProfileImage),
+    takeLatest(Types.DELETE_ACCOUNT, deleteAccount),
   ]);
 }

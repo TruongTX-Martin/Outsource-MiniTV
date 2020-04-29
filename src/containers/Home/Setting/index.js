@@ -41,26 +41,6 @@ class index extends Component {
                 borderBottomWidth: 0.5,
                 borderBottomColor: '#cccccc',
               }}
-              onPress={() => this.props.navigation.navigate('Setting')}>
-              <Text>계정 비활성화</Text>
-              <Switch
-                trackColor={{false: 'white', true: '#6634EA'}}
-                thumbColor={isEnabled ? 'white' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={() => this.setState({isEnabled: !isEnabled})}
-                value={isEnabled}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                height: 60,
-                alignItems: 'center',
-                borderBottomWidth: 0.5,
-                borderBottomColor: '#cccccc',
-              }}
               onPress={() => this.props.navigation.navigate('MyInfor')}>
               <Text>내 정보 수정</Text>
               <Image
@@ -95,7 +75,7 @@ class index extends Component {
                 borderBottomWidth: 0.5,
                 borderBottomColor: '#cccccc',
               }}
-              onPress={() => this.props.navigation.navigate('Setting')}>
+              onPress={() => this.props.navigation.navigate('DeleteAccount')}>
               <Text>계정 삭제</Text>
               <Image
                 style={{width: 15, height: 15}}

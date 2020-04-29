@@ -158,7 +158,6 @@ class index extends Component {
       profileImage,
     } = this.state;
     const {loadingMe, isUpdating, isUpdatingImage} = this.props;
-    console.log('isUpdatingImage:', isUpdatingImage);
     return (
       <Container>
         <Header style={Config.Styles.header}>
