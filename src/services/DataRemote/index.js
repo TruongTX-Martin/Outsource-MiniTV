@@ -147,6 +147,16 @@ const getMe = async () => {
   });
 };
 
+const updateProfile = async (params) => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.post('/mypage/member-account', params, {
+    headers: {
+      'X-User-Token': userToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -159,4 +169,5 @@ export default {
   getDetail,
   changePassword,
   getMe,
+  updateProfile,
 };

@@ -15,6 +15,8 @@ import Config from '../../../../config';
 import TextInputCustom from '../../../../components/TextField';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as myPageActions from '../../../../redux/actions/myPageActions';
+import Modal from 'react-native-modals';
+
 const {width} = Dimensions.get('window');
 const widthView = width - 20;
 
@@ -64,6 +66,11 @@ class index extends Component {
         isValidMonth: true,
         isValidDay: true,
       });
+      this.props.clearMe();
+    }
+    if (nextProps.isUpdateSuccess) {
+      this.setState({isModalVisible: true});
+      this.props.clearProfileReducer();
     }
   }
 
@@ -76,6 +83,7 @@ class index extends Component {
       isValidYear,
       isValidMonth,
       isValidDay,
+      gender,
     } = this.state;
     if (
       childName.trim().length == 0 ||
@@ -85,6 +93,12 @@ class index extends Component {
     ) {
       return;
     }
+    const params = {
+      student_name: childName,
+      birthday: year.toString() + month.toString() + day.toString(),
+      sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
+    };
+    this.props.updateProfile(params);
   }
 
   render() {
@@ -97,10 +111,9 @@ class index extends Component {
       isValidMonth,
       isValidDay,
       childName,
-      isValidAll,
       isModalVisible,
     } = this.state;
-    const {loadingMe} = this.props;
+    const {loadingMe, isUpdating} = this.props;
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -109,7 +122,10 @@ class index extends Component {
         <Body>
           <Content showsVerticalScrollIndicator={false}>
             <View style={{width}}>
-              <Spinner visible={loadingMe} textStyle={{color: '#fff'}} />
+              <Spinner
+                visible={loadingMe || isUpdating}
+                textStyle={{color: '#fff'}}
+              />
               <View
                 style={{
                   width,
@@ -382,6 +398,65 @@ class index extends Component {
             </Text>
           </TouchableOpacity>
         </Footer>
+        <Modal
+          visible={isModalVisible}
+          onTouchOutside={() => {
+            this.setState({isModalVisible: false});
+          }}
+          onHardwareBackPress={() => {
+            this.setState({isModalVisible: false});
+            return true;
+          }}>
+          <View
+            style={{
+              width: width - 40,
+              height: 300,
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'space-between',
+              borderRadius: 5,
+            }}>
+            <View
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 225,
+              }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 25,
+                  width: width - 50,
+                  textAlign: 'center',
+                }}>
+                수정이 완료되었습니다.
+              </Text>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingBottom: 20,
+              }}>
+              <TouchableOpacity
+                style={{
+                  width: width - 60,
+                  backgroundColor: '#499DA7',
+                  height: 55,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 5,
+                }}
+                onPress={() => {
+                  this.setState({isModalVisible: false});
+                }}>
+                <Text style={{color: 'white', fontSize: 17}}>확인</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </Container>
     );
   }
@@ -391,12 +466,17 @@ const mapStateToProps = (state) => {
   return {
     meData: state.getMeReducers.meData,
     loadingMe: state.getMeReducers.loadingMe,
+    isUpdating: state.updateProfileReducer.isUpdating,
+    isUpdateSuccess: state.updateProfileReducer.isUpdateSuccess,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getMe: () => dispatch(myPageActions.getMe()),
+    clearMe: () => dispatch(myPageActions.clearMe()),
+    updateProfile: (params) => dispatch(myPageActions.updateProfile(params)),
+    clearProfileReducer: () => dispatch(myPageActions.clearProfileReducer()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

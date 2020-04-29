@@ -39,6 +39,12 @@ export function getMe() {
   };
 }
 
+export function clearMe() {
+  return {
+    type: Types.GET_ME_CLEAR,
+  };
+}
+
 export function getMeStart() {
   return {
     type: Types.GET_ME_START,
@@ -55,5 +61,37 @@ export function getMeSuccess(meData) {
 export function getMeFailed() {
   return {
     type: Types.GET_ME_FAILED,
+  };
+}
+
+//update profile
+export function updateProfile(params) {
+  return {
+    type: Types.UPDATE_PROFILE,
+    params,
+  };
+}
+
+export function clearProfileReducer() {
+  return {
+    type: Types.UPDATE_PROFILE_CLEAR,
+  };
+}
+
+export function updateProfileStart() {
+  return {
+    type: Types.UPDATE_PROFILE_START,
+  };
+}
+
+export function updateProfileSuccess() {
+  return {
+    type: Types.UPDATE_PROFILE_SUCCESS,
+  };
+}
+
+export function updateProfileFailed() {
+  return {
+    type: Types.UPDATE_PROFILE_FAILED,
   };
 }

@@ -9,6 +9,7 @@ import liveDetailReducer from './liveDetailReducer';
 import snsSignInReducer from './snsSignInReducer';
 import changePasswordReducer from './changePasswordReducer';
 import getMeReducers from './getMeReducers';
+import updateProfileReducer from './updateProfileReducer';
 const rootReducer = combineReducers({
   signUpReducer,
   signInReducer,
@@ -20,5 +21,6 @@ const rootReducer = combineReducers({
   snsSignInReducer,
   changePasswordReducer,
   getMeReducers,
+  updateProfileReducer,
 });
 export default rootReducer;

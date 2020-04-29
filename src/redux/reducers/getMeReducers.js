@@ -26,5 +26,12 @@ const getMeReducers = createReducer(initialState, {
       loadingMe: false,
     };
   },
+  [Types.GET_ME_CLEAR](state, action) {
+    return {
+      ...state,
+      loadingMe: false,
+      meData: null,
+    };
+  },
 });
 export default getMeReducers;

@@ -22,7 +22,6 @@ export function* changePassword(action) {
 
 export function* getMe() {
   try {
-    console.log('Get Me saga');
     yield put(myPageAction.getMeStart());
     const results = yield DataRemote.getMe();
     console.log('Result:', results);
@@ -33,5 +32,21 @@ export function* getMe() {
     }
   } catch (error) {
     yield put(myPageAction.getMeFailed());
+  }
+}
+
+export function* updateProfile(action) {
+  try {
+    console.log('updateProfile saga', action);
+    yield put(myPageAction.updateProfileStart());
+    const results = yield DataRemote.updateProfile(action.params);
+    console.log('Result:', results);
+    if (results.status == 200) {
+      yield put(myPageAction.updateProfileSuccess());
+    } else {
+      yield put(myPageAction.updateProfileFailed());
+    }
+  } catch (error) {
+    yield put(myPageAction.updateProfileFailed());
   }
 }
