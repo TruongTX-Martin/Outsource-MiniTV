@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import Images from '../../../assets/images';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as liveActions from '../../../redux/actions/liveActions';
+import Share from 'react-native-share';
 const {width} = Dimensions.get('window');
 
 const widthView = width - 30;
@@ -33,6 +34,15 @@ class index extends Component {
       available: wish_available,
     };
     this.props.pokeChannel(liveId, params);
+  }
+
+  handleShare(url) {
+    const shareOptions = {
+      title: '',
+      message: '',
+      url,
+    };
+    Share.open(shareOptions);
   }
 
   render() {
@@ -126,7 +136,8 @@ class index extends Component {
                       flexDirection: 'row',
                       width: widthView / 3,
                       justifyContent: 'center',
-                    }}>
+                    }}
+                    onPress={() => this.handleShare(detail.share_link)}>
                     <Image
                       style={{width: 15, height: 16}}
                       source={Images.imgIcShare}
