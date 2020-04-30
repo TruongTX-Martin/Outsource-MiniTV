@@ -44,7 +44,7 @@ class index extends Component {
           <HeaderBase navigation={this.props.navigation} title="" />
         </Header>
         <Body>
-          <Content>
+          <Content showsVerticalScrollIndicator={false}>
             <View style={{width, display: 'flex', alignItems: 'center'}}>
               <Spinner
                 visible={pokeLoading || loadingChannel}

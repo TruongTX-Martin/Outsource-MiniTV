@@ -13,36 +13,6 @@ const widthView = width - 20;
 class index extends Component {
   constructor(props) {
     super(props);
-    this.listHotChannel = [
-      {
-        id: 1,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 2,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 3,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 4,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-    ];
   }
 
   componentDidMount() {
@@ -68,7 +38,7 @@ class index extends Component {
             <View style={{width: widthView}}>
               <Text
                 style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
-                Replay program
+                방송 다시보기
               </Text>
               {list && list.length > 0 && (
                 <FlatList

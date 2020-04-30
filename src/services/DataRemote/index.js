@@ -129,6 +129,15 @@ const getListReplay = async () => {
   });
 };
 
+const getPokeList = async () => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get('/live/wish-list', {
+    headers: {
+      'X-User-Token': userToken,
+    },
+  });
+};
+
 const changePassword = async (params) => {
   const userToken = await DataLocal.getUserToken();
   return await axios.post('/mypage/change-password', params, {
@@ -207,4 +216,5 @@ export default {
   updateProfileImage,
   deleteAccount,
   pokeChannel,
+  getPokeList,
 };

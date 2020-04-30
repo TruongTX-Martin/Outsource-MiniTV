@@ -57,6 +57,38 @@ export function noticeFailed() {
   };
 }
 
+//poke list
+export function getPokeList() {
+  return {
+    type: Types.POKE_LIST_GET,
+  };
+}
+
+export function clearPokeList() {
+  return {
+    type: Types.POKE_LIST_CLEAR,
+  };
+}
+
+export function getPokeListStart() {
+  return {
+    type: Types.POKE_LIST_START,
+  };
+}
+
+export function getPokeListSuccess(list) {
+  return {
+    type: Types.POKE_LIST_SUCCESS,
+    list,
+  };
+}
+
+export function getPokeListFailed() {
+  return {
+    type: Types.POKE_LIST_FAILED,
+  };
+}
+
 //replay
 export function replayGet() {
   return {

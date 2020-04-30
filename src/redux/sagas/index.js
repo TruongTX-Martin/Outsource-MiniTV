@@ -12,6 +12,7 @@ import {
   getListReplay,
   getDetail,
   pokeChannel,
+  getPokeList,
 } from './liveSaga';
 import {
   changePassword,
@@ -40,5 +41,6 @@ export function* rootSaga() {
     takeLatest(Types.UPDATE_IMAGE_PROFILE, updateProfileImage),
     takeLatest(Types.DELETE_ACCOUNT, deleteAccount),
     takeLatest(Types.POKE_CHANNEL, pokeChannel),
+    takeLatest(Types.POKE_LIST_GET, getPokeList),
   ]);
 }

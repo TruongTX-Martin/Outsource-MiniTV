@@ -6,11 +6,15 @@ import {
   Image,
   Dimensions,
   FlatList,
+  RefreshControl,
 } from 'react-native';
-import {Container, Body, Header} from 'native-base';
+import {Container, Body, Header, Content} from 'native-base';
 import {connect} from 'react-redux';
 import Images from '../../../assets/images';
 import ItemChannel from '../Component/ItemChannel';
+import Config from '../../../config';
+import * as liveActions from '../../../redux/actions/liveActions';
+import HeaderBase from '../../../components/HeaderBase';
 const {width} = Dimensions.get('window');
 
 const widthView = width - 20;
@@ -18,75 +22,61 @@ const widthView = width - 20;
 class index extends Component {
   constructor(props) {
     super(props);
-    this.listHotChannel = [
-      {
-        id: 1,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 2,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 3,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        id: 4,
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-    ];
+  }
+
+  componentDidMount() {
+    this.props.getPokeList();
+  }
+
+  componentWillUnmount() {
+    this.props.clearPokeList();
   }
 
   render() {
+    const {list, loading} = this.props;
+    console.log('list:', list);
+    console.log('loading:', loading);
     return (
       <Container>
-        <Header>
-          <View style={{width, paddingLeft: 15}}>
-            <TouchableOpacity
-              style={{width: 50}}
-              onPress={() => this.props.navigation.goBack()}>
-              <Image
-                style={{width: 13, height: 25}}
-                source={Images.imgIcBack}
-              />
-            </TouchableOpacity>
-          </View>
+        <Header style={Config.Styles.header}>
+          <HeaderBase navigation={this.props.navigation} title="" />
         </Header>
         <Body>
-          <View style={{width: widthView}}>
-            <Text
-              style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
-              Poke list
-            </Text>
-            <FlatList
-              data={this.listHotChannel}
-              style={{marginBottom: 30}}
-              keyExtractor={(item) => item.id}
-              showsVerticalScrollIndicator={false}
-              renderItem={({item}) => {
-                return (
-                  <ItemChannel
-                    item={item}
-                    widthView={widthView - 10}
-                    navigation={this.props.navigation}
-                  />
-                );
-              }}
-            />
-          </View>
+          <Content
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={() => this.props.getPokeList()}
+              />
+            }>
+            <View style={{width: widthView}}>
+              <Text
+                style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
+                찜한 방송
+              </Text>
+              <FlatList
+                data={this.list}
+                style={{marginBottom: 30}}
+                keyExtractor={(item) => item.id}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => {
+                  return (
+                    <ItemChannel
+                      item={item}
+                      widthView={widthView - 10}
+                      navigation={this.props.navigation}
+                    />
+                  );
+                }}
+              />
+              {(!list || list.length == 0) && !loading && (
+                <Text style={{textAlign: 'center', marginTop: 100}}>
+                  Items is empty
+                </Text>
+              )}
+            </View>
+          </Content>
         </Body>
       </Container>
     );
@@ -94,10 +84,16 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    list: state.getPokeListReducer.list,
+    loading: state.getPokeListReducer.loading,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getPokeList: () => dispatch(liveActions.getPokeList()),
+    clearPokeList: () => dispatch(liveActions.clearPokeList()),
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

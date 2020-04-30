@@ -70,3 +70,17 @@ export function* pokeChannel(action) {
     yield put(liveActions.pokeChannelFailed());
   }
 }
+
+export function* getPokeList(action) {
+  try {
+    yield put(liveActions.getPokeListStart());
+    const result = yield DataRemote.getPokeList();
+    if (result.status == 200) {
+      yield put(liveActions.getPokeListSuccess(result.data));
+    } else {
+      yield put(liveActions.getPokeListFailed());
+    }
+  } catch (error) {
+    yield put(liveActions.getPokeListFailed());
+  }
+}

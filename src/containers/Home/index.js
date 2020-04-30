@@ -17,6 +17,7 @@ import {connect} from 'react-redux';
 import Images from '../../assets/images';
 import * as authActions from '../../redux/actions/authActions';
 import * as liveActions from '../../redux/actions/liveActions';
+import * as myPageActions from '../../redux/actions/myPageActions';
 import ItemChannel from './Component/ItemChannel';
 import {EventRegister} from 'react-native-event-listeners';
 import DataLocal from '../../services/DataLocal';
@@ -109,6 +110,7 @@ class index extends Component {
       Config.Constant.EVENT_SIGNIN_SUCCESS,
       (data) => {
         this.props.getMainList();
+        this.props.getMe();
         showToast('Login Success');
       },
     );
@@ -339,6 +341,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     generateAccessToken: () => dispatch(authActions.generateAccessToken()),
     getMainList: () => dispatch(liveActions.liveMainGet()),
+    getMe: () => dispatch(myPageActions.getMe()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

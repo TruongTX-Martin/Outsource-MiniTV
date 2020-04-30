@@ -34,7 +34,7 @@ class index extends Component {
     return (
       <Container>
         <Header style={Config.Styles.header}>
-          <HeaderBase navigation={this.props.navigation} title="" />
+          <HeaderBase navigation={this.props.navigation} title="알림" />
         </Header>
         <Body>
           <Content
