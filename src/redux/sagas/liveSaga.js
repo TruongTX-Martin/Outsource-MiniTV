@@ -8,7 +8,16 @@ export function* getLiveMain(action) {
     yield put(liveActions.liveMainStart());
     const mainResult = yield DataRemote.getMainLive();
     if (mainResult.status == 200) {
-      yield put(liveActions.liveMainSuccess(mainResult.data));
+      if (mainResult?.data?.on_air?.status == 'DOING') {
+        const resultPlay = yield DataRemote.getPlayUrl(
+          mainResult?.data?.on_air?.live_uid,
+        );
+        yield put(
+          liveActions.liveMainSuccess(mainResult.data, resultPlay?.data),
+        );
+      } else {
+        yield put(liveActions.liveMainSuccess(mainResult.data, null));
+      }
     } else {
       yield put(liveActions.liveMainFailed());
     }

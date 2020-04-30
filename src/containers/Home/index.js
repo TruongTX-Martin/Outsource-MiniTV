@@ -138,7 +138,8 @@ class index extends Component {
 
   render() {
     const {loadingFirst} = this.state;
-    const {loading, onAir, hotLists} = this.props;
+    const {loading, onAir, hotLists, resultPlay} = this.props;
+    console.log('resultPlay:', resultPlay);
     if (loadingFirst) {
       return (
         <View
@@ -275,7 +276,12 @@ class index extends Component {
                     </View>
                   )}
                   {onAir && onAir.status == STATUS.DOING && (
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.props.navigation.navigate('PlayVideo', {
+                          playUrl: resultPlay.play_url,
+                        })
+                      }>
                       <Image
                         style={{width: 50, height: 50}}
                         source={Images.imgIcPlay}
@@ -336,6 +342,7 @@ const mapStateToProps = (state) => {
     onAir: state.liveMainGetReducer.onAir,
     hotLists: state.liveMainGetReducer.hotLists,
     loading: state.liveMainGetReducer.loading,
+    resultPlay: state.liveMainGetReducer.resultPlay,
   };
 };
 

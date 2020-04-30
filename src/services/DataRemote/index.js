@@ -104,6 +104,15 @@ const getMainLive = async () => {
   });
 };
 
+const getPlayUrl = async (liveId) => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get(`/live/enter-class/${liveId}`, {
+    headers: {
+      'X-User-Token': userToken,
+    },
+  });
+};
+
 const getDetail = async (id) => {
   const accessToken = await DataLocal.getAccessToken();
   const userToken = await DataLocal.getUserToken();
@@ -221,4 +230,5 @@ export default {
   deleteAccount,
   pokeChannel,
   getPokeList,
+  getPlayUrl,
 };

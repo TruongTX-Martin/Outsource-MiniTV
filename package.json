@@ -34,6 +34,7 @@
     "react-native-share": "^3.3.0",
     "react-native-simple-toast": "^1.1.2",
     "react-native-splash-screen": "^3.2.0",
+    "react-native-webview": "^9.4.0",
     "react-navigation": "^4.3.7",
     "react-navigation-drawer": "^2.4.11",
     "react-navigation-stack": "^2.3.11",

@@ -6,6 +6,7 @@ const initialState = {
   todayList: [],
   hotLists: [],
   loading: false,
+  resultPlay: null,
 };
 
 const liveMainGetReducer = createReducer(initialState, {
@@ -22,6 +23,7 @@ const liveMainGetReducer = createReducer(initialState, {
       onAir: action.data.on_air,
       todayList: action.data.today_list,
       hotLists: action.data.hot_list,
+      resultPlay: action.resultPlay,
     };
   },
   [Types.LIVE_MAIN_FAILED](state, action) {

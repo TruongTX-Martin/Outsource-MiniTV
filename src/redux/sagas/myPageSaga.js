@@ -1,7 +1,6 @@
 import * as myPageAction from '../actions/myPageActions';
 import {put} from 'redux-saga/effects';
 import DataRemote from '../../services/DataRemote';
-import DataLocal from '../../services/DataLocal';
 
 export function* changePassword(action) {
   try {

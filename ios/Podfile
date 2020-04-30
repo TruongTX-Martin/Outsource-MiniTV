@@ -90,6 +90,8 @@ target 'MiniTV' do
 
   pod 'RNShare', :path => '../node_modules/react-native-share'
 
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'MiniTVTests' do
     inherit! :complete
     # Pods for testing

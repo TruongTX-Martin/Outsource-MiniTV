@@ -13,10 +13,11 @@ export function liveMainStart() {
   };
 }
 
-export function liveMainSuccess(data) {
+export function liveMainSuccess(data, resultPlay) {
   return {
     type: Types.LIVE_MAIN_SUCCESS,
     data,
+    resultPlay,
   };
 }
 

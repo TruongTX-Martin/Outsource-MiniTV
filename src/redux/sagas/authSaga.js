@@ -24,7 +24,6 @@ export function* generateAccessToken() {
     const generateResult = yield DataRemote.generateAccessToken();
     if (generateResult.status == 200) {
       DataLocal.setAccessToken(generateResult.data.access_token);
-      console.log('Generate forupdate:', generateResult.data.force_update);
       EventRegister.emit(
         Constants.EVENT_GOTO_STORE,
         generateResult.data.force_update,
