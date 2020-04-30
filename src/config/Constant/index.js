@@ -2,6 +2,7 @@ const constant = {
   DETAIL: 'Detail',
 
   EVENT_GOTO_SIGNIN: 'EVENT_GOTO_SIGNIN',
+  EVENT_GOTO_STORE: 'EVENT_GOTO_STORE',
   EVENT_SIGNIN_SUCCESS: 'EVENT_SIGNIN_SUCCESS',
   EVENT_SIGN_OUT: 'EVENT_SIGN_OUT',
   EVENT_SNS_SIGNIN_AGAIN: 'EVENT_SNS_SIGNIN_AGAIN',
@@ -14,6 +15,6 @@ const constant = {
   ACCESS_TOKEN: 'ACCESS_TOKEN',
   USER_TOKEN: 'USER_TOKEN',
 
-  BASE_URL: 'http://dev-api.minitv.io/v1',
+  BASE_URL: 'https://dev-api.minitv.io/v1',
 };
 export default constant;

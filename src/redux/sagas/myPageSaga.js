@@ -21,7 +21,6 @@ export function* getMe() {
   try {
     yield put(myPageAction.getMeStart());
     const results = yield DataRemote.getMe();
-    console.log('Result:', results);
     if (results.status == 200) {
       yield put(myPageAction.getMeSuccess(results.data));
     } else {
@@ -36,7 +35,6 @@ export function* updateProfile(action) {
   try {
     yield put(myPageAction.updateProfileStart());
     const results = yield DataRemote.updateProfile(action.params);
-    console.log('Result:', results);
     if (results.status == 200) {
       yield put(myPageAction.updateProfileSuccess());
     } else {

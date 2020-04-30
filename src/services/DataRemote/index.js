@@ -4,6 +4,7 @@ import DeviceInfo from 'react-native-device-info';
 import Constants from '../../config/Constant';
 import DataLocal from '../DataLocal';
 import RNFetchBlob from 'rn-fetch-blob';
+import {EventRegister} from 'react-native-event-listeners';
 
 let axiosConfig = {
   headers: {
@@ -18,6 +19,9 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error.response.status == 401) {
+      EventRegister.emit(Constants.EVENT_SIGN_OUT);
+    }
     console.log('Interceptors error:', error);
     console.log('Interceptors error code:', error.response.status);
     console.log(JSON.stringify(error));

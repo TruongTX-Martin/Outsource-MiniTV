@@ -2,6 +2,8 @@ import * as authActions from '../actions/authActions';
 import {put} from 'redux-saga/effects';
 import DataRemote from '../../services/DataRemote';
 import DataLocal from '../../services/DataLocal';
+import {EventRegister} from 'react-native-event-listeners';
+import Constants from '../../config/Constant';
 
 export function* signUp(action) {
   try {
@@ -22,6 +24,11 @@ export function* generateAccessToken() {
     const generateResult = yield DataRemote.generateAccessToken();
     if (generateResult.status == 200) {
       DataLocal.setAccessToken(generateResult.data.access_token);
+      console.log('Generate forupdate:', generateResult.data.force_update);
+      EventRegister.emit(
+        Constants.EVENT_GOTO_STORE,
+        generateResult.data.force_update,
+      );
     }
   } catch (error) {}
 }

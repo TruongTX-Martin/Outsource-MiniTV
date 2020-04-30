@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   BackHandler,
+  Linking,
 } from 'react-native';
 import {Container, Body, Header, Content} from 'native-base';
 import Config from '../../config';
@@ -27,36 +28,15 @@ const {width, height} = Dimensions.get('window');
 
 const widthView = width - 30;
 
+const STATUS = {
+  RESERVED: 'RESERVED',
+  DOING: 'DOING',
+  FINISHED: 'FINISHED',
+};
+
 class index extends Component {
   constructor(props) {
     super(props);
-    this.listTag = ['#4~5세', '#영어게임', '#놀이'];
-    this.listHotChannel = [
-      {
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-      {
-        image:
-          'https://s3.ap-northeast-2.amazonaws.com/minischool-dev-001/book/minischool/thumbnail/1585112351121.ico',
-        title: '쿠리와 함께하는 문장게임',
-        tags: ['#4~5세', '#영어게임', '#놀이'],
-      },
-    ];
     this.state = {
       loadingFirst: true,
     };
@@ -121,12 +101,21 @@ class index extends Component {
         this.props.navigation.navigate('SignIn');
       },
     );
+    this.listenerGoToStore = EventRegister.addEventListener(
+      Config.Constant.EVENT_GOTO_STORE,
+      (data) => {
+        if (data.status) {
+          Linking.openURL(data.store_link);
+        }
+      },
+    );
     BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
   componentWillUnmount() {
     EventRegister.removeEventListener(this.listenerGoToSignIn);
     EventRegister.removeEventListener(this.listenerSignInSuccess);
     EventRegister.removeEventListener(this.listenerSignOut);
+    EventRegister.removeEventListener(this.listenerGoToStore);
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this.onAndroidBackPress,
@@ -139,6 +128,13 @@ class index extends Component {
     }
     return false;
   };
+
+  getTitle(status) {
+    if (status == STATUS.DOING) {
+      return '방송 중';
+    }
+    return 'Coming soon';
+  }
 
   render() {
     const {loadingFirst} = this.state;
@@ -205,7 +201,9 @@ class index extends Component {
                   paddingHorizontal: 15,
                   marginTop: 20,
                 }}>
-                <Text style={{fontWeight: 'bold', fontSize: 25}}>방송 중</Text>
+                <Text style={{fontWeight: 'bold', fontSize: 25}}>
+                  {this.getTitle(onAir?.status)}
+                </Text>
                 <View
                   style={{
                     width: widthView,
@@ -251,35 +249,39 @@ class index extends Component {
                     shadowRadius: 3.84,
                     elevation: 5,
                   }}>
-                  <View
-                    style={{
-                      backgroundColor: 'red',
-                      width: 60,
-                      position: 'absolute',
-                      left: 10,
-                      top: 10,
-                      paddingVertical: 5,
-                      textAlign: 'center',
-                      borderRadius: 15,
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Text
+                  {onAir && onAir.status == STATUS.DOING && (
+                    <View
                       style={{
-                        color: 'white',
-                        fontWeight: 'bold',
-                        fontSize: 15,
+                        backgroundColor: 'red',
+                        width: 60,
+                        position: 'absolute',
+                        left: 10,
+                        top: 10,
+                        paddingVertical: 5,
+                        textAlign: 'center',
+                        borderRadius: 15,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}>
-                      On Air
-                    </Text>
-                  </View>
-                  <TouchableOpacity>
-                    <Image
-                      style={{width: 50, height: 50}}
-                      source={Images.imgIcPlay}
-                    />
-                  </TouchableOpacity>
+                      <Text
+                        style={{
+                          color: 'white',
+                          fontWeight: 'bold',
+                          fontSize: 15,
+                        }}>
+                        On Air
+                      </Text>
+                    </View>
+                  )}
+                  {onAir && onAir.status == STATUS.DOING && (
+                    <TouchableOpacity>
+                      <Image
+                        style={{width: 50, height: 50}}
+                        source={Images.imgIcPlay}
+                      />
+                    </TouchableOpacity>
+                  )}
                 </ImageBackground>
               </View>
               <View
