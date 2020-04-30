@@ -59,6 +59,7 @@ class index extends Component {
     } else if (userToken == null || userToken == 'null') {
       this.props.navigation.navigate('SignIn');
     } else {
+      this.props.generateAccessToken();
       this.props.getMainList();
     }
   }
@@ -79,7 +80,6 @@ class index extends Component {
   }
 
   async componentWillMount() {
-    this.props.generateAccessToken();
     this.listenerGoToSignIn = EventRegister.addEventListener(
       Config.Constant.EVENT_GOTO_SIGNIN,
       (data) => {
@@ -97,8 +97,10 @@ class index extends Component {
     this.listenerSignOut = EventRegister.addEventListener(
       Config.Constant.EVENT_SIGN_OUT,
       (data) => {
-        DataLocal.setUserToken('null');
-        this.props.navigation.navigate('SignIn');
+        if (getCurrentRouter() != 'Intro1') {
+          DataLocal.setUserToken('null');
+          this.props.navigation.navigate('SignIn');
+        }
       },
     );
     this.listenerGoToStore = EventRegister.addEventListener(

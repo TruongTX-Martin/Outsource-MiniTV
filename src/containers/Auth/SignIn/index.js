@@ -125,7 +125,7 @@ class index extends Component {
   async handleLoginFacebook() {
     console.log('Handle login facebook');
     await LoginManager.logOut();
-    LoginManager.setLoginBehavior('web_only');
+    // LoginManager.setLoginBehavior('web_only');
     const result = await LoginManager.logInWithPermissions([
       'public_profile',
       'email',
@@ -168,7 +168,6 @@ class index extends Component {
       await GoogleSignin.signOut();
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log('userInfo:', userInfo);
       const paramSignUp = {
         email: userInfo.user.email,
         sns_connect_info: {
@@ -183,8 +182,6 @@ class index extends Component {
         id: userInfo.user.id,
         token: userInfo.idToken,
       };
-      console.log('paramsSNS:', paramsSNS);
-      console.log('paramSignUp:', paramSignUp);
       this.setState({paramSignUp, paramsSNS});
       this.props.snsSignIn(paramsSNS);
     } catch (error) {
