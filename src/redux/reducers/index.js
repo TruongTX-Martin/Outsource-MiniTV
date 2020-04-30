@@ -12,6 +12,7 @@ import getMeReducers from './getMeReducers';
 import updateProfileReducer from './updateProfileReducer';
 import updateProfileImageReducer from './updateProfileImageReducer';
 import deleteAccountReducer from './deleteAccountReducer';
+import pokeChannelReducer from './pokeChannelReducer';
 const rootReducer = combineReducers({
   signUpReducer,
   signInReducer,
@@ -26,5 +27,6 @@ const rootReducer = combineReducers({
   updateProfileReducer,
   updateProfileImageReducer,
   deleteAccountReducer,
+  pokeChannelReducer,
 });
 export default rootReducer;

@@ -79,6 +79,10 @@ class index extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.getMe();
+  }
+
   handleUpdateInfor() {
     const {
       childName,

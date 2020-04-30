@@ -119,3 +119,30 @@ export function detailFailed() {
     type: Types.DETAIL_FAILED,
   };
 }
+
+//poke channel
+export function pokeChannel(liveId, params) {
+  return {
+    type: Types.POKE_CHANNEL,
+    liveId,
+    params,
+  };
+}
+
+export function pokeChannelStart() {
+  return {
+    type: Types.POKE_CHANNEL_START,
+  };
+}
+
+export function pokeChannelSuccess() {
+  return {
+    type: Types.POKE_CHANNEL_SUCCESS,
+  };
+}
+
+export function pokeChannelFailed() {
+  return {
+    type: Types.POKE_CHANNEL_FAILED,
+  };
+}

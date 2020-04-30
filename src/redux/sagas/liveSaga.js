@@ -56,3 +56,17 @@ export function* getDetail(action) {
     yield put(liveActions.detailFailed());
   }
 }
+
+export function* pokeChannel(action) {
+  try {
+    yield put(liveActions.pokeChannelStart());
+    const result = yield DataRemote.pokeChannel(action.liveId, action.params);
+    if (result.status == 200) {
+      yield put(liveActions.pokeChannelSuccess());
+    } else {
+      yield put(liveActions.pokeChannelFailed());
+    }
+  } catch (error) {
+    yield put(liveActions.pokeChannelFailed());
+  }
+}

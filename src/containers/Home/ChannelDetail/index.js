@@ -5,6 +5,7 @@ import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
 import {connect} from 'react-redux';
 import Images from '../../../assets/images';
+import Spinner from 'react-native-loading-spinner-overlay';
 import * as liveActions from '../../../redux/actions/liveActions';
 const {width} = Dimensions.get('window');
 
@@ -27,9 +28,16 @@ class index extends Component {
     this.props.getDetail(id);
   }
 
+  handlePokeChannel(liveId, wish_available) {
+    const params = {
+      available: wish_available,
+    };
+    this.props.pokeChannel(liveId, params);
+  }
+
   render() {
     const {currentTab} = this.state;
-    const {detail} = this.props;
+    const {detail, pokeLoading, loadingChannel} = this.props;
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -38,6 +46,10 @@ class index extends Component {
         <Body>
           <Content>
             <View style={{width, display: 'flex', alignItems: 'center'}}>
+              <Spinner
+                visible={pokeLoading || loadingChannel}
+                textStyle={{color: '#fff'}}
+              />
               <View style={{width: widthView}}>
                 <Text style={{fontSize: 18, fontWeight: 'bold', marginTop: 20}}>
                   {detail?.title}
@@ -48,7 +60,7 @@ class index extends Component {
                     fontWeight: 'bold',
                     marginVertical: 10,
                   }}>
-                  참여 인원 231/500
+                  참여 인원 {detail?.room_join_cnt}/{detail?.room_max_cnt}
                 </Text>
                 <Image
                   style={{
@@ -62,12 +74,10 @@ class index extends Component {
                   }}
                 />
                 <Text style={{fontWeight: 'bold', marginTop: 10, fontSize: 15}}>
-                  쿠리와 함께하는 단어게임
+                  {detail?.title}
                 </Text>
                 <Text style={{color: '#797979', marginTop: 5}}>
-                  쿠리와 함께 놀면서 한글을 배울수 있어요.한솔교육에서 만든
-                  신기한 한글나라를 적용한 교육 프로그램이랍니다. 쿠리와 함께
-                  한글공부를 시작해볼까요?
+                  {detail?.subscript}
                 </Text>
                 <View
                   style={{
@@ -118,12 +128,12 @@ class index extends Component {
                       justifyContent: 'center',
                     }}>
                     <Image
-                      style={{width: 15, height: 15}}
+                      style={{width: 15, height: 16}}
                       source={Images.imgIcShare}
                     />
                     <Text
                       style={{color: '#222222', fontSize: 13, marginLeft: 5}}>
-                      4~6세 대상
+                      공유하기
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -193,6 +203,51 @@ class index extends Component {
                     </Text>
                   </TouchableOpacity>
                 </View>
+                {currentTab == TAB.TAB_COURSE_INFOR && (
+                  <View style={{display: 'flex', alignItems: 'center'}}>
+                    <Image
+                      style={{width: width / 2, height: width / 2}}
+                      source={{uri: detail?.graph_image_url}}
+                    />
+                  </View>
+                )}
+                {currentTab == TAB.TAB_NEXT_SCHEDULER && (
+                  <View style={{marginBottom: 20}}>
+                    {detail?.next_lives.map((e) => {
+                      return (
+                        <View
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginTop: 10,
+                            paddingHorizontal: 20,
+                          }}>
+                          <Text style={{color: '#222222'}}>
+                            {e.live_time_text}
+                          </Text>
+                          <TouchableOpacity
+                            style={{
+                              borderWidth: 2,
+                              borderColor: '#499DA7',
+                              paddingVertical: 5,
+                              paddingHorizontal: 15,
+                              borderRadius: 20,
+                            }}
+                            onPress={() =>
+                              this.handlePokeChannel(
+                                e.live_uid,
+                                e.wish_available,
+                              )
+                            }>
+                            <Text style={{color: '#499DA7'}}>찜하기</Text>
+                          </TouchableOpacity>
+                        </View>
+                      );
+                    })}
+                  </View>
+                )}
               </View>
             </View>
           </Content>
@@ -208,9 +263,7 @@ class index extends Component {
             }}>
             <View style={{paddingLeft: 10}}>
               <Text style={{color: '#6733F2', fontSize: 12}}>방송시간</Text>
-              <Text style={{fontWeight: 'bold'}}>
-                2020년 4월 20일 오후 2:20
-              </Text>
+              <Text style={{fontWeight: 'bold'}}>{detail?.live_time_text}</Text>
             </View>
             <TouchableOpacity
               style={{
@@ -223,7 +276,10 @@ class index extends Component {
                 height: 50,
                 marginRight: 20,
                 borderRadius: 5,
-              }}>
+              }}
+              onPress={() =>
+                this.handlePokeChannel(detail?.live_uid, detail?.wish_available)
+              }>
               <Image
                 style={{width: 17, height: 15}}
                 source={Images.imgIcHear}
@@ -242,12 +298,16 @@ class index extends Component {
 const mapStateToProps = (state) => {
   return {
     detail: state.liveDetailReducer.detail,
+    pokeLoading: state.pokeChannelReducer.loading,
+    loadingChannel: state.liveDetailReducer.loading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getDetail: (id) => dispatch(liveActions.detailGet(id)),
+    pokeChannel: (liveId, available) =>
+      dispatch(liveActions.pokeChannel(liveId, available)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

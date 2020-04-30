@@ -181,6 +181,16 @@ const deleteAccount = async (params) => {
   });
 };
 
+const pokeChannel = async (liveId, params) => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.post(`/live/wish/${liveId}`, params, {
+    headers: {
+      'X-User-Token': userToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -196,4 +206,5 @@ export default {
   updateProfile,
   updateProfileImage,
   deleteAccount,
+  pokeChannel,
 };

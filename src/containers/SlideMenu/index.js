@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {EventRegister} from 'react-native-event-listeners';
 import Constants from '../../config/Constant';
 import Images from '../../assets/images';
+import * as myPageActions from '../../redux/actions/myPageActions';
 const {width, height} = Dimensions.get('window');
 
 class index extends Component {
@@ -12,7 +13,12 @@ class index extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.getMe();
+  }
+
   render() {
+    const {meData} = this.props;
     return (
       <Container>
         <Body>
@@ -42,31 +48,20 @@ class index extends Component {
                       style={{width: 20, height: 20}}
                       source={Images.imgIcBell}
                     />
-                    {/* <View
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: 4,
-                        backgroundColor: 'red',
-                        position: 'absolute',
-                        top: 3,
-                        left: 4,
-                      }}
-                    /> */}
                   </TouchableOpacity>
                 </View>
                 <TouchableOpacity
                   style={{flexDirection: 'row', display: 'flex'}}>
                   <Image
                     style={{width: 60, height: 60, borderRadius: 30}}
-                    source={Images.imgIcProfile}
+                    source={{uri: meData?.profile_image_url}}
                   />
                   <View style={{marginLeft: 10, marginTop: 15}}>
                     <Text style={{fontWeight: 'bold', fontSize: 18}}>
-                      김성국
+                      {meData?.student_name}
                     </Text>
                     <Text style={{fontSize: 14, color: '#999999'}}>
-                      Leo@gmail.com
+                      {meData?.email}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -207,10 +202,14 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    meData: state.getMeReducers.meData,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getMe: () => dispatch(myPageActions.getMe()),
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

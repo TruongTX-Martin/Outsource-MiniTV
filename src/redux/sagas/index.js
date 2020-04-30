@@ -6,7 +6,13 @@ import {
   findPassword,
   snsSignIn,
 } from './authSaga';
-import {getLiveMain, getListNotice, getListReplay, getDetail} from './liveSaga';
+import {
+  getLiveMain,
+  getListNotice,
+  getListReplay,
+  getDetail,
+  pokeChannel,
+} from './liveSaga';
 import {
   changePassword,
   getMe,
@@ -33,5 +39,6 @@ export function* rootSaga() {
     takeLatest(Types.UPDATE_PROFILE, updateProfile),
     takeLatest(Types.UPDATE_IMAGE_PROFILE, updateProfileImage),
     takeLatest(Types.DELETE_ACCOUNT, deleteAccount),
+    takeLatest(Types.POKE_CHANNEL, pokeChannel),
   ]);
 }
