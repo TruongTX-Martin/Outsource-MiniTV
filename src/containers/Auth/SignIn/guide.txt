@@ -9,3 +9,10 @@ Facebook signin
 - Goto facebook developer
 - Create project and add keyhash 
 - add some config to android : manifresh, strings with application id 
+
+
+Naver:
+-Create Naver application 
+-Change package name right 
+-goto tab member and add account test 
+-Or need go to request inspection 

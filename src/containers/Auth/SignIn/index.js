@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Image, Dimensions} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  Dimensions,
+  Alert,
+} from 'react-native';
 import {Container, Body, Content} from 'native-base';
 import Images from '../../../assets/images';
 import {connect} from 'react-redux';
@@ -98,13 +105,11 @@ class index extends Component {
       EventRegister.emit(Constants.EVENT_SIGNIN_SUCCESS);
     }
     if (!snsSuccess && snsMessage == 'failed') {
-      console.log('Goto sign up', this.state.paramSignUp);
       this.props.navigation.navigate('SignUpMoreInfor', {
         isSnsSignUp: true,
         snsSignUpParams: this.state.paramSignUp,
       });
     }
-    console.log('Next props:', nextProps);
   }
 
   componentWillUnmount() {
@@ -123,9 +128,6 @@ class index extends Component {
   }
 
   async handleLoginFacebook() {
-    console.log('Handle login facebook');
-    await LoginManager.logOut();
-    // LoginManager.setLoginBehavior('web_only');
     const result = await LoginManager.logInWithPermissions([
       'public_profile',
       'email',
@@ -139,9 +141,7 @@ class index extends Component {
         'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
           accessToken,
       );
-      console.log('response:', response);
       const json = await response.json();
-      console.log('JSON:', json);
       const paramSignUp = {
         email: json.email,
         sns_connect_info: {
@@ -156,8 +156,6 @@ class index extends Component {
         id: json.id,
         token: accessToken,
       };
-      console.log('paramsSNS:', paramsSNS);
-      console.log('paramSignUp:', paramSignUp);
       this.setState({paramSignUp, paramsSNS});
       this.props.snsSignIn(paramsSNS);
     }
@@ -165,7 +163,6 @@ class index extends Component {
 
   async handleLoginGoogle() {
     try {
-      await GoogleSignin.signOut();
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const paramSignUp = {
@@ -198,20 +195,36 @@ class index extends Component {
     }
   }
 
-  async handleLoginNaver() {}
-
   naverLogin = (props) => {
     return new Promise((resolve, reject) => {
       NaverLogin.login(props, (err, token) => {
-        console.log(`\n\n  Token is fetched  :: ${token} \n\n`);
-        // setNaverToken(token);
-        // if (err) {
-        //   reject(err);
-        //   return;
-        // }
-        // resolve(token);
+        this.getUserProfile(token);
       });
     });
+  };
+
+  getUserProfile = async (naverToken) => {
+    const profileResult = await getProfile(naverToken.accessToken);
+    if (profileResult.resultcode === '024') {
+      Alert.alert('로그인 실패', profileResult.message);
+      return;
+    }
+    const paramSignUp = {
+      email: profileResult.response.email,
+      sns_connect_info: {
+        type: 'naver',
+        id: profileResult.response.id,
+        token: naverToken.accessToken,
+      },
+    };
+    const paramsSNS = {
+      email: profileResult.response.email,
+      sns_type: 'naver',
+      id: profileResult.response.id,
+      token: naverToken.accessToken,
+    };
+    this.setState({paramSignUp, paramsSNS});
+    this.props.snsSignIn(paramsSNS);
   };
 
   render() {
