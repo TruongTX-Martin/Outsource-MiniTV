@@ -318,7 +318,7 @@ class index extends Component {
                   </TouchableOpacity>
                 </View>
                 <Text style={{color: '#222222', marginTop: 40}}>
-                  SNS 간편 로그인
+                  SNS 회원가입 / 로그인
                 </Text>
                 <View
                   style={{

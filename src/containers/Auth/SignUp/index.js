@@ -3,6 +3,8 @@ import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
 import {Container, Body, Content, Footer} from 'native-base';
 import TextInput from '../../../components/TextField';
 import validateInput from '../../../helpers/Validate';
+import DataRemote from '../../../services/DataRemote';
+import Spinner from 'react-native-loading-spinner-overlay';
 const {width} = Dimensions.get('window');
 
 class index extends Component {
@@ -16,6 +18,7 @@ class index extends Component {
       passwordError: '',
       rePassword: '',
       rePasswordError: '',
+      loading: false,
     };
     this.validation = {
       email: {
@@ -47,7 +50,7 @@ class index extends Component {
     };
   }
 
-  handleSignUp() {
+  async handleSignUp() {
     const {email, password, rePassword} = this.state;
     const emailError = validateInput('email', email, this.validation);
     const passwordError = validateInput('password', password, this.validation);
@@ -64,6 +67,17 @@ class index extends Component {
       this.setState({rePasswordError: 'Password and repassword not match'});
       return;
     }
+    this.setState({loading: true});
+    const results = await DataRemote.validateEmail(email);
+    this.setState({loading: false});
+    if (!results?.data?.is_valid) {
+      this.setState({
+        emailError:
+          '등록되지 않았거나 잘못된 이메일 주소입니다. 확인 후 다시 입력해주세요.',
+      });
+      return;
+    }
+
     this.props.navigation.navigate('SignUpMoreInfor', {
       email: email,
       password: password,
@@ -78,6 +92,7 @@ class index extends Component {
       passwordError,
       rePassword,
       rePasswordError,
+      loading,
     } = this.state;
     return (
       <Container>
@@ -88,6 +103,7 @@ class index extends Component {
                 padding: 20,
                 width,
               }}>
+              <Spinner visible={loading} textStyle={{color: '#fff'}} />
               <Text style={{color: '#222222', fontSize: 25, paddingTop: 50}}>
                 회원가입
               </Text>

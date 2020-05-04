@@ -181,7 +181,6 @@ class index extends Component {
               </Text>
               <TextInputCustom
                 width={widthView}
-                placeholder="김성국"
                 value={childName}
                 onChangeText={(childName) =>
                   this.setState({childName}, () => this.checkValidAll())
@@ -443,11 +442,13 @@ class index extends Component {
               <Text
                 style={{
                   color: '#222222',
-                  fontSize: 25,
+                  fontSize: 18,
                   width: width - 50,
                   textAlign: 'center',
                 }}>
-                수정이 완료되었습니다.
+                {
+                  '인증을 위한 이메일이 발송되었습니다.\n 이메일 확인 후 가입을 완료해 주세요.'
+                }
               </Text>
             </View>
             <View

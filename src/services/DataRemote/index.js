@@ -213,6 +213,16 @@ const pokeChannel = async (liveId, params) => {
   });
 };
 
+const validateEmail = async (email) => {
+  const accessToken = await DataLocal.getAccessToken();
+  return await axios.get('/auth/validate-email', {
+    headers: {
+      'X-Access-Token': accessToken,
+      'X-User-Email': email,
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -231,4 +241,5 @@ export default {
   pokeChannel,
   getPokeList,
   getPlayUrl,
+  validateEmail,
 };
