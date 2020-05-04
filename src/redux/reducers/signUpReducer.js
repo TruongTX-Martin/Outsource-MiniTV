@@ -21,7 +21,7 @@ const signUpReducer = createReducer(initialState, {
       ...state,
       isSuccess: false,
       loading: false,
-      reason: 'Sign up error, please try to use another email',
+      reason: '이미 등록된 이메일 주소입니다. 다른 이메일을 등록해 주세요.',
     };
   },
   [Types.SIGN_UP_SUCCESS](state, action) {

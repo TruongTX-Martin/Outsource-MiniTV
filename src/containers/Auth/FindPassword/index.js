@@ -5,6 +5,7 @@ import TextInput from '../../../components/TextField';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from 'react-native-modals';
+import DataRemote from '../../../services/DataRemote';
 import validateInput from '../../../helpers/Validate';
 import * as authActions from '../../../redux/actions/authActions';
 
@@ -15,23 +16,26 @@ class index extends Component {
     super(props);
     this.state = {
       email: '',
+      emailError: null,
       isValidEmail: false,
       isModalVisible: false,
-    };
-    this.validation = {
-      email: {
-        presence: {
-          message: '^Please enter an email address',
-        },
-        email: {
-          message: '^Please enter a valid email address',
-        },
-      },
+      checkingEmail: false,
     };
   }
 
-  findPassword() {
-    this.props.findPassword(this.state.email);
+  async findPassword() {
+    const {email} = this.state;
+    this.setState({checkingEmail: true});
+    const results = await DataRemote.validateEmail(email);
+    this.setState({checkingEmail: false});
+    if (results?.data?.is_valid) {
+      this.setState({
+        emailError:
+          '이메일 주소가 잘못 입력 되었거나 등록되지 않은 주소입니다. 다시 입력해 주세요.',
+      });
+      return;
+    }
+    this.props.findPassword(email);
   }
 
   checkValidEmail() {
@@ -49,13 +53,22 @@ class index extends Component {
   }
 
   render() {
-    const {email, isValidEmail, isModalVisible} = this.state;
+    const {
+      email,
+      isValidEmail,
+      isModalVisible,
+      checkingEmail,
+      emailError,
+    } = this.state;
     const {loading} = this.props;
     return (
       <Container>
         <Body>
           <Content>
-            <Spinner visible={loading} textStyle={{color: '#fff'}} />
+            <Spinner
+              visible={loading || checkingEmail}
+              textStyle={{color: '#fff'}}
+            />
             <View
               style={{
                 padding: 20,
@@ -73,6 +86,7 @@ class index extends Component {
                   onChangeText={(email) =>
                     this.setState({email}, () => this.checkValidEmail())
                   }
+                  error={emailError}
                 />
               </View>
               <View>

@@ -117,7 +117,7 @@ class index extends Component {
                     />
                     <Text
                       style={{color: '#333333', fontSize: 13, marginTop: 5}}>
-                      찜한 방송
+                      방송 다시보기
                     </Text>
                   </TouchableOpacity>
                 </View>

@@ -177,7 +177,7 @@ class index extends Component {
                   <View style={{display: 'flex', alignItems: 'center'}}>
                     <Image
                       style={{width: 80, height: 80, borderRadius: 35}}
-                      source={Images.imgMiniTVIcon}
+                      source={Images.imgMemberNeo}
                     />
                     <Text style={{fontWeight: 'bold', color: '#222222'}}>
                       NEO JUNG
@@ -187,12 +187,12 @@ class index extends Component {
                   <View style={{display: 'flex', alignItems: 'center'}}>
                     <Image
                       style={{width: 80, height: 80, borderRadius: 35}}
-                      source={Images.imgMiniTVIcon}
+                      source={Images.imgMemberLeo}
                     />
                     <Text style={{fontWeight: 'bold', color: '#222222'}}>
-                      NEO JUNG
+                      LEO KIM
                     </Text>
-                    <Text style={{color: '#999999'}}>CEO</Text>
+                    <Text style={{color: '#999999'}}>CBO</Text>
                   </View>
                 </View>
                 <View
@@ -206,22 +206,22 @@ class index extends Component {
                   <View style={{display: 'flex', alignItems: 'center'}}>
                     <Image
                       style={{width: 80, height: 80, borderRadius: 35}}
-                      source={Images.imgMiniTVIcon}
+                      source={Images.imgMemberDa}
                     />
                     <Text style={{fontWeight: 'bold', color: '#222222'}}>
-                      NEO JUNG
+                      DARREN KIM
                     </Text>
-                    <Text style={{color: '#999999'}}>CEO</Text>
+                    <Text style={{color: '#999999'}}>CTO</Text>
                   </View>
                   <View style={{display: 'flex', alignItems: 'center'}}>
                     <Image
                       style={{width: 80, height: 80, borderRadius: 35}}
-                      source={Images.imgMiniTVIcon}
+                      source={Images.imgMemberDa}
                     />
                     <Text style={{fontWeight: 'bold', color: '#222222'}}>
-                      NEO JUNG
+                      ALLEN HUR
                     </Text>
-                    <Text style={{color: '#999999'}}>CEO</Text>
+                    <Text style={{color: '#999999'}}>DEV</Text>
                   </View>
                 </View>
               </View>

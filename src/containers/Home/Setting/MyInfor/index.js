@@ -465,9 +465,7 @@ class index extends Component {
               alignItems: 'center',
             }}
             onPress={() => this.handleUpdateInfor()}>
-            <Text style={{color: 'white', fontSize: 17}}>
-              Confirm to Change
-            </Text>
+            <Text style={{color: 'white', fontSize: 17}}>변경하기</Text>
           </TouchableOpacity>
         </Footer>
         <Modal
@@ -523,6 +521,7 @@ class index extends Component {
                 }}
                 onPress={() => {
                   this.setState({isModalVisible: false});
+                  this.props.navigation.goBack();
                 }}>
                 <Text style={{color: 'white', fontSize: 17}}>확인</Text>
               </TouchableOpacity>

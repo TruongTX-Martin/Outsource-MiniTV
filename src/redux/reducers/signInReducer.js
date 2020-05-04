@@ -29,7 +29,7 @@ const signInReducer = createReducer(initialState, {
       ...state,
       isSuccess: false,
       loading: false,
-      reason: 'Sign in failed. Please check your email or password.',
+      reason: '이메일 주소 또는 비밀번호가 잘못 입력되었습니다. ',
     };
   },
   [Types.SIGN_IN_CLEAR](state, action) {

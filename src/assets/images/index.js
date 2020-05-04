@@ -31,4 +31,8 @@ export default {
   imgMiniTVImg2: require('./mini-img2.png'),
   imgMiniTVIcon: require('./img111.png'),
   imgIcDropdown: require('./ic_dropdown.png'),
+  imgMemberNeo: require('./neo.png'),
+  imgMemberLeo: require('./leo.png'),
+  imgMember04: require('./04.png'),
+  imgMemberDa: require('./da.png'),
 };
