@@ -6,14 +6,13 @@ import {WebView} from 'react-native-webview';
 import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
 import Orientation from 'react-native-orientation';
+import PermissionWebview from './PermisionWebView';
 const {width, height} = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
     super(props);
-    this.setState({
-      width: 0,
-    });
+    Orientation.lockToLandscape();
   }
 
   ActivityIndicatorLoadingView() {
@@ -41,9 +40,7 @@ class index extends Component {
     );
   }
 
-  componentWillMount() {
-    Orientation.lockToLandscape();
-  }
+  componentWillMount() {}
 
   componentWillUnmount() {
     Orientation.lockToPortrait();
@@ -57,7 +54,7 @@ class index extends Component {
           <HeaderBase navigation={this.props.navigation} title="" />
         </Header>
         <Body>
-          <WebView
+          {/* <WebView
             style={{width: height, overflow: 'hidden'}}
             source={{
               uri: playUrl,
@@ -68,7 +65,21 @@ class index extends Component {
             renderLoading={this.ActivityIndicatorLoadingView}
             //Want to show the view or not
             startInLoadingState={true}
-          />
+          /> */}
+          <Content showsVerticalScrollIndicator={false}>
+            <View style={{width: height, height: width}}>
+              <PermissionWebview
+                style={{flex: 1}}
+                mediaPlaybackRequiresUserAction={false}
+                domStorageEnabled={true}
+                allowsInlineMediaPlayback={true}
+                source={{uri: playUrl}}
+                sourceUri={playUrl}
+                allowFileAccessFromFileURLs={true}
+                allowUniversalAccessFromFileURLs={true}
+              />
+            </View>
+          </Content>
         </Body>
       </Container>
     );
