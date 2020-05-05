@@ -55,7 +55,7 @@ class index extends Component {
     const hasShowIntro = await DataLocal.getHasShowIntro();
     const userToken = await DataLocal.getUserToken();
     if (hasShowIntro == null) {
-      this.props.navigation.navigate('Intro1');
+      this.props.navigation.navigate('Intro0');
     } else if (userToken == null || userToken == 'null') {
       this.props.navigation.navigate('SignIn');
     } else {
@@ -97,7 +97,7 @@ class index extends Component {
     this.listenerSignOut = EventRegister.addEventListener(
       Config.Constant.EVENT_SIGN_OUT,
       (data) => {
-        if (getCurrentRouter() != 'Intro1') {
+        if (getCurrentRouter() != 'Intro0') {
           DataLocal.setUserToken('null');
           this.props.navigation.navigate('SignIn');
         }

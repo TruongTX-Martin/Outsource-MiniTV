@@ -30,7 +30,7 @@ class index extends Component {
                 <TouchableOpacity
                   style={{marginTop: 50}}
                   onPress={() => {
-                    this.props.navigation.pop(2);
+                    this.props.navigation.pop(3);
                     EventRegister.emit(Config.Constant.EVENT_GOTO_SIGNIN, '');
                   }}>
                   <Text

@@ -161,6 +161,11 @@ export function pokeChannel(liveId, params) {
     params,
   };
 }
+export function pokeChannelClear() {
+  return {
+    type: Types.POKE_CHANNEL_CLEAR,
+  };
+}
 
 export function pokeChannelStart() {
   return {

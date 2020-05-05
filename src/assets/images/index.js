@@ -35,4 +35,6 @@ export default {
   imgMemberLeo: require('./leo.png'),
   imgMember04: require('./04.png'),
   imgMemberDa: require('./da.png'),
+  imgIcHearFull: require('./heart-w2.png'),
+  imgSplash: require('./splash2.png'),
 };

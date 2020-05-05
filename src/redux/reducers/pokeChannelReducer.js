@@ -28,5 +28,12 @@ const pokeChannelReducer = createReducer(initialState, {
       loading: false,
     };
   },
+  [Types.POKE_CHANNEL_CLEAR](state, action) {
+    return {
+      ...state,
+      isSuccess: false,
+      loading: false,
+    };
+  },
 });
 export default pokeChannelReducer;

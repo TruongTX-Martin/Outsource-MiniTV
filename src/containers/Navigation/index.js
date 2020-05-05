@@ -22,6 +22,7 @@ import Alert from '../Home/Alert';
 import Setting from '../Home/Setting';
 import ChangePassword from '../Home/Setting/ChangePassword';
 import MyInfor from '../Home/Setting/MyInfor';
+import Intro0 from '../Intro0';
 import Intro1 from '../Intro1';
 import Intro2 from '../Intro2';
 import DeleteAccount from '../Home/Setting/DeleteAccount';
@@ -137,6 +138,13 @@ const stackNavigator = createStackNavigator(
     },
     MyInfor: {
       screen: MyInfor,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    Intro0: {
+      screen: Intro0,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

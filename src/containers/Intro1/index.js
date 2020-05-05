@@ -13,7 +13,7 @@ class index extends Component {
   }
 
   componentDidMount() {
-    DataLocal.setHasShowIntro('True');
+    // DataLocal.setHasShowIntro('True');
   }
 
   render() {
@@ -35,7 +35,7 @@ class index extends Component {
                 <TouchableOpacity
                   style={{marginTop: 50}}
                   onPress={() => {
-                    this.props.navigation.goBack();
+                    this.props.navigation.pop(2);
                     EventRegister.emit(Config.Constant.EVENT_GOTO_SIGNIN, '');
                   }}>
                   <Text

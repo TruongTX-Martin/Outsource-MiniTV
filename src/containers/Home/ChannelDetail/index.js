@@ -6,6 +6,7 @@ import HeaderBase from '../../../components/HeaderBase';
 import {connect} from 'react-redux';
 import Images from '../../../assets/images';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Modal from 'react-native-modals';
 import * as liveActions from '../../../redux/actions/liveActions';
 import Share from 'react-native-share';
 const {width} = Dimensions.get('window');
@@ -21,12 +22,25 @@ class index extends Component {
     super(props);
     this.state = {
       currentTab: TAB.TAB_COURSE_INFOR,
+      isModalSuccess: false,
     };
   }
 
   componentDidMount() {
     const id = this.props.navigation.getParam('id', null);
     this.props.getDetail(id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps:', nextProps);
+    if (nextProps.pokeSuccess) {
+      this.setState({isModalSuccess: true});
+      const timeout = setTimeout(() => {
+        this.setState({isModalSuccess: false});
+        clearTimeout(timeout);
+        this.props.pokeChannelClear();
+      }, 2000);
+    }
   }
 
   handlePokeChannel(liveId, wish_available) {
@@ -46,7 +60,7 @@ class index extends Component {
   }
 
   render() {
-    const {currentTab} = this.state;
+    const {currentTab, isModalSuccess} = this.state;
     const {detail, pokeLoading, loadingChannel} = this.props;
     return (
       <Container>
@@ -301,6 +315,41 @@ class index extends Component {
             </TouchableOpacity>
           </View>
         </Footer>
+        <Modal
+          modalStyle={{backgroundColor: 'transparent'}}
+          // overlayBackgroundColor={'transparent'}
+          visible={isModalSuccess}
+          onTouchOutside={() => {
+            this.setState({isModalVisible: false});
+          }}
+          onHardwareBackPress={() => {
+            this.setState({isModalVisible: false});
+            return true;
+          }}>
+          <View
+            style={{
+              width: 200,
+              height: 200,
+              borderRadius: 100,
+              backgroundColor: '#499DA7',
+              display: 'flex',
+              alignItems: 'center',
+            }}>
+            <Image
+              style={{width: 40, height: 36, marginTop: 50}}
+              source={Images.imgIcHearFull}
+            />
+            <Text
+              style={{
+                color: 'white',
+                paddingHorizontal: 40,
+                textAlign: 'center',
+                marginTop: 15,
+              }}>
+              찜한 방송 리스트에 추가하였습니다.
+            </Text>
+          </View>
+        </Modal>
       </Container>
     );
   }
@@ -309,8 +358,9 @@ class index extends Component {
 const mapStateToProps = (state) => {
   return {
     detail: state.liveDetailReducer.detail,
-    pokeLoading: state.pokeChannelReducer.loading,
     loadingChannel: state.liveDetailReducer.loading,
+    pokeLoading: state.pokeChannelReducer.loading,
+    pokeSuccess: state.pokeChannelReducer.isSuccess,
   };
 };
 
@@ -319,6 +369,7 @@ const mapDispatchToProps = (dispatch) => {
     getDetail: (id) => dispatch(liveActions.detailGet(id)),
     pokeChannel: (liveId, available) =>
       dispatch(liveActions.pokeChannel(liveId, available)),
+    pokeChannelClear: () => dispatch(liveActions.pokeChannelClear()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

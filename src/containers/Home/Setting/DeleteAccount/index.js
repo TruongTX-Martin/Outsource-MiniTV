@@ -18,7 +18,7 @@ const LIST_REASON = [
   '2차 계정을 만들었어요',
   '광고가 너무 많아요',
   '앱에 버그가 많아요',
-  'Cancel',
+  '취소',
 ];
 
 class index extends Component {
