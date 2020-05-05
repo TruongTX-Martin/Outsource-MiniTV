@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.multidex.MultiDexApplication;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import cl.json.RNSharePackage;

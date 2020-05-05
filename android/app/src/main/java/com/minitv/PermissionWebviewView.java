@@ -2,6 +2,8 @@ package com.minitv;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -40,4 +42,16 @@ public class PermissionWebviewView  extends WebView {
             }
         });
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("OnPause","Pau em nhe");
+        this.destroy();
+    }
+
+    public void clearAudio(){
+        this.destroy();
+    }
+
 }

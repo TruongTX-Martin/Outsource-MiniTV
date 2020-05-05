@@ -94,6 +94,8 @@ target 'MiniTV' do
 
   pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
   target 'MiniTVTests' do
     inherit! :complete
     # Pods for testing
