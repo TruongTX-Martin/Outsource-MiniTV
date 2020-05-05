@@ -244,8 +244,8 @@ class index extends Component {
                 <Image
                   source={Images.imgLogo}
                   style={{
-                    width: 150,
-                    height: 34,
+                    width: width / 3,
+                    height: ((width / 3) * 90) / 340,
                     marginTop: 60,
                     marginBottom: 40,
                   }}

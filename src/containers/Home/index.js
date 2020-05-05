@@ -174,7 +174,7 @@ class index extends Component {
               alignItems: 'center',
             }}>
             <Image
-              style={{width: 100, height: 23, marginLeft: 15}}
+              style={{width: (30 * 189) / 50, height: 30, marginLeft: 15}}
               source={Images.imgLogo}
             />
             <TouchableOpacity
