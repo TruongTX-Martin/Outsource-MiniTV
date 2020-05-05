@@ -5,11 +5,15 @@ import {connect} from 'react-redux';
 import {WebView} from 'react-native-webview';
 import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
-const {width} = Dimensions.get('window');
+import Orientation from 'react-native-orientation';
+const {width, height} = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
     super(props);
+    this.setState({
+      width: 0,
+    });
   }
 
   ActivityIndicatorLoadingView() {
@@ -18,11 +22,11 @@ class index extends Component {
       <View
         style={{
           display: 'flex',
-          width,
+          width: height,
           justifyContent: 'center',
           alignItems: 'center',
           position: 'absolute',
-          marginTop: 150,
+          marginTop: 100,
         }}>
         <ActivityIndicator
           color="#009688"
@@ -37,7 +41,13 @@ class index extends Component {
     );
   }
 
-  componentDidMount() {}
+  componentWillMount() {
+    Orientation.lockToLandscape();
+  }
+
+  componentWillUnmount() {
+    Orientation.lockToPortrait();
+  }
 
   render() {
     const playUrl = this.props.navigation.getParam('playUrl', null);
@@ -48,7 +58,7 @@ class index extends Component {
         </Header>
         <Body>
           <WebView
-            style={{width, overflow: 'hidden'}}
+            style={{width: height, overflow: 'hidden'}}
             source={{
               uri: playUrl,
             }}

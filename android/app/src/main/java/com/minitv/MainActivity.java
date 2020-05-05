@@ -1,8 +1,10 @@
 package com.minitv;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -22,6 +24,16 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "MiniTV";
   }
+
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    Intent intent = new Intent("onConfigurationChanged");
+    intent.putExtra("newConfig", newConfig);
+    this.sendBroadcast(intent);
+  }
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

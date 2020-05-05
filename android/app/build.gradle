@@ -203,6 +203,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     implementation ('com.naver.nid:naveridlogin-android-sdk:4.2.6')
+    implementation project(':react-native-orientation')
+
 
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
