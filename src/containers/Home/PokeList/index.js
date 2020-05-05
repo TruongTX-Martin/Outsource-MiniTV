@@ -34,8 +34,6 @@ class index extends Component {
 
   render() {
     const {list, loading} = this.props;
-    console.log('list:', list);
-    console.log('loading:', loading);
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -56,7 +54,7 @@ class index extends Component {
                 찜한 방송
               </Text>
               <FlatList
-                data={this.list}
+                data={list}
                 style={{marginBottom: 30}}
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}

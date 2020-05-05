@@ -141,7 +141,6 @@ class index extends Component {
   render() {
     const {loadingFirst} = this.state;
     const {loading, onAir, hotLists, resultPlay} = this.props;
-    console.log('resultPlay:', resultPlay);
     if (loadingFirst) {
       return (
         <View

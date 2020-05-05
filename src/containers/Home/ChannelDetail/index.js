@@ -23,24 +23,36 @@ class index extends Component {
     this.state = {
       currentTab: TAB.TAB_COURSE_INFOR,
       isModalSuccess: false,
+      pokeAvailabe: false,
     };
   }
 
   componentDidMount() {
+    this.getDetail();
+  }
+
+  getDetail() {
     const id = this.props.navigation.getParam('id', null);
     this.props.getDetail(id);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps:', nextProps);
     if (nextProps.pokeSuccess) {
-      this.setState({isModalSuccess: true});
+      this.setState({
+        isModalSuccess: true,
+        pokeAvailabe: nextProps.pokeAvailabe,
+      });
+      this.props.pokeChannelClear();
       const timeout = setTimeout(() => {
         this.setState({isModalSuccess: false});
+        this.getDetail();
         clearTimeout(timeout);
-        this.props.pokeChannelClear();
       }, 2000);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.getPokeList();
   }
 
   handlePokeChannel(liveId, wish_available) {
@@ -60,8 +72,9 @@ class index extends Component {
   }
 
   render() {
-    const {currentTab, isModalSuccess} = this.state;
+    const {currentTab, isModalSuccess, pokeAvailabe} = this.state;
     const {detail, pokeLoading, loadingChannel} = this.props;
+    console.log('render pokeAvailabe:', pokeAvailabe);
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -263,7 +276,7 @@ class index extends Component {
                             onPress={() =>
                               this.handlePokeChannel(
                                 e.live_uid,
-                                e.wish_available,
+                                !e.wish_available,
                               )
                             }>
                             <Text style={{color: '#499DA7'}}>찜하기</Text>
@@ -303,7 +316,10 @@ class index extends Component {
                 borderRadius: 5,
               }}
               onPress={() =>
-                this.handlePokeChannel(detail?.live_uid, detail?.wish_available)
+                this.handlePokeChannel(
+                  detail?.live_uid,
+                  !detail?.wish_available,
+                )
               }>
               <Image
                 style={{width: 17, height: 15}}
@@ -331,13 +347,13 @@ class index extends Component {
               width: 200,
               height: 200,
               borderRadius: 100,
-              backgroundColor: '#499DA7',
+              backgroundColor: pokeAvailabe ? '#499DA7' : '#333333',
               display: 'flex',
               alignItems: 'center',
             }}>
             <Image
               style={{width: 40, height: 36, marginTop: 50}}
-              source={Images.imgIcHearFull}
+              source={pokeAvailabe ? Images.imgIcHearFull : Images.imgIcHear}
             />
             <Text
               style={{
@@ -346,7 +362,9 @@ class index extends Component {
                 textAlign: 'center',
                 marginTop: 15,
               }}>
-              찜한 방송 리스트에 추가하였습니다.
+              {pokeAvailabe
+                ? '찜한 방송 리스트에 추가하였습니다.'
+                : '찜한 방송 리스트에서 삭제하였습니다.'}
             </Text>
           </View>
         </Modal>
@@ -361,6 +379,7 @@ const mapStateToProps = (state) => {
     loadingChannel: state.liveDetailReducer.loading,
     pokeLoading: state.pokeChannelReducer.loading,
     pokeSuccess: state.pokeChannelReducer.isSuccess,
+    pokeAvailabe: state.pokeChannelReducer.pokeAvailabe,
   };
 };
 
@@ -370,6 +389,7 @@ const mapDispatchToProps = (dispatch) => {
     pokeChannel: (liveId, available) =>
       dispatch(liveActions.pokeChannel(liveId, available)),
     pokeChannelClear: () => dispatch(liveActions.pokeChannelClear()),
+    getPokeList: () => dispatch(liveActions.getPokeList()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

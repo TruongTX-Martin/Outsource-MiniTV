@@ -167,9 +167,10 @@ export function pokeChannelClear() {
   };
 }
 
-export function pokeChannelStart() {
+export function pokeChannelStart(params) {
   return {
     type: Types.POKE_CHANNEL_START,
+    params,
   };
 }
 

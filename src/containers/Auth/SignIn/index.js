@@ -305,7 +305,7 @@ class index extends Component {
                   }}>
                   <TouchableOpacity onPress={() => this.gotoSignUp()}>
                     <Text style={{color: '#797979', marginRight: 10}}>
-                      회원가입
+                      이메일 회원가입
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity

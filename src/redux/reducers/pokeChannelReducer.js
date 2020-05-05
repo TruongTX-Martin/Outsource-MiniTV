@@ -2,16 +2,18 @@ import createReducer from './createReducer';
 import * as Types from '../actions/types';
 
 const initialState = {
+  pokeAvailabe: false,
   isSuccess: false,
   loading: false,
 };
 
 const pokeChannelReducer = createReducer(initialState, {
-  [Types.POKE_CHANNEL_START](state) {
+  [Types.POKE_CHANNEL_START](state, action) {
     return {
       ...state,
       loading: true,
       isSuccess: false,
+      pokeAvailabe: action.params.available,
     };
   },
   [Types.POKE_CHANNEL_SUCCESS](state, action) {
@@ -33,6 +35,7 @@ const pokeChannelReducer = createReducer(initialState, {
       ...state,
       isSuccess: false,
       loading: false,
+      pokeAvailabe: false,
     };
   },
 });
