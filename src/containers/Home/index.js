@@ -39,7 +39,9 @@ class index extends Component {
     super(props);
     this.state = {
       loadingFirst: true,
+      countPressBack: 0,
     };
+    this.timeoutBackPress = null;
   }
 
   componentDidMount() {
@@ -126,7 +128,32 @@ class index extends Component {
 
   onAndroidBackPress = () => {
     console.log('onAndroidBackPress');
-    if (getCurrentRouter() == 'SignIn' || getCurrentRouter() == 'Home') {
+    if (getCurrentRouter() == 'SignIn') {
+      return true;
+    }
+    if (getCurrentRouter() == 'Home') {
+      const {countPressBack} = this.state;
+      this.setState(
+        {
+          countPressBack: countPressBack + 1,
+        },
+        () => {
+          if (this.state.countPressBack == 1) {
+            //show toast
+            showToast('한 번 더 누르면 종료됩니다.');
+          } else if (this.state.countPressBack >= 2) {
+            BackHandler.exitApp();
+            return true;
+          }
+        },
+      );
+      if (this.timeoutBackPress != null) {
+        clearTimeout(this.timeoutBackPress);
+      }
+      this.timeoutBackPress = setTimeout(() => {
+        this.setState({countPressBack: 0});
+        clearTimeout(this.timeoutBackPress);
+      }, 3000);
       return true;
     }
     return false;
