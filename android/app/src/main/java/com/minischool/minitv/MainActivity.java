@@ -1,4 +1,4 @@
-package com.minitv;
+package com.minischool.minitv;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;

@@ -75,5 +75,9 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+  <key>NSCameraUsageDescription</key>
+  <string>We want to use your camera</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>We want to use your microphone</string>
 </dict>
 </plist>

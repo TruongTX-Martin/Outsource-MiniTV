@@ -1,15 +1,9 @@
-package com.minitv;
+package com.minischool.minitv;
 
 import android.content.Context;
 import androidx.multidex.MultiDexApplication;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
-import com.github.yamill.orientation.OrientationPackage;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
-import cl.json.RNSharePackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -68,7 +62,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.minitv.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.minischool.minitv.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

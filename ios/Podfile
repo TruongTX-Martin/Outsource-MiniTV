@@ -1,5 +1,8 @@
+
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+
 
 def add_flipper_pods!(versions = {})
   versions['Flipper'] ||= '~> 0.33.1'
@@ -43,6 +46,8 @@ def flipper_post_install(installer)
     end
   end
 end
+
+
 
 target 'MiniTV' do
   # Pods for MiniTV
@@ -95,6 +100,12 @@ target 'MiniTV' do
   pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+  pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone.podspec"
+
 
   target 'MiniTVTests' do
     inherit! :complete

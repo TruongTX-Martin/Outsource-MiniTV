@@ -1,9 +1,7 @@
-package com.minitv;
-
+package com.minischool.minitv;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;

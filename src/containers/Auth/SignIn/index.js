@@ -70,14 +70,14 @@ class index extends Component {
     GoogleSignin.configure({
       // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       webClientId:
-        '68351548425-qsou5lr4g8qghae5ajjp7ko1k7eh66be.apps.googleusercontent.com',
+        '367155018407-imisa2jp5q1ppv041u5slgmeetlt0t6a.apps.googleusercontent.com',
       offlineAccess: true,
       hostedDomain: '',
       loginHint: '',
       forceConsentPrompt: true,
       accountName: '',
       androidClientId:
-        '68351548425-v3oplo93abbtf1qpj7e2emnt72igh06e.apps.googleusercontent.com',
+        '367155018407-rr2nnifcsr9fqlam41uocrf636jqvpfu.apps.googleusercontent.com',
       iosClientId:
         'XXXXXX-krv1hjXXXXXXp51pisuc1104q5XXXXXXe.apps.googleusercontent.com',
     });

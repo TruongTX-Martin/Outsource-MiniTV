@@ -1,7 +1,4 @@
-package com.minitv;
-
-import androidx.annotation.NonNull;
-
+package com.minischool.minitv;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
