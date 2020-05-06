@@ -127,8 +127,8 @@ class index extends Component {
   }
 
   onAndroidBackPress = () => {
-    console.log('onAndroidBackPress');
     if (getCurrentRouter() == 'SignIn') {
+      BackHandler.exitApp();
       return true;
     }
     if (getCurrentRouter() == 'Home') {
