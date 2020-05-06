@@ -104,7 +104,7 @@ class index extends Component {
               alignItems: 'center',
             }}
             onPress={() => {
-              this.props.navigation.pop(2);
+              this.props.navigation.pop(3);
               EventRegister.emit(Config.Constant.EVENT_GOTO_SIGNIN, '');
             }}>
             <Text style={{color: 'white', fontSize: 16}}>다음</Text>

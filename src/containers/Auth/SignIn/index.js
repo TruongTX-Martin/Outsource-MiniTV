@@ -25,7 +25,7 @@ import {NaverLogin, getProfile} from '@react-native-seoul/naver-login';
 const androidkeys = {
   kConsumerKey: 'TTq8dR1UvTfqGzynoOyd',
   kConsumerSecret: 'hO7NGv2v7M',
-  kServiceAppName: 'Mini TV-DEV',
+  kServiceAppName: 'Mini TV',
 };
 const {width} = Dimensions.get('window');
 
