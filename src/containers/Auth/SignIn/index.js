@@ -43,19 +43,19 @@ class index extends Component {
     this.validation = {
       email: {
         presence: {
-          message: '^Please enter an email address',
+          message: '^이메일 주소를 입력해 주세요.',
         },
         email: {
-          message: '^Please enter a valid email address',
+          message: '^이메일 주소를 정확히 입력해주세요. ',
         },
       },
       password: {
         presence: {
-          message: '^Please enter password',
+          message: '^비밀번호를 입력해 주세요.',
         },
         length: {
           minimum: 6,
-          message: '^Your password must be at least 6 characters',
+          message: '^6글자/숫자 이상의 비밀번호를 입력해주세요. ',
         },
       },
     };
@@ -276,7 +276,7 @@ class index extends Component {
                   onChangeText={(password) =>
                     this.setState({password, passwordError: null})
                   }
-                  error={passwordError}
+                  error={passwordError || reason}
                 />
                 <View style={{marginTop: 40}}>
                   <ButtonBase
@@ -285,16 +285,6 @@ class index extends Component {
                     onPress={() => this.handleSignIn()}
                   />
                 </View>
-                {reason != null && (
-                  <Text
-                    style={{
-                      color: 'red',
-                      textAlign: 'center',
-                      paddingHorizontal: 20,
-                    }}>
-                    {reason}
-                  </Text>
-                )}
                 <View
                   style={{
                     display: 'flex',
