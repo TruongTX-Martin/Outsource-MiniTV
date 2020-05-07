@@ -260,7 +260,7 @@ class index extends Component {
                 </View>
                 <ImageBackground
                   source={{
-                    uri: onAir && onAir.thumbnail,
+                    uri: onAir && onAir.thumbnail ? onAir.thumbnail : '',
                   }}
                   imageStyle={{borderRadius: 5}}
                   style={{

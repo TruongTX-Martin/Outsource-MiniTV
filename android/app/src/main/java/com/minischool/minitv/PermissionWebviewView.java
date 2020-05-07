@@ -2,6 +2,7 @@ package com.minischool.minitv;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -27,7 +28,7 @@ public class PermissionWebviewView  extends WebView {
         webSettings.setAllowFileAccessFromFileURLs(true);
         webSettings.setAllowContentAccess(true);
         webSettings.setDomStorageEnabled(true);
-        webSettings.setMediaPlaybackRequiresUserGesture(false);
+        webSettings.setMediaPlaybackRequiresUserGesture(true);
         webSettings.setUseWideViewPort(true);
 
         this.setWebChromeClient(new WebChromeClient() {
@@ -38,14 +39,25 @@ public class PermissionWebviewView  extends WebView {
                     request.grant(request.getResources());
                 }
             }
+
         });
     }
+
+
+
+
 
     @Override
     public void onPause() {
         super.onPause();
         Log.d("OnPause","Pau em nhe");
         this.destroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d("onKeyDown:",keyCode + "");
+        return super.onKeyDown(keyCode, event);
     }
 
     public void clearAudio(){
