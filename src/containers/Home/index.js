@@ -40,6 +40,7 @@ class index extends Component {
     this.state = {
       loadingFirst: true,
       countPressBack: 0,
+      isOpenSlideMenu: false,
     };
     this.timeoutBackPress = null;
   }
@@ -132,7 +133,11 @@ class index extends Component {
       return true;
     }
     if (getCurrentRouter() == 'Home') {
-      const {countPressBack} = this.state;
+      const {countPressBack, isOpenSlideMenu} = this.state;
+      if (isOpenSlideMenu) {
+        this.setState({isOpenSlideMenu: false});
+        return;
+      }
       this.setState(
         {
           countPressBack: countPressBack + 1,
@@ -206,7 +211,10 @@ class index extends Component {
               source={Images.imgLogo}
             />
             <TouchableOpacity
-              onPress={() => this.props.navigation.openDrawer()}>
+              onPress={() => {
+                this.props.navigation.openDrawer();
+                this.setState({isOpenSlideMenu: true});
+              }}>
               <Image
                 style={{width: 25, height: 19, marginRight: 10}}
                 source={Images.imgIcMenuBar}
