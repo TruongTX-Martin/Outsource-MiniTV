@@ -5,6 +5,9 @@ Google signIn
 - Goto https://console.developers.google.com/apis/credentials?authuser=3&folder=&hl=vi&organizationId=&project=minitv-cd739 
 => get webClientId, androidClientId and add to config 
 
+-> incase IOS: create project IOS on Firebase and get IOSClientid -> paste to config
+And then download info.list add to project and update url schema on infor tab 
+
 Facebook signin 
 - Goto facebook developer
 - Create project and add keyhash 
@@ -16,3 +19,17 @@ Naver:
 -Change package name right 
 -goto tab member and add account test 
 -Or need go to request inspection 
+
+
+//update when use webview 
+// <PermissionWebview
+                //   ref={this.webviewRef}
+                //   style={{flex: 1}}
+                //   mediaPlaybackRequiresUserAction={false}
+                //   domStorageEnabled={true}
+                //   allowsInlineMediaPlayback={true}
+                //   source={{uri: playUrl}}
+                //   sourceUri={playUrl}
+                //   allowFileAccessFromFileURLs={true}
+                //   allowUniversalAccessFromFileURLs={true}
+                // />

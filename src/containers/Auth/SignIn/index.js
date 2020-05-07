@@ -79,7 +79,7 @@ class index extends Component {
       androidClientId:
         '367155018407-rr2nnifcsr9fqlam41uocrf636jqvpfu.apps.googleusercontent.com',
       iosClientId:
-        'XXXXXX-krv1hjXXXXXXp51pisuc1104q5XXXXXXe.apps.googleusercontent.com',
+        '367155018407-nu2jcpajmvgb3caqql2afo8a303gocbk.apps.googleusercontent.com',
     });
   }
 

@@ -31,6 +31,7 @@ public class PermissionWebviewView  extends WebView {
         webSettings.setMediaPlaybackRequiresUserGesture(true);
         webSettings.setUseWideViewPort(true);
 
+
         this.setWebChromeClient(new WebChromeClient() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
