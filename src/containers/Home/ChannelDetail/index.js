@@ -74,7 +74,7 @@ class index extends Component {
   render() {
     const {currentTab, isModalSuccess, pokeAvailabe} = this.state;
     const {detail, pokeLoading, loadingChannel} = this.props;
-    console.log('render pokeAvailabe:', pokeAvailabe);
+    console.log('render detail:', detail);
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -279,7 +279,9 @@ class index extends Component {
                                 !e.wish_available,
                               )
                             }>
-                            <Text style={{color: '#499DA7'}}>찜하기</Text>
+                            <Text style={{color: '#499DA7'}}>
+                              {e?.wish_available ? '취소' : '찜하기'}
+                            </Text>
                           </TouchableOpacity>
                         </View>
                       );
@@ -321,12 +323,14 @@ class index extends Component {
                   !detail?.wish_available,
                 )
               }>
-              <Image
-                style={{width: 17, height: 15}}
-                source={Images.imgIcHear}
-              />
+              {!detail?.wish_available && (
+                <Image
+                  style={{width: 17, height: 15}}
+                  source={Images.imgIcHear}
+                />
+              )}
               <Text style={{color: 'white', marginLeft: 5, fontWeight: 'bold'}}>
-                찜하기
+                {detail?.wish_available ? '취소' : '찜하기'}
               </Text>
             </TouchableOpacity>
           </View>

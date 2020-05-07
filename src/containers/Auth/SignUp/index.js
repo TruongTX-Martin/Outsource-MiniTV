@@ -94,6 +94,11 @@ class index extends Component {
       rePasswordError,
       loading,
     } = this.state;
+    const isEnable =
+      email.trim().length > 0 &&
+      password.trim().length > 0 &&
+      rePassword.trim().length > 0;
+
     return (
       <Container>
         <Body>
@@ -193,8 +198,9 @@ class index extends Component {
         </Body>
         <Footer style={{backgroundColor: '#499DA7'}}>
           <TouchableOpacity
+            disabled={!isEnable}
             style={{
-              backgroundColor: '#499DA7',
+              backgroundColor: isEnable ? '#499DA7' : '#999999',
               width,
               display: 'flex',
               justifyContent: 'center',
