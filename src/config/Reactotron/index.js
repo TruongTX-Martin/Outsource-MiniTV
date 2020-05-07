@@ -3,7 +3,7 @@ import Reactotron from 'reactotron-react-native';
 Reactotron.configure({
   name: 'React Native Demo',
   /*If you want to connect Android for debug*/
-  host: '10.80.0.74',
+  host: '192.168.1.30',
 })
   .useReactNative({
     asyncStorage: false, // there are more options to the async storage.

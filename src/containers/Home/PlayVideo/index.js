@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Dimensions,
-  BackHandler,
-  UIManager,
-  findNodeHandle,
-  Text,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Dimensions, BackHandler, ActivityIndicator} from 'react-native';
 import {Container, Body, Content} from 'native-base';
 import {connect} from 'react-redux';
 import Orientation from 'react-native-orientation';
-import PermissionWebview from './PermisionWebView';
+import Spinner from 'react-native-loading-spinner-overlay';
 import {WebView} from 'react-native-webview';
 import {showToast} from '../../../utils';
 import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
 const {width, height} = Dimensions.get('window');
+
+const INJECTED_JAVASCRIPT = `(function() {
+  window.NativeInfo = { 
+          deviceInfo: {
+                os: 'Android'
+          }
+  }
+})();`;
 
 class index extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class index extends Component {
     this.state = {
       countPress: 0,
       isHavePermission: false,
+      loading: false,
     };
     this.timeoutBackPress = null;
     this.webviewRef = React.createRef();
@@ -56,6 +57,11 @@ class index extends Component {
   }
 
   onAndroidBackPress = () => {
+    this.handleBack();
+    return true;
+  };
+
+  handleBack() {
     const {countPress} = this.state;
     this.setState(
       {
@@ -66,13 +72,6 @@ class index extends Component {
           //show toast
           showToast('한 번 더 누르면 종료됩니다.');
         } else if (this.state.countPress >= 2) {
-          // UIManager.dispatchViewManagerCommand(
-          //   findNodeHandle(this.webviewRef.current),
-          //   'clearAudio',
-          //   [
-          //     /* additional arguments */
-          //   ],
-          // );
           this.props.navigation.goBack();
           return true;
         }
@@ -85,43 +84,39 @@ class index extends Component {
       this.setState({countPress: 0});
       clearTimeout(this.timeoutBackPress);
     }, 3000);
-
-    return true;
-  };
+  }
 
   render() {
     const playUrl = this.props.navigation.getParam('playUrl', null);
-    const {isHavePermission} = this.state;
-    const INJECTED_JAVASCRIPT = `(function() {
-                window.NativeInfo = { 
-                        deviceInfo: {
-                              os: 'Android',
-                              osVer: '7.0',
-                              apiLevel: '24',
-                              model: 'SM-T583',
-                        },
-                        appInfo: {
-                              name: 'minitv',
-                              version: '1.0.0'
-                        }
-                }
-          })();`;
+    const {isHavePermission, loading} = this.state;
     return (
       <Container>
         <Body>
           <Content showsVerticalScrollIndicator={false}>
             <View style={{width: height, height: width}}>
+              <Spinner visible={loading} textStyle={{color: '#fff'}} />
               {isHavePermission && (
                 <WebView
-                  style={{width: height, overflow: 'hidden'}}
+                  style={{
+                    width: height,
+                    overflow: 'hidden',
+                    justifyContent: 'center',
+                    flexGrow: 1,
+                  }}
                   source={{uri: playUrl}}
                   javaScriptEnabled={true}
+                  scrollEnabled={false}
                   allowUniversalAccessFromFileURLs={true}
-                  mediaPlaybackRequiresUserAction={true}
+                  mediaPlaybackRequiresUserAction={false}
                   injectedJavaScript={INJECTED_JAVASCRIPT}
                   onMessage={(event) => {
-                    alert(event.nativeEvent.data);
+                    const jsonEvent = JSON.parse(event.nativeEvent.data);
+                    if (jsonEvent.command && jsonEvent.command == 'goHome') {
+                      this.handleBack();
+                    }
                   }}
+                  onLoadStart={() => this.setState({loading: true})}
+                  onLoadEnd={() => this.setState({loading: false})}
                 />
               )}
             </View>
