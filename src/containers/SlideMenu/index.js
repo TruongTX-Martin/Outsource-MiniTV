@@ -186,7 +186,7 @@ class index extends Component {
                     borderBottomColor: '#cccccc',
                   }}
                   onPress={() => EventRegister.emit(Constants.EVENT_SIGN_OUT)}>
-                  <Text>Sign Out</Text>
+                  <Text>로그 아웃</Text>
                   <Image
                     style={{width: 15, height: 15}}
                     source={Images.imgIcArrowRight}
