@@ -154,7 +154,7 @@ class index extends Component {
                     />
                     <Text
                       style={{color: '#222222', fontSize: 13, marginLeft: 5}}>
-                      {`${detail?.duration} 세 대상`}
+                      {`총 ${detail?.duration} 분`}
                     </Text>
                   </View>
                   <TouchableOpacity

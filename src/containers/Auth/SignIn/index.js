@@ -163,7 +163,7 @@ class index extends Component {
 
   async handleLoginGoogle() {
     try {
-      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.signOut();
       const userInfo = await GoogleSignin.signIn();
       const paramSignUp = {
         email: userInfo.user.email,

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions, BackHandler, ActivityIndicator} from 'react-native';
+import {View, Dimensions, BackHandler, StatusBar} from 'react-native';
 import {Container, Body, Content} from 'native-base';
 import {connect} from 'react-redux';
 import Orientation from 'react-native-orientation';
@@ -36,6 +36,7 @@ class index extends Component {
       'hardwareBackPress',
       this.onAndroidBackPress,
     );
+    StatusBar.setHidden(false);
   }
 
   componentDidMount() {
@@ -50,6 +51,7 @@ class index extends Component {
         this.setState({isHavePermission: true});
       }
     });
+    StatusBar.setHidden(true);
   }
 
   componentWillMount() {
