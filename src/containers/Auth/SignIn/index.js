@@ -67,6 +67,7 @@ class index extends Component {
 
   componentDidMount() {
     this.props.generateAccessToken();
+
     GoogleSignin.configure({
       // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       webClientId:
@@ -79,7 +80,7 @@ class index extends Component {
       androidClientId:
         '367155018407-rr2nnifcsr9fqlam41uocrf636jqvpfu.apps.googleusercontent.com',
       iosClientId:
-        '367155018407-nu2jcpajmvgb3caqql2afo8a303gocbk.apps.googleusercontent.com',
+        '367155018407-eeag1be667s265fk8cjbshgas6imvb8c.apps.googleusercontent.com',
     });
   }
 
