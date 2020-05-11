@@ -39,7 +39,7 @@ const get = async (path, params) => {
 
 const generateAccessToken = async () => {
   const params = {};
-  params.app_udid = DeviceInfo.getDeviceId();
+  params.app_udid = DeviceInfo.getUniqueId();
   params.model = DeviceInfo.getModel();
   params.os_name = Platform.OS;
   params.os_ver = DeviceInfo.getSystemVersion();
