@@ -46,9 +46,27 @@
 				<string>367155018407-tm4t1felbdfs638vgoujtntgl5vstbqv.apps.googleusercontent.com</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb2663649970531823</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>2663649970531823</string>
+	<key>FacebookDisplayName</key>
+	<string>미니TV</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+    <string>fb2663649970531823</string>
+		<string>naversearchapp</string>
+		<string>naversearchthirdlogin</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -106,18 +124,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>fb2663649970531823</string>
-    </array>
-    </dict>
-  </array>
-  <key>FacebookAppID</key>
-  <string>2663649970531823</string>
-  <key>FacebookDisplayName</key>
-  <string>미니TV</string>
 </dict>
 </plist>

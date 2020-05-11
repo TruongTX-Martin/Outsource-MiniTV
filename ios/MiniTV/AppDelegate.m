@@ -13,6 +13,9 @@
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 #import "RNSplashScreen.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+# import  <NaverThirdPartyLogin/NaverThirdPartyLoginConnection.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
+
 
 
 static void InitializeFlipper(UIApplication *application) {
@@ -49,6 +52,8 @@ static void InitializeFlipper(UIApplication *application) {
   [RNSplashScreen show];
   [[FBSDKApplicationDelegate sharedInstance] application:application
   didFinishLaunchingWithOptions:launchOptions];
+  [[NaverThirdPartyLoginConnection getSharedInstance] setIsNaverAppOauthEnable:YES];
+  [[NaverThirdPartyLoginConnection getSharedInstance] setIsInAppOauthEnable:YES];
   return YES;
 }
 
@@ -65,13 +70,23 @@ static void InitializeFlipper(UIApplication *application) {
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
-  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-    openURL:url
-    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-    annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-  ];
-  // Add any custom logic here.
-  return handled;
+//  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+//    openURL:url
+//    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+//    annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+//  ];
+//  return handled;
+  if([RNGoogleSignin application:application openURL:url options:options]){
+    return YES;
+  }else if([[FBSDKApplicationDelegate sharedInstance] application:application
+            openURL:url
+  sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+         annotation:options[UIApplicationOpenURLOptionsAnnotationKey]]){
+    return YES;
+  }else if([[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options]){
+    return YES;
+  }
+  return NO;
 }
 
 @end
