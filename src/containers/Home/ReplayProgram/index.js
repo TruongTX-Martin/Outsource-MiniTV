@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
-import {Text, View, Dimensions, FlatList, RefreshControl} from 'react-native';
+import {
+  Text,
+  View,
+  Dimensions,
+  FlatList,
+  RefreshControl,
+  Image,
+} from 'react-native';
 import {Container, Body, Header, Content} from 'native-base';
+import Images from '../../../assets/images';
 import {connect} from 'react-redux';
 import ItemChannel from '../Component/ItemChannel';
 import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
 import * as liveActions from '../../../redux/actions/liveActions';
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 const widthView = width - 20;
 
@@ -16,7 +24,7 @@ class index extends Component {
   }
 
   componentDidMount() {
-    this.props.getListReplay();
+    // this.props.getListReplay();
   }
 
   render() {
@@ -40,7 +48,37 @@ class index extends Component {
                 style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
                 방송 다시보기
               </Text>
-              {list && list.length > 0 && (
+
+              <View
+                style={{
+                  width: widthView,
+                  display: 'flex',
+                  alignItems: 'center',
+                  paddingTop: 100,
+                }}>
+                <Image
+                  style={{width: 130, height: 130, borderRadius: 65}}
+                  source={Images.imgReplayAlert}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    marginTop: 10,
+                    textAlign: 'center',
+                  }}>
+                  서비스 준비중 입니다
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    textAlign: 'center',
+                    color: '#AAAAAA',
+                  }}>
+                  빠른 시일내에 준비해서 찾아 뵐게요
+                </Text>
+              </View>
+              {/* {list && list.length > 0 && (
                 <FlatList
                   data={list}
                   showsVerticalScrollIndicator={false}
@@ -61,7 +99,7 @@ class index extends Component {
                 <Text style={{textAlign: 'center', marginTop: 100}}>
                   Items is empty
                 </Text>
-              )}
+              )} */}
             </View>
           </Content>
         </Body>
