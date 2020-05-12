@@ -54,6 +54,14 @@
 				<string>fb2663649970531823</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>minitivischeme</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -63,7 +71,7 @@
 	<string>미니TV</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-    <string>fb2663649970531823</string>
+		<string>fb2663649970531823</string>
 		<string>naversearchapp</string>
 		<string>naversearchthirdlogin</string>
 	</array>

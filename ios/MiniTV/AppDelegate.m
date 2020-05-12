@@ -41,6 +41,7 @@ static void InitializeFlipper(UIApplication *application) {
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"MiniTV"
                                             initialProperties:nil];
+  
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
@@ -53,7 +54,6 @@ static void InitializeFlipper(UIApplication *application) {
   [[FBSDKApplicationDelegate sharedInstance] application:application
   didFinishLaunchingWithOptions:launchOptions];
   [[NaverThirdPartyLoginConnection getSharedInstance] setIsNaverAppOauthEnable:YES];
-  [[NaverThirdPartyLoginConnection getSharedInstance] setIsInAppOauthEnable:YES];
   return YES;
 }
 
@@ -69,24 +69,20 @@ static void InitializeFlipper(UIApplication *application) {
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-
-//  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-//    openURL:url
-//    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-//    annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-//  ];
-//  return handled;
+  if ([url.scheme isEqualToString:@"minitivischeme"]) {
+       return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];
+  }else
   if([RNGoogleSignin application:application openURL:url options:options]){
-    return YES;
+      return YES;
   }else if([[FBSDKApplicationDelegate sharedInstance] application:application
             openURL:url
   sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
          annotation:options[UIApplicationOpenURLOptionsAnnotationKey]]){
     return YES;
-  }else if([[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options]){
-    return YES;
   }
   return NO;
+    
+//  return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];;
 }
 
 @end
