@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   Alert,
+  Platform,
 } from 'react-native';
 import {Container, Body, Content} from 'native-base';
 import Images from '../../../assets/images';
@@ -26,6 +27,13 @@ const androidkeys = {
   kConsumerKey: 'TTq8dR1UvTfqGzynoOyd',
   kConsumerSecret: 'hO7NGv2v7M',
   kServiceAppName: 'Mini TV',
+};
+
+const ioskeys = {
+  kConsumerKey: 'TTq8dR1UvTfqGzynoOyd',
+  kConsumerSecret: 'hO7NGv2v7M',
+  kServiceAppName: 'Mini TV',
+  kServiceAppUrlScheme: 'minitivischeme', // only for iOS
 };
 const {width} = Dimensions.get('window');
 
@@ -67,6 +75,7 @@ class index extends Component {
 
   componentDidMount() {
     this.props.generateAccessToken();
+
     GoogleSignin.configure({
       // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       webClientId:
@@ -79,7 +88,7 @@ class index extends Component {
       androidClientId:
         '367155018407-rr2nnifcsr9fqlam41uocrf636jqvpfu.apps.googleusercontent.com',
       iosClientId:
-        '367155018407-nu2jcpajmvgb3caqql2afo8a303gocbk.apps.googleusercontent.com',
+        '367155018407-eeag1be667s265fk8cjbshgas6imvb8c.apps.googleusercontent.com',
     });
   }
 
@@ -229,7 +238,7 @@ class index extends Component {
 
   render() {
     const {email, emailError, password, passwordError} = this.state;
-    const initials = androidkeys;
+    const initials = Platform.OS == 'ios' ? ioskeys : androidkeys;
     const {loading, reason, snsLoading} = this.props;
     return (
       <Container>

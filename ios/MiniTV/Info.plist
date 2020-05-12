@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>367155018407-nu2jcpajmvgb3caqql2afo8a303gocbk.apps.googleusercontent.com</string>
+				<string>367155018407-eeag1be667s265fk8cjbshgas6imvb8c.apps.googleusercontent.com</string>
 			</array>
 		</dict>
 		<dict>
@@ -35,7 +35,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.367155018407-nu2jcpajmvgb3caqql2afo8a303gocbk</string>
+				<string>com.googleusercontent.apps.367155018407-eeag1be667s265fk8cjbshgas6imvb8c</string>
 			</array>
 		</dict>
 		<dict>
@@ -43,12 +43,38 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>367155018407-rr2nnifcsr9fqlam41uocrf636jqvpfu.apps.googleusercontent.com</string>
+				<string>367155018407-tm4t1felbdfs638vgoujtntgl5vstbqv.apps.googleusercontent.com</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb2663649970531823</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>minitivischeme</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>2663649970531823</string>
+	<key>FacebookDisplayName</key>
+	<string>미니TV</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fb2663649970531823</string>
+		<string>naversearchapp</string>
+		<string>naversearchthirdlogin</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

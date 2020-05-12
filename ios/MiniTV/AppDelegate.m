@@ -12,6 +12,11 @@
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 #import "RNSplashScreen.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+# import  <NaverThirdPartyLogin/NaverThirdPartyLoginConnection.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
+
+
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -36,6 +41,7 @@ static void InitializeFlipper(UIApplication *application) {
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"MiniTV"
                                             initialProperties:nil];
+  
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
@@ -45,6 +51,9 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+  didFinishLaunchingWithOptions:launchOptions];
+  [[NaverThirdPartyLoginConnection getSharedInstance] setIsNaverAppOauthEnable:YES];
   return YES;
 }
 
@@ -55,6 +64,25 @@ static void InitializeFlipper(UIApplication *application) {
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  if ([url.scheme isEqualToString:@"minitivischeme"]) {
+       return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];
+  }else
+  if([RNGoogleSignin application:application openURL:url options:options]){
+      return YES;
+  }else if([[FBSDKApplicationDelegate sharedInstance] application:application
+            openURL:url
+  sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+         annotation:options[UIApplicationOpenURLOptionsAnnotationKey]]){
+    return YES;
+  }
+  return NO;
+    
+//  return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];;
 }
 
 @end

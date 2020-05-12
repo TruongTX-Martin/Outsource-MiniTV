@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions, BackHandler, StatusBar} from 'react-native';
+import {View, Dimensions, BackHandler, StatusBar, Platform} from 'react-native';
 import {Container, Body, Content} from 'native-base';
 import {connect} from 'react-redux';
 import Orientation from 'react-native-orientation';
@@ -40,17 +40,31 @@ class index extends Component {
   }
 
   componentDidMount() {
-    requestMultiple([
-      PERMISSIONS.ANDROID.RECORD_AUDIO,
-      PERMISSIONS.ANDROID.CAMERA,
-    ]).then((statuses) => {
-      if (
-        statuses[PERMISSIONS.ANDROID.RECORD_AUDIO] == 'granted' &&
-        statuses[PERMISSIONS.ANDROID.CAMERA] == 'granted'
-      ) {
-        this.setState({isHavePermission: true});
-      }
-    });
+    if (Platform.OS == 'ios') {
+      requestMultiple([
+        PERMISSIONS.IOS.RECORD_AUDIO,
+        PERMISSIONS.IOS.CAMERA,
+      ]).then((statuses) => {
+        if (
+          statuses[PERMISSIONS.IOS.RECORD_AUDIO] == 'granted' &&
+          statuses[PERMISSIONS.IOS.CAMERA] == 'granted'
+        ) {
+          this.setState({isHavePermission: true});
+        }
+      });
+    } else {
+      requestMultiple([
+        PERMISSIONS.ANDROID.RECORD_AUDIO,
+        PERMISSIONS.ANDROID.CAMERA,
+      ]).then((statuses) => {
+        if (
+          statuses[PERMISSIONS.ANDROID.RECORD_AUDIO] == 'granted' &&
+          statuses[PERMISSIONS.ANDROID.CAMERA] == 'granted'
+        ) {
+          this.setState({isHavePermission: true});
+        }
+      });
+    }
     StatusBar.setHidden(true);
   }
 
@@ -96,32 +110,32 @@ class index extends Component {
         <Body>
           <View style={{width: height, height: width}}>
             <Spinner visible={loading} textStyle={{color: '#fff'}} />
-            {isHavePermission && (
-              <WebView
-                style={{
-                  width: height,
-                  overflow: 'hidden',
-                  justifyContent: 'center',
-                  flexGrow: 1,
-                }}
-                source={{uri: playUrl}}
-                javaScriptEnabled={true}
-                scrollEnabled={false}
-                showsVerticalScrollIndicator={false}
-                scalesPageToFit={true}
-                allowUniversalAccessFromFileURLs={true}
-                mediaPlaybackRequiresUserAction={false}
-                injectedJavaScript={INJECTED_JAVASCRIPT}
-                onMessage={(event) => {
-                  const jsonEvent = JSON.parse(event.nativeEvent.data);
-                  if (jsonEvent.command && jsonEvent.command == 'goHome') {
-                    this.handleBack();
-                  }
-                }}
-                onLoadStart={() => this.setState({loading: true})}
-                onLoadEnd={() => this.setState({loading: false})}
-              />
-            )}
+            {/* {isHavePermission && ( */}
+            <WebView
+              style={{
+                width: height,
+                overflow: 'hidden',
+                justifyContent: 'center',
+                flexGrow: 1,
+              }}
+              source={{uri: playUrl}}
+              javaScriptEnabled={true}
+              scrollEnabled={false}
+              showsVerticalScrollIndicator={false}
+              scalesPageToFit={true}
+              allowUniversalAccessFromFileURLs={true}
+              mediaPlaybackRequiresUserAction={false}
+              injectedJavaScript={INJECTED_JAVASCRIPT}
+              onMessage={(event) => {
+                const jsonEvent = JSON.parse(event.nativeEvent.data);
+                if (jsonEvent.command && jsonEvent.command == 'goHome') {
+                  this.handleBack();
+                }
+              }}
+              onLoadStart={() => this.setState({loading: true})}
+              onLoadEnd={() => this.setState({loading: false})}
+            />
+            {/* // )} */}
           </View>
         </Body>
       </Container>
