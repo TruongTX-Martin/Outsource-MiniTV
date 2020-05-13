@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Image, Dimensions} from 'react-native';
-import {Container, Body, Content, Footer} from 'native-base';
+import {Container, Body, Content, Footer, Header} from 'native-base';
 import Images from '../../../assets/images';
+import Config from '../../../config';
+import HeaderBase from '../../../components/HeaderBase';
 const {width, height} = Dimensions.get('window');
 
 class index extends Component {
@@ -97,6 +99,9 @@ class index extends Component {
     const {listOption, optionAll, canNext} = this.state;
     return (
       <Container>
+        <Header style={Config.Styles.header}>
+          <HeaderBase navigation={this.props.navigation} />
+        </Header>
         <Body>
           <Content>
             <View

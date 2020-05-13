@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
-import {Container, Body, Content, Footer} from 'native-base';
+import {Container, Body, Content, Footer, Header} from 'native-base';
 import TextInput from '../../../components/TextField';
+import HeaderBase from '../../../components/HeaderBase';
+import Config from '../../../config';
 import validateInput from '../../../helpers/Validate';
 import DataRemote from '../../../services/DataRemote';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -101,6 +103,9 @@ class index extends Component {
 
     return (
       <Container>
+        <Header style={Config.Styles.header}>
+          <HeaderBase navigation={this.props.navigation} />
+        </Header>
         <Body>
           <Content>
             <View

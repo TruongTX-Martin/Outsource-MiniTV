@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
-import {Container, Body, Content, Footer} from 'native-base';
+import {Container, Body, Content, Footer, Header} from 'native-base';
 import TextInput from '../../../components/TextField';
+import Config from '../../../config';
+import HeaderBase from '../../../components/HeaderBase';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from 'react-native-modals';
@@ -73,6 +75,9 @@ class index extends Component {
     const {loading} = this.props;
     return (
       <Container>
+        <Header style={Config.Styles.header}>
+          <HeaderBase navigation={this.props.navigation} />
+        </Header>
         <Body>
           <Content>
             <Spinner
@@ -82,7 +87,7 @@ class index extends Component {
             <View
               style={{
                 padding: 20,
-                height: height - 100,
+                height: height - 150,
                 width,
                 display: 'flex',
                 justifyContent: 'space-between',
