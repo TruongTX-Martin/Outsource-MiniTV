@@ -32,6 +32,8 @@
 		9FD757917F1449BCA2FE8ED2 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */; };
 		A3A8B43778DD4910A03C6A72 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E94944C4EC8246BAB2D44977 /* MaterialIcons.ttf */; };
 		BD959335E456D9C2EA32DCEA /* libPods-MiniTV-MiniTVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B06D6B1FF1F3A69882967B0 /* libPods-MiniTV-MiniTVTests.a */; };
+		C62C7478246BB69A00CE0AFA /* libreact-native-wkwebview.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C62C7477246BB69A00CE0AFA /* libreact-native-wkwebview.a */; };
+		C6552A2A246B9C3B008147BE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		C6D1BA9F0B7842F88579C0F9 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */; };
 		C6D84FB62467F34100A84C8B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6D84FB52467F34100A84C8B /* GoogleService-Info.plist */; };
 		CB34C0F71F5549B2AC734A84 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 993AED29FBAC40CF86D761F6 /* Feather.ttf */; };
@@ -98,7 +100,9 @@
 		A34A63D7E2114C917300C846 /* Pods-MiniTV-MiniTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-MiniTVTests.debug.xcconfig"; path = "Target Support Files/Pods-MiniTV-MiniTVTests/Pods-MiniTV-MiniTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4F5CC38C803418F86439A0E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		C62C7477246BB69A00CE0AFA /* libreact-native-wkwebview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-wkwebview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D84FB52467F34100A84C8B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C6DB2239246B989800908CC3 /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFDE88BDD0B14B2E8E295029 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		DF471961C6ED4F43A472034C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		DFD424F9A5C487314613FD2F /* libPods-MiniTV-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniTV-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +126,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C62C7478246BB69A00CE0AFA /* libreact-native-wkwebview.a in Frameworks */,
+				C6552A2A246B9C3B008147BE /* JavaScriptCore.framework in Frameworks */,
 				E558DCE355347D3CC17DBA55 /* libPods-MiniTV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +186,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C62C7477246BB69A00CE0AFA /* libreact-native-wkwebview.a */,
+				C6DB2239246B989800908CC3 /* libAppAuth.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				7F68E22DC6D729DE4CA01CDA /* libPods-MiniTV.a */,
@@ -808,6 +816,7 @@
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = MiniTV/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -833,6 +842,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ8LA5VSZS;
 				INFOPLIST_FILE = MiniTV/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
