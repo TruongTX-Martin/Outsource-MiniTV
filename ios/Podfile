@@ -12,28 +12,28 @@ def add_flipper_pods!(versions = {})
   versions['Flipper-PeerTalk'] ||= '~> 0.0.4'
   versions['Flipper-RSocket'] ||= '~> 1.0'
 
-  pod 'FlipperKit', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitLayoutPlugin', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/SKIOSNetworkPlugin', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitUserDefaultsPlugin', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitReactPlugin', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FlipperKitLayoutPlugin', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/SKIOSNetworkPlugin', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FlipperKitUserDefaultsPlugin', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FlipperKitReactPlugin', versions['Flipper'], :configuration => ['Debug','Release']
 
   # List all transitive dependencies for FlipperKit pods
   # to avoid them being linked in Release builds
-  pod 'Flipper', versions['Flipper'], :configuration => 'Debug'
-  pod 'Flipper-DoubleConversion', versions['DoubleConversion'], :configuration => 'Debug'
-  pod 'Flipper-Folly', versions['Flipper-Folly'], :configuration => 'Debug'
-  pod 'Flipper-Glog', versions['Flipper-Glog'], :configuration => 'Debug'
-  pod 'Flipper-PeerTalk', versions['Flipper-PeerTalk'], :configuration => 'Debug'
-  pod 'Flipper-RSocket', versions['Flipper-RSocket'], :configuration => 'Debug'
-  pod 'FlipperKit/Core', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/CppBridge', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FBCxxFollyDynamicConvert', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FBDefines', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FKPortForwarding', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitHighlightOverlay', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitLayoutTextSearchable', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitNetworkPlugin', versions['Flipper'], :configuration => 'Debug'
+  pod 'Flipper', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'Flipper-DoubleConversion', versions['DoubleConversion'], :configuration => ['Debug','Release']
+  pod 'Flipper-Folly', versions['Flipper-Folly'], :configuration => ['Debug','Release']
+  pod 'Flipper-Glog', versions['Flipper-Glog'], :configuration => ['Debug','Release']
+  pod 'Flipper-PeerTalk', versions['Flipper-PeerTalk'], :configuration => ['Debug','Release']
+  pod 'Flipper-RSocket', versions['Flipper-RSocket'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/Core', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/CppBridge', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FBCxxFollyDynamicConvert', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FBDefines', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FKPortForwarding', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FlipperKitHighlightOverlay', versions['Flipper'], :configuration =>['Debug','Release']
+  pod 'FlipperKit/FlipperKitLayoutTextSearchable', versions['Flipper'], :configuration => ['Debug','Release']
+  pod 'FlipperKit/FlipperKitNetworkPlugin', versions['Flipper'], :configuration => ['Debug','Release']
 end
 
 # Post Install processing for Flipper
@@ -45,11 +45,26 @@ def flipper_post_install(installer)
       end
     end
   end
+  file_name = Dir.glob("*.xcodeproj")[0]
+  app_project = Xcodeproj::Project.open(file_name)
+  app_project.native_targets.each do |target|
+    target.build_configurations.each do |config|
+      cflags = config.build_settings['OTHER_CFLAGS'] || '$(inherited) '
+      unless cflags.include? '-DFB_SONARKIT_ENABLED=1'
+        puts 'Adding -DFB_SONARKIT_ENABLED=1 in OTHER_CFLAGS...'
+        cflags << '-DFB_SONARKIT_ENABLED=1'
+      end
+      config.build_settings['OTHER_CFLAGS'] = cflags
+    end
+    app_project.save
+  end
+  installer.pods_project.save
 end
 
 
 
 target 'MiniTV' do
+
   # Pods for MiniTV
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
