@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, Image, Dimensions} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import {Container, Body, Header, Content, Footer} from 'native-base';
 import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
@@ -302,8 +309,20 @@ class index extends Component {
               width,
             }}>
             <View style={{paddingLeft: 10}}>
-              <Text style={{color: '#6733F2', fontSize: 12}}>방송시간</Text>
-              <Text style={{fontWeight: 'bold'}}>{detail?.live_time_text}</Text>
+              <Text
+                style={{
+                  color: '#6733F2',
+                  fontSize: Platform.OS == 'ios' ? 10 : 12,
+                }}>
+                방송시간
+              </Text>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: Platform.OS == 'ios' ? 11 : 14,
+                }}>
+                {detail?.live_time_text}
+              </Text>
             </View>
             <TouchableOpacity
               style={{
