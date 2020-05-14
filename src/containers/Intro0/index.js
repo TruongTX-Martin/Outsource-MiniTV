@@ -5,9 +5,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ImageBackground,
+  Platform,
 } from 'react-native';
-import {Container, Body, Content, Footer} from 'native-base';
 import Images from '../../assets/images';
 import {EventRegister} from 'react-native-event-listeners';
 import Config from '../../config';
@@ -52,7 +51,7 @@ class index extends Component {
             justifyContent: 'center',
             alignItems: 'center',
             position: 'absolute',
-            bottom: 20,
+            bottom: Platform.OS == 'ios' ? 0 : 20,
           }}
           onPress={() => this.props.navigation.navigate('Intro1')}>
           <Text style={{color: 'white', fontSize: 16}}>다음</Text>

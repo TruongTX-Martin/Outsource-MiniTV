@@ -15,7 +15,7 @@ const constant = {
   ACCESS_TOKEN: 'ACCESS_TOKEN',
   USER_TOKEN: 'USER_TOKEN',
 
-  // BASE_URL: 'https://dev-api.minitv.io/v1',
-  BASE_URL: 'https://api.minitv.io/v1',
+  BASE_URL: 'https://dev-api.minitv.io/v1',
+  // BASE_URL: 'https://api.minitv.io/v1',
 };
 export default constant;

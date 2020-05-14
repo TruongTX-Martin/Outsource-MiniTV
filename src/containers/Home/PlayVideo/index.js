@@ -42,11 +42,11 @@ class index extends Component {
   componentDidMount() {
     if (Platform.OS == 'ios') {
       requestMultiple([
-        PERMISSIONS.IOS.RECORD_AUDIO,
+        PERMISSIONS.IOS.MICROPHONE,
         PERMISSIONS.IOS.CAMERA,
       ]).then((statuses) => {
         if (
-          statuses[PERMISSIONS.IOS.RECORD_AUDIO] == 'granted' &&
+          statuses[PERMISSIONS.IOS.MICROPHONE] == 'granted' &&
           statuses[PERMISSIONS.IOS.CAMERA] == 'granted'
         ) {
           this.setState({isHavePermission: true});
@@ -110,32 +110,32 @@ class index extends Component {
         <Body>
           <View style={{width: height, height: width}}>
             <Spinner visible={loading} textStyle={{color: '#fff'}} />
-            {/* {isHavePermission && ( */}
-            <WebView
-              style={{
-                width: height,
-                overflow: 'hidden',
-                justifyContent: 'center',
-                flexGrow: 1,
-              }}
-              source={{uri: playUrl}}
-              javaScriptEnabled={true}
-              scrollEnabled={false}
-              showsVerticalScrollIndicator={false}
-              scalesPageToFit={true}
-              allowUniversalAccessFromFileURLs={true}
-              mediaPlaybackRequiresUserAction={false}
-              injectedJavaScript={INJECTED_JAVASCRIPT}
-              onMessage={(event) => {
-                const jsonEvent = JSON.parse(event.nativeEvent.data);
-                if (jsonEvent.command && jsonEvent.command == 'goHome') {
-                  this.handleBack();
-                }
-              }}
-              onLoadStart={() => this.setState({loading: true})}
-              onLoadEnd={() => this.setState({loading: false})}
-            />
-            {/* // )} */}
+            {isHavePermission && (
+              <WebView
+                style={{
+                  width: height,
+                  overflow: 'hidden',
+                  justifyContent: 'center',
+                  flexGrow: 1,
+                }}
+                source={{uri: playUrl}}
+                javaScriptEnabled={true}
+                scrollEnabled={false}
+                showsVerticalScrollIndicator={false}
+                scalesPageToFit={true}
+                allowUniversalAccessFromFileURLs={true}
+                mediaPlaybackRequiresUserAction={false}
+                injectedJavaScript={INJECTED_JAVASCRIPT}
+                onMessage={(event) => {
+                  const jsonEvent = JSON.parse(event.nativeEvent.data);
+                  if (jsonEvent.command && jsonEvent.command == 'goHome') {
+                    this.handleBack();
+                  }
+                }}
+                onLoadStart={() => this.setState({loading: true})}
+                onLoadEnd={() => this.setState({loading: false})}
+              />
+            )}
           </View>
         </Body>
       </Container>
