@@ -6267,6 +6267,11 @@ react-native-screens@^2.4.0:
   dependencies:
     debounce "^1.2.0"
 
+react-native-sfsafariviewcontroller@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/react-native-sfsafariviewcontroller/-/react-native-sfsafariviewcontroller-0.2.6.tgz#dc8f46a3a4969b0ca821511a11b2593a169643fc"
+  integrity sha1-3I9Go6SWmwyoIVEaEbJZOhaWQ/w=
+
 react-native-share@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-3.3.0.tgz#07ab21e6e6dc2399a9c4b5517f5bca831907ffa3"
