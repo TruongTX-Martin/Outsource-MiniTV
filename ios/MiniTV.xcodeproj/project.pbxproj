@@ -129,6 +129,7 @@
 			files = (
 				C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */,
 				E558DCE355347D3CC17DBA55 /* libPods-MiniTV.a in Frameworks */,
+				C63A985D246D403C00095EEE /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

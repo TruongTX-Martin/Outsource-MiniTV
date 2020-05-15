@@ -107,6 +107,8 @@ PODS:
   - Permission-Microphone (2.1.4):
     - RNPermissions
   - RCTRequired (0.62.2)
+  - RCTSFSafariViewController (0.2.6):
+    - React
   - RCTTypeSafety (0.62.2):
     - FBLazyVector (= 0.62.2)
     - Folly (= 2018.10.22.00)
@@ -410,6 +412,7 @@ DEPENDENCIES:
   - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera.podspec`)
   - Permission-Microphone (from `../node_modules/react-native-permissions/ios/Microphone.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
+  - RCTSFSafariViewController (from `../node_modules/react-native-sfsafariviewcontroller`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
   - React-Core (from `../node_modules/react-native/`)
@@ -491,6 +494,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-permissions/ios/Microphone.podspec"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
+  RCTSFSafariViewController:
+    :path: "../node_modules/react-native-sfsafariviewcontroller"
   RCTTypeSafety:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
   React:
@@ -592,6 +597,7 @@ SPEC CHECKSUMS:
   Permission-Camera: 402f1ac15b962448d75e8cf2039d235e7bc09a85
   Permission-Microphone: 84332821b494a0864867ae41c0b29f28002db47b
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
+  RCTSFSafariViewController: 709bddbde953cd94f373827b02d36224a9ad8293
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
   React: 29a8b1a02bd764fb7644ef04019270849b9a7ac3
   React-Core: b12bffb3f567fdf99510acb716ef1abd426e0e05

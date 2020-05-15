@@ -7,6 +7,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {WebView} from 'react-native-webview';
 import {showToast} from '../../../utils';
 import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
+import RCTSFSafariViewController from 'react-native-sfsafariviewcontroller';
 const {width, height} = Dimensions.get('window');
 
 const INJECTED_JAVASCRIPT = `(function() {
@@ -41,17 +42,11 @@ class index extends Component {
 
   componentDidMount() {
     if (Platform.OS == 'ios') {
-      requestMultiple([
-        PERMISSIONS.IOS.MICROPHONE,
-        PERMISSIONS.IOS.CAMERA,
-      ]).then((statuses) => {
-        if (
-          statuses[PERMISSIONS.IOS.MICROPHONE] == 'granted' &&
-          statuses[PERMISSIONS.IOS.CAMERA] == 'granted'
-        ) {
-          this.setState({isHavePermission: true});
-        }
-      });
+      const playUrl = this.props.navigation.getParam('playUrl', null);
+      RCTSFSafariViewController.open(playUrl);
+      RCTSFSafariViewController.addEventListener('onDismiss', () =>
+        this.props.navigation.goBack(),
+      );
     } else {
       requestMultiple([
         PERMISSIONS.ANDROID.RECORD_AUDIO,
@@ -110,7 +105,7 @@ class index extends Component {
         <Body>
           <View style={{width: height, height: width}}>
             <Spinner visible={loading} textStyle={{color: '#fff'}} />
-            {isHavePermission && (
+            {isHavePermission && Platform.OS == 'android' && (
               <WebView
                 style={{
                   width: height,
