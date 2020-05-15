@@ -3,19 +3,20 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-
-#if DEBUG
-#if FB_SONARKIT_ENABLED
-#import <FlipperKit/FlipperClient.h>
-#import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
-#import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
-#import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
-#import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 #import "RNSplashScreen.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 # import  <NaverThirdPartyLogin/NaverThirdPartyLoginConnection.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
+
+#if DEBUG && TARGET_OS_SIMULATOR
+#import <FlipperKit/FlipperClient.h>
+#import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
+#import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
+#import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
+#import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
+
+
 
 
 
@@ -29,17 +30,14 @@ static void InitializeFlipper(UIApplication *application) {
   [client start];
 }
 #endif
-#endif
 
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if DEBUG
-  #if FB_SONARKIT_ENABLED
+#if DEBUG && TARGET_OS_SIMULATOR
   InitializeFlipper(application);
-  #endif
 #endif
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];

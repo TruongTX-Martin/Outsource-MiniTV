@@ -33,6 +33,7 @@
 		A3A8B43778DD4910A03C6A72 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E94944C4EC8246BAB2D44977 /* MaterialIcons.ttf */; };
 		BD959335E456D9C2EA32DCEA /* libPods-MiniTV-MiniTVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B06D6B1FF1F3A69882967B0 /* libPods-MiniTV-MiniTVTests.a */; };
 		C62C08CC246D2BB20045B166 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C08CB246D2BB20045B166 /* File.swift */; };
+		C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		C6D1BA9F0B7842F88579C0F9 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */; };
 		C6D84FB62467F34100A84C8B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6D84FB52467F34100A84C8B /* GoogleService-Info.plist */; };
 		CB34C0F71F5549B2AC734A84 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 993AED29FBAC40CF86D761F6 /* Feather.ttf */; };
@@ -101,6 +102,7 @@
 		C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		C62C08CA246D2BB20045B166 /* MiniTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MiniTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		C62C08CB246D2BB20045B166 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C6A2B1CC246E653D007CA782 /* libFlipperKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFlipperKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D84FB52467F34100A84C8B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFDE88BDD0B14B2E8E295029 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		DF471961C6ED4F43A472034C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */,
 				E558DCE355347D3CC17DBA55 /* libPods-MiniTV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +188,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6A2B1CC246E653D007CA782 /* libFlipperKit.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				7F68E22DC6D729DE4CA01CDA /* libPods-MiniTV.a */,
@@ -794,6 +798,7 @@
 				INFOPLIST_FILE = MiniTVTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -842,7 +847,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "MiniTV-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -875,7 +880,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MiniTV-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
