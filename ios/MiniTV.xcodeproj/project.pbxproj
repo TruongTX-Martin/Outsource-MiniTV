@@ -129,7 +129,6 @@
 			files = (
 				C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */,
 				E558DCE355347D3CC17DBA55 /* libPods-MiniTV.a in Frameworks */,
-				C63A985D246D403C00095EEE /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +475,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2B3E5395D79E474C233D69B5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -833,6 +832,7 @@
 				);
 				INFOPLIST_FILE = MiniTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -881,7 +881,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MiniTV-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
