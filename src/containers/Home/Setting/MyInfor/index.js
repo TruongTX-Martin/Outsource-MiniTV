@@ -286,6 +286,8 @@ class index extends Component {
                         textAlign: 'right',
                         paddingRight: 5,
                       }}
+                      placeholderTextColor="#666"
+                      color="#333"
                       keyboardType="numeric"
                       value={year}
                       onChangeText={(year) => {
@@ -319,6 +321,8 @@ class index extends Component {
                         textAlign: 'right',
                         paddingRight: 5,
                       }}
+                      placeholderTextColor="#666"
+                      color="#333"
                       keyboardType="numeric"
                       value={month}
                       onChangeText={(month) => {
@@ -354,6 +358,8 @@ class index extends Component {
                         textAlign: 'right',
                         paddingRight: 5,
                       }}
+                      placeholderTextColor="#666"
+                      color="#333"
                       keyboardType="numeric"
                       value={day}
                       onChangeText={(day) => {

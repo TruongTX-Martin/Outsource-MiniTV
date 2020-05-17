@@ -225,6 +225,8 @@ class index extends Component {
                       textAlign: 'right',
                       paddingRight: 5,
                     }}
+                    placeholderTextColor="#666"
+                    color="#333"
                     keyboardType="numeric"
                     value={year}
                     onChangeText={(year) => {
@@ -256,6 +258,8 @@ class index extends Component {
                     paddingBottom: 5,
                   }}>
                   <TextInput
+                    placeholderTextColor="#666"
+                    color="#333"
                     style={{
                       width: widthView / 3 - 35,
                       textAlign: 'right',
@@ -294,6 +298,8 @@ class index extends Component {
                     paddingBottom: 5,
                   }}>
                   <TextInput
+                    placeholderTextColor="#666"
+                    color="#333"
                     style={{
                       width: widthView / 3 - 35,
                       textAlign: 'right',

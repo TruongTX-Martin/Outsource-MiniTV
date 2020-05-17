@@ -110,7 +110,7 @@ class index extends Component {
                 paddingHorizontal: 20,
                 backgroundColor: '#f7f7f7',
               }}>
-              <Text style={{color: '#222222', fontSize: 25, paddingTop: 100}}>
+              <Text style={{color: '#222222', fontSize: 25, paddingTop: 80}}>
                 약관 동의
               </Text>
               <Text style={{color: '#222222', fontSize: 15, paddingTop: 10}}>
