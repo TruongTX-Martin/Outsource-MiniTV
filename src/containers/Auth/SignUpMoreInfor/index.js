@@ -101,11 +101,14 @@ class index extends Component {
     const password = this.props.navigation.getParam('password', null);
     const {childName, year, month, day, gender} = this.state;
     let params = null;
+    const validMonth =
+      parseInt(month) < 10 && month.length < 2 ? '0' + month : month;
+    const validDay = parseInt(day) < 10 && day.length < 2 ? '0' + day : day;
     if (this.isSnsSignUp && this.snsSignUpParams != null) {
       params = {
         ...this.snsSignUpParams,
         student_name: childName,
-        birthday: year.toString() + month.toString() + day.toString(),
+        birthday: year.toString() + validMonth.toString() + validDay.toString(),
         sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
       };
     } else {
@@ -113,7 +116,7 @@ class index extends Component {
         email,
         password,
         student_name: childName,
-        birthday: year.toString() + month.toString() + day.toString(),
+        birthday: year.toString() + validMonth.toString() + validDay.toString(),
         sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
       };
     }
@@ -225,8 +228,8 @@ class index extends Component {
                       textAlign: 'right',
                       paddingRight: 5,
                     }}
-                    placeholderTextColor="#666"
-                    color="#333"
+                    // placeholderTextColor="#666"
+                    // color="#333"
                     keyboardType="numeric"
                     value={year}
                     onChangeText={(year) => {
@@ -258,8 +261,8 @@ class index extends Component {
                     paddingBottom: 5,
                   }}>
                   <TextInput
-                    placeholderTextColor="#666"
-                    color="#333"
+                    // placeholderTextColor="#666"
+                    // color="#333"
                     style={{
                       width: widthView / 3 - 35,
                       textAlign: 'right',
@@ -298,8 +301,8 @@ class index extends Component {
                     paddingBottom: 5,
                   }}>
                   <TextInput
-                    placeholderTextColor="#666"
-                    color="#333"
+                    // placeholderTextColor="#666"
+                    // color="#333"
                     style={{
                       width: widthView / 3 - 35,
                       textAlign: 'right',

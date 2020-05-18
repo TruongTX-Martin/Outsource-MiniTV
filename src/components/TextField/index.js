@@ -37,8 +37,8 @@ class index extends Component {
           )}
           <TextInput
             style={[Styles.text, {width: this.props.widthText || width - 60}]}
-            placeholderTextColor="#666"
-            color="#333"
+            // placeholderTextColor="#666"
+            // color="#333"
             value={this.props.value}
             secureTextEntry={this.props.isPassword ? true : false}
             returnKeyType={this.props.keyType ? this.props.keyType : 'next'}

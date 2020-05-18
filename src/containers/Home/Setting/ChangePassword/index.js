@@ -136,11 +136,11 @@ class index extends Component {
                   marginTop: 30,
                   marginBottom: 5,
                 }}>
-                이메일
+                현재 비밀번호
               </Text>
               <TextInput
                 width={width - 40}
-                placeholder="아이디로 사용할 이메일을 입력해주세요."
+                placeholder="현재 비밀번호를 입력해주세요."
                 isPassword
                 value={currentPassword}
                 onChangeText={(currentPassword) =>
@@ -155,7 +155,7 @@ class index extends Component {
                   marginTop: 20,
                   marginBottom: 5,
                 }}>
-                비밀번호
+                새 비밀번호
               </Text>
               <TextInput
                 width={width - 40}
@@ -206,9 +206,7 @@ class index extends Component {
               alignItems: 'center',
             }}
             onPress={() => this.onHandleChangePassword()}>
-            <Text style={{color: 'white', fontSize: 17}}>
-              Confirm to Change
-            </Text>
+            <Text style={{color: 'white', fontSize: 17}}>변경하기</Text>
           </TouchableOpacity>
         </Footer>
         <Modal

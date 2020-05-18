@@ -102,9 +102,12 @@ class index extends Component {
     ) {
       return;
     }
+    const validMonth =
+      parseInt(month) < 10 && month.length < 2 ? '0' + month : month;
+    const validDay = parseInt(day) < 10 && day.length < 2 ? '0' + day : day;
     const params = {
       student_name: childName,
-      birthday: year.toString() + month.toString() + day.toString(),
+      birthday: year.toString() + validMonth.toString() + validDay.toString(),
       sex: gender == GENDER.MALE ? 'MALE' : 'FEMALE',
     };
     this.props.updateProfile(params);
@@ -286,8 +289,8 @@ class index extends Component {
                         textAlign: 'right',
                         paddingRight: 5,
                       }}
-                      placeholderTextColor="#666"
-                      color="#333"
+                      // placeholderTextColor="#666"
+                      // color="#333"
                       keyboardType="numeric"
                       value={year}
                       onChangeText={(year) => {
@@ -321,8 +324,8 @@ class index extends Component {
                         textAlign: 'right',
                         paddingRight: 5,
                       }}
-                      placeholderTextColor="#666"
-                      color="#333"
+                      // placeholderTextColor="#666"
+                      // color="#333"
                       keyboardType="numeric"
                       value={month}
                       onChangeText={(month) => {
@@ -358,8 +361,8 @@ class index extends Component {
                         textAlign: 'right',
                         paddingRight: 5,
                       }}
-                      placeholderTextColor="#666"
-                      color="#333"
+                      // placeholderTextColor="#666"
+                      // color="#333"
                       keyboardType="numeric"
                       value={day}
                       onChangeText={(day) => {
