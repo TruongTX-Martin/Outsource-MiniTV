@@ -70,7 +70,7 @@ class index extends Component {
               />
               {(!list || list.length == 0) && !loading && (
                 <Text style={{textAlign: 'center', marginTop: 100}}>
-                  Items is empty
+                  찜한 방송이 없습니다.
                 </Text>
               )}
             </View>

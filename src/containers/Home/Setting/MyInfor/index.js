@@ -115,10 +115,10 @@ class index extends Component {
 
   onHandleChooseImage() {
     const options = {
-      title: 'Select Images',
-      cancelButtonTitle: 'Cancel',
-      takePhotoButtonTitle: 'Take photo',
-      chooseFromLibraryButtonTitle: 'Choose image from library',
+      title: '프로필 사진 바꾸기',
+      cancelButtonTitle: '취소',
+      takePhotoButtonTitle: '사진 찍기',
+      chooseFromLibraryButtonTitle: '앨범에서 선택',
       quality: 1.0,
       maxWidth: 500,
       maxHeight: 500,
@@ -217,16 +217,24 @@ class index extends Component {
                     }}
                   />
                   {!isUpdatingImage && (
-                    <Image
-                      style={{
-                        width: 30,
-                        height: 30,
-                        position: 'absolute',
-                        bottom: 30,
-                        left: 35,
-                      }}
-                      source={Images.imgIcCamera}
-                    />
+                    <TouchableOpacity
+                      onPress={() => {
+                        if (isUpdatingImage) {
+                          return;
+                        }
+                        this.onHandleChooseImage();
+                      }}>
+                      <Image
+                        style={{
+                          width: 30,
+                          height: 30,
+                          position: 'absolute',
+                          bottom: 30,
+                          left: 35,
+                        }}
+                        source={Images.imgIcCamera}
+                      />
+                    </TouchableOpacity>
                   )}
                   {isUpdatingImage && (
                     <ActivityIndicator

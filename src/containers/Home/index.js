@@ -22,6 +22,8 @@ import * as myPageActions from '../../redux/actions/myPageActions';
 import ItemChannel from './Component/ItemChannel';
 import {EventRegister} from 'react-native-event-listeners';
 import DataLocal from '../../services/DataLocal';
+import DataRemote from '../../services/DataRemote';
+import firebase from 'react-native-firebase';
 import {showToast} from '../../utils';
 import {getCurrentRouter} from '../../helpers/routerHelper';
 const {width, height} = Dimensions.get('window');
@@ -53,6 +55,43 @@ class index extends Component {
     this.checkScreenAndLoadData();
   }
 
+  async checkPermission() {
+    console.log('Check permission');
+    const enabled = await firebase.messaging().hasPermission();
+    console.log('enabled:', enabled);
+    if (enabled) {
+      this.getToken();
+    } else {
+      this.requestPermission();
+    }
+  }
+
+  async getToken() {
+    let fcmToken = await DataLocal.getTokenFirebase();
+    if (!fcmToken) {
+      fcmToken = await firebase.messaging().getToken();
+      if (fcmToken) {
+        // user has a device token
+        DataRemote.setTokenFirebase(fcmToken);
+        DataLocal.saveTokenFirebase(fcmToken);
+        this.props.generateAccessToken();
+      }
+    } else {
+      DataRemote.setTokenFirebase(fcmToken);
+      this.props.generateAccessToken();
+    }
+  }
+
+  async requestPermission() {
+    try {
+      await firebase.messaging().requestPermission();
+      // User has authorised
+      this.getToken();
+    } catch (error) {
+      // User has rejected permissions
+    }
+  }
+
   async checkScreenAndLoadData() {
     //check login or show intro
     const hasShowIntro = await DataLocal.getHasShowIntro();
@@ -62,6 +101,7 @@ class index extends Component {
     } else if (userToken == null || userToken == 'null') {
       this.props.navigation.navigate('SignIn');
     } else {
+      this.checkPermission();
       this.props.generateAccessToken();
       this.props.getMainList();
     }
@@ -92,9 +132,9 @@ class index extends Component {
     this.listenerSignInSuccess = EventRegister.addEventListener(
       Config.Constant.EVENT_SIGNIN_SUCCESS,
       (data) => {
+        this.checkPermission();
         this.props.getMainList();
         this.props.getMe();
-        showToast('Login Success');
       },
     );
     this.listenerSignOut = EventRegister.addEventListener(

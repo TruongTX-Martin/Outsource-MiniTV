@@ -46,7 +46,7 @@ class index extends Component {
             )}
             {todayList.length == 0 && (
               <Text style={{textAlign: 'center', marginTop: 100}}>
-                Items is empty
+                찜한 방송이 없습니다.
               </Text>
             )}
           </View>
