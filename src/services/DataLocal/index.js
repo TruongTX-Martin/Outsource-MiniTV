@@ -31,6 +31,21 @@ const getUserToken = async () => {
   return userToken;
 };
 
+const saveTokenFirebase = (token) => {
+  try {
+    AsyncStorage.setItem(Constants.TOKEN_FIREBASE, token);
+  } catch (error) {}
+};
+const getTokenFirebase = async () => {
+  let token = null;
+  try {
+    token = await AsyncStorage.getItem(Constants.TOKEN_FIREBASE);
+  } catch (error) {
+    console.log('Catch token firebase:', error);
+  }
+  return token;
+};
+
 export default {
   setHasShowIntro,
   getHasShowIntro,
@@ -38,4 +53,6 @@ export default {
   getAccessToken,
   setUserToken,
   getUserToken,
+  saveTokenFirebase,
+  getTokenFirebase,
 };

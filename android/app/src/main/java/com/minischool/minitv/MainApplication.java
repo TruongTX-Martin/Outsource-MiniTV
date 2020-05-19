@@ -1,6 +1,7 @@
 package com.minischool.minitv;
 
 import android.content.Context;
+
 import androidx.multidex.MultiDexApplication;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
@@ -17,7 +18,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
       new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
+          return true;
         }
 
         @Override

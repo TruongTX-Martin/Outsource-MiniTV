@@ -33,6 +33,8 @@
 		9FD757917F1449BCA2FE8ED2 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */; };
 		A3A8B43778DD4910A03C6A72 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E94944C4EC8246BAB2D44977 /* MaterialIcons.ttf */; };
 		BD959335E456D9C2EA32DCEA /* libPods-MiniTV-MiniTVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B06D6B1FF1F3A69882967B0 /* libPods-MiniTV-MiniTVTests.a */; };
+		C61D668524739ACF004B3482 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C61D668424739ACF004B3482 /* UserNotifications.framework */; };
+		C61D668724739ADD004B3482 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C61D668624739ADD004B3482 /* libRNFirebase.a */; };
 		C62C08CC246D2BB20045B166 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C08CB246D2BB20045B166 /* File.swift */; };
 		C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		C6D1BA9F0B7842F88579C0F9 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */; };
@@ -100,8 +102,11 @@
 		A34A63D7E2114C917300C846 /* Pods-MiniTV-MiniTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-MiniTVTests.debug.xcconfig"; path = "Target Support Files/Pods-MiniTV-MiniTVTests/Pods-MiniTV-MiniTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4F5CC38C803418F86439A0E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		C356C91F8D7541738FD79394 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		C61D668424739ACF004B3482 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		C61D668624739ADD004B3482 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFirebase.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62C08CA246D2BB20045B166 /* MiniTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MiniTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		C62C08CB246D2BB20045B166 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C62E35932473B6570040269F /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6323794247129AD006EAE11 /* libYogaKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYogaKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6323796247129CD006EAE11 /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C632379824712A6F006EAE11 /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +137,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C61D668724739ADD004B3482 /* libRNFirebase.a in Frameworks */,
+				C61D668524739ACF004B3482 /* UserNotifications.framework in Frameworks */,
 				C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */,
 				703F23FE645E29A9DAD2012C /* libPods-MiniTV.a in Frameworks */,
 			);
@@ -193,6 +200,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C62E35932473B6570040269F /* libAppAuth.a */,
+				C61D668624739ADD004B3482 /* libRNFirebase.a */,
+				C61D668424739ACF004B3482 /* UserNotifications.framework */,
 				C681C62A247133C200AAE07B /* libAppAuth.a */,
 				C632379824712A6F006EAE11 /* libAppAuth.a */,
 				C6323796247129CD006EAE11 /* libYoga.a */,
@@ -835,7 +845,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = HS8WA856NV;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
@@ -894,6 +904,7 @@
 					"\"${PODS_ROOT}/Headers/Public/react-native-webview\"",
 					"\"${PODS_ROOT}/Headers/Public/rn-fetch-blob\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase",
 				);
 				INFOPLIST_FILE = MiniTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
@@ -927,7 +938,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = HS8WA856NV;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -982,6 +993,7 @@
 					"\"${PODS_ROOT}/Headers/Public/react-native-webview\"",
 					"\"${PODS_ROOT}/Headers/Public/rn-fetch-blob\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase",
 				);
 				INFOPLIST_FILE = MiniTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

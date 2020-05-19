@@ -13,6 +13,8 @@ let axiosConfig = {
   },
 };
 
+let tokenFirebase = '';
+
 axios.interceptors.response.use(
   (response) => {
     checkResponse();
@@ -44,6 +46,7 @@ const generateAccessToken = async () => {
   params.os_name = Platform.OS;
   params.os_ver = DeviceInfo.getSystemVersion();
   params.app_ver = Constants.VERSION_APP;
+  params.push_token = tokenFirebase;
   return await axios.post('/auth/access-token', params, {
     headers: {
       'X-Access-Id': Constants.KEY_ACCESS_ID,
@@ -223,6 +226,10 @@ const validateEmail = async (email) => {
   });
 };
 
+const setTokenFirebase = (token) => {
+  tokenFirebase = token;
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -242,4 +249,5 @@ export default {
   getPokeList,
   getPlayUrl,
   validateEmail,
+  setTokenFirebase,
 };

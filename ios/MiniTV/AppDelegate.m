@@ -9,6 +9,10 @@
 # import  <NaverThirdPartyLogin/NaverThirdPartyLoginConnection.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
+#import <Firebase.h>
+#import "RNFirebaseNotifications.h"
+#import "RNFirebaseMessaging.h"
+
 //#if DEBUG && TARGET_OS_SIMULATOR
 //#import <FlipperKit/FlipperClient.h>
 //#import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -40,6 +44,11 @@
 //  InitializeFlipper(application);
 //#endif
 
+  //Add these 3 lines
+  [FIRApp configure];
+  [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+  [RNFirebaseNotifications configure];
+  
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"MiniTV"
@@ -84,8 +93,21 @@
     return YES;
   }
   return NO;
-    
-//  return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];;
+  }
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
+fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
+  [[RNFirebaseNotifications instance] didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+  [[RNFirebaseMessaging instance] didRegisterUserNotificationSettings:notificationSettings];
+}
+
+-(void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+  
+  [[RNFirebaseMessaging instance] didReceiveRemoteNotification:response.notification.request.content.userInfo];
+  completionHandler();
 }
 
 @end

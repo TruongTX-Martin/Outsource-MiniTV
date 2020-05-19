@@ -127,11 +127,16 @@ target 'MiniTV' do
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
   pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone.podspec"
 
+  # Pods for ReactPushNotifications - Add these lines
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+
   project 'MiniTV',
   'Debug-dev' => :debug,
   'Release-dev' => :release,
   'Debug' => :debug,
   'Release' => :release
+
 
   target 'MiniTVTests' do
     inherit! :complete

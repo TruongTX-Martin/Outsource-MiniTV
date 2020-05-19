@@ -114,6 +114,12 @@ class index extends Component {
         }
       },
     );
+    this.listenerGetAccessToken = EventRegister.addEventListener(
+      Config.Constant.EVENT_RECALL_API,
+      (data) => {
+        this.props.generateAccessToken();
+      },
+    );
     BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
   componentWillUnmount() {
@@ -121,6 +127,7 @@ class index extends Component {
     EventRegister.removeEventListener(this.listenerSignInSuccess);
     EventRegister.removeEventListener(this.listenerSignOut);
     EventRegister.removeEventListener(this.listenerGoToStore);
+    EventRegister.removeEventListener(this.listenerGetAccessToken);
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this.onAndroidBackPress,
