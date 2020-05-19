@@ -205,14 +205,17 @@ dependencies {
     implementation ('com.naver.nid:naveridlogin-android-sdk:4.2.6')
     implementation project(':react-native-orientation')
 
-     //Add these lines
-    implementation 'com.google.android.gms:play-services-base:16.1.0'
-    implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-messaging:17.5.0'
+    implementation "androidx.annotation:annotation:1.1.0"
 
-     compile(project(':react-native-firebase')) {   
-       transitive = false
-   }
+     //Add these lines
+     implementation 'com.google.android.gms:play-services-base:16.1.0'
+     implementation 'com.google.firebase:firebase-core:16.0.8'
+     implementation 'com.google.firebase:firebase-messaging:17.5.0'
+
+
+      implementation(project(':react-native-firebase')) {
+        transitive = false
+    }
 
 
     def multidex_version = "2.0.1"
@@ -249,6 +252,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
 apply plugin: 'com.google.gms.google-services'
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+applyNativeModulesAppBuildGradle(project);

@@ -138,6 +138,7 @@ target 'MiniTV' do
   'Release' => :release
 
 
+
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
   target 'MiniTVTests' do
