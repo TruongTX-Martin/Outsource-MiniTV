@@ -317,7 +317,7 @@ class index extends Component {
                   source={{
                     uri: onAir && onAir.thumbnail ? onAir.thumbnail : '',
                   }}
-                  imageStyle={{borderRadius: 5, resizeMode: 'contain'}}
+                  imageStyle={{borderRadius: 5, resizeMode: 'stretch'}}
                   style={{
                     width: widthView,
                     height: (widthView * 490) / 800,

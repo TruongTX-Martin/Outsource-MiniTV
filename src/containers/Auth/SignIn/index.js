@@ -247,8 +247,6 @@ class index extends Component {
             <View
               style={{
                 height,
-                display: 'flex',
-                justifyContent: 'space-between',
               }}>
               <View>
                 <Spinner
@@ -326,70 +324,71 @@ class index extends Component {
                       </Text>
                     </TouchableOpacity>
                   </View>
-                </View>
-              </View>
-              <View style={{marginBottom: 50}}>
-                <View
-                  style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginBottom: 20,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <View
-                    style={{flex: 2, height: 1, backgroundColor: '#cacaca'}}
-                  />
                   <View
                     style={{
-                      flex: 4,
-                      height: 30,
+                      flex: 1,
                       display: 'flex',
-                      justifyContent: 'center',
+                      flexDirection: 'row',
                       alignItems: 'center',
+                      justifyContent: 'center',
+                      marginTop: 50,
+                      width: width - 45,
+                      marginBottom: 25,
                     }}>
-                    <Text style={{color: '#797979'}}>
-                      SNS 회원가입 / 로그인
-                    </Text>
+                    <View
+                      style={{flex: 2, height: 1, backgroundColor: '#cacaca'}}
+                    />
+                    <View
+                      style={{
+                        flex: 4,
+                        height: 30,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={{color: '#797979'}}>
+                        SNS 회원가입 / 로그인
+                      </Text>
+                    </View>
+                    <View
+                      style={{flex: 2, height: 1, backgroundColor: '#cacaca'}}
+                    />
                   </View>
-                  <View
-                    style={{flex: 2, height: 1, backgroundColor: '#cacaca'}}
-                  />
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: '#54c43a',
+                      width: width - 46,
+                      height: 45,
+                      borderRadius: 5,
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                    onPress={() => this.naverLogin(initials)}>
+                    <Text
+                      style={{
+                        fontSize: 30,
+                        color: 'white',
+                        fontWeight: 'bold',
+                        marginHorizontal: 10,
+                      }}>
+                      N
+                    </Text>
+                    <Text style={{color: 'white', textAlign: 'center'}}>
+                      네이버로 시작하기
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 30,
+                        color: 'transparent',
+                        fontWeight: 'bold',
+                        marginHorizontal: 10,
+                      }}>
+                      N
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#54c43a',
-                    height: 45,
-                    borderRadius: 5,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                  onPress={() => this.naverLogin(initials)}>
-                  <Text
-                    style={{
-                      fontSize: 30,
-                      color: 'white',
-                      fontWeight: 'bold',
-                      marginHorizontal: 10,
-                    }}>
-                    N
-                  </Text>
-                  <Text style={{color: 'white', textAlign: 'center'}}>
-                    네이버로 시작하기
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 30,
-                      color: 'transparent',
-                      fontWeight: 'bold',
-                      marginHorizontal: 10,
-                    }}>
-                    N
-                  </Text>
-                </TouchableOpacity>
               </View>
             </View>
           </Content>

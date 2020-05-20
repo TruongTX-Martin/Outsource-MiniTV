@@ -42,7 +42,8 @@ class index extends Component {
 
   componentDidMount() {
     if (Platform.OS == 'ios') {
-      const playUrl = this.props.navigation.getParam('playUrl', null);
+      let playUrl = this.props.navigation.getParam('playUrl', null);
+      playUrl = playUrl.replace(/\s/g, '');
       RCTSFSafariViewController.open(playUrl);
       RCTSFSafariViewController.addEventListener('onDismiss', () =>
         this.props.navigation.goBack(),

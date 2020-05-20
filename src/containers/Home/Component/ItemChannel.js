@@ -30,6 +30,7 @@ class index extends Component {
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
           }}
+          resizeMode="stretch"
           source={{uri: item.thumbnail}}
         />
         <View
