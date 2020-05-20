@@ -17,7 +17,7 @@ const constant = {
   USER_TOKEN: 'USER_TOKEN',
   TOKEN_FIREBASE: '@TokenFireBase',
 
-  // BASE_URL: 'https://dev-api.minitv.io/v1',
-  BASE_URL: 'https://api.minitv.io/v1',
+  BASE_URL: 'https://dev-api.minitv.io/v1',
+  // BASE_URL: 'https://api.minitv.io/v1',
 };
 export default constant;

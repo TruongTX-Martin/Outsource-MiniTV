@@ -10,7 +10,7 @@ import {
 import {Container, Body, Content, Footer, Header} from 'native-base';
 import TextInputCustom from '../../../components/TextField';
 import Images from '../../../assets/images';
-import Modal from 'react-native-modals';
+import Modal from 'react-native-modal';
 import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
 import {connect} from 'react-redux';
@@ -429,11 +429,8 @@ class index extends Component {
           </TouchableOpacity>
         </Footer>
         <Modal
-          visible={isModalVisible}
-          onTouchOutside={() => {
-            this.setState({isModalVisible: false});
-          }}
-          onHardwareBackPress={() => {
+          isVisible={isModalVisible}
+          onBackButtonPress={() => {
             this.setState({isModalVisible: false});
             return true;
           }}>

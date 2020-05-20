@@ -16,7 +16,7 @@ import Config from '../../../../config';
 import TextInputCustom from '../../../../components/TextField';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as myPageActions from '../../../../redux/actions/myPageActions';
-import Modal, {SlideAnimation} from 'react-native-modals';
+import Modal from 'react-native-modal';
 import RNFetchBlob from 'rn-fetch-blob';
 import ImagePicker from 'react-native-image-picker';
 const {width} = Dimensions.get('window');
@@ -486,19 +486,9 @@ class index extends Component {
           </TouchableOpacity>
         </Footer>
         <Modal
-          visible={isModalVisible}
-          modalAnimation={
-            new SlideAnimation({
-              initialValue: 0,
-              slideFrom: 'bottom',
-              useNativeDriver: true,
-            })
-          }
+          isVisible={isModalVisible}
           useNativeDriver={true}
-          onTouchOutside={() => {
-            this.setState({isModalVisible: false});
-          }}
-          onHardwareBackPress={() => {
+          onBackButtonPress={() => {
             this.setState({isModalVisible: false});
             return true;
           }}>
@@ -545,8 +535,8 @@ class index extends Component {
                   borderRadius: 5,
                 }}
                 onPress={() => {
-                  this.setState({isModalVisible: false});
                   console.log('Demamaa');
+                  this.setState({isModalVisible: false});
                   this.props.navigation.goBack();
                 }}>
                 <Text style={{color: 'white', fontSize: 17}}>확인</Text>

@@ -6,7 +6,7 @@ import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import Modal from 'react-native-modals';
+import Modal from 'react-native-modal';
 import DataRemote from '../../../services/DataRemote';
 import validateInput from '../../../helpers/Validate';
 import * as authActions from '../../../redux/actions/authActions';
@@ -132,11 +132,8 @@ class index extends Component {
           </TouchableOpacity>
         </Footer>
         <Modal
-          visible={isModalVisible}
-          onTouchOutside={() => {
-            this.setState({isModalVisible: false});
-          }}
-          onHardwareBackPress={() => {
+          isVisible={isModalVisible}
+          onBackButtonPress={() => {
             this.setState({isModalVisible: false});
             return true;
           }}>

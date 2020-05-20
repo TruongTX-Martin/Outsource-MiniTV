@@ -6,7 +6,7 @@ import Config from '../../../../config';
 import ActionSheet from 'react-native-actionsheet';
 import {EventRegister} from 'react-native-event-listeners';
 import Images from '../../../../assets/images';
-import Modal from 'react-native-modals';
+import Modal from 'react-native-modal';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {connect} from 'react-redux';
 import * as myPageAction from '../../../../redux/actions/myPageActions';
@@ -203,11 +203,8 @@ class index extends Component {
           </View>
         </Modal>
         <Modal
-          visible={isModalSuccess}
-          onTouchOutside={() => {
-            this.setState({isModalVisible: false});
-          }}
-          onHardwareBackPress={() => {
+          isVisible={isModalSuccess}
+          onBackButtonPress={() => {
             this.setState({isModalVisible: false});
             return true;
           }}>
