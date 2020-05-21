@@ -23,6 +23,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.routerHome = 'Home';
+    console.log('Constants.BASE_URL:', Constants.BASE_URL);
   }
   componentDidMount() {
     SplashScreen.hide();

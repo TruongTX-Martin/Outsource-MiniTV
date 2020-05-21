@@ -1,3 +1,5 @@
+import Config from 'react-native-config';
+
 const constant = {
   DETAIL: 'Detail',
 
@@ -17,7 +19,6 @@ const constant = {
   USER_TOKEN: 'USER_TOKEN',
   TOKEN_FIREBASE: '@TokenFireBase',
 
-  BASE_URL: 'https://dev-api.minitv.io/v1',
-  // BASE_URL: 'https://api.minitv.io/v1',
+  BASE_URL: Config.BASE_URL,
 };
 export default constant;

@@ -206,6 +206,7 @@ dependencies {
     implementation project(':react-native-orientation')
 
     implementation "androidx.annotation:annotation:1.1.0"
+    implementation project(':react-native-config')
 
      //Add these lines
      implementation 'com.google.android.gms:play-services-base:16.1.0'
@@ -252,6 +253,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply plugin: 'com.google.gms.google-services'
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
 applyNativeModulesAppBuildGradle(project);

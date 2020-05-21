@@ -37,6 +37,7 @@
 		C61D668724739ADD004B3482 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C61D668624739ADD004B3482 /* libRNFirebase.a */; };
 		C62C08CC246D2BB20045B166 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C08CB246D2BB20045B166 /* File.swift */; };
 		C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
+		C6B87B122476799A00FCAA00 /* libreact-native-config.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B87B112476799A00FCAA00 /* libreact-native-config.a */; };
 		C6D1BA9F0B7842F88579C0F9 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */; };
 		C6D84FB62467F34100A84C8B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6D84FB52467F34100A84C8B /* GoogleService-Info.plist */; };
 		CB34C0F71F5549B2AC734A84 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 993AED29FBAC40CF86D761F6 /* Feather.ttf */; };
@@ -113,6 +114,7 @@
 		C681C62A247133C200AAE07B /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A2B1CC246E653D007CA782 /* libFlipperKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFlipperKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B87B062476695800FCAA00 /* 미니TV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "미니TV.entitlements"; path = "MiniTV/미니TV.entitlements"; sourceTree = "<group>"; };
+		C6B87B112476799A00FCAA00 /* libreact-native-config.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-config.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D84FB52467F34100A84C8B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6DCA24C2471275A00BF94C0 /* libYogaKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYogaKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFDE88BDD0B14B2E8E295029 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6B87B122476799A00FCAA00 /* libreact-native-config.a in Frameworks */,
 				C61D668724739ADD004B3482 /* libRNFirebase.a in Frameworks */,
 				C61D668524739ACF004B3482 /* UserNotifications.framework in Frameworks */,
 				C67C56D4246E22B5000EEE4F /* JavaScriptCore.framework in Frameworks */,
@@ -202,6 +205,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6B87B112476799A00FCAA00 /* libreact-native-config.a */,
 				C62E35932473B6570040269F /* libAppAuth.a */,
 				C61D668624739ADD004B3482 /* libRNFirebase.a */,
 				C61D668424739ACF004B3482 /* UserNotifications.framework */,
@@ -908,6 +912,7 @@
 					"\"${PODS_ROOT}/Headers/Public/rn-fetch-blob\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/**",
 				);
 				INFOPLIST_FILE = MiniTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
@@ -999,6 +1004,7 @@
 					"\"${PODS_ROOT}/Headers/Public/rn-fetch-blob\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/**",
 				);
 				INFOPLIST_FILE = MiniTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

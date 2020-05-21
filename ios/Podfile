@@ -138,8 +138,10 @@ target 'MiniTV' do
   'Release' => :release
 
 
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
 
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
 
   target 'MiniTVTests' do
     inherit! :complete
