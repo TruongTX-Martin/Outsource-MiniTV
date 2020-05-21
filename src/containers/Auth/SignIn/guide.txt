@@ -21,15 +21,14 @@ Naver:
 -Or need go to request inspection 
 
 
-//update when use webview 
-// <PermissionWebview
-                //   ref={this.webviewRef}
-                //   style={{flex: 1}}
-                //   mediaPlaybackRequiresUserAction={false}
-                //   domStorageEnabled={true}
-                //   allowsInlineMediaPlayback={true}
-                //   source={{uri: playUrl}}
-                //   sourceUri={playUrl}
-                //   allowFileAccessFromFileURLs={true}
-                //   allowUniversalAccessFromFileURLs={true}
-                // />
+[facebook]
+ID : 01097717668
+PW : minischool0);
+
+[google]
+ID : minischool.qa.001@gmail.com
+PW : minischool0);
+
+Naver: ID : msdev1
+PW : msdevmsdev
+https://developers.naver.com/apps/#/myapps/TTq8dR1UvTfqGzynoOyd/config

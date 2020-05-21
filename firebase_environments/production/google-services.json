@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "29792372647",
+    "firebase_url": "https://minitv-7e5e5.firebaseio.com",
+    "project_id": "minitv-7e5e5",
+    "storage_bucket": "minitv-7e5e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29792372647:android:af9846ad5fd0c494449882",
+        "android_client_info": {
+          "package_name": "com.minischool.minitv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29792372647-oqmo3b9r3emdotjdk238m5tep1ihmv36.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB12GXoLCI59ORtQ830XZnu1QauJE0h9ZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29792372647-oqmo3b9r3emdotjdk238m5tep1ihmv36.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
