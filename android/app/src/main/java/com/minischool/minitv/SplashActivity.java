@@ -12,7 +12,12 @@ public class SplashActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launch_screen);
 
+
+        Intent fcmIntent = this.getIntent();
+        Bundle bundle = fcmIntent.getExtras();
+
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtras(fcmIntent);
         startActivity(intent);
         finish();
     }
