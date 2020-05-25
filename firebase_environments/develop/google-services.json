@@ -1,35 +1,58 @@
 {
   "project_info": {
-    "project_number": "367155018407",
-    "firebase_url": "https://minitv-151b8.firebaseio.com",
-    "project_id": "minitv-151b8",
-    "storage_bucket": "minitv-151b8.appspot.com"
+    "project_number": "999414166330",
+    "firebase_url": "https://minitv-dev-24ac7.firebaseio.com",
+    "project_id": "minitv-dev-24ac7",
+    "storage_bucket": "minitv-dev-24ac7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:367155018407:android:d000322f3d49dc8310b982",
+        "mobilesdk_app_id": "1:999414166330:android:69f01e000969033142d603",
         "android_client_info": {
           "package_name": "com.minischool.minitv"
         }
       },
       "oauth_client": [
         {
-          "client_id": "367155018407-imisa2jp5q1ppv041u5slgmeetlt0t6a.apps.googleusercontent.com",
+          "client_id": "999414166330-kvsrondtve2dneni86g8vv25onsmlgm3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minischool.minitv",
+            "certificate_hash": "a20557a5f4ba01fa564947a189ce85d107776152"
+          }
+        },
+        {
+          "client_id": "999414166330-9go5elkqkfnp52995ab7froj9ajm4i2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minischool.minitv",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "999414166330-o5r8c4g58g8ac9rhs1tk6c941h3j5m37.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBY0NWr1R8NQiFqCUUpU1pP8WrHwDHpdb4"
+          "current_key": "AIzaSyCohtH-yu6FArLn6OMXPg_M633q9xA2Klk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "367155018407-imisa2jp5q1ppv041u5slgmeetlt0t6a.apps.googleusercontent.com",
+              "client_id": "999414166330-o5r8c4g58g8ac9rhs1tk6c941h3j5m37.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "999414166330-64j96qk2pnqu6k7cuv08c6cft0uhpube.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.minischool.minitvios"
+              }
             }
           ]
         }
