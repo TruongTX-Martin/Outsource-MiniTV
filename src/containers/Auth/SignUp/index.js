@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
-import {Container, Body, Content, Footer, Header} from 'native-base';
+import React, { Component } from 'react';
+import { View, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { Container, Body, Content, Footer, Header } from 'native-base';
 import TextInput from '../../../components/TextField';
 import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
 import validateInput from '../../../helpers/Validate';
 import DataRemote from '../../../services/DataRemote';
 import Spinner from 'react-native-loading-spinner-overlay';
-const {width} = Dimensions.get('window');
+import Localization from '../../../localization';
+const { width } = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
@@ -25,35 +26,35 @@ class index extends Component {
     this.validation = {
       email: {
         presence: {
-          message: '^이메일 주소를 입력해 주세요.',
+          message: Localization.email_cannot_empty,
         },
         email: {
-          message: '^이메일 주소를 정확히 입력해주세요. ',
+          message: Localization.email_invalid,
         },
       },
       password: {
         presence: {
-          message: '^비밀번호를 입력해 주세요.',
+          message: Localization.password_cannot_empty,
         },
         length: {
           minimum: 6,
-          message: '^6글자/숫자 이상의 비밀번호를 입력해주세요. ',
+          message: Localization.password_length_invaid,
         },
       },
       rePassword: {
         presence: {
-          message: '^비밀번호를 한번더 입력해 주세요.',
+          message: Localization.repassword_cannot_empty,
         },
         length: {
           minimum: 6,
-          message: '^6글자/숫자 이상의 비밀번호를 입력해주세요. ',
+          message: Localization.repassword_length_invalid,
         },
       },
     };
   }
 
   async handleSignUp() {
-    const {email, password, rePassword} = this.state;
+    const { email, password, rePassword } = this.state;
     const emailError = validateInput('email', email, this.validation);
     const passwordError = validateInput('password', password, this.validation);
     const rePasswordError = validateInput(
@@ -62,20 +63,21 @@ class index extends Component {
       this.validation,
     );
     if (emailError || passwordError || rePasswordError) {
-      this.setState({emailError, passwordError, rePasswordError});
+      this.setState({ emailError, passwordError, rePasswordError });
       return;
     }
     if (password.trim() !== rePassword.trim()) {
-      this.setState({rePasswordError: '입력한 비밀번호가 일치하지 않습니다. '});
+      this.setState({
+        rePasswordError: Localization.password_and_repassword_not_match,
+      });
       return;
     }
-    this.setState({loading: true});
+    this.setState({ loading: true });
     const results = await DataRemote.validateEmail(email);
-    this.setState({loading: false});
+    this.setState({ loading: false });
     if (!results?.data?.is_valid) {
       this.setState({
-        emailError:
-          '등록되지 않았거나 잘못된 이메일 주소입니다. 확인 후 다시 입력해주세요.',
+        emailError: Localization.email_error,
       });
       return;
     }
@@ -113,8 +115,8 @@ class index extends Component {
                 padding: 20,
                 width,
               }}>
-              <Spinner visible={loading} textStyle={{color: '#fff'}} />
-              <Text style={{color: '#222222', fontSize: 25, paddingTop: 50}}>
+              <Spinner visible={loading} textStyle={{ color: '#fff' }} />
+              <Text style={{ color: '#222222', fontSize: 25, paddingTop: 50 }}>
                 회원가입
               </Text>
               <View
@@ -156,7 +158,7 @@ class index extends Component {
                 placeholder="아이디로 사용할 이메일을 입력해주세요."
                 value={email}
                 onChangeText={(email) =>
-                  this.setState({email, emailError: null})
+                  this.setState({ email, emailError: null })
                 }
                 error={emailError}
               />
@@ -175,7 +177,7 @@ class index extends Component {
                 isPassword
                 value={password}
                 onChangeText={(password) =>
-                  this.setState({password, passwordError: null})
+                  this.setState({ password, passwordError: null })
                 }
                 error={passwordError}
               />
@@ -194,14 +196,14 @@ class index extends Component {
                 isPassword
                 value={rePassword}
                 onChangeText={(rePassword) =>
-                  this.setState({rePassword, rePasswordError: null})
+                  this.setState({ rePassword, rePasswordError: null })
                 }
                 error={rePasswordError}
               />
             </View>
           </Content>
         </Body>
-        <Footer style={{backgroundColor: '#499DA7'}}>
+        <Footer style={{ backgroundColor: '#499DA7' }}>
           <TouchableOpacity
             disabled={!isEnable}
             style={{
@@ -212,7 +214,7 @@ class index extends Component {
               alignItems: 'center',
             }}
             onPress={() => this.handleSignUp()}>
-            <Text style={{color: 'white', fontSize: 18}}>다음</Text>
+            <Text style={{ color: 'white', fontSize: 18 }}>다음</Text>
           </TouchableOpacity>
         </Footer>
       </Container>

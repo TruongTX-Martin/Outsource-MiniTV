@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -8,19 +8,20 @@ import {
   Alert,
   Platform,
 } from 'react-native';
-import {Container, Body, Content} from 'native-base';
+import { Container, Body, Content } from 'native-base';
 import Images from '../../../assets/images';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as authActions from '../../../redux/actions/authActions';
 import TextInput from '../../../components/TextField';
-import {EventRegister} from 'react-native-event-listeners';
+import { EventRegister } from 'react-native-event-listeners';
 import Constants from '../../../config/Constant';
 import validateInput from '../../../helpers/Validate';
 import ButtonBase from '../../../components/ButtonBase';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {AccessToken, LoginManager} from 'react-native-fbsdk';
-import {GoogleSignin, statusCodes} from 'react-native-google-signin';
-import {NaverLogin, getProfile} from '@react-native-seoul/naver-login';
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import { GoogleSignin, statusCodes } from 'react-native-google-signin';
+import { NaverLogin, getProfile } from '@react-native-seoul/naver-login';
+import Localization from '../../../localization';
 
 //naver
 const androidkeys = {
@@ -35,7 +36,7 @@ const ioskeys = {
   kServiceAppName: 'Mini TV',
   kServiceAppUrlScheme: 'minitivischeme', // only for iOS
 };
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
@@ -51,19 +52,19 @@ class index extends Component {
     this.validation = {
       email: {
         presence: {
-          message: '^이메일 주소를 입력해 주세요.',
+          message: Localization.email_cannot_empty,
         },
         email: {
-          message: '^이메일 주소를 정확히 입력해주세요. ',
+          message: Localization.email_invalid,
         },
       },
       password: {
         presence: {
-          message: '^비밀번호를 입력해 주세요.',
+          message: Localization.password_cannot_empty,
         },
         length: {
           minimum: 6,
-          message: '^6글자/숫자 이상의 비밀번호를 입력해주세요. ',
+          message: Localization.password_length_invaid,
         },
       },
     };
@@ -93,11 +94,11 @@ class index extends Component {
   }
 
   handleSignIn() {
-    const {email, password} = this.state;
+    const { email, password } = this.state;
     const emailError = validateInput('email', email, this.validation);
     const passwordError = validateInput('password', password, this.validation);
     if (emailError || passwordError) {
-      this.setState({emailError, passwordError});
+      this.setState({ emailError, passwordError });
       return;
     }
     const params = {
@@ -108,7 +109,7 @@ class index extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {snsMessage, snsSuccess} = nextProps;
+    const { snsMessage, snsSuccess } = nextProps;
     if (nextProps.isSuccess || snsSuccess) {
       this.props.navigation.goBack();
       EventRegister.emit(Constants.EVENT_SIGNIN_SUCCESS);
@@ -145,10 +146,10 @@ class index extends Component {
       console.log('Login cancelled');
     } else {
       const data = await AccessToken.getCurrentAccessToken();
-      const {accessToken} = data;
+      const { accessToken } = data;
       const response = await fetch(
         'https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' +
-          accessToken,
+        accessToken,
       );
       const json = await response.json();
       const paramSignUp = {
@@ -165,7 +166,7 @@ class index extends Component {
         id: json.id,
         token: accessToken,
       };
-      this.setState({paramSignUp, paramsSNS});
+      this.setState({ paramSignUp, paramsSNS });
       this.props.snsSignIn(paramsSNS);
     }
   }
@@ -188,7 +189,7 @@ class index extends Component {
         id: userInfo.user.id,
         token: userInfo.idToken,
       };
-      this.setState({paramSignUp, paramsSNS});
+      this.setState({ paramSignUp, paramsSNS });
       this.props.snsSignIn(paramsSNS);
     } catch (error) {
       console.log('error:', error);
@@ -232,14 +233,14 @@ class index extends Component {
       id: profileResult.response.id,
       token: naverToken.accessToken,
     };
-    this.setState({paramSignUp, paramsSNS});
+    this.setState({ paramSignUp, paramsSNS });
     this.props.snsSignIn(paramsSNS);
   };
 
   render() {
-    const {email, emailError, password, passwordError} = this.state;
+    const { email, emailError, password, passwordError } = this.state;
     const initials = Platform.OS == 'ios' ? ioskeys : androidkeys;
-    const {loading, reason, snsLoading} = this.props;
+    const { loading, reason, snsLoading } = this.props;
     return (
       <Container>
         <Body>
@@ -251,9 +252,9 @@ class index extends Component {
               <View>
                 <Spinner
                   visible={loading || snsLoading}
-                  textStyle={{color: '#fff'}}
+                  textStyle={{ color: '#fff' }}
                 />
-                <View style={{display: 'flex', alignItems: 'center'}}>
+                <View style={{ display: 'flex', alignItems: 'center' }}>
                   <Image
                     source={Images.imgLogo}
                     style={{
@@ -270,15 +271,15 @@ class index extends Component {
                     alignItems: 'center',
                     marginTop: 30,
                   }}>
-                  <View style={{marginBottom: 10}}>
+                  <View style={{ marginBottom: 10 }}>
                     <TextInput
                       icon={Images.imgIcUserName}
                       width={width - 42}
-                      styleIcon={{width: 15, height: 14}}
+                      styleIcon={{ width: 15, height: 14 }}
                       placeholder="이메일"
                       value={email}
                       onChangeText={(email) =>
-                        this.setState({email, emailError: null})
+                        this.setState({ email, emailError: null })
                       }
                       error={emailError}
                     />
@@ -286,16 +287,16 @@ class index extends Component {
                   <TextInput
                     icon={Images.imgIcPassword}
                     width={width - 42}
-                    styleIcon={{width: 15, height: 18}}
+                    styleIcon={{ width: 15, height: 18 }}
                     placeholder="비밀번호"
                     isPassword
                     value={password}
                     onChangeText={(password) =>
-                      this.setState({password, passwordError: null})
+                      this.setState({ password, passwordError: null })
                     }
                     error={passwordError || reason}
                   />
-                  <View style={{marginTop: 40}}>
+                  <View style={{ marginTop: 40 }}>
                     <ButtonBase
                       width={width - 46}
                       text={'로그인'}
@@ -311,7 +312,7 @@ class index extends Component {
                       marginTop: 10,
                     }}>
                     <TouchableOpacity onPress={() => this.gotoSignUp()}>
-                      <Text style={{color: '#797979', marginRight: 10}}>
+                      <Text style={{ color: '#797979', marginRight: 10 }}>
                         이메일 회원가입
                       </Text>
                     </TouchableOpacity>
@@ -319,7 +320,7 @@ class index extends Component {
                       onPress={() =>
                         this.props.navigation.navigate('FindPassword')
                       }>
-                      <Text style={{color: '#797979', marginRight: 10}}>
+                      <Text style={{ color: '#797979', marginRight: 10 }}>
                         비밀번호 찾기
                       </Text>
                     </TouchableOpacity>
@@ -336,7 +337,7 @@ class index extends Component {
                       marginBottom: 25,
                     }}>
                     <View
-                      style={{flex: 2, height: 1, backgroundColor: '#cacaca'}}
+                      style={{ flex: 2, height: 1, backgroundColor: '#cacaca' }}
                     />
                     <View
                       style={{
@@ -346,12 +347,12 @@ class index extends Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}>
-                      <Text style={{color: '#797979'}}>
+                      <Text style={{ color: '#797979' }}>
                         SNS 회원가입 / 로그인
                       </Text>
                     </View>
                     <View
-                      style={{flex: 2, height: 1, backgroundColor: '#cacaca'}}
+                      style={{ flex: 2, height: 1, backgroundColor: '#cacaca' }}
                     />
                   </View>
                   <TouchableOpacity
@@ -375,7 +376,7 @@ class index extends Component {
                       }}>
                       N
                     </Text>
-                    <Text style={{color: 'white', textAlign: 'center'}}>
+                    <Text style={{ color: 'white', textAlign: 'center' }}>
                       네이버로 시작하기
                     </Text>
                     <Text

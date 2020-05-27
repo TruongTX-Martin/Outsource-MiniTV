@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,18 +7,18 @@ import {
   Dimensions,
   TextInput,
 } from 'react-native';
-import {Container, Body, Content, Footer, Header} from 'native-base';
+import { Container, Body, Content, Footer, Header } from 'native-base';
 import TextInputCustom from '../../../components/TextField';
 import Images from '../../../assets/images';
 import Modal from 'react-native-modal';
 import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {EventRegister} from 'react-native-event-listeners';
+import { EventRegister } from 'react-native-event-listeners';
 import Constants from '../../../config/Constant';
 import * as authActions from '../../../redux/actions/authActions';
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const widthView = width - 40;
 const GENDER = {
@@ -46,17 +46,6 @@ class index extends Component {
     this.showModal = this.showModal.bind(this);
   }
 
-  componentDidMount() {}
-
-  // static getDerivedStateFromProps(props, state) {
-  //   console.log('getDerivedStateFromProps props:', props);
-  //   console.log('getDerivedStateFromProps state:', state);
-  //   if (props.isSuccess) {
-  //     this.showModal();
-  //   }
-  //   return null;
-  // }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSuccess) {
       if (this.isSnsSignUp) {
@@ -69,7 +58,7 @@ class index extends Component {
   }
 
   showModal() {
-    this.setState({isModalVisible: true});
+    this.setState({ isModalVisible: true });
   }
 
   componentWillUnmount() {
@@ -87,10 +76,10 @@ class index extends Component {
     this.setState({
       isValidAll:
         childName.trim().length > 0 &&
-        isValidYear &&
-        isValidMonth &&
-        isValidDay &&
-        gender != null
+          isValidYear &&
+          isValidMonth &&
+          isValidDay &&
+          gender != null
           ? true
           : false,
     });
@@ -99,7 +88,7 @@ class index extends Component {
   handleSignUp() {
     const email = this.props.navigation.getParam('email', null);
     const password = this.props.navigation.getParam('password', null);
-    const {childName, year, month, day, gender} = this.state;
+    const { childName, year, month, day, gender } = this.state;
     let params = null;
     const validMonth =
       parseInt(month) < 10 && month.length < 2 ? '0' + month : month;
@@ -136,7 +125,7 @@ class index extends Component {
       isValidAll,
       isModalVisible,
     } = this.state;
-    const {loading, reason} = this.props;
+    const { loading, reason } = this.props;
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -149,8 +138,8 @@ class index extends Component {
                 padding: 20,
                 width,
               }}>
-              <Spinner visible={loading} textStyle={{color: '#fff'}} />
-              <Text style={{color: '#222222', fontSize: 25, paddingTop: 50}}>
+              <Spinner visible={loading} textStyle={{ color: '#fff' }} />
+              <Text style={{ color: '#222222', fontSize: 25, paddingTop: 50 }}>
                 회원가입
               </Text>
               <View
@@ -191,7 +180,7 @@ class index extends Component {
                 width={widthView}
                 value={childName}
                 onChangeText={(childName) =>
-                  this.setState({childName}, () => this.checkValidAll())
+                  this.setState({ childName }, () => this.checkValidAll())
                 }
               />
               <Text
@@ -245,7 +234,7 @@ class index extends Component {
                       }
                     }}
                   />
-                  <Text style={{color: isValidYear ? '#222222' : '#AAAAAA'}}>
+                  <Text style={{ color: isValidYear ? '#222222' : '#AAAAAA' }}>
                     년
                   </Text>
                 </TouchableOpacity>
@@ -285,7 +274,7 @@ class index extends Component {
                       }
                     }}
                   />
-                  <Text style={{color: isValidMonth ? '#222222' : '#AAAAAA'}}>
+                  <Text style={{ color: isValidMonth ? '#222222' : '#AAAAAA' }}>
                     월
                   </Text>
                 </TouchableOpacity>
@@ -325,7 +314,7 @@ class index extends Component {
                       }
                     }}
                   />
-                  <Text style={{color: isValidDay ? '#222222' : '#AAAAAA'}}>
+                  <Text style={{ color: isValidDay ? '#222222' : '#AAAAAA' }}>
                     일
                   </Text>
                 </TouchableOpacity>
@@ -358,7 +347,7 @@ class index extends Component {
                     paddingBottom: 5,
                   }}
                   onPress={() =>
-                    this.setState({gender: GENDER.MALE}, () =>
+                    this.setState({ gender: GENDER.MALE }, () =>
                       this.checkValidAll(),
                     )
                   }>
@@ -368,7 +357,7 @@ class index extends Component {
                         ? Images.imgIcCheck
                         : Images.imgIcUnCheck
                     }
-                    style={{width: 20, height: 20, marginRight: 10}}
+                    style={{ width: 20, height: 20, marginRight: 10 }}
                   />
                   <Text
                     style={{
@@ -388,7 +377,7 @@ class index extends Component {
                     paddingBottom: 5,
                   }}
                   onPress={() =>
-                    this.setState({gender: GENDER.FEMALE}, () =>
+                    this.setState({ gender: GENDER.FEMALE }, () =>
                       this.checkValidAll(),
                     )
                   }>
@@ -398,7 +387,7 @@ class index extends Component {
                         ? Images.imgIcCheck
                         : Images.imgIcUnCheck
                     }
-                    style={{width: 20, height: 20, marginRight: 10}}
+                    style={{ width: 20, height: 20, marginRight: 10 }}
                   />
                   <Text
                     style={{
@@ -409,12 +398,12 @@ class index extends Component {
                 </TouchableOpacity>
               </View>
               {reason != null && (
-                <Text style={{color: 'red', marginTop: 5}}>{reason}</Text>
+                <Text style={{ color: 'red', marginTop: 5 }}>{reason}</Text>
               )}
             </View>
           </Content>
         </Body>
-        <Footer style={{backgroundColor: '#499DA7'}}>
+        <Footer style={{ backgroundColor: '#499DA7' }}>
           <TouchableOpacity
             disabled={!isValidAll}
             style={{
@@ -425,13 +414,13 @@ class index extends Component {
               alignItems: 'center',
             }}
             onPress={() => this.handleSignUp()}>
-            <Text style={{color: 'white', fontSize: 18}}>완료</Text>
+            <Text style={{ color: 'white', fontSize: 18 }}>완료</Text>
           </TouchableOpacity>
         </Footer>
         <Modal
           isVisible={isModalVisible}
           onBackButtonPress={() => {
-            this.setState({isModalVisible: false});
+            this.setState({ isModalVisible: false });
             return true;
           }}>
           <View
@@ -479,10 +468,10 @@ class index extends Component {
                   borderRadius: 5,
                 }}
                 onPress={() => {
-                  this.setState({isModalVisible: false});
+                  this.setState({ isModalVisible: false });
                   this.props.navigation.pop(3);
                 }}>
-                <Text style={{color: 'white', fontSize: 17}}>확인</Text>
+                <Text style={{ color: 'white', fontSize: 17 }}>확인</Text>
               </TouchableOpacity>
             </View>
           </View>
