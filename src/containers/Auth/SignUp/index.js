@@ -155,7 +155,7 @@ class index extends Component {
               </Text>
               <TextInput
                 width={width - 40}
-                placeholder="아이디로 사용할 이메일을 입력해주세요."
+                placeholder={Localization.email_place_holder}
                 value={email}
                 onChangeText={(email) =>
                   this.setState({ email, emailError: null })
@@ -173,7 +173,7 @@ class index extends Component {
               </Text>
               <TextInput
                 width={width - 40}
-                placeholder="6글자 이상의 비밀번호를 설정해주세요."
+                placeholder={Localization.password_place_holder}
                 isPassword
                 value={password}
                 onChangeText={(password) =>
@@ -192,7 +192,7 @@ class index extends Component {
               </Text>
               <TextInput
                 width={width - 40}
-                placeholder="비밀번호를 다시 한 번 입력해주세요."
+                placeholder={Localization.repassword_place_holder}
                 isPassword
                 value={rePassword}
                 onChangeText={(rePassword) =>
