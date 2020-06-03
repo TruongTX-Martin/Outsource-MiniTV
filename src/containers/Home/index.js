@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -12,21 +12,22 @@ import {
   BackHandler,
   Linking,
 } from 'react-native';
-import {Container, Body, Header, Content} from 'native-base';
+import { Container, Body, Header, Content } from 'native-base';
 import Config from '../../config';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Images from '../../assets/images';
 import * as authActions from '../../redux/actions/authActions';
 import * as liveActions from '../../redux/actions/liveActions';
 import * as myPageActions from '../../redux/actions/myPageActions';
 import ItemChannel from './Component/ItemChannel';
-import {EventRegister} from 'react-native-event-listeners';
+import { EventRegister } from 'react-native-event-listeners';
 import DataLocal from '../../services/DataLocal';
 import DataRemote from '../../services/DataRemote';
 import firebase from 'react-native-firebase';
-import {showToast} from '../../utils';
-import {getCurrentRouter} from '../../helpers/routerHelper';
-const {width, height} = Dimensions.get('window');
+import { showToast } from '../../utils';
+import { getCurrentRouter } from '../../helpers/routerHelper';
+const { width, height } = Dimensions.get('window');
+import Orientation from 'react-native-orientation';
 
 const widthView = width - 30;
 
@@ -49,7 +50,7 @@ class index extends Component {
 
   componentDidMount() {
     const timeoutLoading = setTimeout(() => {
-      this.setState({loadingFirst: false});
+      this.setState({ loadingFirst: false });
       clearTimeout(timeoutLoading);
     }, 2000);
     this.checkScreenAndLoadData();
@@ -101,13 +102,14 @@ class index extends Component {
     } else if (userToken == null || userToken == 'null') {
       this.props.navigation.navigate('SignIn');
     } else {
+      Orientation.lockToLandscape();
       this.checkPermission();
       this.props.generateAccessToken();
       this.props.getMainList();
     }
   }
 
-  renderItem({item, index}) {
+  renderItem({ item, index }) {
     return (
       <TouchableOpacity
         style={{
@@ -115,7 +117,7 @@ class index extends Component {
           borderBottomWidth: 1,
           borderBottomColor: '#CACACA',
         }}>
-        <Text style={{fontSize: 15, fontWeight: '600', marginLeft: 10}}>
+        <Text style={{ fontSize: 15, fontWeight: '600', marginLeft: 10 }}>
           {item.title}
         </Text>
       </TouchableOpacity>
@@ -180,9 +182,9 @@ class index extends Component {
       return true;
     }
     if (getCurrentRouter() == 'Home') {
-      const {countPressBack, isOpenSlideMenu} = this.state;
+      const { countPressBack, isOpenSlideMenu } = this.state;
       if (isOpenSlideMenu) {
-        this.setState({isOpenSlideMenu: false});
+        this.setState({ isOpenSlideMenu: false });
         return;
       }
       this.setState(
@@ -203,7 +205,7 @@ class index extends Component {
         clearTimeout(this.timeoutBackPress);
       }
       this.timeoutBackPress = setTimeout(() => {
-        this.setState({countPressBack: 0});
+        this.setState({ countPressBack: 0 });
         clearTimeout(this.timeoutBackPress);
       }, 3000);
       return true;
@@ -219,8 +221,8 @@ class index extends Component {
   }
 
   render() {
-    const {loadingFirst} = this.state;
-    const {loading, onAir, hotLists, resultPlay} = this.props;
+    const { loadingFirst } = this.state;
+    const { loading, onAir, hotLists, resultPlay } = this.props;
     if (loadingFirst) {
       return (
         <View
@@ -237,41 +239,9 @@ class index extends Component {
     }
     return (
       <Container>
-        <Header
-          style={[
-            Config.Styles.header,
-            {
-              borderBottomWidth: 1,
-              borderBottomColor: 'white',
-            },
-          ]}>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width,
-              alignItems: 'center',
-            }}>
-            <Image
-              style={{width: (30 * 189) / 50, height: 30, marginLeft: 15}}
-              source={Images.imgLogo}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                this.props.navigation.openDrawer();
-                this.setState({isOpenSlideMenu: true});
-              }}>
-              <Image
-                style={{width: 25, height: 19, marginRight: 10}}
-                source={Images.imgIcMenuBar}
-              />
-            </TouchableOpacity>
-          </View>
-        </Header>
         <Body>
           <Content
-            style={{backgroundColor: '#fefefe'}}
+            style={{ backgroundColor: '#fefefe' }}
             showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
@@ -282,135 +252,185 @@ class index extends Component {
             <View>
               <View
                 style={{
-                  width,
-                  paddingHorizontal: 15,
-                  marginTop: 20,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  width: width,
+                  paddingHorizontal: 10,
+                  paddingTop: 10,
                 }}>
-                <Text style={{fontWeight: 'bold', fontSize: 25}}>
-                  {this.getTitle(onAir?.status)}
-                </Text>
-                <View
+                <TouchableOpacity
                   style={{
-                    width: widthView,
-                    height: 1,
-                    backgroundColor: '#f7f7f7',
-                    marginVertical: 10,
-                  }}
-                />
-                <Text
-                  style={{color: '#333333', fontWeight: 'bold', fontSize: 20}}>
-                  {onAir && onAir.title}
-                </Text>
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginVertical: 5,
-                  }}>
-                  <TouchableOpacity>
-                    <Text style={{color: '#4E9DA6', marginRight: 10}}>
-                      {onAir && onAir.tags}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <ImageBackground
-                  source={{
-                    uri: onAir && onAir.thumbnail ? onAir.thumbnail : '',
-                  }}
-                  imageStyle={{borderRadius: 5, resizeMode: 'stretch'}}
-                  style={{
-                    width: widthView,
-                    height: (widthView * 490) / 800,
-                    borderRadius: 5,
+                    backgroundColor: '#FFEDED',
+                    width: 50,
+                    height: 50,
+                    borderRadius: 25,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                    elevation: 5,
                   }}>
-                  {onAir && onAir.status == STATUS.DOING && (
-                    <View
-                      style={{
-                        backgroundColor: 'red',
-                        width: 60,
-                        position: 'absolute',
-                        left: 10,
-                        top: 10,
-                        paddingVertical: 5,
-                        textAlign: 'center',
-                        borderRadius: 15,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                      <Text
-                        style={{
-                          color: 'white',
-                          fontWeight: 'bold',
-                          fontSize: 15,
-                        }}>
-                        On Air
-                      </Text>
-                    </View>
-                  )}
-                  {onAir && onAir.status == STATUS.DOING && (
-                    <TouchableOpacity
-                      onPress={() =>
-                        this.props.navigation.navigate('PlayVideo', {
-                          playUrl: resultPlay.play_url,
-                        })
-                      }>
-                      <Image
-                        style={{width: 50, height: 50}}
-                        source={Images.imgIcPlay}
-                      />
-                    </TouchableOpacity>
-                  )}
-                </ImageBackground>
-              </View>
-              <View
-                style={{
-                  paddingLeft: 10,
-                  marginTop: 30,
-                  backgroundColor: '#fefefe',
-                }}>
-                <Text
-                  style={{
-                    color: '#00000',
-                    fontSize: 25,
-                    fontWeight: 'bold',
-                    marginLeft: 5,
-                  }}>
-                  Hot Channel
-                </Text>
-                <ScrollView
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
+                  <Text style={{ textAlign: 'center' }}>My Page</Text>
+                </TouchableOpacity>
+                <View
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    marginBottom: 20,
-                    marginTop: 10,
-                    paddingBottom: 10,
-                    paddingLeft: 5,
                   }}>
-                  {hotLists &&
-                    hotLists.map((e) => {
-                      return (
-                        <ItemChannel
-                          item={e}
-                          widthView={widthView - 30}
-                          navigation={this.props.navigation}
-                        />
-                      );
-                    })}
+                  <View style={{ display: 'flex', alignItems: 'center' }}>
+                    <TouchableOpacity
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 25,
+                        backgroundColor: '#f7cbca',
+                      }}
+                    />
+                    <Text>On Air</Text>
+                  </View>
+                  <View
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginHorizontal: 20,
+                    }}>
+                    <TouchableOpacity
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 25,
+                        backgroundColor: '#FFDD91',
+                      }}
+                    />
+                    <Text>Channel</Text>
+                  </View>
+                  <View style={{ display: 'flex', alignItems: 'center' }}>
+                    <TouchableOpacity
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 25,
+                        backgroundColor: '#B7C8FF',
+                      }}
+                    />
+                    <Text>Play Alone</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    backgroundColor: 'white',
+                    width: 50,
+                    height: 50,
+                    borderRadius: 25,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                />
+              </View>
+              <View>
+                <ScrollView
+                  horizontal={true}
+                  style={{ paddingLeft: 20, marginTop: 20 }}
+                  showsHorizontalScrollIndicator={false}>
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}>
+                    <View>
+                      <View
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginBottom: 10,
+                        }}>
+                        <Text style={{ fontSize: 13 }}>Thursday PM 7:00</Text>
+                        <Text style={{ fontSize: 11, color: '#D63C3C' }}>
+                          09:20:60 left
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          width: 200,
+                          height: 100,
+                          borderWidth: 2,
+                          borderColor: 'red',
+                        }}
+                      />
+                      <Text>Title</Text>
+                    </View>
+
+                    <View
+                      style={{
+                        width: 90,
+                        height: 90,
+                        borderRadius: 40,
+                        backgroundColor: '#E2FFEF',
+                        marginHorizontal: 30,
+                      }}
+                    />
+                    <View>
+                      <Text style={{ marginBottom: 10 }}>
+                        Next Webcasts are….
+                      </Text>
+                      <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <View style={{ marginRight: 20 }}>
+                          <View
+                            style={{
+                              width: 120,
+                              height: 120,
+                              borderRadius: 60,
+                              backgroundColor: '#F7F7F7',
+                              borderWidth: 1,
+                              borderColor: 'black',
+                            }}
+                          />
+                          <Text>Title</Text>
+                        </View>
+                        <View style={{ marginRight: 20 }}>
+                          <View
+                            style={{
+                              width: 120,
+                              height: 120,
+                              borderRadius: 60,
+                              backgroundColor: '#F7F7F7',
+                              borderWidth: 1,
+                              borderColor: 'black',
+                            }}
+                          />
+                          <Text>Title</Text>
+                        </View>
+                        <View style={{ marginRight: 20 }}>
+                          <View
+                            style={{
+                              width: 120,
+                              height: 120,
+                              borderRadius: 60,
+                              backgroundColor: '#F7F7F7',
+                              borderWidth: 1,
+                              borderColor: 'black',
+                            }}
+                          />
+                          <Text>Title</Text>
+                        </View>
+                        <View style={{ marginRight: 20 }}>
+                          <View
+                            style={{
+                              width: 120,
+                              height: 120,
+                              borderRadius: 60,
+                              backgroundColor: '#F7F7F7',
+                              borderWidth: 1,
+                              borderColor: 'black',
+                            }}
+                          />
+                          <Text>Title</Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
                 </ScrollView>
               </View>
             </View>
