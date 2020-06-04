@@ -37,6 +37,12 @@ const STATUS = {
   FINISHED: 'FINISHED',
 };
 
+const TAB = {
+  TAB_ONAIR: 'TAB_ONAIR',
+  TAB_CHANNEL: 'TAB_CHANNEL',
+  TAB_PLAY_ALONE: 'TAB_PLAY_ALONE',
+};
+
 class index extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +50,7 @@ class index extends Component {
       loadingFirst: true,
       countPressBack: 0,
       isOpenSlideMenu: false,
+      currentTab: TAB.TAB_CHANNEL,
     };
     this.timeoutBackPress = null;
   }
@@ -221,8 +228,9 @@ class index extends Component {
   }
 
   render() {
-    const { loadingFirst } = this.state;
+    const { loadingFirst, currentTab } = this.state;
     const { loading, onAir, hotLists, resultPlay } = this.props;
+    const listChannel = [1, 2, 3, 4, 5, 6];
     if (loadingFirst) {
       return (
         <View
@@ -283,8 +291,20 @@ class index extends Component {
                         height: 50,
                         borderRadius: 25,
                         backgroundColor: '#f7cbca',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}
-                    />
+                      onPress={() =>
+                        this.setState({ currentTab: TAB.TAB_ONAIR })
+                      }>
+                      {currentTab == TAB.TAB_ONAIR && (
+                        <Image
+                          source={Images.imgIcTemTick}
+                          style={{ width: 20, height: 20 }}
+                        />
+                      )}
+                    </TouchableOpacity>
                     <Text>On Air</Text>
                   </View>
                   <View
@@ -299,8 +319,20 @@ class index extends Component {
                         height: 50,
                         borderRadius: 25,
                         backgroundColor: '#FFDD91',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}
-                    />
+                      onPress={() =>
+                        this.setState({ currentTab: TAB.TAB_CHANNEL })
+                      }>
+                      {currentTab == TAB.TAB_CHANNEL && (
+                        <Image
+                          source={Images.imgIcTemTick}
+                          style={{ width: 20, height: 20 }}
+                        />
+                      )}
+                    </TouchableOpacity>
                     <Text>Channel</Text>
                   </View>
                   <View style={{ display: 'flex', alignItems: 'center' }}>
@@ -310,8 +342,20 @@ class index extends Component {
                         height: 50,
                         borderRadius: 25,
                         backgroundColor: '#B7C8FF',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}
-                    />
+                      onPress={() =>
+                        this.setState({ currentTab: TAB.TAB_PLAY_ALONE })
+                      }>
+                      {currentTab == TAB.TAB_PLAY_ALONE && (
+                        <Image
+                          source={Images.imgIcTemTick}
+                          style={{ width: 20, height: 20 }}
+                        />
+                      )}
+                    </TouchableOpacity>
                     <Text>Play Alone</Text>
                   </View>
                 </View>
@@ -332,105 +376,157 @@ class index extends Component {
                   horizontal={true}
                   style={{ paddingLeft: 20, marginTop: 20 }}
                   showsHorizontalScrollIndicator={false}>
-                  <View
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}>
-                    <View>
-                      <View
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          marginBottom: 10,
-                        }}>
-                        <Text style={{ fontSize: 13 }}>Thursday PM 7:00</Text>
-                        <Text style={{ fontSize: 11, color: '#D63C3C' }}>
-                          09:20:60 left
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          width: 200,
-                          height: 100,
-                          borderWidth: 2,
-                          borderColor: 'red',
-                        }}
-                      />
-                      <Text>Title</Text>
-                    </View>
-
+                  {currentTab == TAB.TAB_ONAIR && (
                     <View
                       style={{
-                        width: 90,
-                        height: 90,
-                        borderRadius: 40,
-                        backgroundColor: '#E2FFEF',
-                        marginHorizontal: 30,
-                      }}
-                    />
-                    <View>
-                      <Text style={{ marginBottom: 10 }}>
-                        Next Webcasts are….
-                      </Text>
-                      <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <View style={{ marginRight: 20 }}>
-                          <View
-                            style={{
-                              width: 120,
-                              height: 120,
-                              borderRadius: 60,
-                              backgroundColor: '#F7F7F7',
-                              borderWidth: 1,
-                              borderColor: 'black',
-                            }}
-                          />
-                          <Text>Title</Text>
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
+                      <View>
+                        <View
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            marginBottom: 10,
+                          }}>
+                          <Text style={{ fontSize: 13 }}>Thursday PM 7:00</Text>
+                          <Text style={{ fontSize: 11, color: '#D63C3C' }}>
+                            09:20:60 left
+                          </Text>
                         </View>
-                        <View style={{ marginRight: 20 }}>
-                          <View
-                            style={{
-                              width: 120,
-                              height: 120,
-                              borderRadius: 60,
-                              backgroundColor: '#F7F7F7',
-                              borderWidth: 1,
-                              borderColor: 'black',
-                            }}
-                          />
-                          <Text>Title</Text>
-                        </View>
-                        <View style={{ marginRight: 20 }}>
-                          <View
-                            style={{
-                              width: 120,
-                              height: 120,
-                              borderRadius: 60,
-                              backgroundColor: '#F7F7F7',
-                              borderWidth: 1,
-                              borderColor: 'black',
-                            }}
-                          />
-                          <Text>Title</Text>
-                        </View>
-                        <View style={{ marginRight: 20 }}>
-                          <View
-                            style={{
-                              width: 120,
-                              height: 120,
-                              borderRadius: 60,
-                              backgroundColor: '#F7F7F7',
-                              borderWidth: 1,
-                              borderColor: 'black',
-                            }}
-                          />
-                          <Text>Title</Text>
+                        <View
+                          style={{
+                            width: 200,
+                            height: 100,
+                            borderWidth: 2,
+                            borderColor: 'red',
+                          }}
+                        />
+                        <Text>Title</Text>
+                      </View>
+                      <View
+                        style={{
+                          width: 90,
+                          height: 90,
+                          borderRadius: 40,
+                          backgroundColor: '#E2FFEF',
+                          marginHorizontal: 30,
+                        }}
+                      />
+                      <View>
+                        <Text style={{ marginBottom: 10 }}>
+                          Next Webcasts are….
+                        </Text>
+                        <View style={{ display: 'flex', flexDirection: 'row' }}>
+                          <View style={{ marginRight: 20 }}>
+                            <View
+                              style={{
+                                width: 120,
+                                height: 120,
+                                borderRadius: 60,
+                                backgroundColor: '#F7F7F7',
+                                borderWidth: 1,
+                                borderColor: 'black',
+                              }}
+                            />
+                            <Text>Title</Text>
+                          </View>
+                          <View style={{ marginRight: 20 }}>
+                            <View
+                              style={{
+                                width: 120,
+                                height: 120,
+                                borderRadius: 60,
+                                backgroundColor: '#F7F7F7',
+                                borderWidth: 1,
+                                borderColor: 'black',
+                              }}
+                            />
+                            <Text>Title</Text>
+                          </View>
+                          <View style={{ marginRight: 20 }}>
+                            <View
+                              style={{
+                                width: 120,
+                                height: 120,
+                                borderRadius: 60,
+                                backgroundColor: '#F7F7F7',
+                                borderWidth: 1,
+                                borderColor: 'black',
+                              }}
+                            />
+                            <Text>Title</Text>
+                          </View>
+                          <View style={{ marginRight: 20 }}>
+                            <View
+                              style={{
+                                width: 120,
+                                height: 120,
+                                borderRadius: 60,
+                                backgroundColor: '#F7F7F7',
+                                borderWidth: 1,
+                                borderColor: 'black',
+                              }}
+                            />
+                            <Text>Title</Text>
+                          </View>
                         </View>
                       </View>
                     </View>
-                  </View>
+                  )}
+                  {currentTab == TAB.TAB_CHANNEL && (
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingTop: 20,
+                      }}>
+                      {listChannel.map((e) => {
+                        return (
+                          <TouchableOpacity
+                            style={{
+                              width: 200,
+                              height: 120,
+                              borderWidth: 1,
+                              borderColor: '#cacaca',
+                              borderRadius: 10,
+                              display: 'flex',
+                              justifyContent: 'flex-end',
+                              marginRight: 30,
+                            }}
+                            onPress={() =>
+                              this.props.navigation.navigate('ChannelDetail2')
+                            }>
+                            <View
+                              style={{
+                                width: 200,
+                                height: 50,
+                                backgroundColor: '#919191',
+                                borderBottomLeftRadius: 10,
+                                borderBottomRightRadius: 10,
+                                display: 'flex',
+                                justifyContent: 'center',
+                              }}>
+                              <Text style={{ color: 'white', marginLeft: 10 }}>
+                                Channel Title
+                              </Text>
+                              <Text
+                                style={{
+                                  color: 'white',
+                                  fontSize: 10,
+                                  marginLeft: 10,
+                                }}>
+                                Series #A
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        );
+                      })}
+                    </View>
+                  )}
                 </ScrollView>
               </View>
             </View>

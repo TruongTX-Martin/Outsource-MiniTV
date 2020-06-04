@@ -38,4 +38,5 @@ export default {
   imgIcHearFull: require('./heart-w2.png'),
   imgSplash: require('./splash2.png'),
   imgReplayAlert: require('./img_replay_alert.png'),
+  imgIcTemTick: require('./ic_test_tick.png'),
 };

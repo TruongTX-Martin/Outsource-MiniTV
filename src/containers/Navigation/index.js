@@ -1,8 +1,8 @@
-import {Dimensions} from 'react-native';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import {createDrawerNavigator} from 'react-navigation-drawer';
-import {fromRight} from 'react-navigation-transitions';
+import { Dimensions } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { fromRight } from 'react-navigation-transitions';
 import HomeScreen from '../Home';
 import SignInScreen from '../Auth/SignIn';
 import TermAndCondition from '../Auth/TermAndCondition';
@@ -18,6 +18,7 @@ import ChannelList from '../Home/ChannelList';
 import PokeList from '../Home/PokeList';
 import ReplayProgram from '../Home/ReplayProgram';
 import ChannelDetail from '../Home/ChannelDetail';
+import ChannelDetail2 from '../Home/ChannelDetail2';
 import Alert from '../Home/Alert';
 import Setting from '../Home/Setting';
 import ChangePassword from '../Home/Setting/ChangePassword';
@@ -27,7 +28,7 @@ import Intro1 from '../Intro1';
 import Intro2 from '../Intro2';
 import DeleteAccount from '../Home/Setting/DeleteAccount';
 import PlayVideo from '../Home/PlayVideo';
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 //use with case don't need slidemenu
 // export default StackNavigator({
@@ -110,6 +111,13 @@ const stackNavigator = createStackNavigator(
     },
     ChannelDetail: {
       screen: ChannelDetail,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    ChannelDetail2: {
+      screen: ChannelDetail2,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',
@@ -222,7 +230,7 @@ const stackNavigator = createStackNavigator(
   },
 );
 
-stackNavigator.navigationOptions = ({navigation}) => {
+stackNavigator.navigationOptions = ({ navigation }) => {
   let drawerLockMode = 'unlocked';
   if (navigation.state.index > 0) {
     drawerLockMode = 'locked-closed';
