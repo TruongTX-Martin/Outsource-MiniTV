@@ -50,7 +50,7 @@ class index extends Component {
       loadingFirst: true,
       countPressBack: 0,
       isOpenSlideMenu: false,
-      currentTab: TAB.TAB_CHANNEL,
+      currentTab: TAB.TAB_ONAIR,
     };
     this.timeoutBackPress = null;
   }
@@ -141,6 +141,7 @@ class index extends Component {
     this.listenerSignInSuccess = EventRegister.addEventListener(
       Config.Constant.EVENT_SIGNIN_SUCCESS,
       (data) => {
+        Orientation.lockToLandscape();
         this.checkPermission();
         this.props.getMainList();
         this.props.getMe();
@@ -420,58 +421,26 @@ class index extends Component {
                           Next Webcasts are….
                         </Text>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
-                          <View style={{ marginRight: 20 }}>
-                            <View
-                              style={{
-                                width: 120,
-                                height: 120,
-                                borderRadius: 60,
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 1,
-                                borderColor: 'black',
-                              }}
-                            />
-                            <Text>Title</Text>
-                          </View>
-                          <View style={{ marginRight: 20 }}>
-                            <View
-                              style={{
-                                width: 120,
-                                height: 120,
-                                borderRadius: 60,
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 1,
-                                borderColor: 'black',
-                              }}
-                            />
-                            <Text>Title</Text>
-                          </View>
-                          <View style={{ marginRight: 20 }}>
-                            <View
-                              style={{
-                                width: 120,
-                                height: 120,
-                                borderRadius: 60,
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 1,
-                                borderColor: 'black',
-                              }}
-                            />
-                            <Text>Title</Text>
-                          </View>
-                          <View style={{ marginRight: 20 }}>
-                            <View
-                              style={{
-                                width: 120,
-                                height: 120,
-                                borderRadius: 60,
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 1,
-                                borderColor: 'black',
-                              }}
-                            />
-                            <Text>Title</Text>
-                          </View>
+                          {listChannel.map((e) => {
+                            return (
+                              <View style={{ marginRight: 20 }}>
+                                <TouchableOpacity
+                                  style={{
+                                    width: 120,
+                                    height: 120,
+                                    borderRadius: 60,
+                                    backgroundColor: '#F7F7F7',
+                                    borderWidth: 1,
+                                    borderColor: 'black',
+                                  }}
+                                  onPress={() =>
+                                    this.props.navigation.navigate('WebCast')
+                                  }
+                                />
+                                <Text>Title</Text>
+                              </View>
+                            );
+                          })}
                         </View>
                       </View>
                     </View>

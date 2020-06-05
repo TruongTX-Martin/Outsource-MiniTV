@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   Platform,
+  ScrollView,
 } from 'react-native';
 import { Container, Body, Header, Content, Footer } from 'native-base';
 import Config from '../../../config';
@@ -16,7 +17,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from 'react-native-modals';
 import * as liveActions from '../../../redux/actions/liveActions';
 import Share from 'react-native-share';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const TAB = {
   TAB_INFOR: 'TAB_INFOR',
@@ -29,10 +30,12 @@ class index extends Component {
     this.state = {
       currentTab: TAB.TAB_INFOR,
     };
+    this.width = Dimensions.get('window').width;
   }
 
   render() {
     const { currentTab } = this.state;
+    const listSeries = [1, 2, 3, 4, 5, 6, 7];
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -87,7 +90,7 @@ class index extends Component {
               {currentTab == TAB.TAB_INFOR && (
                 <View
                   style={{
-                    width,
+                    width: this.width,
                     paddingLeft: 20,
                     paddingTop: 20,
                     display: 'flex',
@@ -103,8 +106,8 @@ class index extends Component {
                       backgroundColor: '#F7F7F7',
                     }}
                   />
-                  <View>
-                    <Text style={{ paddingHorizontal: 20, paddingRight: 150 }}>
+                  <View style={{ width: width - 250, paddingHorizontal: 20 }}>
+                    <Text>
                       Channel description. 공유주신 엑셀-방송 썸네일 리스 트 중
                       “채널 설명” 탭에 들어가는 내용을 바탕으로 작성하면 될 것
                       같 습니다. 예를 들어 이 채널은 어떤 내용으로 구성이
@@ -112,8 +115,77 @@ class index extends Component {
                       부분이 성장할 수 있다 등등등 의 내용을 줄 글로 길게
                       풀어써주시면 될 것 .
                     </Text>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        marginTop: 10,
+                      }}>
+                      <Text
+                        style={{
+                          color: '#777777',
+                          fontSize: 12,
+                          marginRight: 10,
+                        }}>
+                        #태그개수는
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#777777',
+                          fontSize: 12,
+                          marginRight: 10,
+                        }}>
+                        #태그개수는
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#777777',
+                          fontSize: 12,
+                          marginRight: 10,
+                        }}>
+                        #태그
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-end',
+                        paddingRight: 20,
+                      }}>
+                      <Image source={Images.imgBtnAlert} />
+                    </View>
                   </View>
                 </View>
+              )}
+              {currentTab == TAB.TAB_SERI_LIST && (
+                <ScrollView
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}>
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      padding: 20,
+                    }}>
+                    {listSeries.map((e) => {
+                      return (
+                        <View
+                          style={{
+                            width: 200,
+                            height: 100,
+                            borderWidth: 1,
+                            borderColor: '#cacaca',
+                            borderRadius: 10,
+                            marginRight: 20,
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                          }}>
+                          <Image source={Images.imgBtnAlert} />
+                        </View>
+                      );
+                    })}
+                  </View>
+                </ScrollView>
               )}
             </View>
           </Content>

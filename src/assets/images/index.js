@@ -39,4 +39,9 @@ export default {
   imgSplash: require('./splash2.png'),
   imgReplayAlert: require('./img_replay_alert.png'),
   imgIcTemTick: require('./ic_test_tick.png'),
+  imgIcTemWebCase1: require('./ic_test_webcase1.png'),
+  imgIcTemWebCase2: require('./ic_test_webcase2.png'),
+  imgIcTemNext: require('./ic_next_test.png'),
+  imgIcTemPrevious: require('./ic_previous_test.png'),
+  imgBtnAlert: require('./btn_getalert.png'),
 };
