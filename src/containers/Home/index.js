@@ -44,6 +44,41 @@ const TAB = {
   TAB_PLAY_ALONE: 'TAB_PLAY_ALONE',
 };
 
+const listSchedule = [
+  {
+    id: 1,
+    date1: '6월 14일',
+    date2: '저녁 7시 30분',
+    title: '자두와 함께 야채를 먹어요 방송제…',
+    isAdd: true,
+    color: '#B873F5',
+  },
+  {
+    id: 2,
+    date1: '6월 14일',
+    date2: '저녁 7시 30분',
+    title: '자두와 함께 야채를 먹어요 방송제…',
+    isAdd: true,
+    color: '#F8C21F',
+  },
+  {
+    id: 3,
+    date1: '6월 14일',
+    date2: '저녁 7시 30분',
+    title: '자두와 함께 야채를 먹어요 방송제…',
+    isAdd: true,
+    color: '#50CCC3',
+  },
+  {
+    id: 4,
+    date1: '6월 14일',
+    date2: '저녁 7시 30분',
+    title: '자두와 함께 야채를 먹어요 방송제…',
+    isAdd: true,
+    color: '#FD8E56',
+  },
+];
+
 class index extends Component {
   constructor(props) {
     super(props);
@@ -438,45 +473,47 @@ class index extends Component {
                         </Text>
                       </View>
                       <Image
-                        style={{ width: 150, height: 158 }}
+                        style={{ width: 150, height: 158, marginRight: 50 }}
                         source={Images2.imgHome2}
                       />
-                      <View
-                        style={{
-                          width: 90,
-                          height: 90,
-                          borderRadius: 40,
-                          backgroundColor: '#E2FFEF',
-                          marginHorizontal: 30,
-                        }}
-                      />
-                      <View>
-                        <Text style={{ marginBottom: 10 }}>
-                          Next Webcasts are….
-                        </Text>
-                        <View style={{ display: 'flex', flexDirection: 'row' }}>
-                          {listChannel.map((e) => {
-                            return (
-                              <View style={{ marginRight: 20 }}>
-                                <TouchableOpacity
-                                  style={{
-                                    width: 120,
-                                    height: 120,
-                                    borderRadius: 60,
-                                    backgroundColor: '#F7F7F7',
-                                    borderWidth: 1,
-                                    borderColor: 'black',
-                                  }}
-                                  onPress={() =>
-                                    this.props.navigation.navigate('WebCast')
-                                  }
-                                />
-                                <Text>Title</Text>
-                              </View>
-                            );
-                          })}
-                        </View>
-                      </View>
+                      {listSchedule.map((e) => {
+                        return (
+                          <View>
+                            <View
+                              style={{
+                                borderWidth: 5,
+                                borderColor: e.color,
+                                borderRadius: 5,
+                                marginTop: 10,
+                                marginRight: 30,
+                              }}>
+                              <ImageBackground
+                                style={{
+                                  width: 250,
+                                  height: 140,
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                                source={Images2.imgItemHomeTest}>
+                                <TouchableOpacity />
+                              </ImageBackground>
+                            </View>
+                            <Text
+                              style={{
+                                color: '#141414',
+                                fontSize: 13,
+                                width: 250,
+                                marginTop: 5,
+                                paddingLeft: 5,
+                              }}
+                              numberOfLines={1}
+                              ellipsizeMode="tail">
+                              방송제목 방송제목 방송제목 방송제목 방방송제목
+                            </Text>
+                          </View>
+                        );
+                      })}
                     </View>
                   )}
                   {currentTab == TAB.TAB_CHANNEL && (
