@@ -6,14 +6,15 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './config/Reactotron';
 import axios from 'axios';
 import MyApp from './containers/Navigation';
-import {store} from './redux/store';
+import { store } from './redux/store';
 import SplashScreen from 'react-native-splash-screen';
-import {setCurrentRouter} from './helpers/routerHelper';
-import {Provider} from 'react-redux';
+import { setCurrentRouter } from './helpers/routerHelper';
+import { Provider } from 'react-redux';
+import Orientation from 'react-native-orientation';
 import Constants from './config/Constant';
 
 //setup default axios
@@ -26,6 +27,7 @@ export default class App extends Component {
   }
   componentDidMount() {
     SplashScreen.hide();
+    Orientation.lockToLandscape();
   }
 
   getActiveRouteName(navigationState) {

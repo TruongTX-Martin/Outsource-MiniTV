@@ -16,6 +16,7 @@ import { Container, Body, Header, Content } from 'native-base';
 import Config from '../../config';
 import { connect } from 'react-redux';
 import Images from '../../assets/images';
+import Images2 from '../../assets/images2';
 import * as authActions from '../../redux/actions/authActions';
 import * as liveActions from '../../redux/actions/liveActions';
 import * as myPageActions from '../../redux/actions/myPageActions';
@@ -263,10 +264,10 @@ class index extends Component {
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
                   width: width,
                   paddingHorizontal: 10,
-                  paddingTop: 10,
+                  alignItems: 'center',
+                  paddingTop: 20,
                 }}>
                 <TouchableOpacity
                   style={{
@@ -277,100 +278,99 @@ class index extends Component {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    marginRight: 100,
                   }}>
-                  <Text style={{ textAlign: 'center' }}>My Page</Text>
+                  <Image
+                    style={{ width: 50, height: 50 }}
+                    source={Images2.imgIcMyPage}
+                  />
                 </TouchableOpacity>
-                <View
+                <TouchableOpacity
                   style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                  }}>
-                  <View style={{ display: 'flex', alignItems: 'center' }}>
-                    <TouchableOpacity
-                      style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 25,
-                        backgroundColor: '#f7cbca',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                      onPress={() =>
-                        this.setState({ currentTab: TAB.TAB_ONAIR })
-                      }>
-                      {currentTab == TAB.TAB_ONAIR && (
-                        <Image
-                          source={Images.imgIcTemTick}
-                          style={{ width: 20, height: 20 }}
-                        />
-                      )}
-                    </TouchableOpacity>
-                    <Text>On Air</Text>
-                  </View>
-                  <View
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      marginHorizontal: 20,
-                    }}>
-                    <TouchableOpacity
-                      style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 25,
-                        backgroundColor: '#FFDD91',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                      onPress={() =>
-                        this.setState({ currentTab: TAB.TAB_CHANNEL })
-                      }>
-                      {currentTab == TAB.TAB_CHANNEL && (
-                        <Image
-                          source={Images.imgIcTemTick}
-                          style={{ width: 20, height: 20 }}
-                        />
-                      )}
-                    </TouchableOpacity>
-                    <Text>Channel</Text>
-                  </View>
-                  <View style={{ display: 'flex', alignItems: 'center' }}>
-                    <TouchableOpacity
-                      style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 25,
-                        backgroundColor: '#B7C8FF',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                      onPress={() =>
-                        this.setState({ currentTab: TAB.TAB_PLAY_ALONE })
-                      }>
-                      {currentTab == TAB.TAB_PLAY_ALONE && (
-                        <Image
-                          source={Images.imgIcTemTick}
-                          style={{ width: 20, height: 20 }}
-                        />
-                      )}
-                    </TouchableOpacity>
-                    <Text>Play Alone</Text>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    backgroundColor: 'white',
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
+                    marginRight: 30,
                     display: 'flex',
                     justifyContent: 'center',
+                    width: 53,
+                  }}
+                  onPress={() => {
+                    if (currentTab != TAB.TAB_ONAIR) {
+                      this.setState({ currentTab: TAB.TAB_ONAIR });
+                    }
+                  }}>
+                  <Image
+                    style={{ width: 53, height: 40 }}
+                    source={Images2.imgIcOnAir}
+                  />
+                  <Text
+                    style={{
+                      fontWeight:
+                        currentTab == TAB.TAB_ONAIR ? 'bold' : 'normal',
+                      textAlign: 'right',
+                      paddingRight: 2,
+                      color:
+                        currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
+                      marginTop: 3,
+                      fontSize: 13,
+                    }}>
+                    온에어
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    marginRight: 30,
+                    display: 'flex',
                     alignItems: 'center',
                   }}
-                />
+                  onPress={() => {
+                    if (currentTab != TAB.TAB_CHANNEL) {
+                      this.setState({ currentTab: TAB.TAB_CHANNEL });
+                    }
+                  }}>
+                  <Image
+                    style={{ width: 40, height: 40 }}
+                    source={Images2.imgIcChannel}
+                  />
+                  <Text
+                    style={{
+                      fontWeight:
+                        currentTab == TAB.TAB_CHANNEL ? 'bold' : 'normal',
+                      textAlign: 'center',
+                      color:
+                        currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
+                      marginTop: 3,
+                      fontSize: 13,
+                    }}>
+                    채널
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    marginRight: 30,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onPress={() => {
+                    if (currentTab != TAB.TAB_PLAY_ALONE) {
+                      this.setState({ currentTab: TAB.TAB_PLAY_ALONE });
+                    }
+                  }}>
+                  <Image
+                    style={{ width: 40, height: 40 }}
+                    source={Images2.imgIcPlayAlone}
+                  />
+                  <Text
+                    style={{
+                      fontWeight:
+                        currentTab == TAB.TAB_PLAY_ALONE ? 'bold' : 'normal',
+                      textAlign: 'center',
+                      color:
+                        currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
+                      marginTop: 3,
+                      fontSize: 13,
+                    }}>
+                    혼자 놀기
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View>
                 <ScrollView
@@ -384,29 +384,63 @@ class index extends Component {
                         flexDirection: 'row',
                         alignItems: 'center',
                       }}>
+                      <Image
+                        style={{ width: 150, height: 171 }}
+                        source={Images2.imgHome1}
+                      />
                       <View>
                         <View
                           style={{
                             display: 'flex',
                             flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            marginBottom: 10,
+                            alignItems: 'center',
                           }}>
-                          <Text style={{ fontSize: 13 }}>Thursday PM 7:00</Text>
-                          <Text style={{ fontSize: 11, color: '#D63C3C' }}>
-                            09:20:60 left
+                          <Image source={Images2.imgIcBtnLive} />
+                          <Text style={{ color: '#111111', marginLeft: 5 }}>
+                            지금은 캐릭터 선생님과 노는 시간!
                           </Text>
                         </View>
                         <View
                           style={{
-                            width: 200,
-                            height: 100,
-                            borderWidth: 2,
-                            borderColor: 'red',
+                            borderWidth: 5,
+                            borderColor: 'green',
+                            borderRadius: 5,
+                            marginTop: 10,
+                          }}>
+                          <ImageBackground
+                            style={{
+                              width: 250,
+                              height: 140,
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                            source={Images2.imgItemHomeTest}>
+                            <TouchableOpacity>
+                              <Image
+                                style={{ width: 50, height: 50 }}
+                                source={Images2.imgIcBtnPlay}
+                              />
+                            </TouchableOpacity>
+                          </ImageBackground>
+                        </View>
+                        <Text
+                          style={{
+                            color: '#141414',
+                            fontSize: 13,
+                            width: 250,
+                            marginTop: 5,
+                            paddingLeft: 5,
                           }}
-                        />
-                        <Text>Title</Text>
+                          numberOfLines={1}
+                          ellipsizeMode="tail">
+                          방송제목 방송제목 방송제목 방송제목 방방송제목
+                        </Text>
                       </View>
+                      <Image
+                        style={{ width: 150, height: 158 }}
+                        source={Images2.imgHome2}
+                      />
                       <View
                         style={{
                           width: 90,
