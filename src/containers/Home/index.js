@@ -44,6 +44,8 @@ const TAB = {
   TAB_PLAY_ALONE: 'TAB_PLAY_ALONE',
 };
 
+const mySchedules = [1, 2, 3];
+
 const listSchedule = [
   {
     id: 1,
@@ -301,6 +303,7 @@ class index extends Component {
                   flexDirection: 'row',
                   width: width,
                   paddingHorizontal: 10,
+                  justifyContent: 'space-between',
                   alignItems: 'center',
                   paddingTop: 20,
                 }}>
@@ -313,104 +316,114 @@ class index extends Component {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginRight: 100,
                   }}>
                   <Image
                     style={{ width: 50, height: 50 }}
                     source={Images2.imgIcMyPage}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity
+                <View
                   style={{
-                    marginRight: 30,
                     display: 'flex',
-                    justifyContent: 'center',
-                    width: 53,
-                  }}
-                  onPress={() => {
-                    if (currentTab != TAB.TAB_ONAIR) {
-                      this.setState({ currentTab: TAB.TAB_ONAIR });
-                    }
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    width: width * 0.3,
                   }}>
-                  <Image
-                    style={{ width: 53, height: 40 }}
-                    source={Images2.imgIcOnAir}
-                  />
-                  <Text
+                  <TouchableOpacity
                     style={{
-                      fontWeight:
-                        currentTab == TAB.TAB_ONAIR ? 'bold' : 'normal',
-                      textAlign: 'right',
-                      paddingRight: 2,
-                      color:
-                        currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
-                      marginTop: 3,
-                      fontSize: 13,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      width: 53,
+                    }}
+                    onPress={() => {
+                      if (currentTab != TAB.TAB_ONAIR) {
+                        this.setState({ currentTab: TAB.TAB_ONAIR });
+                      }
                     }}>
-                    온에어
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                    <Image
+                      style={{ width: 53, height: 40 }}
+                      source={Images2.imgIcOnAir}
+                    />
+                    <Text
+                      style={{
+                        fontWeight:
+                          currentTab == TAB.TAB_ONAIR ? 'bold' : 'normal',
+                        textAlign: 'right',
+                        paddingRight: 2,
+                        color:
+                          currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
+                        marginTop: 3,
+                        fontSize: 13,
+                      }}>
+                      온에어
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                    onPress={() => {
+                      if (currentTab != TAB.TAB_CHANNEL) {
+                        this.setState({ currentTab: TAB.TAB_CHANNEL });
+                      }
+                    }}>
+                    <Image
+                      style={{ width: 40, height: 40 }}
+                      source={Images2.imgIcChannel}
+                    />
+                    <Text
+                      style={{
+                        fontWeight:
+                          currentTab == TAB.TAB_CHANNEL ? 'bold' : 'normal',
+                        textAlign: 'center',
+                        color:
+                          currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
+                        marginTop: 3,
+                        fontSize: 13,
+                      }}>
+                      채널
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                    onPress={() => {
+                      if (currentTab != TAB.TAB_PLAY_ALONE) {
+                        this.setState({ currentTab: TAB.TAB_PLAY_ALONE });
+                      }
+                    }}>
+                    <Image
+                      style={{ width: 40, height: 40 }}
+                      source={Images2.imgIcPlayAlone}
+                    />
+                    <Text
+                      style={{
+                        fontWeight:
+                          currentTab == TAB.TAB_PLAY_ALONE ? 'bold' : 'normal',
+                        textAlign: 'center',
+                        color:
+                          currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
+                        marginTop: 3,
+                        fontSize: 13,
+                      }}>
+                      혼자 놀기
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View
                   style={{
-                    marginRight: 30,
-                    display: 'flex',
-                    alignItems: 'center',
+                    width: 50,
+                    height: 50,
                   }}
-                  onPress={() => {
-                    if (currentTab != TAB.TAB_CHANNEL) {
-                      this.setState({ currentTab: TAB.TAB_CHANNEL });
-                    }
-                  }}>
-                  <Image
-                    style={{ width: 40, height: 40 }}
-                    source={Images2.imgIcChannel}
-                  />
-                  <Text
-                    style={{
-                      fontWeight:
-                        currentTab == TAB.TAB_CHANNEL ? 'bold' : 'normal',
-                      textAlign: 'center',
-                      color:
-                        currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
-                      marginTop: 3,
-                      fontSize: 13,
-                    }}>
-                    채널
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    marginRight: 30,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                  onPress={() => {
-                    if (currentTab != TAB.TAB_PLAY_ALONE) {
-                      this.setState({ currentTab: TAB.TAB_PLAY_ALONE });
-                    }
-                  }}>
-                  <Image
-                    style={{ width: 40, height: 40 }}
-                    source={Images2.imgIcPlayAlone}
-                  />
-                  <Text
-                    style={{
-                      fontWeight:
-                        currentTab == TAB.TAB_PLAY_ALONE ? 'bold' : 'normal',
-                      textAlign: 'center',
-                      color:
-                        currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
-                      marginTop: 3,
-                      fontSize: 13,
-                    }}>
-                    혼자 놀기
-                  </Text>
-                </TouchableOpacity>
+                />
               </View>
               <View>
                 <ScrollView
                   horizontal={true}
-                  style={{ paddingLeft: 20, marginTop: 20 }}
+                  style={{ marginTop: 20 }}
                   showsHorizontalScrollIndicator={false}>
                   {currentTab == TAB.TAB_ONAIR && (
                     <View
@@ -419,10 +432,21 @@ class index extends Component {
                         flexDirection: 'row',
                         alignItems: 'center',
                       }}>
-                      <Image
-                        style={{ width: 150, height: 171 }}
-                        source={Images2.imgHome1}
-                      />
+                      <View
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: width * 0.3,
+                        }}>
+                        <Image
+                          style={{
+                            width: width * 0.3 - 40,
+                            height: ((width * 0.3 - 40) * 171) / 150,
+                          }}
+                          source={Images2.imgHome1}
+                        />
+                      </View>
                       <View>
                         <View
                           style={{
@@ -438,20 +462,35 @@ class index extends Component {
                         <View
                           style={{
                             borderWidth: 5,
-                            borderColor: 'green',
+                            borderColor: '#50CCC3',
                             borderRadius: 5,
                             marginTop: 10,
                           }}>
                           <ImageBackground
                             style={{
-                              width: 250,
-                              height: 140,
+                              width: width * 0.4,
+                              height: (width * 0.4 * 14) / 25,
                               display: 'flex',
                               justifyContent: 'center',
                               alignItems: 'center',
                             }}
                             source={Images2.imgItemHomeTest}>
-                            <TouchableOpacity>
+                            <View
+                              style={{
+                                width: width * 0.4,
+                                height: (width * 0.4 * 14) / 25,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: '#000000',
+                                opacity: 0.5,
+                              }}
+                            />
+                            <TouchableOpacity
+                              style={{
+                                position: 'absolute',
+                                top: (width * 0.4 * 14) / 50 - 25,
+                              }}>
                               <Image
                                 style={{ width: 50, height: 50 }}
                                 source={Images2.imgIcBtnPlay}
@@ -472,31 +511,60 @@ class index extends Component {
                           방송제목 방송제목 방송제목 방송제목 방방송제목
                         </Text>
                       </View>
-                      <Image
-                        style={{ width: 150, height: 158, marginRight: 50 }}
-                        source={Images2.imgHome2}
-                      />
+                      <View
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: width * 0.3 - 30,
+                        }}>
+                        <Image
+                          style={{
+                            width: width * 0.3 - 60,
+                            height: ((width * 0.3 - 60) * 158) / 150,
+                          }}
+                          source={Images2.imgHome2}
+                        />
+                      </View>
                       {listSchedule.map((e) => {
                         return (
-                          <View>
+                          <View style={{ paddingLeft: 3 }}>
                             <View
                               style={{
                                 borderWidth: 5,
                                 borderColor: e.color,
                                 borderRadius: 5,
                                 marginTop: 10,
-                                marginRight: 30,
+                                marginRight: 20,
                               }}>
                               <ImageBackground
                                 style={{
-                                  width: 250,
-                                  height: 140,
+                                  width: width * 0.4,
+                                  height: (width * 0.4 * 14) / 25,
                                   display: 'flex',
                                   justifyContent: 'center',
                                   alignItems: 'center',
                                 }}
                                 source={Images2.imgItemHomeTest}>
-                                <TouchableOpacity />
+                                <View
+                                  style={{
+                                    backgroundColor: e.color,
+                                    position: 'absolute',
+                                    right: 0,
+                                    bottom: 0,
+                                    borderTopLeftRadius: 5,
+                                  }}>
+                                  <Text
+                                    style={{
+                                      color: '#59317C',
+                                      fontWeight: 'bold',
+                                      paddingHorizontal: 10,
+                                      paddingVertical: 5,
+                                      fontSize: 15,
+                                    }}>
+                                    {e.date2}
+                                  </Text>
+                                </View>
                               </ImageBackground>
                             </View>
                             <Text
@@ -511,9 +579,120 @@ class index extends Component {
                               ellipsizeMode="tail">
                               방송제목 방송제목 방송제목 방송제목 방방송제목
                             </Text>
+                            <View
+                              style={{
+                                backgroundColor: e.color,
+                                position: 'absolute',
+                                left: 0,
+                                top: 3,
+                                borderRadius: 5,
+                              }}>
+                              <Text
+                                style={{
+                                  color: '#59317C',
+                                  fontWeight: 'bold',
+                                  paddingHorizontal: 10,
+                                  paddingVertical: 5,
+                                  fontSize: 15,
+                                }}>
+                                {e.date1}
+                              </Text>
+                            </View>
                           </View>
                         );
                       })}
+                      {mySchedules.length > 0 && (
+                        <View
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                          }}>
+                          <Image
+                            style={{
+                              width: width * 0.3 - 60,
+                              height: ((width * 0.3 - 60) * 133) / 161,
+                              marginHorizontal: 30,
+                            }}
+                            source={Images2.imgHome3}
+                          />
+                          {listSchedule.map((e) => {
+                            return (
+                              <View style={{ paddingLeft: 3 }}>
+                                <View
+                                  style={{
+                                    borderWidth: 5,
+                                    borderColor: e.color,
+                                    borderRadius: 5,
+                                    marginTop: 10,
+                                    marginRight: 20,
+                                  }}>
+                                  <ImageBackground
+                                    style={{
+                                      width: width * 0.4,
+                                      height: (width * 0.4 * 14) / 25,
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                    }}
+                                    source={Images2.imgItemHomeTest}>
+                                    <View
+                                      style={{
+                                        backgroundColor: e.color,
+                                        position: 'absolute',
+                                        right: 0,
+                                        bottom: 0,
+                                        borderTopLeftRadius: 5,
+                                      }}>
+                                      <Text
+                                        style={{
+                                          color: '#59317C',
+                                          fontWeight: 'bold',
+                                          paddingHorizontal: 10,
+                                          paddingVertical: 5,
+                                          fontSize: 15,
+                                        }}>
+                                        {e.date2}
+                                      </Text>
+                                    </View>
+                                  </ImageBackground>
+                                </View>
+                                <Text
+                                  style={{
+                                    color: '#141414',
+                                    fontSize: 13,
+                                    width: 250,
+                                    marginTop: 5,
+                                    paddingLeft: 5,
+                                  }}
+                                  numberOfLines={1}
+                                  ellipsizeMode="tail">
+                                  방송제목 방송제목 방송제목 방송제목 방방송제목
+                                </Text>
+                                <View
+                                  style={{
+                                    backgroundColor: e.color,
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 3,
+                                    borderRadius: 5,
+                                  }}>
+                                  <Text
+                                    style={{
+                                      color: '#59317C',
+                                      fontWeight: 'bold',
+                                      paddingHorizontal: 10,
+                                      paddingVertical: 5,
+                                      fontSize: 15,
+                                    }}>
+                                    {e.date1}
+                                  </Text>
+                                </View>
+                              </View>
+                            );
+                          })}
+                        </View>
+                      )}
                     </View>
                   )}
                   {currentTab == TAB.TAB_CHANNEL && (
