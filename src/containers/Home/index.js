@@ -22,15 +22,13 @@ import * as liveActions from '../../redux/actions/liveActions';
 import * as myPageActions from '../../redux/actions/myPageActions';
 import ItemChannel from './Component/ItemChannel';
 import { EventRegister } from 'react-native-event-listeners';
+import moment from 'moment';
 import DataLocal from '../../services/DataLocal';
 import DataRemote from '../../services/DataRemote';
 import firebase from 'react-native-firebase';
 import { showToast } from '../../utils';
 import { getCurrentRouter } from '../../helpers/routerHelper';
-const { width, height } = Dimensions.get('window');
 import Orientation from 'react-native-orientation';
-
-const widthView = width - 30;
 
 const STATUS = {
   RESERVED: 'RESERVED',
@@ -44,43 +42,6 @@ const TAB = {
   TAB_PLAY_ALONE: 'TAB_PLAY_ALONE',
 };
 
-const mySchedules = [1, 2, 3];
-
-const listSchedule = [
-  {
-    id: 1,
-    date1: '6월 14일',
-    date2: '저녁 7시 30분',
-    title: '자두와 함께 야채를 먹어요 방송제…',
-    isAdd: true,
-    color: '#B873F5',
-  },
-  {
-    id: 2,
-    date1: '6월 14일',
-    date2: '저녁 7시 30분',
-    title: '자두와 함께 야채를 먹어요 방송제…',
-    isAdd: true,
-    color: '#F8C21F',
-  },
-  {
-    id: 3,
-    date1: '6월 14일',
-    date2: '저녁 7시 30분',
-    title: '자두와 함께 야채를 먹어요 방송제…',
-    isAdd: true,
-    color: '#50CCC3',
-  },
-  {
-    id: 4,
-    date1: '6월 14일',
-    date2: '저녁 7시 30분',
-    title: '자두와 함께 야채를 먹어요 방송제…',
-    isAdd: true,
-    color: '#FD8E56',
-  },
-];
-
 class index extends Component {
   constructor(props) {
     super(props);
@@ -89,8 +50,19 @@ class index extends Component {
       countPressBack: 0,
       isOpenSlideMenu: false,
       currentTab: TAB.TAB_ONAIR,
+      scrollPositionX: 0,
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
     };
     this.timeoutBackPress = null;
+    this.onLayout = this.onLayout.bind(this);
+  }
+
+  onLayout(e) {
+    this.setState({
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+    });
   }
 
   componentDidMount() {
@@ -266,10 +238,25 @@ class index extends Component {
     return 'Coming soon';
   }
 
+  getTitleWhenScroll() {
+    const { scrollPositionX, width } = this.state;
+    const { todayList } = this.props;
+
+    if (
+      scrollPositionX >=
+      width - 50 + todayList.length * width * 0.4 + width * 0.3
+    ) {
+      return 'MY 편성표';
+    } else if (scrollPositionX >= width - 50) {
+      return '미니TV 편성표';
+    }
+    return '';
+  }
+
   render() {
-    const { loadingFirst, currentTab } = this.state;
-    const { loading, onAir, hotLists, resultPlay } = this.props;
-    const listChannel = [1, 2, 3, 4, 5, 6];
+    const { loadingFirst, currentTab, width, height } = this.state;
+    const { loading, onAir, hotLists, resultPlay, todayList } = this.props;
+    console.log('todayList:', todayList);
     if (loadingFirst) {
       return (
         <View
@@ -296,7 +283,7 @@ class index extends Component {
                 onRefresh={() => this.props.getMainList()}
               />
             }>
-            <View>
+            <View onLayout={this.onLayout}>
               <View
                 style={{
                   display: 'flex',
@@ -328,6 +315,7 @@ class index extends Component {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     width: width * 0.3,
+                    alignItems: 'center',
                   }}>
                   <TouchableOpacity
                     style={{
@@ -421,10 +409,25 @@ class index extends Component {
                 />
               </View>
               <View>
+                <Text
+                  style={{
+                    color: '#111111',
+                    fontWeight: 'bold',
+                    fontSize: 17,
+                    marginLeft: 10,
+                    marginTop: 5,
+                  }}>
+                  {this.getTitleWhenScroll()}
+                </Text>
                 <ScrollView
                   horizontal={true}
-                  style={{ marginTop: 20 }}
-                  showsHorizontalScrollIndicator={false}>
+                  showsHorizontalScrollIndicator={false}
+                  scrollEventThrottle={100}
+                  onScroll={(event) => {
+                    this.setState({
+                      scrollPositionX: event.nativeEvent.contentOffset.x,
+                    });
+                  }}>
                   {currentTab == TAB.TAB_ONAIR && (
                     <View
                       style={{
@@ -454,9 +457,11 @@ class index extends Component {
                             flexDirection: 'row',
                             alignItems: 'center',
                           }}>
-                          <Image source={Images2.imgIcBtnLive} />
+                          {onAir?.status == STATUS.DOING && (
+                            <Image source={Images2.imgIcBtnLive} />
+                          )}
                           <Text style={{ color: '#111111', marginLeft: 5 }}>
-                            지금은 캐릭터 선생님과 노는 시간!
+                            {onAir?.title}
                           </Text>
                         </View>
                         <View
@@ -474,7 +479,7 @@ class index extends Component {
                               justifyContent: 'center',
                               alignItems: 'center',
                             }}
-                            source={Images2.imgItemHomeTest}>
+                            source={{ uri: onAir?.thumbnail }}>
                             <View
                               style={{
                                 width: width * 0.4,
@@ -486,16 +491,18 @@ class index extends Component {
                                 opacity: 0.5,
                               }}
                             />
-                            <TouchableOpacity
-                              style={{
-                                position: 'absolute',
-                                top: (width * 0.4 * 14) / 50 - 25,
-                              }}>
-                              <Image
-                                style={{ width: 50, height: 50 }}
-                                source={Images2.imgIcBtnPlay}
-                              />
-                            </TouchableOpacity>
+                            {onAir?.status == STATUS.DOING && (
+                              <TouchableOpacity
+                                style={{
+                                  position: 'absolute',
+                                  top: (width * 0.4 * 14) / 50 - 25,
+                                }}>
+                                <Image
+                                  style={{ width: 50, height: 50 }}
+                                  source={Images2.imgIcBtnPlay}
+                                />
+                              </TouchableOpacity>
+                            )}
                           </ImageBackground>
                         </View>
                         <Text
@@ -508,7 +515,7 @@ class index extends Component {
                           }}
                           numberOfLines={1}
                           ellipsizeMode="tail">
-                          방송제목 방송제목 방송제목 방송제목 방방송제목
+                          {onAir?.subscript}
                         </Text>
                       </View>
                       <View
@@ -526,13 +533,13 @@ class index extends Component {
                           source={Images2.imgHome2}
                         />
                       </View>
-                      {listSchedule.map((e) => {
+                      {todayList.map((e) => {
                         return (
                           <View style={{ paddingLeft: 3 }}>
                             <View
                               style={{
                                 borderWidth: 5,
-                                borderColor: e.color,
+                                borderColor: e.rgb_value,
                                 borderRadius: 5,
                                 marginTop: 10,
                                 marginRight: 20,
@@ -545,10 +552,10 @@ class index extends Component {
                                   justifyContent: 'center',
                                   alignItems: 'center',
                                 }}
-                                source={Images2.imgItemHomeTest}>
+                                source={{ uri: e.thumbnail }}>
                                 <View
                                   style={{
-                                    backgroundColor: e.color,
+                                    backgroundColor: e.rgb_value,
                                     position: 'absolute',
                                     right: 0,
                                     bottom: 0,
@@ -562,26 +569,44 @@ class index extends Component {
                                       paddingVertical: 5,
                                       fontSize: 15,
                                     }}>
-                                    {e.date2}
+                                    {moment(e.start_datetime).format(
+                                      ' 낮 hh시mm분',
+                                    )}
                                   </Text>
                                 </View>
                               </ImageBackground>
                             </View>
-                            <Text
-                              style={{
-                                color: '#141414',
-                                fontSize: 13,
-                                width: 250,
-                                marginTop: 5,
-                                paddingLeft: 5,
-                              }}
-                              numberOfLines={1}
-                              ellipsizeMode="tail">
-                              방송제목 방송제목 방송제목 방송제목 방방송제목
-                            </Text>
                             <View
                               style={{
-                                backgroundColor: e.color,
+                                width: width * 0.4 + 10,
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'flex-start',
+                                justifyContent: 'space-between',
+                                marginTop: 3,
+                              }}>
+                              <Text
+                                style={{
+                                  color: '#141414',
+                                  fontSize: 13,
+                                  width: width * 0.4 - 50,
+                                  marginTop: 5,
+                                  paddingLeft: 5,
+                                }}
+                                numberOfLines={1}
+                                ellipsizeMode="tail">
+                                {e.title}
+                              </Text>
+                              <TouchableOpacity>
+                                <Image
+                                  style={{ width: 30, height: 30 }}
+                                  source={Images2.imgIconAlamp}
+                                />
+                              </TouchableOpacity>
+                            </View>
+                            <View
+                              style={{
+                                backgroundColor: e.rgb_value,
                                 position: 'absolute',
                                 left: 0,
                                 top: 3,
@@ -595,34 +620,34 @@ class index extends Component {
                                   paddingVertical: 5,
                                   fontSize: 15,
                                 }}>
-                                {e.date1}
+                                {moment(e.start_datetime).format('MM월 DD일')}
                               </Text>
                             </View>
                           </View>
                         );
                       })}
-                      {mySchedules.length > 0 && (
-                        <View
+                      <View
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                        }}>
+                        <Image
                           style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                          }}>
-                          <Image
-                            style={{
-                              width: width * 0.3 - 60,
-                              height: ((width * 0.3 - 60) * 133) / 161,
-                              marginHorizontal: 30,
-                            }}
-                            source={Images2.imgHome3}
-                          />
-                          {listSchedule.map((e) => {
+                            width: width * 0.3 - 60,
+                            height: ((width * 0.3 - 60) * 133) / 161,
+                            marginHorizontal: 30,
+                          }}
+                          source={Images2.imgHome3}
+                        />
+                        {hotLists.length > 0 &&
+                          hotLists.map((e) => {
                             return (
                               <View style={{ paddingLeft: 3 }}>
                                 <View
                                   style={{
                                     borderWidth: 5,
-                                    borderColor: e.color,
+                                    borderColor: e.rgb_value,
                                     borderRadius: 5,
                                     marginTop: 10,
                                     marginRight: 20,
@@ -638,7 +663,7 @@ class index extends Component {
                                     source={Images2.imgItemHomeTest}>
                                     <View
                                       style={{
-                                        backgroundColor: e.color,
+                                        backgroundColor: e.rgb_value,
                                         position: 'absolute',
                                         right: 0,
                                         bottom: 0,
@@ -652,7 +677,7 @@ class index extends Component {
                                           paddingVertical: 5,
                                           fontSize: 15,
                                         }}>
-                                        {e.date2}
+                                        {e.end_datetime}
                                       </Text>
                                     </View>
                                   </ImageBackground>
@@ -667,11 +692,11 @@ class index extends Component {
                                   }}
                                   numberOfLines={1}
                                   ellipsizeMode="tail">
-                                  방송제목 방송제목 방송제목 방송제목 방방송제목
+                                  {e.title}
                                 </Text>
                                 <View
                                   style={{
-                                    backgroundColor: e.color,
+                                    backgroundColor: e.rgb_value,
                                     position: 'absolute',
                                     left: 0,
                                     top: 3,
@@ -685,14 +710,19 @@ class index extends Component {
                                       paddingVertical: 5,
                                       fontSize: 15,
                                     }}>
-                                    {e.date1}
+                                    {e.start_datetime}
                                   </Text>
                                 </View>
                               </View>
                             );
                           })}
-                        </View>
-                      )}
+                        {hotLists.length == 0 && (
+                          <Image
+                            source={Images2.imgMyImageEmpty}
+                            style={{ marginRight: 50 }}
+                          />
+                        )}
+                      </View>
                     </View>
                   )}
                   {currentTab == TAB.TAB_CHANNEL && (
@@ -703,7 +733,7 @@ class index extends Component {
                         alignItems: 'center',
                         paddingTop: 20,
                       }}>
-                      {listChannel.map((e) => {
+                      {/* {listChannel.map((e) => {
                         return (
                           <TouchableOpacity
                             style={{
@@ -743,7 +773,7 @@ class index extends Component {
                             </View>
                           </TouchableOpacity>
                         );
-                      })}
+                      })} */}
                     </View>
                   )}
                 </ScrollView>
@@ -760,6 +790,7 @@ const mapStateToProps = (state) => {
   return {
     onAir: state.liveMainGetReducer.onAir,
     hotLists: state.liveMainGetReducer.hotLists,
+    todayList: state.liveMainGetReducer.todayList,
     loading: state.liveMainGetReducer.loading,
     resultPlay: state.liveMainGetReducer.resultPlay,
   };

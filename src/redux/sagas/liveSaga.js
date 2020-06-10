@@ -1,5 +1,5 @@
 import * as liveActions from '../actions/liveActions';
-import {put} from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import DataRemote from '../../services/DataRemote';
 import DataLocal from '../../services/DataLocal';
 
@@ -7,6 +7,7 @@ export function* getLiveMain(action) {
   try {
     yield put(liveActions.liveMainStart());
     const mainResult = yield DataRemote.getMainLive();
+    console.log('mainResult:', mainResult);
     if (mainResult.status == 200) {
       if (mainResult?.data?.on_air?.status == 'DOING') {
         const resultPlay = yield DataRemote.getPlayUrl(

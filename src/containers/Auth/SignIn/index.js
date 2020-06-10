@@ -13,6 +13,7 @@ import Images from '../../../assets/images';
 import { connect } from 'react-redux';
 import * as authActions from '../../../redux/actions/authActions';
 import TextInput from '../../../components/TextField';
+import Orientation from 'react-native-orientation';
 import { EventRegister } from 'react-native-event-listeners';
 import Constants from '../../../config/Constant';
 import validateInput from '../../../helpers/Validate';
@@ -111,6 +112,7 @@ class index extends Component {
   componentWillReceiveProps(nextProps) {
     const { snsMessage, snsSuccess } = nextProps;
     if (nextProps.isSuccess || snsSuccess) {
+      Orientation.lockToLandscape();
       this.props.navigation.goBack();
       EventRegister.emit(Constants.EVENT_SIGNIN_SUCCESS);
     }

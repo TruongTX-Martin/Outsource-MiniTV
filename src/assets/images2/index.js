@@ -9,4 +9,7 @@ export default {
   imgHome2: require('./img2.png'),
   imgHome3: require('./img3.png'),
   imgItemHomeTest: require('./item_home_test.png'),
+  imgMyImageEmpty: require('./img_my_empty.png'),
+  imgIconAlamp: require('./icon_myalarm.png'),
+  imgIconAlampOff: require('./icon_alarm_off.png'),
 };
