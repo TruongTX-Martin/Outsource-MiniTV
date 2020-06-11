@@ -12,4 +12,10 @@ export default {
   imgMyImageEmpty: require('./img_my_empty.png'),
   imgIconAlamp: require('./icon_myalarm.png'),
   imgIconAlampOff: require('./icon_alarm_off.png'),
+  imgPlayAloneEmpty: require('./play_alone_empty.png'),
+  imgIcBack: require('./icon_back.png'),
+  imgIcDate: require('./icon_date.png'),
+  imgIcShare: require('./icon_share.png'),
+  imgPopup: require('./popup_bg.png'),
+  imgClose: require('./btn_close.png'),
 };

@@ -1,5 +1,5 @@
 const color = {
-  headerColor: 'white',
+  headerColor: '#FDF9ED',
   loading: '#0000ff',
 };
 

@@ -49,7 +49,7 @@ class index extends Component {
       loadingFirst: true,
       countPressBack: 0,
       isOpenSlideMenu: false,
-      currentTab: TAB.TAB_ONAIR,
+      currentTab: TAB.TAB_CHANNEL,
       scrollPositionX: 0,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
@@ -401,12 +401,21 @@ class index extends Component {
                     </Text>
                   </TouchableOpacity>
                 </View>
-                <View
+                <TouchableOpacity
                   style={{
+                    backgroundColor: '#FFEDED',
                     width: 50,
                     height: 50,
-                  }}
-                />
+                    borderRadius: 25,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    style={{ width: 50, height: 50 }}
+                    source={Images2.imgIconAlamp}
+                  />
+                </TouchableOpacity>
               </View>
               <View>
                 <Text
@@ -733,47 +742,23 @@ class index extends Component {
                         alignItems: 'center',
                         paddingTop: 20,
                       }}>
-                      {/* {listChannel.map((e) => {
-                        return (
-                          <TouchableOpacity
-                            style={{
-                              width: 200,
-                              height: 120,
-                              borderWidth: 1,
-                              borderColor: '#cacaca',
-                              borderRadius: 10,
-                              display: 'flex',
-                              justifyContent: 'flex-end',
-                              marginRight: 30,
-                            }}
-                            onPress={() =>
-                              this.props.navigation.navigate('ChannelDetail2')
-                            }>
-                            <View
-                              style={{
-                                width: 200,
-                                height: 50,
-                                backgroundColor: '#919191',
-                                borderBottomLeftRadius: 10,
-                                borderBottomRightRadius: 10,
-                                display: 'flex',
-                                justifyContent: 'center',
-                              }}>
-                              <Text style={{ color: 'white', marginLeft: 10 }}>
-                                Channel Title
-                              </Text>
-                              <Text
-                                style={{
-                                  color: 'white',
-                                  fontSize: 10,
-                                  marginLeft: 10,
-                                }}>
-                                Series #A
-                              </Text>
-                            </View>
-                          </TouchableOpacity>
-                        );
-                      })} */}
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.props.navigation.navigate('ChannelDetail2')
+                        }>
+                        <Image source={Images2.imgItemHomeTest} />
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                  {currentTab == TAB.TAB_PLAY_ALONE && (
+                    <View
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        paddingTop: 50,
+                        width,
+                      }}>
+                      <Image source={Images2.imgPlayAloneEmpty} />
                     </View>
                   )}
                 </ScrollView>

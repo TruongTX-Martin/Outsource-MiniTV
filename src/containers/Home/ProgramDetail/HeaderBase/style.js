@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   viewLeft: {
-    flex: 0.5,
+    flex: 0.8,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
@@ -36,7 +36,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   viewRight: {
-    flex: 0.5,
+    flex: 0.8,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginRight: 10,
   },
 });
 

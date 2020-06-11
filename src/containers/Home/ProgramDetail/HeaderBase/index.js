@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import Images2 from '../../assets/images2';
+import Images2 from '../../../../assets/images2';
 import styles from './style';
 
 class index extends Component {
@@ -22,7 +22,20 @@ class index extends Component {
         <View style={styles.viewCenter}>
           <Text style={styles.textCenter}>{this.props.title}</Text>
         </View>
-        <View style={styles.viewRight} />
+        <View style={styles.viewRight}>
+          <TouchableOpacity>
+            <Image
+              style={{ width: 50, height: 50 }}
+              source={Images2.imgIcShare}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.showCalendar && this.props.showCalendar();
+            }}>
+            <Image style={{ width: 50, height: 50 }} source={Images2.imgIcDate} />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
