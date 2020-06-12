@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import signUpReducer from './signUpReducer';
 import signInReducer from './signInReducer';
 import findPasswordReducer from './findPasswordReducer';
@@ -13,7 +13,11 @@ import updateProfileReducer from './updateProfileReducer';
 import updateProfileImageReducer from './updateProfileImageReducer';
 import deleteAccountReducer from './deleteAccountReducer';
 import pokeChannelReducer from './pokeChannelReducer';
+import pokeChannelReducer2 from './pokeChannelReducer2';
 import getPokeListReducer from './getPokeListReducer';
+import channelGetListReducer from './channelGetListReducer';
+import channelGetDetailReducer from './channelGetDetailReducer';
+
 const rootReducer = combineReducers({
   signUpReducer,
   signInReducer,
@@ -30,5 +34,8 @@ const rootReducer = combineReducers({
   deleteAccountReducer,
   pokeChannelReducer,
   getPokeListReducer,
+  channelGetListReducer,
+  channelGetDetailReducer,
+  pokeChannelReducer2
 });
 export default rootReducer;

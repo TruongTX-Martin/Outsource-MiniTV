@@ -16,6 +16,7 @@ import Images from '../../../assets/images';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from 'react-native-modals';
 import * as liveActions from '../../../redux/actions/liveActions';
+import * as channelActions from '../../../redux/actions/channelActions';
 import Share from 'react-native-share';
 import images2 from '../../../assets/images2';
 const { width, height } = Dimensions.get('window');
@@ -29,7 +30,7 @@ class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentTab: TAB.TAB_SERI_LIST,
+      currentTab: TAB.TAB_INFOR,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     };
@@ -43,7 +44,7 @@ class index extends Component {
     });
   }
 
-  getChildTag(index) {
+  getChildTag(e, index) {
     if (index < 4) {
       switch (index) {
         case 0:
@@ -56,7 +57,7 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#A15FDB' }}>#동요</Text>
+              <Text style={{ color: '#A15FDB' }}>{e}</Text>
             </TouchableOpacity>
           );
         case 1:
@@ -69,7 +70,7 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#28B5AD' }}>#노래</Text>
+              <Text style={{ color: '#28B5AD' }}>{e}</Text>
             </TouchableOpacity>
           );
         case 2:
@@ -82,7 +83,7 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#C7693A' }}>#영어</Text>
+              <Text style={{ color: '#C7693A' }}>{e}</Text>
             </TouchableOpacity>
           );
         case 3:
@@ -95,17 +96,26 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#C19E34' }}>#블루래빗</Text>
+              <Text style={{ color: '#C19E34' }}>{e}</Text>
             </TouchableOpacity>
           );
       }
     }
   }
 
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
+    const id = this.props.navigation.getParam('id', null);
+    this.props.getChannelDetail(id);
+  }
+
   render() {
     const { currentTab, width } = this.state;
-    const listSeries = [1, 2, 3, 4, 5, 6, 7];
-    const listTag = [1, 2, 3, 4];
+    const { detail } = this.props;
+    const listTag = detail?.tags.split(' ');
     return (
       <Container>
         <Header style={Config.Styles.header}>
@@ -172,10 +182,11 @@ class index extends Component {
                   }}>
                   <View style={{ flex: 4, padding: 10 }}>
                     <Image
-                      source={images2.imgItemHomeTest}
+                      source={{ uri: detail?.thumbnail }}
                       style={{
                         width: ((width - 30) * 2) / 5 - 15,
-                        borderRadius: 10,
+                        height: (((width - 30) * 2) / 5 - 15) * 49 / 80,
+                        borderRadius: 5
                       }}
                     />
                   </View>
@@ -189,12 +200,7 @@ class index extends Component {
                     }}>
                     <View>
                       <Text style={{ color: '#333333', fontWeight: '300' }}>
-                        나의 노래실력을 뽐낼 때가 왔다! 캐릭터가 들려주는 노래를
-                        배우며 영어도 배우고 함께 노래도 배우면서 나의 노래
-                        실력을 모두에게 자랑해보아요. 영어 동요를 통해 영어를
-                        처음 접하는 아이들을 영어와 친해지게 해주세요. 노래를
-                        듣고 따라 부르는 것만으로도 영어에 대한 호기심과
-                        자신감을 키워줄 수 있어요.
+                        {detail?.title}
                       </Text>
                       <View
                         style={{
@@ -202,13 +208,17 @@ class index extends Component {
                           flexDirection: 'row',
                           marginTop: 10,
                         }}>
-                        {listTag.map((e, index) => {
-                          return this.getChildTag(index);
+                        {listTag != null && listTag.map((e, index) => {
+                          return this.getChildTag(e, index);
                         })}
                       </View>
                     </View>
                     <View style={{ display: 'flex', alignItems: 'flex-end' }}>
-                      <TouchableOpacity>
+                      <TouchableOpacity onPress={() => {
+                        this.props.pokeChannel(detail?.channel_uid, {
+                          available: !detail?.wish_available,
+                        });
+                      }}>
                         <Image
                           source={images2.imgIconAlamp}
                           style={{ width: 40, height: 40 }}
@@ -227,8 +237,9 @@ class index extends Component {
                       display: 'flex',
                       flexDirection: 'row',
                       padding: 20,
+                      paddingTop: 30
                     }}>
-                    {listSeries.map((e) => {
+                    {detail?.lives.map((e) => {
                       return (
                         <TouchableOpacity
                           style={{
@@ -240,8 +251,8 @@ class index extends Component {
                             this.props.navigation.navigate('ProgramDetail')
                           }>
                           <Image
-                            source={images2.imgItemHomeTest}
-                            style={{ width: width / 3 - 20, borderRadius: 10 }}
+                            source={{ uri: e.thumbnail }}
+                            style={{ width: width / 3 - 20, height: (width / 3 - 20) * 49 / 80, borderRadius: 10 }}
                           />
                           <View
                             style={{
@@ -250,8 +261,8 @@ class index extends Component {
                               justifyContent: 'space-between',
                               marginTop: 5,
                             }}>
-                            <Text style={{ width: width / 3 - 20 - 50 }}>
-                              Ten Little Indians
+                            <Text style={{ width: width / 3 - 20 - 50, textAlign: 'center' }}>
+                              {e.title}
                             </Text>
                             <Image
                               style={{ width: 35, height: 35 }}
@@ -274,21 +285,15 @@ class index extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    detail: state.liveDetailReducer.detail,
-    loadingChannel: state.liveDetailReducer.loading,
-    pokeLoading: state.pokeChannelReducer.loading,
-    pokeSuccess: state.pokeChannelReducer.isSuccess,
-    pokeAvailabe: state.pokeChannelReducer.pokeAvailabe,
+    detail: state.channelGetDetailReducer.detail
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDetail: (id) => dispatch(liveActions.detailGet(id)),
+    getChannelDetail: (id) => dispatch(liveActions.channelDetailGet(id)),
     pokeChannel: (liveId, available) =>
-      dispatch(liveActions.pokeChannel(liveId, available)),
-    pokeChannelClear: () => dispatch(liveActions.pokeChannelClear()),
-    getPokeList: () => dispatch(liveActions.getPokeList()),
+      dispatch(channelActions.pokeChannel2(liveId, available)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

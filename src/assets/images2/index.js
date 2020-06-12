@@ -1,7 +1,9 @@
 export default {
   imgIcMyPage: require('./icon_mypage.png'),
   imgIcOnAir: require('./icon_onair.png'),
+  imgIcOnAirOff: require('./icon_onair_off.png'),
   imgIcChannel: require('./icon_channel.png'),
+  imgIcChannelOn: require('./icon_channel_on.png'),
   imgIcPlayAlone: require('./icon_playalone.png'),
   imgIcBtnLive: require('./ic_btn_live.png'),
   imgIcBtnPlay: require('./btn_play.png'),
@@ -18,4 +20,6 @@ export default {
   imgIcShare: require('./icon_share.png'),
   imgPopup: require('./popup_bg.png'),
   imgClose: require('./btn_close.png'),
+  imgIcCommingSoon: require('./icon_comingsoon.png'),
+  imgIcCommingSoonOn: require('./icon_comingsoon_on.png'),
 };

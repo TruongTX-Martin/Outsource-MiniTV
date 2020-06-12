@@ -1,10 +1,10 @@
 import axios from 'axios';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Constants from '../../config/Constant';
 import DataLocal from '../DataLocal';
 import RNFetchBlob from 'rn-fetch-blob';
-import {EventRegister} from 'react-native-event-listeners';
+import { EventRegister } from 'react-native-event-listeners';
 
 let axiosConfig = {
   headers: {
@@ -216,6 +216,16 @@ const pokeChannel = async (liveId, params) => {
   });
 };
 
+const pokeChannel2 = async (channelId, params) => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.post(`/channel/wish/${channelId}`, params, {
+    headers: {
+      'X-User-Token': userToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 const validateEmail = async (email) => {
   const accessToken = await DataLocal.getAccessToken();
   return await axios.get('/auth/validate-email', {
@@ -228,6 +238,28 @@ const validateEmail = async (email) => {
 
 const setTokenFirebase = (token) => {
   tokenFirebase = token;
+};
+
+const getChannelList = async () => {
+  const accessToken = await DataLocal.getAccessToken();
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get('/channel/list', {
+    headers: {
+      'X-Access-Token': accessToken,
+      'X-User-Token': userToken,
+    },
+  });
+};
+
+const getChannelDetail = async (id) => {
+  const accessToken = await DataLocal.getAccessToken();
+  const userToken = await DataLocal.getUserToken();
+  return await axios.get('/channel/' + id, {
+    headers: {
+      'X-Access-Token': accessToken,
+      'X-User-Token': userToken,
+    },
+  });
 };
 
 export default {
@@ -250,4 +282,7 @@ export default {
   getPlayUrl,
   validateEmail,
   setTokenFirebase,
+  getChannelList,
+  getChannelDetail,
+  pokeChannel2
 };

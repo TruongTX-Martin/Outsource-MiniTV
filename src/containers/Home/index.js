@@ -49,7 +49,7 @@ class index extends Component {
       loadingFirst: true,
       countPressBack: 0,
       isOpenSlideMenu: false,
-      currentTab: TAB.TAB_CHANNEL,
+      currentTab: TAB.TAB_ONAIR,
       scrollPositionX: 0,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
@@ -74,9 +74,7 @@ class index extends Component {
   }
 
   async checkPermission() {
-    console.log('Check permission');
     const enabled = await firebase.messaging().hasPermission();
-    console.log('enabled:', enabled);
     if (enabled) {
       this.getToken();
     } else {
@@ -119,10 +117,10 @@ class index extends Component {
     } else if (userToken == null || userToken == 'null') {
       this.props.navigation.navigate('SignIn');
     } else {
-      Orientation.lockToLandscape();
       this.checkPermission();
       this.props.generateAccessToken();
       this.props.getMainList();
+      this.props.getListChannel();
     }
   }
 
@@ -253,10 +251,16 @@ class index extends Component {
     return '';
   }
 
+  handlePokeChannel(liveId, wish_available) {
+    const params = {
+      available: wish_available,
+    };
+    this.props.pokeChannel(liveId, params);
+  }
+
   render() {
     const { loadingFirst, currentTab, width, height } = this.state;
-    const { loading, onAir, hotLists, resultPlay, todayList } = this.props;
-    console.log('todayList:', todayList);
+    let { loading, onAir, hotLists, resultPlay, todayList, listChannel } = this.props;
     if (loadingFirst) {
       return (
         <View
@@ -328,16 +332,37 @@ class index extends Component {
                         this.setState({ currentTab: TAB.TAB_ONAIR });
                       }
                     }}>
-                    <Image
-                      style={{ width: 53, height: 40 }}
-                      source={Images2.imgIcOnAir}
-                    />
+                    {onAir?.status == STATUS.DOING && (
+                      <Image
+                        style={{
+                          width: currentTab == TAB.TAB_ONAIR ? 53 : 42,
+                          height: currentTab == TAB.TAB_ONAIR ? 42 : 40,
+                        }}
+                        source={
+                          currentTab == TAB.TAB_ONAIR
+                            ? Images2.imgIcOnAir
+                            : Images2.imgIcOnAirOff
+                        }
+                      />
+                    )}
+                    {onAir?.status != STATUS.DOING && (
+                      <Image
+                        style={{
+                          width: currentTab == TAB.TAB_ONAIR ? 53 : 44,
+                          height: 44,
+                        }}
+                        source={
+                          currentTab == TAB.TAB_ONAIR
+                            ? Images2.imgIcCommingSoonOn
+                            : Images2.imgIcCommingSoon
+                        }
+                      />
+                    )}
                     <Text
                       style={{
                         fontWeight:
                           currentTab == TAB.TAB_ONAIR ? 'bold' : 'normal',
-                        textAlign: 'right',
-                        paddingRight: 2,
+                        paddingLeft: currentTab == TAB.TAB_ONAIR ? 13 : 5,
                         color:
                           currentTab == TAB.TAB_ONAIR ? '#222222' : '#757677',
                         marginTop: 3,
@@ -358,7 +383,11 @@ class index extends Component {
                     }}>
                     <Image
                       style={{ width: 40, height: 40 }}
-                      source={Images2.imgIcChannel}
+                      source={
+                        currentTab == TAB.TAB_CHANNEL
+                          ? Images2.imgIcChannelOn
+                          : Images2.imgIcChannel
+                      }
                     />
                     <Text
                       style={{
@@ -384,7 +413,7 @@ class index extends Component {
                       }
                     }}>
                     <Image
-                      style={{ width: 40, height: 40 }}
+                      style={{ width: 42, height: 38 }}
                       source={Images2.imgIcPlayAlone}
                     />
                     <Text
@@ -606,10 +635,20 @@ class index extends Component {
                                 ellipsizeMode="tail">
                                 {e.title}
                               </Text>
-                              <TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.handlePokeChannel(
+                                    e.live_uid,
+                                    !e.wish_available,
+                                  )
+                                }>
                                 <Image
                                   style={{ width: 30, height: 30 }}
-                                  source={Images2.imgIconAlamp}
+                                  source={
+                                    e.wish_available
+                                      ? Images2.imgIconAlamp
+                                      : Images2.imgIconAlampOff
+                                  }
                                 />
                               </TouchableOpacity>
                             </View>
@@ -734,22 +773,16 @@ class index extends Component {
                       </View>
                     </View>
                   )}
-                  {currentTab == TAB.TAB_CHANNEL && (
-                    <View
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        paddingTop: 20,
-                      }}>
-                      <TouchableOpacity
-                        onPress={() =>
-                          this.props.navigation.navigate('ChannelDetail2')
-                        }>
-                        <Image source={Images2.imgItemHomeTest} />
-                      </TouchableOpacity>
-                    </View>
-                  )}
+                  {currentTab == TAB.TAB_CHANNEL && (<View style={{ display: 'flex', flexDirection: 'row', paddingLeft: 50 }}>
+                    {
+                      listChannel != null && listChannel.map(e => {
+                        return <TouchableOpacity style={{ marginRight: 30 }} onPress={() => this.props.navigation.navigate('ChannelDetail2', { id: e.channel_uid })}>
+                          <Image source={{ uri: e.thumbnail }} style={{ width: 250, height: 150, borderRadius: 10 }} />
+                          <Text>{e.title}</Text>
+                        </TouchableOpacity>
+                      })
+                    }
+                  </View>)}
                   {currentTab == TAB.TAB_PLAY_ALONE && (
                     <View
                       style={{
@@ -778,6 +811,7 @@ const mapStateToProps = (state) => {
     todayList: state.liveMainGetReducer.todayList,
     loading: state.liveMainGetReducer.loading,
     resultPlay: state.liveMainGetReducer.resultPlay,
+    listChannel: state.channelGetListReducer.list
   };
 };
 
@@ -786,6 +820,9 @@ const mapDispatchToProps = (dispatch) => {
     generateAccessToken: () => dispatch(authActions.generateAccessToken()),
     getMainList: () => dispatch(liveActions.liveMainGet()),
     getMe: () => dispatch(myPageActions.getMe()),
+    pokeChannel: (liveId, available) =>
+      dispatch(liveActions.pokeChannel(liveId, available)),
+    getListChannel: () => dispatch(liveActions.channelListGet())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

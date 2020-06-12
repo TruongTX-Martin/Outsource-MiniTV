@@ -7,7 +7,6 @@ export function* getLiveMain(action) {
   try {
     yield put(liveActions.liveMainStart());
     const mainResult = yield DataRemote.getMainLive();
-    console.log('mainResult:', mainResult);
     if (mainResult.status == 200) {
       if (mainResult?.data?.on_air?.status == 'DOING') {
         const resultPlay = yield DataRemote.getPlayUrl(
@@ -73,6 +72,7 @@ export function* pokeChannel(action) {
     const result = yield DataRemote.pokeChannel(action.liveId, action.params);
     if (result.status == 200) {
       yield put(liveActions.pokeChannelSuccess());
+      yield put(liveActions.liveMainGet());
     } else {
       yield put(liveActions.pokeChannelFailed());
     }

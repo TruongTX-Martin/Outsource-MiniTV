@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {Text, View, Dimensions, FlatList} from 'react-native';
-import {Container, Body, Header} from 'native-base';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Text, View, Dimensions, FlatList } from 'react-native';
+import { Container, Body, Header } from 'native-base';
+import { connect } from 'react-redux';
 import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
 import ItemChannel from '../Component/ItemChannel';
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
+
 
 const widthView = width - 20;
 
@@ -14,26 +15,29 @@ class index extends Component {
     super(props);
   }
 
+  componentDidMount() {
+  }
+
   render() {
-    const {todayList} = this.props;
+    const { todayList } = this.props;
     return (
       <Container>
         <Header style={Config.Styles.header}>
           <HeaderBase navigation={this.props.navigation} title="" />
         </Header>
         <Body>
-          <View style={{width: widthView}}>
+          <View style={{ width: widthView }}>
             <Text
-              style={{fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>
+              style={{ fontSize: 20, fontWeight: 'bold', marginVertical: 10 }}>
               MiniTV Channel
             </Text>
             {todayList.length > 0 && (
               <FlatList
                 data={todayList}
-                style={{marginBottom: 30}}
+                style={{ marginBottom: 30 }}
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
-                renderItem={({item}) => {
+                renderItem={({ item }) => {
                   return (
                     <ItemChannel
                       item={item}
@@ -45,7 +49,7 @@ class index extends Component {
               />
             )}
             {todayList.length == 0 && (
-              <Text style={{textAlign: 'center', marginTop: 100}}>
+              <Text style={{ textAlign: 'center', marginTop: 100 }}>
                 찜한 방송이 없습니다.
               </Text>
             )}
@@ -63,6 +67,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

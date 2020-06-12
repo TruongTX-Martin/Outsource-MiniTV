@@ -185,3 +185,62 @@ export function pokeChannelFailed() {
     type: Types.POKE_CHANNEL_FAILED,
   };
 }
+
+//channel list
+export function channelListGet() {
+  return {
+    type: Types.CHANNEL_LIST_GET,
+  };
+}
+export function channelListClear() {
+  return {
+    type: Types.CHANNEL_LIST_CLEAR,
+  };
+}
+export function channelListStart() {
+  return {
+    type: Types.CHANNEL_LIST_START,
+  };
+}
+export function channelListSuccess(list) {
+  return {
+    type: Types.CHANNEL_LIST_SUCCESS,
+    list
+  };
+}
+
+export function channelListFailed() {
+  return {
+    type: Types.CHANNEL_LIST_FAILED,
+  };
+}
+
+//channel detail
+export function channelDetailGet(id) {
+  return {
+    type: Types.CHANNEL_DETAIL_GET,
+    id,
+  };
+}
+export function channelDetailClear() {
+  return {
+    type: Types.CHANNEL_DETAIL_CLEAR,
+  };
+}
+
+export function channelDetailStart() {
+  return {
+    type: Types.CHANNEL_DETAIL_START,
+  };
+}
+export function channelDetailSuccess(detail) {
+  return {
+    type: Types.CHANNEL_DETAIL_SUCCESS,
+    detail
+  };
+}
+export function channelDetailFailed() {
+  return {
+    type: Types.CHANNEL_DETAIL_FAILED,
+  };
+}
