@@ -7,6 +7,10 @@ const styles = StyleSheet.create({
     backgroundColor: color.headerColor,
     borderBottomColor: color.headerColor,
   },
+  headerGray: {
+    backgroundColor: color.headerColorGray,
+    borderBottomColor: color.headerColorGray,
+  },
   body: {
     backgroundColor: color.headerColor,
   },

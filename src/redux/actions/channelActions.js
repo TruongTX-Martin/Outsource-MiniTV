@@ -1,11 +1,11 @@
 import * as Types from './types';
 
-
 //poke channel
-export function pokeChannel2(liveId, params) {
+export function pokeChannel2(liveId, liveIdRefresh, params) {
   return {
     type: Types.POKE_CHANNEL_2,
     liveId,
+    liveIdRefresh,
     params,
   };
 }

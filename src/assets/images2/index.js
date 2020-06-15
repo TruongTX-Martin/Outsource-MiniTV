@@ -22,4 +22,6 @@ export default {
   imgClose: require('./btn_close.png'),
   imgIcCommingSoon: require('./icon_comingsoon.png'),
   imgIcCommingSoonOn: require('./icon_comingsoon_on.png'),
+  imgIcSet: require('./icon_set.png'),
+  imgBgMyPage: require('./bg_mypage.png'),
 };

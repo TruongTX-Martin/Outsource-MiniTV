@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
   },
   viewRight: {
     flex: 0.5,
+    display: 'flex',
+    alignItems: 'flex-end',
   },
 });
 

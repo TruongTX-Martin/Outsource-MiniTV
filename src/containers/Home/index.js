@@ -71,6 +71,7 @@ class index extends Component {
       clearTimeout(timeoutLoading);
     }, 2000);
     this.checkScreenAndLoadData();
+    Orientation.lockToLandscape();
   }
 
   async checkPermission() {
@@ -260,7 +261,14 @@ class index extends Component {
 
   render() {
     const { loadingFirst, currentTab, width, height } = this.state;
-    let { loading, onAir, hotLists, resultPlay, todayList, listChannel } = this.props;
+    let {
+      loading,
+      onAir,
+      hotLists,
+      resultPlay,
+      todayList,
+      listChannel,
+    } = this.props;
     if (loadingFirst) {
       return (
         <View
@@ -307,7 +315,8 @@ class index extends Component {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                  }}>
+                  }}
+                  onPress={() => this.props.navigation.navigate('MyPageV2')}>
                   <Image
                     style={{ width: 50, height: 50 }}
                     source={Images2.imgIcMyPage}
@@ -773,16 +782,38 @@ class index extends Component {
                       </View>
                     </View>
                   )}
-                  {currentTab == TAB.TAB_CHANNEL && (<View style={{ display: 'flex', flexDirection: 'row', paddingLeft: 50 }}>
-                    {
-                      listChannel != null && listChannel.map(e => {
-                        return <TouchableOpacity style={{ marginRight: 30 }} onPress={() => this.props.navigation.navigate('ChannelDetail2', { id: e.channel_uid })}>
-                          <Image source={{ uri: e.thumbnail }} style={{ width: 250, height: 150, borderRadius: 10 }} />
-                          <Text>{e.title}</Text>
-                        </TouchableOpacity>
-                      })
-                    }
-                  </View>)}
+                  {currentTab == TAB.TAB_CHANNEL && (
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        paddingLeft: 50,
+                      }}>
+                      {listChannel != null &&
+                        listChannel.map((e) => {
+                          return (
+                            <TouchableOpacity
+                              style={{ marginRight: 30 }}
+                              onPress={() =>
+                                this.props.navigation.navigate(
+                                  'ChannelDetail2',
+                                  { id: e.channel_uid },
+                                )
+                              }>
+                              <Image
+                                source={{ uri: e.thumbnail }}
+                                style={{
+                                  width: 250,
+                                  height: 150,
+                                  borderRadius: 10,
+                                }}
+                              />
+                              <Text>{e.title}</Text>
+                            </TouchableOpacity>
+                          );
+                        })}
+                    </View>
+                  )}
                   {currentTab == TAB.TAB_PLAY_ALONE && (
                     <View
                       style={{
@@ -811,7 +842,7 @@ const mapStateToProps = (state) => {
     todayList: state.liveMainGetReducer.todayList,
     loading: state.liveMainGetReducer.loading,
     resultPlay: state.liveMainGetReducer.resultPlay,
-    listChannel: state.channelGetListReducer.list
+    listChannel: state.channelGetListReducer.list,
   };
 };
 
@@ -822,7 +853,7 @@ const mapDispatchToProps = (dispatch) => {
     getMe: () => dispatch(myPageActions.getMe()),
     pokeChannel: (liveId, available) =>
       dispatch(liveActions.pokeChannel(liveId, available)),
-    getListChannel: () => dispatch(liveActions.channelListGet())
+    getListChannel: () => dispatch(liveActions.channelListGet()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

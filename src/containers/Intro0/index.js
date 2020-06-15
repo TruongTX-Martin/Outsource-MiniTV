@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -8,10 +8,11 @@ import {
   Platform,
 } from 'react-native';
 import Images from '../../assets/images';
-import {EventRegister} from 'react-native-event-listeners';
+import { EventRegister } from 'react-native-event-listeners';
 import Config from '../../config';
 import DataLocal from '../../services/DataLocal';
-const {width, height} = Dimensions.get('window');
+import Orientation from 'react-native-orientation';
+const { width, height } = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
@@ -20,14 +21,15 @@ class index extends Component {
 
   componentDidMount() {
     DataLocal.setHasShowIntro('True');
+    Orientation.lockToPortrait();
   }
 
   render() {
     return (
-      <View style={{width, height}}>
-        <Image style={{width, height}} source={Images.imgSplash} />
+      <View style={{ width, height }}>
+        <Image style={{ width, height }} source={Images.imgSplash} />
         <TouchableOpacity
-          style={{position: 'absolute', top: 50}}
+          style={{ position: 'absolute', top: 50 }}
           onPress={() => {
             this.props.navigation.goBack();
             EventRegister.emit(Config.Constant.EVENT_GOTO_SIGNIN, '');
@@ -54,7 +56,7 @@ class index extends Component {
             bottom: Platform.OS == 'ios' ? 0 : 20,
           }}
           onPress={() => this.props.navigation.navigate('Intro1')}>
-          <Text style={{color: 'white', fontSize: 16}}>다음</Text>
+          <Text style={{ color: 'white', fontSize: 16 }}>다음</Text>
         </TouchableOpacity>
       </View>
     );

@@ -9,17 +9,16 @@ import {
   ScrollView,
 } from 'react-native';
 import { Container, Body, Header, Content, Footer } from 'native-base';
-import Config from '../../../config';
-import HeaderBase from '../../../components/HeaderBase';
+import Config from '../../../../config';
+import HeaderBase from '../../../../components/HeaderBase';
 import { connect } from 'react-redux';
-import Images from '../../../assets/images';
+import Images from '../../../../assets/images';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from 'react-native-modals';
-import * as liveActions from '../../../redux/actions/liveActions';
-import * as channelActions from '../../../redux/actions/channelActions';
+import * as liveActions from '../../../../redux/actions/liveActions';
+import * as channelActions from '../../../../redux/actions/channelActions';
 import Share from 'react-native-share';
-import images2 from '../../../assets/images2';
-const { width, height } = Dimensions.get('window');
+import images2 from '../../../../assets/images2';
 
 const TAB = {
   TAB_INFOR: 'TAB_INFOR',
@@ -125,7 +124,7 @@ class index extends Component {
           <Content
             showsVerticalScrollIndicator={false}
             style={Config.Styles.body}>
-            <View onLayout={this.onLayout}>
+            <View onLayout={this.onLayout} style={{ width }}>
               <View
                 style={{
                   display: 'flex',
@@ -185,8 +184,8 @@ class index extends Component {
                       source={{ uri: detail?.thumbnail }}
                       style={{
                         width: ((width - 30) * 2) / 5 - 15,
-                        height: (((width - 30) * 2) / 5 - 15) * 49 / 80,
-                        borderRadius: 5
+                        height: ((((width - 30) * 2) / 5 - 15) * 49) / 80,
+                        borderRadius: 5,
                       }}
                     />
                   </View>
@@ -208,19 +207,29 @@ class index extends Component {
                           flexDirection: 'row',
                           marginTop: 10,
                         }}>
-                        {listTag != null && listTag.map((e, index) => {
-                          return this.getChildTag(e, index);
-                        })}
+                        {listTag != null &&
+                          listTag.map((e, index) => {
+                            return this.getChildTag(e, index);
+                          })}
                       </View>
                     </View>
                     <View style={{ display: 'flex', alignItems: 'flex-end' }}>
-                      <TouchableOpacity onPress={() => {
-                        this.props.pokeChannel(detail?.channel_uid, {
-                          available: !detail?.wish_available,
-                        });
-                      }}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.props.pokeChannel(
+                            detail?.channel_uid,
+                            detail?.channel_uid,
+                            {
+                              available: !detail?.wish_available,
+                            },
+                          );
+                        }}>
                         <Image
-                          source={images2.imgIconAlamp}
+                          source={
+                            detail?.wish_available
+                              ? images2.imgIconAlamp
+                              : images2.imgIconAlampOff
+                          }
                           style={{ width: 40, height: 40 }}
                         />
                       </TouchableOpacity>
@@ -231,13 +240,15 @@ class index extends Component {
               {currentTab == TAB.TAB_SERI_LIST && (
                 <ScrollView
                   horizontal={true}
-                  showsHorizontalScrollIndicator={false}>
+                  showsHorizontalScrollIndicator={false}
+                  style={{ width }}>
                   <View
                     style={{
+                      width,
                       display: 'flex',
                       flexDirection: 'row',
                       padding: 20,
-                      paddingTop: 30
+                      paddingTop: 30,
                     }}>
                     {detail?.lives.map((e) => {
                       return (
@@ -252,7 +263,11 @@ class index extends Component {
                           }>
                           <Image
                             source={{ uri: e.thumbnail }}
-                            style={{ width: width / 3 - 20, height: (width / 3 - 20) * 49 / 80, borderRadius: 10 }}
+                            style={{
+                              width: width / 3 - 20,
+                              height: ((width / 3 - 20) * 49) / 80,
+                              borderRadius: 10,
+                            }}
                           />
                           <View
                             style={{
@@ -261,17 +276,41 @@ class index extends Component {
                               justifyContent: 'space-between',
                               marginTop: 5,
                             }}>
-                            <Text style={{ width: width / 3 - 20 - 50, textAlign: 'center' }}>
+                            <Text
+                              style={{
+                                width: width / 3 - 20 - 50,
+                                textAlign: 'center',
+                              }}>
                               {e.title}
                             </Text>
-                            <Image
-                              style={{ width: 35, height: 35 }}
-                              source={images2.imgIconAlamp}
-                            />
+                            <TouchableOpacity
+                              onPress={() =>
+                                this.props.pokeChannel(
+                                  e?.live_uid,
+                                  detail?.channel_uid,
+                                  {
+                                    available: !e?.wish_available,
+                                  },
+                                )
+                              }>
+                              <Image
+                                style={{ width: 35, height: 35 }}
+                                source={
+                                  e.wish_available
+                                    ? images2.imgIconAlamp
+                                    : images2.imgIconAlampOff
+                                }
+                              />
+                            </TouchableOpacity>
                           </View>
                         </TouchableOpacity>
                       );
                     })}
+                    {detail?.lives.length == 0 && (
+                      <View>
+                        <Text>Items is empty</Text>
+                      </View>
+                    )}
                   </View>
                 </ScrollView>
               )}
@@ -285,15 +324,15 @@ class index extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    detail: state.channelGetDetailReducer.detail
+    detail: state.channelGetDetailReducer.detail,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getChannelDetail: (id) => dispatch(liveActions.channelDetailGet(id)),
-    pokeChannel: (liveId, available) =>
-      dispatch(channelActions.pokeChannel2(liveId, available)),
+    pokeChannel: (liveId, liveIdRefresh, available) =>
+      dispatch(channelActions.pokeChannel2(liveId, liveIdRefresh, available)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

@@ -22,7 +22,16 @@ class index extends Component {
         <View style={styles.viewCenter}>
           <Text style={styles.textCenter}>{this.props.title}</Text>
         </View>
-        <View style={styles.viewRight} />
+        <View style={styles.viewRight}>
+          {this.props.setting && (
+            <TouchableOpacity onPress={() => this.props.openSetting()}>
+              <Image
+                style={{ width: 50, height: 50 }}
+                source={Images2.imgIcSet}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
     );
   }

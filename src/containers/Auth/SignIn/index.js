@@ -37,7 +37,6 @@ const ioskeys = {
   kServiceAppName: 'Mini TV',
   kServiceAppUrlScheme: 'minitivischeme', // only for iOS
 };
-const { width, height } = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
@@ -49,6 +48,8 @@ class index extends Component {
       passwordError: '',
       paramSignUp: null,
       paramsSNS: null,
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
     };
     this.validation = {
       email: {
@@ -69,7 +70,17 @@ class index extends Component {
         },
       },
     };
+    this.onLayout = this.onLayout.bind(this);
   }
+
+
+  onLayout(e) {
+    this.setState({
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+    });
+  }
+
 
   gotoSignUp() {
     this.props.navigation.navigate('TermAndCondition');
@@ -92,6 +103,7 @@ class index extends Component {
       iosClientId:
         '367155018407-eeag1be667s265fk8cjbshgas6imvb8c.apps.googleusercontent.com',
     });
+    Orientation.lockToPortrait();
   }
 
   handleSignIn() {
@@ -240,7 +252,7 @@ class index extends Component {
   };
 
   render() {
-    const { email, emailError, password, passwordError } = this.state;
+    const { email, emailError, password, passwordError, width, height } = this.state;
     const initials = Platform.OS == 'ios' ? ioskeys : androidkeys;
     const { loading, reason, snsLoading } = this.props;
     return (
@@ -248,6 +260,7 @@ class index extends Component {
         <Body>
           <Content showsVerticalScrollIndicator={false}>
             <View
+              onLayout={this.onLayout}
               style={{
                 height,
               }}>

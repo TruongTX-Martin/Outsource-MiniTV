@@ -18,7 +18,9 @@ import ChannelList from '../Home/ChannelList';
 import PokeList from '../Home/PokeList';
 import ReplayProgram from '../Home/ReplayProgram';
 import ChannelDetail from '../Home/ChannelDetail';
-import ChannelDetail2 from '../Home/ChannelDetail2';
+import ChannelDetail2 from '../Home/V2/ChannelDetail2';
+import SettingV2 from '../Home/V2/SettingV2';
+import MyPageV2 from '../Home/V2/MyPageV2';
 import ProgramDetail from '../Home/ProgramDetail';
 import WebCast from '../Home/WebCast';
 import Alert from '../Home/Alert';
@@ -120,6 +122,20 @@ const stackNavigator = createStackNavigator(
     },
     ChannelDetail2: {
       screen: ChannelDetail2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    SettingV2: {
+      screen: SettingV2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    MyPageV2: {
+      screen: MyPageV2,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',
