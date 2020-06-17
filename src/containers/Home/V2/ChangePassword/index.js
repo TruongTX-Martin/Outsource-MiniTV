@@ -18,7 +18,9 @@ import Modal from 'react-native-modal';
 import TextInputRight from '../../../../components/TextFieldRight';
 import * as myPageActions from '../../../../redux/actions/myPageActions';
 import Localization from '../../../../localization';
-const { width, height } = Dimensions.get('window');
+import { getWidthScreen, getHeightScreen } from '../../../../utils';
+let width = 0;
+let height = 0;
 
 class index extends Component {
   constructor(props) {
@@ -61,6 +63,8 @@ class index extends Component {
         },
       },
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   onUpdatePassword() {

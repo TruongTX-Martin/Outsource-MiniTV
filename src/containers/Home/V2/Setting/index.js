@@ -17,9 +17,9 @@ import { EventRegister } from 'react-native-event-listeners';
 import Constants from '../../../../config/Constant';
 import * as myPageActions from '../../../../redux/actions/myPageActions';
 import Image2 from '../../../../assets/images2';
-
-const { width, height } = Dimensions.get('window');
-
+import { getWidthScreen, getHeightScreen } from '../../../../utils';
+let width = 0;
+let height = 0;
 class index extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +27,8 @@ class index extends Component {
       isEnabled: false,
       isUpdateEnableState: false,
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   componentWillUnmount() {

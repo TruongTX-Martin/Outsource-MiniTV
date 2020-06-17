@@ -22,8 +22,9 @@ import * as myPageActions from '../../../../redux/actions/myPageActions';
 import Image2 from '../../../../assets/images2';
 import DatePicker from 'react-native-datepicker';
 
-const { width, height } = Dimensions.get('window');
-
+import { getWidthScreen, getHeightScreen } from '../../../../utils';
+let width = 0;
+let height = 0;
 const GENDER = {
   MALE: 0,
   FEMALE: 1,
@@ -41,6 +42,8 @@ class index extends Component {
       day: '',
       date: '2020.10.10',
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   componentDidMount() {
