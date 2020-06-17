@@ -16,6 +16,7 @@ export default {
   imgIconAlampOff: require('./icon_alarm_off.png'),
   imgPlayAloneEmpty: require('./play_alone_empty.png'),
   imgIcBack: require('./icon_back.png'),
+  imgIcBackGray: require('./ic_back_gray.png'),
   imgIcDate: require('./icon_date.png'),
   imgIcShare: require('./icon_share.png'),
   imgPopup: require('./popup_bg.png'),

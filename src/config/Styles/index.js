@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
     backgroundColor: color.headerColorGray,
     borderBottomColor: color.headerColorGray,
   },
+  headerWhite: {
+    backgroundColor: color.headerColorWhite,
+    borderBottomColor: color.headerColorWhite,
+  },
   body: {
     backgroundColor: color.headerColor,
   },

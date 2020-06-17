@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   TextInput,
@@ -9,23 +9,26 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class index extends Component {
   render() {
     return (
       <TouchableOpacity
         onPress={() => this.props.onPress && this.props.onPress()}
-        style={{
-          width: this.props.width || width,
-          height: 50,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: this.props.backgroundColor || '#499DA7',
-          borderRadius: 5,
-        }}>
-        <Text style={{color: 'white', fontSize: 18}}>{this.props.text}</Text>
+        style={[
+          {
+            width: this.props.width || width,
+            height: 50,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: this.props.backgroundColor || '#499DA7',
+            borderRadius: 5,
+          },
+          this.props.style,
+        ]}>
+        <Text style={{ color: 'white', fontSize: 18 }}>{this.props.text}</Text>
       </TouchableOpacity>
     );
   }

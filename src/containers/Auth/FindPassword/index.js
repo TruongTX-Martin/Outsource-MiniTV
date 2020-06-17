@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
-import {Container, Body, Content, Footer, Header} from 'native-base';
+import React, { Component } from 'react';
+import { View, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { Container, Body, Content, Footer, Header } from 'native-base';
 import TextInput from '../../../components/TextField';
 import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from 'react-native-modal';
 import DataRemote from '../../../services/DataRemote';
 import validateInput from '../../../helpers/Validate';
 import * as authActions from '../../../redux/actions/authActions';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
@@ -36,10 +36,10 @@ class index extends Component {
   }
 
   async findPassword() {
-    const {email} = this.state;
-    this.setState({checkingEmail: true});
+    const { email } = this.state;
+    this.setState({ checkingEmail: true });
     const results = await DataRemote.validateEmail(email);
-    this.setState({checkingEmail: false});
+    this.setState({ checkingEmail: false });
     if (results?.data?.is_valid) {
       this.setState({
         emailError:
@@ -51,7 +51,7 @@ class index extends Component {
   }
 
   checkValidEmail() {
-    const {email} = this.state;
+    const { email } = this.state;
     const emailError = validateInput('email', email, this.validation);
     this.setState({
       isValidEmail: emailError == null,
@@ -60,7 +60,7 @@ class index extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSuccess) {
-      this.setState({isModalVisible: true});
+      this.setState({ isModalVisible: true });
     }
   }
 
@@ -72,17 +72,17 @@ class index extends Component {
       checkingEmail,
       emailError,
     } = this.state;
-    const {loading} = this.props;
+    const { loading } = this.props;
     return (
       <Container>
-        <Header style={Config.Styles.header}>
-          <HeaderBase navigation={this.props.navigation} />
+        <Header style={Config.Styles.headerWhite}>
+          <HeaderBase smallBack navigation={this.props.navigation} />
         </Header>
         <Body>
           <Content>
             <Spinner
               visible={loading || checkingEmail}
-              textStyle={{color: '#fff'}}
+              textStyle={{ color: '#fff' }}
             />
             <View
               style={{
@@ -93,48 +93,51 @@ class index extends Component {
                 justifyContent: 'space-between',
               }}>
               <View>
-                <Text style={{marginTop: 50, fontSize: 30}}>비밀번호 찾기</Text>
-                <Text style={{marginTop: 50, fontSize: 20}}>이메일</Text>
+                <Text style={{ marginTop: 50, fontSize: 30 }}>비밀번호 찾기</Text>
+                <Text style={{ marginTop: 50, fontSize: 20 }}>이메일</Text>
                 <TextInput
                   placeholder="이메일을 입력해주세요"
                   value={email}
                   onChangeText={(email) =>
-                    this.setState({email}, () => this.checkValidEmail())
+                    this.setState({ email }, () => this.checkValidEmail())
                   }
                   error={emailError}
                 />
               </View>
               <View>
                 <Text
-                  style={{textAlign: 'center', color: '#555555', fontSize: 17}}>
+                  style={{ textAlign: 'center', color: '#555555', fontSize: 17 }}>
                   아직 문제가 있으신가요?
                 </Text>
                 <Text
-                  style={{textAlign: 'center', color: '#555555', fontSize: 17}}>
+                  style={{ textAlign: 'center', color: '#555555', fontSize: 17 }}>
                   고객센터 : 02-123-2012
                 </Text>
               </View>
             </View>
           </Content>
         </Body>
-        <Footer style={{backgroundColor: '#499DA7'}}>
+        <Footer
+          style={{ backgroundColor: 'white', height: 60, borderTopWidth: 0 }}>
           <TouchableOpacity
             style={{
-              backgroundColor: isValidEmail ? '#499DA7' : '#999999',
-              width,
+              backgroundColor: isValidEmail ? '#50CCC3' : '#999999',
+              width: width - 20,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              borderRadius: 30,
+              height: 50,
             }}
             disabled={!isValidEmail}
             onPress={() => this.findPassword()}>
-            <Text style={{color: 'white', fontSize: 18}}>확인</Text>
+            <Text style={{ color: 'white', fontSize: 18 }}>확인</Text>
           </TouchableOpacity>
         </Footer>
         <Modal
           isVisible={isModalVisible}
           onBackButtonPress={() => {
-            this.setState({isModalVisible: false});
+            this.setState({ isModalVisible: false });
             return true;
           }}>
           <View
@@ -182,10 +185,10 @@ class index extends Component {
                   borderRadius: 5,
                 }}
                 onPress={() => {
-                  this.setState({isModalVisible: false});
+                  this.setState({ isModalVisible: false });
                   this.props.navigation.goBack();
                 }}>
-                <Text style={{color: 'white', fontSize: 17}}>확인</Text>
+                <Text style={{ color: 'white', fontSize: 17 }}>확인</Text>
               </TouchableOpacity>
             </View>
           </View>

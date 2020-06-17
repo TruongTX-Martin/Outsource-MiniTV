@@ -40,6 +40,25 @@ export function generateAccessToken() {
   };
 }
 
+export function generateAccessTokenStart() {
+  return {
+    type: Types.GENERATE_ACCESS_TOKEN_START,
+  };
+}
+
+export function generateAccessTokenSuccess(data) {
+  return {
+    type: Types.GENERATE_ACCESS_TOKEN_SUCCESS,
+    data,
+  };
+}
+
+export function generateAccessTokenFailed() {
+  return {
+    type: Types.GENERATE_ACCESS_TOKEN_FAILED,
+  };
+}
+
 //sign in
 export function signIn(params) {
   return {
@@ -123,5 +142,13 @@ export function snsSignInSuccess() {
 export function snsSignInFailed() {
   return {
     type: Types.SNS_SIGNIN_FAILED,
+  };
+}
+
+//action update push alert status
+export function updatePushAlert(available) {
+  return {
+    type: Types.UPDATE_PUSH_ALERT,
+    available,
   };
 }

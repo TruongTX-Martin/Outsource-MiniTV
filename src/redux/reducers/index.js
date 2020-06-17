@@ -17,6 +17,7 @@ import pokeChannelReducer2 from './pokeChannelReducer2';
 import getPokeListReducer from './getPokeListReducer';
 import channelGetListReducer from './channelGetListReducer';
 import channelGetDetailReducer from './channelGetDetailReducer';
+import generateAccessTokenReducer from './generateAccessTokenReducer';
 
 const rootReducer = combineReducers({
   signUpReducer,
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   getPokeListReducer,
   channelGetListReducer,
   channelGetDetailReducer,
-  pokeChannelReducer2
+  pokeChannelReducer2,
+  generateAccessTokenReducer,
 });
 export default rootReducer;

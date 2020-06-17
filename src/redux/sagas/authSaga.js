@@ -1,8 +1,8 @@
 import * as authActions from '../actions/authActions';
-import {put} from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import DataRemote from '../../services/DataRemote';
 import DataLocal from '../../services/DataLocal';
-import {EventRegister} from 'react-native-event-listeners';
+import { EventRegister } from 'react-native-event-listeners';
 import Constants from '../../config/Constant';
 
 export function* signUp(action) {
@@ -21,6 +21,7 @@ export function* signUp(action) {
 
 export function* generateAccessToken() {
   try {
+    yield put(authActions.generateAccessTokenStart());
     const generateResult = yield DataRemote.generateAccessToken();
     if (generateResult.status == 200) {
       DataLocal.setAccessToken(generateResult.data.access_token);
@@ -28,8 +29,13 @@ export function* generateAccessToken() {
         Constants.EVENT_GOTO_STORE,
         generateResult.data.force_update,
       );
+      yield put(authActions.generateAccessTokenSuccess(generateResult.data));
+    } else {
+      yield put(authActions.generateAccessTokenFailed());
     }
-  } catch (error) {}
+  } catch (error) {
+    yield put(authActions.generateAccessTokenFailed());
+  }
 }
 
 export function* signIn(action) {
@@ -74,4 +80,12 @@ export function* snsSignIn(action) {
   } catch (error) {
     yield put(authActions.snsSignInFailed());
   }
+}
+
+export function* updatePushAlert(action) {
+  try {
+    yield DataRemote.updatePushAlert({
+      available: action.available,
+    });
+  } catch (error) { }
 }

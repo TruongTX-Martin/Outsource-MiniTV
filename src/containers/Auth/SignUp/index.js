@@ -105,8 +105,8 @@ class index extends Component {
 
     return (
       <Container>
-        <Header style={Config.Styles.header}>
-          <HeaderBase navigation={this.props.navigation} />
+        <Header style={Config.Styles.headerWhite}>
+          <HeaderBase navigation={this.props.navigation} smallBack />
         </Header>
         <Body>
           <Content>
@@ -203,18 +203,23 @@ class index extends Component {
             </View>
           </Content>
         </Body>
-        <Footer style={{ backgroundColor: '#499DA7' }}>
+        <Footer
+          style={{ backgroundColor: 'white', height: 60, borderTopWidth: 0 }}>
           <TouchableOpacity
             disabled={!isEnable}
             style={{
-              backgroundColor: isEnable ? '#499DA7' : '#999999',
-              width,
+              backgroundColor: isEnable ? '#50CCC3' : '#999999',
+              width: width - 20,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              borderRadius: 30,
+              height: 50,
             }}
             onPress={() => this.handleSignUp()}>
-            <Text style={{ color: 'white', fontSize: 18 }}>다음</Text>
+            <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
+              다음
+            </Text>
           </TouchableOpacity>
         </Footer>
       </Container>

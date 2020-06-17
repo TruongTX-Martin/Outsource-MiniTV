@@ -18,9 +18,9 @@ import ChannelList from '../Home/ChannelList';
 import PokeList from '../Home/PokeList';
 import ReplayProgram from '../Home/ReplayProgram';
 import ChannelDetail from '../Home/ChannelDetail';
-import ChannelDetail2 from '../Home/V2/ChannelDetail2';
-import SettingV2 from '../Home/V2/SettingV2';
-import MyPageV2 from '../Home/V2/MyPageV2';
+import ChannelDetail2 from '../Home/V2/ChannelDetail';
+import SettingV2 from '../Home/V2/Setting';
+import MyPageV2 from '../Home/V2/MyPage';
 import ProgramDetail from '../Home/ProgramDetail';
 import WebCast from '../Home/WebCast';
 import Alert from '../Home/Alert';
@@ -32,6 +32,9 @@ import Intro1 from '../Intro1';
 import Intro2 from '../Intro2';
 import DeleteAccount from '../Home/Setting/DeleteAccount';
 import PlayVideo from '../Home/PlayVideo';
+import EditMyPageV2 from '../Home/V2/EditMyPage';
+import ChangePasswordV2 from '../Home/V2/ChangePassword';
+import DeleteAccountV2 from '../Home/V2/DeleteAccount';
 const { width } = Dimensions.get('window');
 
 //use with case don't need slidemenu
@@ -122,6 +125,27 @@ const stackNavigator = createStackNavigator(
     },
     ChannelDetail2: {
       screen: ChannelDetail2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    EditMyPageV2: {
+      screen: EditMyPageV2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    ChangePasswordV2: {
+      screen: ChangePasswordV2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    DeleteAccountV2: {
+      screen: DeleteAccountV2,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

@@ -73,14 +73,12 @@ class index extends Component {
     this.onLayout = this.onLayout.bind(this);
   }
 
-
   onLayout(e) {
     this.setState({
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     });
   }
-
 
   gotoSignUp() {
     this.props.navigation.navigate('TermAndCondition');
@@ -252,7 +250,14 @@ class index extends Component {
   };
 
   render() {
-    const { email, emailError, password, passwordError, width, height } = this.state;
+    const {
+      email,
+      emailError,
+      password,
+      passwordError,
+      width,
+      height,
+    } = this.state;
     const initials = Platform.OS == 'ios' ? ioskeys : androidkeys;
     const { loading, reason, snsLoading } = this.props;
     return (
@@ -263,6 +268,9 @@ class index extends Component {
               onLayout={this.onLayout}
               style={{
                 height,
+                display: 'flex',
+                justifyContent: 'space-between',
+                paddingBottom: 50,
               }}>
               <View>
                 <Spinner
@@ -288,9 +296,7 @@ class index extends Component {
                   }}>
                   <View style={{ marginBottom: 10 }}>
                     <TextInput
-                      icon={Images.imgIcUserName}
                       width={width - 42}
-                      styleIcon={{ width: 15, height: 14 }}
                       placeholder="이메일"
                       value={email}
                       onChangeText={(email) =>
@@ -300,9 +306,7 @@ class index extends Component {
                     />
                   </View>
                   <TextInput
-                    icon={Images.imgIcPassword}
                     width={width - 42}
-                    styleIcon={{ width: 15, height: 18 }}
                     placeholder="비밀번호"
                     isPassword
                     value={password}
@@ -315,6 +319,8 @@ class index extends Component {
                     <ButtonBase
                       width={width - 46}
                       text={'로그인'}
+                      style={{ borderRadius: 30 }}
+                      backgroundColor={'#50CCC3'}
                       onPress={() => this.handleSignIn()}
                     />
                   </View>
@@ -322,90 +328,65 @@ class index extends Component {
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
-                      alignItems: 'flex-start',
+                      justifyContent: 'center',
                       width: width - 46,
                       marginTop: 10,
                     }}>
-                    <TouchableOpacity onPress={() => this.gotoSignUp()}>
-                      <Text style={{ color: '#797979', marginRight: 10 }}>
-                        이메일 회원가입
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() =>
-                        this.props.navigation.navigate('FindPassword')
-                      }>
-                      <Text style={{ color: '#797979', marginRight: 10 }}>
-                        비밀번호 찾기
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View
-                    style={{
-                      flex: 1,
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginTop: 50,
-                      width: width - 45,
-                      marginBottom: 25,
-                    }}>
-                    <View
-                      style={{ flex: 2, height: 1, backgroundColor: '#cacaca' }}
-                    />
-                    <View
-                      style={{
-                        flex: 4,
-                        height: 30,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                      <Text style={{ color: '#797979' }}>
-                        SNS 회원가입 / 로그인
-                      </Text>
+                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                      <TouchableOpacity
+                        onPress={() => this.gotoSignUp()}
+                        style={{
+                          borderRightWidth: 1,
+                          borderRightColor: '#333030',
+                          paddingRight: 10,
+                        }}>
+                        <Text style={{ color: '#333030' }}>회원가입</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.props.navigation.navigate('FindPassword')
+                        }
+                        style={{ paddingLeft: 10 }}>
+                        <Text style={{ color: '#333030' }}>비밀번호 찾기</Text>
+                      </TouchableOpacity>
                     </View>
-                    <View
-                      style={{ flex: 2, height: 1, backgroundColor: '#cacaca' }}
-                    />
                   </View>
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: '#54c43a',
-                      width: width - 46,
-                      height: 45,
-                      borderRadius: 5,
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                    onPress={() => this.naverLogin(initials)}>
-                    <Text
-                      style={{
-                        fontSize: 30,
-                        color: 'white',
-                        fontWeight: 'bold',
-                        marginHorizontal: 10,
-                      }}>
-                      N
-                    </Text>
-                    <Text style={{ color: 'white', textAlign: 'center' }}>
-                      네이버로 시작하기
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 30,
-                        color: 'transparent',
-                        fontWeight: 'bold',
-                        marginHorizontal: 10,
-                      }}>
-                      N
-                    </Text>
-                  </TouchableOpacity>
                 </View>
               </View>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#1FC800',
+                  width: width - 46,
+                  height: 45,
+                  borderRadius: 2,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+                onPress={() => this.naverLogin(initials)}>
+                <Text
+                  style={{
+                    fontSize: 30,
+                    color: 'white',
+                    fontWeight: 'bold',
+                    marginHorizontal: 10,
+                  }}>
+                  N
+                </Text>
+                <Text style={{ color: 'white', textAlign: 'center' }}>
+                  네이버로 시작하기
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 30,
+                    color: 'transparent',
+                    fontWeight: 'bold',
+                    marginHorizontal: 10,
+                  }}>
+                  N
+                </Text>
+              </TouchableOpacity>
             </View>
           </Content>
         </Body>

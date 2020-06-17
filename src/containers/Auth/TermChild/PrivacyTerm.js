@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,11 +6,11 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import {Container, Body, Content, Footer, Header} from 'native-base';
+import { Container, Body, Content, Footer, Header } from 'native-base';
 import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
 import Images from '../../../assets/images';
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
@@ -20,15 +20,16 @@ class index extends Component {
   render() {
     return (
       <Container>
-        <Header style={Config.Styles.header}>
+        <Header style={Config.Styles.headerGray}>
           <HeaderBase
+            backGray
             navigation={this.props.navigation}
             title={'개인정보 수집 동의'}
           />
         </Header>
         <Body>
           <Content showsVerticalScrollIndicator={false}>
-            <View style={{width: width - 40, paddingVertical: 20}}>
+            <View style={{ width: width - 40, paddingVertical: 20 }}>
               <Text style={styles.textStyle1}>
                 (주)미니스쿨(이하, "회사")은 개인정보보호법에 따라 이용자의
                 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 이용자의

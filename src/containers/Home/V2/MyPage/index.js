@@ -15,8 +15,9 @@ import Images from '../../../../assets/images';
 import { connect } from 'react-redux';
 import * as myPageActions from '../../../../redux/actions/myPageActions';
 import Image2 from '../../../../assets/images2';
-
-const { width, height } = Dimensions.get('window');
+import { getWidthScreen, getHeightScreen } from '../../../../utils';
+let width = 0;
+let height = 0;
 
 class index extends Component {
   constructor(props) {
@@ -24,6 +25,8 @@ class index extends Component {
     this.state = {
       isEnabled: false,
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   componentDidMount() {
@@ -41,44 +44,37 @@ class index extends Component {
     const { meData } = this.props;
     return (
       <Container>
-        <Header style={Config.Styles.headerGray}>
-          <HeaderBase title="아이 정보 수정" />
+        <Header style={Config.Styles.header}>
+          <HeaderBase
+            navigation={this.props.navigation}
+            title="마이페이지"
+            setting
+            openSetting={() => this.props.navigation.navigate('SettingV2')}
+          />
         </Header>
         <Body>
-          <View style={{ width, height, backgroundColor: '#F0F0F0' }}>
+          <ImageBackground
+            style={{ width, height }}
+            source={Image2.imgBgMyPage}
+            resizeMode="cover">
             <View
               style={{ display: 'flex', flexDirection: 'row', marginTop: 30 }}>
               <View
                 style={{
                   display: 'flex',
-                  flex: 3,
+                  flex: 4,
                   alignItems: 'flex-end',
                 }}>
-                <ImageBackground
-                  style={{ width: 120, height: 120, borderRadius: 60 }}
-                  imageStyle={{ borderRadius: 60 }}
-                  source={{ uri: meData?.profile_image_url }}>
-                  <View
-                    style={{
-                      width: 120,
-                      height: 120,
-                      borderRadius: 60,
-                      backgroundColor: '#000000',
-                      opacity: 0.6,
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <TouchableOpacity>
-                      <Image
-                        style={{ width: 40, height: 40 }}
-                        source={Images.imgIcCamera}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </ImageBackground>
+                <Image
+                  style={{
+                    width: 120,
+                    height: 120,
+                    borderRadius: 60,
+                  }}
+                  source={{ uri: meData?.profile_image_url }}
+                />
               </View>
-              <View style={{ flex: 7, paddingLeft: 10, paddingTop: 30 }}>
+              <View style={{ flex: 6, paddingLeft: 10, paddingTop: 30 }}>
                 <Text
                   style={{ fontSize: 20, color: '#333333', fontWeight: 'bold' }}>
                   {meData?.student_name}
@@ -113,45 +109,20 @@ class index extends Component {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginTop: 50,
               }}>
-              <View
+              <TouchableOpacity
                 style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}>
-                <TouchableOpacity
-                  style={{
-                    borderRadius: 5,
-                    borderWidth: 2,
-                    borderColor: '#9A9A9A',
-                    paddingVertical: 10,
-                    marginRight: 5,
-                    width: 90,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                  onPress={() => this.props.navigation.goBack()}>
-                  <Text style={{ color: '#9A9A9A' }}>취소</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    borderRadius: 5,
-                    backgroundColor: '#50CCC3',
-                    paddingVertical: 10,
-                    marginRight: 5,
-                    width: 90,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginLeft: 5,
-                  }}>
-                  <Text style={{ color: 'white' }}>취소</Text>
-                </TouchableOpacity>
-              </View>
+                  borderRadius: 5,
+                  borderWidth: 2,
+                  borderColor: '#50CCC3',
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                }}
+                onPress={() => this.props.navigation.navigate('EditMyPageV2')}>
+                <Text style={{ color: '#50CCC3' }}>수정하기</Text>
+              </TouchableOpacity>
             </View>
-          </View>
+          </ImageBackground>
         </Body>
       </Container>
     );

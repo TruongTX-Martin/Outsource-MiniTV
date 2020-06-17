@@ -18,9 +18,10 @@ class index extends Component {
           {
             borderRadius: 5,
             marginTop: 5,
-            height: 45,
-            backgroundColor: '#F4F5FA',
+            height: 40,
             marginBottom: Platform.OS === 'ios' ? 4 : 0,
+            borderBottomWidth: 1,
+            borderBottomColor: '#BEBEC0',
             paddingLeft: 5,
             width: this.props.width,
           },
@@ -34,8 +35,20 @@ class index extends Component {
           {this.props.icon && (
             <Image source={this.props.icon} style={this.props.styleIcon} />
           )}
+          {this.props.title && (
+            <Text style={{ color: '#333333', fontWeight: 'bold' }}>
+              {this.props.title}
+            </Text>
+          )}
           <TextInput
-            style={[Styles.text, { width: this.props.widthText || width - 60 }]}
+            style={[
+              Styles.text,
+              {
+                flex: 1,
+                textAlign: 'right',
+                paddingRight: 5,
+              },
+            ]}
             value={this.props.value}
             secureTextEntry={this.props.isPassword ? true : false}
             returnKeyType={this.props.keyType ? this.props.keyType : 'next'}
@@ -57,8 +70,9 @@ class index extends Component {
             style={{
               color: 'red',
               fontSize: 10,
-              marginBottom: 5,
+              marginBottom: 10,
               paddingLeft: 5,
+              textAlign: 'right',
             }}>
             {this.props.error}
           </Text>

@@ -29,6 +29,7 @@ import firebase from 'react-native-firebase';
 import { showToast } from '../../utils';
 import { getCurrentRouter } from '../../helpers/routerHelper';
 import Orientation from 'react-native-orientation';
+import { setWidthScreen, setHeightScreen } from '../../utils';
 
 const STATUS = {
   RESERVED: 'RESERVED',
@@ -59,9 +60,12 @@ class index extends Component {
   }
 
   onLayout(e) {
+    const { width, height } = Dimensions.get('window');
+    setWidthScreen(width);
+    setHeightScreen(height);
     this.setState({
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
+      width,
+      height,
     });
   }
 

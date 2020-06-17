@@ -86,6 +86,16 @@ const snsSignIn = async (params) => {
   });
 };
 
+const updatePushAlert = async (params) => {
+  const accessToken = await DataLocal.getAccessToken();
+  return await axios.post('/auth/push/callback-available', params, {
+    headers: {
+      'X-Access-Token': accessToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 const findPassword = async (email) => {
   const accessToken = await DataLocal.getAccessToken();
   return await axios.get('/auth/find-password', {
@@ -284,5 +294,6 @@ export default {
   setTokenFirebase,
   getChannelList,
   getChannelDetail,
-  pokeChannel2
+  pokeChannel2,
+  updatePushAlert,
 };

@@ -5,6 +5,7 @@ import {
   signIn,
   findPassword,
   snsSignIn,
+  updatePushAlert,
 } from './authSaga';
 import {
   getLiveMain,
@@ -21,7 +22,11 @@ import {
   updateProfileImage,
   deleteAccount,
 } from './myPageSaga';
-import { getListChannel, getChannelDetail, pokeChannel as pokeChannel2 } from './channelSaga';
+import {
+  getListChannel,
+  getChannelDetail,
+  pokeChannel as pokeChannel2,
+} from './channelSaga';
 import * as Types from '../actions/types';
 
 // Redux Saga: Root Saga
@@ -46,5 +51,6 @@ export function* rootSaga() {
     takeLatest(Types.CHANNEL_LIST_GET, getListChannel),
     takeLatest(Types.CHANNEL_DETAIL_GET, getChannelDetail),
     takeLatest(Types.POKE_CHANNEL_2, pokeChannel2),
+    takeLatest(Types.UPDATE_PUSH_ALERT, updatePushAlert),
   ]);
 }

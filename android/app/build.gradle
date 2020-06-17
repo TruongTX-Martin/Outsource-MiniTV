@@ -207,8 +207,10 @@ dependencies {
 
     implementation "androidx.annotation:annotation:1.1.0"
     implementation project(':react-native-config')
+    implementation "androidx.annotation:annotation:1.1.0"
 
-     //Add these lines
+
+    //Add these lines
      implementation 'com.google.android.gms:play-services-base:16.1.0'
      implementation 'com.google.firebase:firebase-core:16.0.8'
      implementation 'com.google.firebase:firebase-messaging:17.5.0'

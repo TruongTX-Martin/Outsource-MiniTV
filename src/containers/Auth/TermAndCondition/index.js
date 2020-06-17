@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Image, Dimensions} from 'react-native';
-import {Container, Body, Content, Footer, Header} from 'native-base';
+import React, { Component } from 'react';
+import { View, TouchableOpacity, Text, Image, Dimensions } from 'react-native';
+import { Container, Body, Content, Footer, Header } from 'native-base';
 import Images from '../../../assets/images';
 import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class index extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class index extends Component {
   }
 
   handleClickOption(option) {
-    var {listOption, optionAll} = this.state;
+    var { listOption, optionAll } = this.state;
     listOption = listOption.map((e) => {
       if (e.key == option.key) {
         return {
@@ -74,11 +74,11 @@ class index extends Component {
     const canNext = !(
       listOption.filter((e) => e.isMust && !e.isCheck).length > 0
     );
-    this.setState({listOption, canNext, optionAll});
+    this.setState({ listOption, canNext, optionAll });
   }
 
   handleClickOptionAll() {
-    var {listOption, optionAll} = this.state;
+    var { listOption, optionAll } = this.state;
     listOption = listOption.map((e) => {
       return {
         ...e,
@@ -92,15 +92,15 @@ class index extends Component {
     const canNext = !(
       listOption.filter((e) => e.isMust && !e.isCheck).length > 0
     );
-    this.setState({optionAll, listOption, canNext});
+    this.setState({ optionAll, listOption, canNext });
   }
 
   render() {
-    const {listOption, optionAll, canNext} = this.state;
+    const { listOption, optionAll, canNext } = this.state;
     return (
       <Container>
-        <Header style={Config.Styles.header}>
-          <HeaderBase navigation={this.props.navigation} />
+        <Header style={Config.Styles.headerWhite}>
+          <HeaderBase smallBack navigation={this.props.navigation} backGray />
         </Header>
         <Body>
           <Content>
@@ -108,12 +108,12 @@ class index extends Component {
               style={{
                 width,
                 paddingHorizontal: 20,
-                backgroundColor: '#f7f7f7',
+                backgroundColor: '#ffffff',
               }}>
-              <Text style={{color: '#222222', fontSize: 25, paddingTop: 80}}>
+              <Text style={{ color: '#222222', fontSize: 25, paddingTop: 80 }}>
                 약관 동의
               </Text>
-              <Text style={{color: '#222222', fontSize: 15, paddingTop: 10}}>
+              <Text style={{ color: '#222222', fontSize: 15, paddingTop: 10 }}>
                 {'원할한 서비스 이용을 위해 필수항목 동의가 필요합니다.'}
               </Text>
 
@@ -123,21 +123,24 @@ class index extends Component {
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: 30,
-                  borderWidth: 1,
-                  borderColor: '#CCCCCC',
+                  backgroundColor: '#ffffff',
+                  borderBottomWidth: 2,
+                  borderBottomColor: '#50CCC3',
                   paddingHorizontal: 5,
                   paddingVertical: 12,
-                  backgroundColor: 'white',
                 }}
                 onPress={() => this.handleClickOptionAll()}>
                 <Image
                   source={
                     optionAll.isCheck ? Images.imgIcCheck : Images.imgIcUnCheck
                   }
-                  style={{width: 20, height: 20, marginRight: 10}}
+                  style={{ width: 20, height: 20, marginRight: 10 }}
                 />
                 <Text
-                  style={{color: optionAll.isCheck ? '#222222' : '#555555'}}>
+                  style={{
+                    color: optionAll.isCheck ? '#318E87' : '#222222',
+                    fontWeight: optionAll.isCheck ? 'bold' : 'normal',
+                  }}>
                   {optionAll.title}
                 </Text>
               </TouchableOpacity>
@@ -146,7 +149,7 @@ class index extends Component {
                   marginTop: 25,
                   borderWidth: 1,
                   borderColor: '#cccccc',
-                  backgroundColor: 'white',
+                  backgroundColor: '#f6f7fb',
                   paddingVertical: 10,
                 }}>
                 {listOption.map((e) => {
@@ -173,10 +176,10 @@ class index extends Component {
                           source={
                             e.isCheck ? Images.imgIcCheck : Images.imgIcUnCheck
                           }
-                          style={{width: 20, height: 20, marginRight: 10}}
+                          style={{ width: 20, height: 20, marginRight: 10 }}
                         />
                         <Text
-                          style={{color: e.isCheck ? '#222222' : '#555555'}}>
+                          style={{ color: e.isCheck ? '#222222' : '#555555' }}>
                           {e.title}
                         </Text>
                       </TouchableOpacity>
@@ -189,7 +192,7 @@ class index extends Component {
                         }}
                         onPress={() => this.onPressChild(e)}>
                         <Image
-                          style={{width: 15, height: 15}}
+                          style={{ width: 15, height: 15 }}
                           source={Images.imgIcArrowRight}
                         />
                       </TouchableOpacity>
@@ -200,18 +203,23 @@ class index extends Component {
             </View>
           </Content>
         </Body>
-        <Footer style={{backgroundColor: '#499DA7'}}>
+        <Footer
+          style={{ backgroundColor: 'white', height: 60, borderTopWidth: 0 }}>
           <TouchableOpacity
             disabled={!canNext}
             style={{
-              backgroundColor: canNext ? '#499DA7' : '#999999',
-              width,
+              backgroundColor: canNext ? '#50CCC3' : '#999999',
+              width: width - 20,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              borderRadius: 30,
+              height: 50,
             }}
             onPress={() => this.props.navigation.navigate('SignUp')}>
-            <Text style={{color: 'white', fontSize: 18}}>다음</Text>
+            <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
+              다음
+            </Text>
           </TouchableOpacity>
         </Footer>
       </Container>

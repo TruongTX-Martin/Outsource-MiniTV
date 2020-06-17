@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Images2 from '../../assets/images2';
+import Images from '../../assets/images';
 import styles from './style';
 
 class index extends Component {
@@ -12,10 +13,22 @@ class index extends Component {
             <TouchableOpacity
               style={styles.buttonLeft}
               onPress={() => this.props.navigation.goBack()}>
-              <Image
-                style={styles.imageButtonLeft}
-                source={Images2.imgIcBack}
-              />
+              {this.props.smallBack && (
+                <Image
+                  style={{ width: 13, height: 25 }}
+                  source={Images.imgIcBack}
+                />
+              )}
+              {!this.props.smallBack && (
+                <Image
+                  style={styles.imageButtonLeft}
+                  source={
+                    this.props.backGray
+                      ? Images2.imgIcBackGray
+                      : Images2.imgIcBack
+                  }
+                />
+              )}
             </TouchableOpacity>
           )}
         </View>
