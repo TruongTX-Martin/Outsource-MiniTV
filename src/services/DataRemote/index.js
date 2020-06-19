@@ -272,6 +272,16 @@ const getChannelDetail = async (id) => {
   });
 };
 
+const authPhone = async (params) => {
+  const accessToken = await DataLocal.getAccessToken();
+  return await axios.post('/auth/phone-number', params, {
+    headers: {
+      'X-Access-Token': accessToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export default {
   generateAccessToken,
   signUp,
@@ -296,4 +306,5 @@ export default {
   getChannelDetail,
   pokeChannel2,
   updatePushAlert,
+  authPhone,
 };

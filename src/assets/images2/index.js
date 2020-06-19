@@ -25,4 +25,7 @@ export default {
   imgIcCommingSoonOn: require('./icon_comingsoon_on.png'),
   imgIcSet: require('./icon_set.png'),
   imgBgMyPage: require('./bg_mypage.png'),
+  imgLogo2: require('./logo-2.png'),
+  imgIcBirthDay: require('./icon_birth.png'),
+  imgMyAlertListEmpty: require('./img-empty-my.png'),
 };

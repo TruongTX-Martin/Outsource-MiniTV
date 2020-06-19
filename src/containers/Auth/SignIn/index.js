@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Container, Body, Content } from 'native-base';
 import Images from '../../../assets/images';
+import Images2 from '../../../assets/images2';
 import { connect } from 'react-redux';
 import * as authActions from '../../../redux/actions/authActions';
 import TextInput from '../../../components/TextField';
@@ -23,6 +24,7 @@ import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import { NaverLogin, getProfile } from '@react-native-seoul/naver-login';
 import Localization from '../../../localization';
+import { setWidthScreen, setHeightScreen } from '../../../utils';
 
 //naver
 const androidkeys = {
@@ -74,9 +76,12 @@ class index extends Component {
   }
 
   onLayout(e) {
+    const { width, height } = Dimensions.get('window');
+    setWidthScreen(width);
+    setHeightScreen(height);
     this.setState({
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
+      width,
+      height,
     });
   }
 
@@ -127,7 +132,7 @@ class index extends Component {
       EventRegister.emit(Constants.EVENT_SIGNIN_SUCCESS);
     }
     if (!snsSuccess && snsMessage == 'failed') {
-      this.props.navigation.navigate('SignUpMoreInfor', {
+      this.props.navigation.navigate('SignUpConfirmCode', {
         isSnsSignUp: true,
         snsSignUpParams: this.state.paramSignUp,
       });
@@ -277,12 +282,27 @@ class index extends Component {
                   visible={loading || snsLoading}
                   textStyle={{ color: '#fff' }}
                 />
-                <View style={{ display: 'flex', alignItems: 'center' }}>
+                <View
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                  }}>
                   <Image
-                    source={Images.imgLogo}
+                    source={Images2.imgLogo2}
                     style={{
                       width: width / 3,
                       height: ((width / 3) * 90) / 340,
+                      marginTop: 60,
+                      marginBottom: 40,
+                    }}
+                  />
+                  <Image
+                    source={Images2.imgIcOnAir}
+                    style={{
+                      width: 53,
+                      height: 42,
                       marginTop: 60,
                       marginBottom: 40,
                     }}

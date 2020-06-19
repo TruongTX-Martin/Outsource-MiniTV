@@ -73,6 +73,7 @@ export function* pokeChannel(action) {
     if (result.status == 200) {
       yield put(liveActions.pokeChannelSuccess());
       yield put(liveActions.liveMainGet());
+      yield put(liveActions.getPokeList());
     } else {
       yield put(liveActions.pokeChannelFailed());
     }
@@ -86,7 +87,6 @@ export function* getPokeList(action) {
     yield put(liveActions.getPokeListStart());
     const result = yield DataRemote.getPokeList();
     if (result.status == 200) {
-      console.log('Get poke list result data:', result);
       yield put(liveActions.getPokeListSuccess(result.data));
     } else {
       yield put(liveActions.getPokeListFailed());

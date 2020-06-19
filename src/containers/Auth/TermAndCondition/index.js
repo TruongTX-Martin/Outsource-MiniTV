@@ -4,8 +4,10 @@ import { Container, Body, Content, Footer, Header } from 'native-base';
 import Images from '../../../assets/images';
 import Config from '../../../config';
 import HeaderBase from '../../../components/HeaderBase';
-const { width, height } = Dimensions.get('window');
+import { getWidthScreen, getHeightScreen } from '../../../utils';
 
+let width = 0;
+let height = 0;
 class index extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +39,8 @@ class index extends Component {
         },
       ],
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   onPressChild(item) {

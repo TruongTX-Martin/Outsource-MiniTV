@@ -10,6 +10,7 @@ import TermOfUse from '../Auth/TermChild/TermOfUse';
 import PrivacyTerm from '../Auth/TermChild/PrivacyTerm';
 import MarketingTerm from '../Auth/TermChild/MarketingTerm';
 import SignUp from '../Auth/SignUp';
+import SignUpConfirmCode from '../Auth/SignUpConfirmCode';
 import SignUpMoreInfor from '../Auth/SignUpMoreInfor';
 import FindPassword from '../Auth/FindPassword';
 import SlideMenu from '../SlideMenu';
@@ -21,6 +22,7 @@ import ChannelDetail from '../Home/ChannelDetail';
 import ChannelDetail2 from '../Home/V2/ChannelDetail';
 import SettingV2 from '../Home/V2/Setting';
 import MyPageV2 from '../Home/V2/MyPage';
+import MyAlertList from '../Home/V2/MyALertList';
 import ProgramDetail from '../Home/ProgramDetail';
 import WebCast from '../Home/WebCast';
 import Alert from '../Home/Alert';
@@ -69,6 +71,13 @@ const stackNavigator = createStackNavigator(
     },
     SignUp: {
       screen: SignUp,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    SignUpConfirmCode: {
+      screen: SignUpConfirmCode,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',
@@ -132,6 +141,13 @@ const stackNavigator = createStackNavigator(
     },
     EditMyPageV2: {
       screen: EditMyPageV2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    MyAlertList: {
+      screen: MyAlertList,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

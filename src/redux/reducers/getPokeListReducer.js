@@ -14,7 +14,6 @@ const getPokeListReducer = createReducer(initialState, {
     };
   },
   [Types.POKE_LIST_SUCCESS](state, action) {
-    console.log('POKE_LIST_SUCCESS:', action);
     return {
       ...state,
       loading: false,

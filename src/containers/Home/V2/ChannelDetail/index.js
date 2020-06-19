@@ -12,12 +12,8 @@ import { Container, Body, Header, Content, Footer } from 'native-base';
 import Config from '../../../../config';
 import HeaderBase from '../../../../components/HeaderBase';
 import { connect } from 'react-redux';
-import Images from '../../../../assets/images';
-import Spinner from 'react-native-loading-spinner-overlay';
-import Modal from 'react-native-modals';
 import * as liveActions from '../../../../redux/actions/liveActions';
 import * as channelActions from '../../../../redux/actions/channelActions';
-import Share from 'react-native-share';
 import images2 from '../../../../assets/images2';
 
 const TAB = {

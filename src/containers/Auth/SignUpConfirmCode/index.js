@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, Image } from 'react-native';
+import { View, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import { Container, Body, Content, Footer, Header } from 'native-base';
 import TextInputCustom from '../../../components/TextField';
 import Images from '../../../assets/images';
@@ -8,10 +8,8 @@ import HeaderBase from '../../../components/HeaderBase';
 import Config from '../../../config';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import moment from 'moment';
 import { EventRegister } from 'react-native-event-listeners';
 import Constants from '../../../config/Constant';
-import DatePicker from 'react-native-datepicker';
 import * as authActions from '../../../redux/actions/authActions';
 import { getWidthScreen, getHeightScreen } from '../../../utils';
 import DataRemote from '../../../services/DataRemote';
@@ -25,15 +23,23 @@ const GENDER = {
   FEMALE: 1,
 };
 
+const CERTIFICATE_STATUS = {
+  NOT_CHECK: 0,
+  PASS: 1,
+  FAILED: 2,
+};
+
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childName: '',
+      parrentName: '',
+      phoneNumber: '',
+      confirmCode: '',
       isModalVisible: false,
-      date: null,
-      gender: -1,
-      loading: false,
+      checkingPhone: false,
+      certificateNumber: '',
+      certificateStatus: CERTIFICATE_STATUS.NOT_CHECK,
     };
     this.isSnsSignUp = props.navigation.getParam('isSnsSignUp', null);
     this.snsSignUpParams = props.navigation.getParam('snsSignUpParams', null);
@@ -41,11 +47,6 @@ class index extends Component {
     width = getWidthScreen();
     height = getHeightScreen();
     widthView = width - 40;
-  }
-
-  componentDidMount() {
-    const params = this.props.navigation.getParam('params', null);
-    console.log('componentDidMount:', params);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,63 +68,124 @@ class index extends Component {
     this.props.clearSignUpData();
   }
 
-  async handleSignUp() {
-    const { childName, gender, date } = this.state;
-    let params = this.props.navigation.getParam('params', null);
-    params.student_name = childName;
-    params.birthday = date.split('.').join('');
-    params.sex = gender == GENDER.MALE ? 'MALE' : 'FEMALE';
-    params.marketing_agree = true;
+  handleSignUp() {
+    let params = null;
+    const email = this.props.navigation.getParam('email', null);
+    const password = this.props.navigation.getParam('password', null);
+    const { parrentName, phoneNumber } = this.state;
     if (this.isSnsSignUp && this.snsSignUpParams != null) {
       params = {
         ...this.snsSignUpParams,
-        ...params,
+        email,
+        password,
+        member_name: parrentName,
+        phone_number: phoneNumber,
+      };
+    } else {
+      params = {
+        email,
+        password,
+        member_name: parrentName,
+        phone_number: phoneNumber,
       };
     }
-    this.setState({ loading: true });
-    const result = await DataRemote.signUp(params);
-    this.setState({ loading: false });
-    console.log('Result', result);
-    if (result.status == 200) {
-      if (this.isSnsSignUp) {
-        this.props.navigation.pop(4);
-        EventRegister.emit(Constants.EVENT_SNS_SIGNIN_AGAIN);
-      } else {
-        this.showModal();
-      }
+    this.props.navigation.navigate('SignUpMoreInfor', { params });
+  }
+
+  async getCMS() {
+    const { phoneNumber } = this.state;
+    if (phoneNumber.trim().toString().length == 0) {
+      return;
+    }
+    const params = {
+      phone_number: phoneNumber,
+    };
+    this.setState({ checkingPhone: true });
+    const results = await DataRemote.authPhone(params);
+    if (results.status == 200) {
+      const cerNumber = results.data.certi_number;
+      this.setState({
+        certificateNumber: cerNumber,
+        checkingPhone: false,
+      });
+    } else {
+      this.setState({ checkingPhone: false });
+    }
+  }
+
+  isValidPhone(phone) {
+    return /^\d+$/.test(phone) && phone.trim().length > 8;
+  }
+
+  isValidCode(code, certificate) {
+    return /^\d+$/.test(code) && code.trim().length > 2;
+  }
+
+  checkConfirmCode() {
+    const { certificateNumber, confirmCode } = this.state;
+    if (certificateNumber == confirmCode) {
+      this.setState({ certificateStatus: CERTIFICATE_STATUS.PASS });
+    } else {
+      this.setState({ certificateStatus: CERTIFICATE_STATUS.FAILED });
     }
   }
 
   render() {
-    const { childName, isModalVisible, date, gender, loading } = this.state;
+    const {
+      parrentName,
+      isModalVisible,
+      phoneNumber,
+      confirmCode,
+      checkingPhone,
+      certificateNumber,
+      certificateStatus,
+    } = this.state;
+    const { loading } = this.props;
+    const isValidPhone = this.isValidPhone(phoneNumber);
+    const isValidCode = this.isValidCode(confirmCode, certificateNumber);
     const isValidAll =
-      gender != -1 && childName.trim().length > 0 && date != null;
+      certificateStatus == CERTIFICATE_STATUS.PASS && parrentName.length > 0;
     return (
       <Container>
-        <Header
-          style={[
-            Config.Styles.headerWhite,
-            { backgroundColor: '#FDF9ED', borderBottomColor: '#FDF9ED' },
-          ]}>
+        <Header style={Config.Styles.headerWhite}>
           <HeaderBase navigation={this.props.navigation} smallBack />
         </Header>
         <Body>
-          <Content style={{ backgroundColor: '#FDF9ED' }}>
+          <Content>
             <View
               style={{
                 padding: 20,
                 width,
               }}>
               <Spinner visible={loading} textStyle={{ color: '#fff' }} />
-              <Text
-                style={{
-                  color: '#222222',
-                  fontSize: 25,
-                  paddingTop: 50,
-                  fontWeight: '700',
-                }}>
-                아이 정보
+              <Text style={{ color: '#222222', fontSize: 25, paddingTop: 50 }}>
+                회원가입
               </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  display: 'flex',
+                  marginTop: 5,
+                  paddingLeft: 5,
+                }}>
+                <View
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 4,
+                    backgroundColor: '#999999',
+                    marginRight: 5,
+                  }}
+                />
+                <View
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 4,
+                    backgroundColor: '#5DC3D0',
+                  }}
+                />
+              </View>
               <Text
                 style={{
                   color: '#333333',
@@ -131,14 +193,12 @@ class index extends Component {
                   marginTop: 30,
                   marginBottom: 5,
                 }}>
-                아이 이름
+                이름
               </Text>
               <TextInputCustom
                 width={widthView}
-                backgroundColor={'white'}
-                value={childName}
-                placeholder={'아이 이름을 입력해주세요'}
-                onChangeText={(childName) => this.setState({ childName })}
+                value={parrentName}
+                onChangeText={(parrentName) => this.setState({ parrentName })}
               />
               <Text
                 style={{
@@ -147,72 +207,48 @@ class index extends Component {
                   marginTop: 20,
                   marginBottom: 5,
                 }}>
-                성별
+                휴대전화
               </Text>
               <View
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
                 }}>
+                <TextInputCustom
+                  width={widthView - 80}
+                  value={phoneNumber}
+                  placeholder={'‘-‘를 제외한 숫자만 입력해주세요.'}
+                  onChangeText={(phoneNumber) => this.setState({ phoneNumber })}
+                />
                 <TouchableOpacity
                   style={{
+                    backgroundColor: isValidPhone ? '#50CCC3' : '#DDDDDD',
                     display: 'flex',
-                    flexDirection: 'row',
+                    justifyContent: 'center',
                     alignItems: 'center',
-                    borderWidth: 2,
-                    borderColor: gender == GENDER.MALE ? '#50CCC3' : '#CCCCCC',
-                    paddingHorizontal: 25,
-                    paddingVertical: 10,
-                    marginRight: 10,
+                    width: 70,
+                    height: 45,
+                    marginTop: 5,
                   }}
-                  onPress={() => this.setState({ gender: GENDER.MALE })}>
-                  <Image
-                    style={{ width: 20, height: 20, marginRight: 5 }}
-                    source={
-                      gender == GENDER.MALE
-                        ? Images.imgIcCheck
-                        : Images.imgIcUnCheck
-                    }
-                  />
-                  <Text
-                    style={{
-                      fontSize: 17,
-                      color: gender == GENDER.MALE ? '#50CCC3' : '#777777',
-                    }}>
-                    남자
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    borderWidth: 2,
-                    borderColor:
-                      gender == GENDER.FEMALE ? '#50CCC3' : '#CCCCCC',
-                    paddingHorizontal: 25,
-                    paddingVertical: 10,
-                  }}
-                  onPress={() => this.setState({ gender: GENDER.FEMALE })}>
-                  <Image
-                    style={{ width: 20, height: 20, marginRight: 5 }}
-                    source={
-                      gender == GENDER.FEMALE
-                        ? Images.imgIcCheck
-                        : Images.imgIcUnCheck
-                    }
-                  />
-                  <Text
-                    style={{
-                      fontSize: 17,
-                      color: gender == GENDER.FEMALE ? '#50CCC3' : '#777777',
-                    }}>
-                    여자
-                  </Text>
+                  disabled={!isValidPhone}
+                  onPress={() => this.getCMS()}>
+                  {checkingPhone && (
+                    <ActivityIndicator size="small" color="white" />
+                  )}
+                  {!checkingPhone && (
+                    <Text
+                      style={{
+                        color: isValidPhone ? 'white' : '#222222',
+                        fontWeight: 'bold',
+                      }}>
+                      인증
+                    </Text>
+                  )}
                 </TouchableOpacity>
               </View>
+
               <Text
                 style={{
                   color: '#333333',
@@ -220,49 +256,58 @@ class index extends Component {
                   marginTop: 20,
                   marginBottom: 5,
                 }}>
-                생년월일
+                인증번호
               </Text>
-              <TouchableOpacity
+              <View
                 style={{
-                  backgroundColor: 'white',
-                  paddingLeft: 5,
                   display: 'flex',
                   flexDirection: 'row',
-                  alignItems: 'center',
                   justifyContent: 'space-between',
-                  paddingVertical: 3,
-                }}
-                onPress={() => this.datePicker.onPressDate()}>
-                <Text style={{ color: date ? '#222222' : '#A2A2A2' }}>
-                  {date || '생년월일을 입력해주세요.'}
-                </Text>
-                <DatePicker
-                  ref={(picker) => {
-                    this.datePicker = picker;
-                  }}
-                  date={this.state.date}
-                  showIcon={false}
-                  mode="date"
-                  format="YYYY.MM.DD"
-                  minDate="1900.01.01"
-                  maxDate={moment(new Date()).format('YYYY.MM.DD')}
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  customStyles={{
-                    dateInput: { borderWidth: 0 },
-                    dateText: {
-                      textAlign: 'right',
-                      width: 0,
-                      fontSize: 0,
-                      paddingRight: 0,
-                      color: '#575757',
-                    },
-                  }}
-                  onDateChange={(input) => {
-                    this.setState({ date: input });
-                  }}
+                  alignItems: 'flex-start',
+                }}>
+                <TextInputCustom
+                  width={widthView - 80}
+                  value={confirmCode}
+                  onChangeText={(confirmCode) =>
+                    this.setState({
+                      confirmCode,
+                      certificateStatus: CERTIFICATE_STATUS.NOT_CHECK,
+                    })
+                  }
                 />
-              </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: isValidCode ? '#50CCC3' : '#DDDDDD',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 70,
+                    height: 45,
+                    marginTop: 5,
+                  }}
+                  disabled={!isValidCode}
+                  onPress={() => this.checkConfirmCode()}>
+                  <Text
+                    style={{
+                      color: isValidCode ? 'white' : '#222222',
+                      fontWeight: 'bold',
+                    }}>
+                    확인
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              {certificateStatus == CERTIFICATE_STATUS.FAILED && (
+                <Text
+                  style={{ fontSize: 13, color: '#F7543F', fontWeight: '300' }}>
+                  인증번호를 다시 확인해주세요.
+                </Text>
+              )}
+              {certificateStatus == CERTIFICATE_STATUS.PASS && (
+                <Text
+                  style={{ fontSize: 13, color: '#1A8DFF', fontWeight: '300' }}>
+                  인증되었습니다!
+                </Text>
+              )}
             </View>
           </Content>
         </Body>
@@ -335,7 +380,7 @@ class index extends Component {
                 }}
                 onPress={() => {
                   this.setState({ isModalVisible: false });
-                  this.props.navigation.pop(4);
+                  this.props.navigation.pop(3);
                 }}>
                 <Text style={{ color: 'white', fontSize: 17 }}>확인</Text>
               </TouchableOpacity>

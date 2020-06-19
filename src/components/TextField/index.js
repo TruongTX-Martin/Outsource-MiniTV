@@ -19,7 +19,7 @@ class index extends Component {
             borderRadius: 5,
             marginTop: 5,
             height: 45,
-            backgroundColor: '#F4F5FA',
+            backgroundColor: this.props.backgroundColor || '#F4F5FA',
             marginBottom: Platform.OS === 'ios' ? 4 : 0,
             paddingLeft: 5,
             width: this.props.width,

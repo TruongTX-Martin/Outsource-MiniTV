@@ -10,9 +10,10 @@ import Modal from 'react-native-modal';
 import DataRemote from '../../../services/DataRemote';
 import validateInput from '../../../helpers/Validate';
 import * as authActions from '../../../redux/actions/authActions';
+import { getWidthScreen, getHeightScreen } from '../../../utils';
 
-const { width, height } = Dimensions.get('window');
-
+let width = 0;
+let height = 0;
 class index extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +34,8 @@ class index extends Component {
         },
       },
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   async findPassword() {
@@ -176,13 +179,13 @@ class index extends Component {
               }}>
               <TouchableOpacity
                 style={{
-                  width: width - 60,
-                  backgroundColor: '#499DA7',
-                  height: 55,
+                  backgroundColor: '#50CCC3',
+                  height: 50,
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderRadius: 5,
+                  paddingHorizontal: 55,
                 }}
                 onPress={() => {
                   this.setState({ isModalVisible: false });

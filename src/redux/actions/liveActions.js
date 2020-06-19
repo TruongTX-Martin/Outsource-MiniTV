@@ -205,7 +205,7 @@ export function channelListStart() {
 export function channelListSuccess(list) {
   return {
     type: Types.CHANNEL_LIST_SUCCESS,
-    list
+    list,
   };
 }
 
@@ -236,7 +236,7 @@ export function channelDetailStart() {
 export function channelDetailSuccess(detail) {
   return {
     type: Types.CHANNEL_DETAIL_SUCCESS,
-    detail
+    detail,
   };
 }
 export function channelDetailFailed() {

@@ -8,7 +8,10 @@ import validateInput from '../../../helpers/Validate';
 import DataRemote from '../../../services/DataRemote';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Localization from '../../../localization';
-const { width } = Dimensions.get('window');
+import { getWidthScreen, getHeightScreen } from '../../../utils';
+
+let width = 0;
+let height = 0;
 
 class index extends Component {
   constructor(props) {
@@ -51,6 +54,8 @@ class index extends Component {
         },
       },
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   async handleSignUp() {
@@ -82,7 +87,7 @@ class index extends Component {
       return;
     }
 
-    this.props.navigation.navigate('SignUpMoreInfor', {
+    this.props.navigation.navigate('SignUpConfirmCode', {
       email: email,
       password: password,
     });

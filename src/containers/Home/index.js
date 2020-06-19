@@ -452,7 +452,8 @@ class index extends Component {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                  }}>
+                  }}
+                  onPress={() => this.props.navigation.navigate('MyAlertList')}>
                   <Image
                     style={{ width: 50, height: 50 }}
                     source={Images2.imgIconAlamp}
@@ -791,7 +792,7 @@ class index extends Component {
                       style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        paddingLeft: 50,
+                        paddingLeft: 30,
                       }}>
                       {listChannel != null &&
                         listChannel.map((e) => {
@@ -807,12 +808,20 @@ class index extends Component {
                               <Image
                                 source={{ uri: e.thumbnail }}
                                 style={{
-                                  width: 250,
-                                  height: 150,
-                                  borderRadius: 10,
+                                  width: width / 3 - 40,
+                                  height: ((width / 3 - 40) * 4) / 5,
+                                  borderRadius: 50,
                                 }}
                               />
-                              <Text>{e.title}</Text>
+                              <Text
+                                style={{
+                                  textAlign: 'center',
+                                  color: '#141414',
+                                  fontSize: 13,
+                                  marginTop: 10,
+                                }}>
+                                {e.title}
+                              </Text>
                             </TouchableOpacity>
                           );
                         })}

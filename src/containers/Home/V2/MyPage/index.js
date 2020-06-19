@@ -90,8 +90,8 @@ class index extends Component {
                     alignItems: 'center',
                   }}>
                   <Image
-                    style={{ width: 25, height: 25 }}
-                    source={Image2.imgIcBtnPlay}
+                    style={{ width: 15, height: 15 }}
+                    source={Image2.imgIcBirthDay}
                   />
                   <Text style={{ fontSize: 16, color: '#333333', marginLeft: 5 }}>
                     생년월일

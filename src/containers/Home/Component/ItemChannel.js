@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, Image} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 class index extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class index extends Component {
   }
 
   render() {
-    const {item, widthView} = this.props;
+    const { item, widthView } = this.props;
     return (
       <TouchableOpacity
         style={{
@@ -21,7 +21,7 @@ class index extends Component {
           marginLeft: 5,
         }}
         onPress={() =>
-          this.props.navigation.navigate('ChannelDetail', {id: item.live_uid})
+          this.props.navigation.navigate('ChannelDetail', { id: item.live_uid })
         }>
         <Image
           style={{
@@ -31,7 +31,7 @@ class index extends Component {
             borderTopRightRadius: 10,
           }}
           resizeMode="stretch"
-          source={{uri: item.thumbnail}}
+          source={{ uri: item.thumbnail }}
         />
         <View
           style={{
@@ -49,7 +49,7 @@ class index extends Component {
             elevation: 5,
             backgroundColor: '#ffffff',
           }}>
-          <Text style={{marginLeft: 10, marginTop: 10}}>{item.title}</Text>
+          <Text style={{ marginLeft: 10, marginTop: 10 }}>{item.title}</Text>
           <View
             style={{
               display: 'flex',
@@ -58,7 +58,7 @@ class index extends Component {
             }}>
             <TouchableOpacity>
               {item.tags && (
-                <Text style={{color: '#999999', marginRight: 5}}>
+                <Text style={{ color: '#999999', marginRight: 5 }}>
                   {item.tags}
                 </Text>
               )}
