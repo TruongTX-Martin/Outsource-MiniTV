@@ -7,7 +7,7 @@ import {
   Image,
   Switch,
 } from 'react-native';
-import { Container, Body, Header } from 'native-base';
+import { Container, Body, Header, Content } from 'native-base';
 import HeaderBase from '../../../../components/HeaderBase';
 import * as authActions from '../../../../redux/actions/authActions';
 import Config from '../../../../config';
@@ -36,7 +36,6 @@ class index extends Component {
   }
 
   render() {
-    const { meData } = this.props;
     const { isEnabled, isUpdateEnableState } = this.state;
     if (!isUpdateEnableState) {
       this.setState({
@@ -54,113 +53,170 @@ class index extends Component {
           />
         </Header>
         <Body>
-          <View style={{ width, height, backgroundColor: '#F0F0F0' }}>
-            <View style={{ display: 'flex', flex: 1, flexDirection: 'row' }}>
-              <View style={{ display: 'flex', flex: 1 }} />
-              <View style={{ display: 'flex', flex: 7, paddingTop: 50 }}>
-                <TouchableOpacity
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    borderBottomWidth: 1,
-                    borderBottomColor: '#bebec0',
-                    paddingBottom: 5,
-                  }}
-                  onPress={() =>
-                    this.props.navigation.navigate('ChangePasswordV2')
-                  }>
-                  <Text
-                    style={{
-                      color: '#333333',
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                    }}>
-                    비밀번호 변경
-                  </Text>
-                  <Image
-                    style={{ width: 20, height: 20 }}
-                    source={Images.imgIcArrowRight}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginTop: 15,
-                  }}>
-                  <Text
-                    style={{
-                      color: '#333333',
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                    }}>
-                    앱 알림 push
-                  </Text>
-                  <View
+          <Content>
+            <View style={{ width, height, backgroundColor: '#F0F0F0' }}>
+              <View style={{ display: 'flex', flex: 1, flexDirection: 'row' }}>
+                <View style={{ display: 'flex', flex: 1 }} />
+                <View style={{ display: 'flex', flex: 7, paddingTop: 20 }}>
+                  <TouchableOpacity
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginTop: 15,
                       alignItems: 'center',
                     }}>
                     <Text
                       style={{
-                        color: isEnabled ? '#50CCC3' : '#575757',
-                        marginRight: 10,
-                        fontSize: 15,
+                        color: '#333333',
+                        fontSize: 16,
                         fontWeight: 'bold',
                       }}>
-                      {isEnabled ? 'On' : 'OFF'}
+                      앱 알림 push
                     </Text>
-                    <Switch
-                      trackColor={{ false: '#d0d0d0', true: '#50CCC3' }}
-                      thumbColor={'white'}
-                      onValueChange={() => {
-                        this.setState({ isEnabled: !isEnabled });
-                        this.props.updatePushAlert(!isEnabled);
-                      }}
-                      value={isEnabled}
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
+                      <Text
+                        style={{
+                          color: isEnabled ? '#50CCC3' : '#575757',
+                          marginRight: 10,
+                          fontSize: 15,
+                          fontWeight: 'bold',
+                        }}>
+                        {isEnabled ? 'On' : 'OFF'}
+                      </Text>
+                      <Switch
+                        trackColor={{ false: '#d0d0d0', true: '#50CCC3' }}
+                        thumbColor={'white'}
+                        onValueChange={() => {
+                          this.setState({ isEnabled: !isEnabled });
+                          this.props.updatePushAlert(!isEnabled);
+                        }}
+                        value={isEnabled}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      borderTopWidth: 1,
+                      borderTopColor: '#bebec0',
+                      paddingTop: 10,
+                      marginTop: 10,
+                    }}
+                    onPress={() =>
+                      this.props.navigation.navigate('EditMyInforV2')
+                    }>
+                    <Text
+                      style={{
+                        color: '#333333',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                      }}>
+                      내 정보 수정
+                    </Text>
+                    <Image
+                      style={{ width: 20, height: 20 }}
+                      source={Images.imgIcArrowRight}
                     />
-                  </View>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 100,
-                  }}>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      borderTopWidth: 1,
+                      borderTopColor: '#bebec0',
+                      paddingTop: 10,
+                      marginTop: 10,
+                    }}
+                    onPress={() => {
+                      console.log('Goto my policy');
+                    }}>
+                    <Text
+                      style={{
+                        color: '#333333',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                      }}>
+                      개인정보 처리방침
+                    </Text>
+                    <Image
+                      style={{ width: 20, height: 20 }}
+                      source={Images.imgIcArrowRight}
+                    />
+                  </TouchableOpacity>
                   <View
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      borderTopWidth: 1,
+                      borderTopColor: '#bebec0',
+                      paddingTop: 10,
+                      marginTop: 10,
                     }}>
-                    <TouchableOpacity
+                    <Text
                       style={{
-                        paddingRight: 10,
-                        borderRightWidth: 1,
-                        borderRightColor: '#9A9A9A',
-                      }}
-                      onPress={() =>
-                        this.props.navigation.navigate('DeleteAccountV2')
-                      }>
-                      <Text style={{ color: '#9A9A9A' }}>회원 탈퇴</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={{ paddingLeft: 10 }}
-                      onPress={() => {
-                        this.props.navigation.pop(2);
-                        EventRegister.emit(Constants.EVENT_SIGN_OUT);
+                        color: '#333333',
+                        fontSize: 16,
+                        fontWeight: 'bold',
                       }}>
-                      <Text style={{ color: '#9A9A9A' }}>로그아웃</Text>
-                    </TouchableOpacity>
+                      버전 정보
+                    </Text>
+                    <Text
+                      style={{
+                        color: '#333333',
+                        fontSize: 16,
+                        fontWeight: '300',
+                      }}>
+                      1.2.0
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 30,
+                    }}>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                      }}>
+                      <TouchableOpacity
+                        style={{
+                          paddingRight: 10,
+                          borderRightWidth: 1,
+                          borderRightColor: '#9A9A9A',
+                        }}
+                        onPress={() =>
+                          this.props.navigation.navigate('DeleteAccountV2')
+                        }>
+                        <Text style={{ color: '#9A9A9A' }}>회원 탈퇴</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={{ paddingLeft: 10 }}
+                        onPress={() => {
+                          this.props.navigation.pop(2);
+                          EventRegister.emit(Constants.EVENT_SIGN_OUT);
+                        }}>
+                        <Text style={{ color: '#9A9A9A' }}>로그아웃</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
+                <View style={{ display: 'flex', flex: 1 }} />
               </View>
-              <View style={{ display: 'flex', flex: 1 }} />
             </View>
-          </View>
+          </Content>
         </Body>
       </Container>
     );

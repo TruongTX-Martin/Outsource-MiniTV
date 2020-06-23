@@ -35,16 +35,11 @@ import Intro2 from '../Intro2';
 import DeleteAccount from '../Home/Setting/DeleteAccount';
 import PlayVideo from '../Home/PlayVideo';
 import EditMyPageV2 from '../Home/V2/EditMyPage';
+import EditMyInforV2 from '../Home/V2/EditMyInfor';
 import ChangePasswordV2 from '../Home/V2/ChangePassword';
+import ChangePhoneNumberV2 from '../Home/V2/ChangePhoneNumber';
 import DeleteAccountV2 from '../Home/V2/DeleteAccount';
 const { width } = Dimensions.get('window');
-
-//use with case don't need slidemenu
-// export default StackNavigator({
-//   Home: { screen: HomeScreen },
-//   Detail: { screen: DetailScreen }
-// }, {
-//       headerMode: 'none'
 
 const stackNavigator = createStackNavigator(
   {
@@ -146,6 +141,13 @@ const stackNavigator = createStackNavigator(
         drawerLockMode: 'locked-closed',
       }),
     },
+    EditMyInforV2: {
+      screen: EditMyInforV2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
     MyAlertList: {
       screen: MyAlertList,
       navigationOptions: () => ({
@@ -155,6 +157,13 @@ const stackNavigator = createStackNavigator(
     },
     ChangePasswordV2: {
       screen: ChangePasswordV2,
+      navigationOptions: () => ({
+        header: null,
+        drawerLockMode: 'locked-closed',
+      }),
+    },
+    ChangePhoneNumberV2: {
+      screen: ChangePhoneNumberV2,
       navigationOptions: () => ({
         header: null,
         drawerLockMode: 'locked-closed',

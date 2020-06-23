@@ -174,6 +174,16 @@ const changePassword = async (params) => {
   });
 };
 
+const changePhoneNumber = async (params) => {
+  const userToken = await DataLocal.getUserToken();
+  return await axios.post('/mypage/change-phoneNumber', params, {
+    headers: {
+      'X-User-Token': userToken,
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 const getMe = async () => {
   const userToken = await DataLocal.getUserToken();
   return await axios.get('/mypage/member-account', {
@@ -293,6 +303,7 @@ export default {
   getListReplay,
   getDetail,
   changePassword,
+  changePhoneNumber,
   getMe,
   updateProfile,
   updateProfileImage,

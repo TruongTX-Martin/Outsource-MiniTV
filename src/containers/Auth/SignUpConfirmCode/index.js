@@ -114,7 +114,7 @@ class index extends Component {
   }
 
   isValidPhone(phone) {
-    return /^\d+$/.test(phone) && phone.trim().length > 8;
+    return /^\d+$/.test(phone) && phone.trim().length == 11;
   }
 
   isValidCode(code, certificate) {
