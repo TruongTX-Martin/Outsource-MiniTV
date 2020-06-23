@@ -13,7 +13,7 @@ import Config from '../../../../config';
 import HeaderBase from '../../../../components/HeaderBase';
 import { connect } from 'react-redux';
 import * as liveActions from '../../../../redux/actions/liveActions';
-import * as channelActions from '../../../../redux/actions/channelActions';
+import DataRemote from '../../../../services/DataRemote';
 import images2 from '../../../../assets/images2';
 
 const TAB = {
@@ -105,6 +105,13 @@ class index extends Component {
   getData() {
     const id = this.props.navigation.getParam('id', null);
     this.props.getChannelDetail(id);
+  }
+
+  async handlePokeChannel(liveId, params) {
+    const results = await DataRemote.pokeChannel(liveId, params);
+    if (results.status == 200) {
+      this.getData();
+    }
   }
 
   render() {
@@ -236,11 +243,9 @@ class index extends Component {
               {currentTab == TAB.TAB_SERI_LIST && (
                 <ScrollView
                   horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  style={{ width }}>
+                  showsHorizontalScrollIndicator={false}>
                   <View
                     style={{
-                      width,
                       display: 'flex',
                       flexDirection: 'row',
                       padding: 20,
@@ -255,7 +260,9 @@ class index extends Component {
                             justifyContent: 'flex-end',
                           }}
                           onPress={() =>
-                            this.props.navigation.navigate('ProgramDetail')
+                            this.props.navigation.navigate('ProgramDetail', {
+                              live_uid: e.live_uid,
+                            })
                           }>
                           <Image
                             source={{ uri: e.thumbnail }}
@@ -281,13 +288,9 @@ class index extends Component {
                             </Text>
                             <TouchableOpacity
                               onPress={() =>
-                                this.props.pokeChannel(
-                                  e?.live_uid,
-                                  detail?.channel_uid,
-                                  {
-                                    available: !e?.wish_available,
-                                  },
-                                )
+                                this.handlePokeChannel(e?.live_uid, {
+                                  available: !e?.wish_available,
+                                })
                               }>
                               <Image
                                 style={{ width: 35, height: 35 }}
@@ -321,14 +324,15 @@ class index extends Component {
 const mapStateToProps = (state) => {
   return {
     detail: state.channelGetDetailReducer.detail,
+    isSuccessPoke: state.getPokeListReducer.isSuccess,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getChannelDetail: (id) => dispatch(liveActions.channelDetailGet(id)),
-    pokeChannel: (liveId, liveIdRefresh, available) =>
-      dispatch(channelActions.pokeChannel2(liveId, liveIdRefresh, available)),
+    pokeChannel: (liveId, available) =>
+      dispatch(liveActions.pokeChannel(liveId, available)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(index);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import Images2 from '../../../../assets/images2';
+import Images2 from '../../../../../assets/images2';
 import styles from './style';
 
 class index extends Component {

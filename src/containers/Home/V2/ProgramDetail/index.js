@@ -10,15 +10,16 @@ import {
   ImageBackground,
 } from 'react-native';
 import { Container, Body, Header, Content, Footer } from 'native-base';
-import Config from '../../../config';
+import Config from '../../../../config';
 import HeaderBase from './HeaderBase';
 import { connect } from 'react-redux';
-import Images from '../../../assets/images';
+import Images from '../../../../assets/images';
 import Spinner from 'react-native-loading-spinner-overlay';
-import * as liveActions from '../../../redux/actions/liveActions';
+import * as liveActions from '../../../../redux/actions/liveActions';
 import Share from 'react-native-share';
-import images2 from '../../../assets/images2';
+import images2 from '../../../../assets/images2';
 import Modal from 'react-native-modal';
+import DataRemote from '../../../../services/DataRemote';
 
 const { width, height } = Dimensions.get('window');
 
@@ -40,15 +41,94 @@ class index extends Component {
     });
   }
 
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
+    const live_uid = this.props.navigation.getParam('live_uid', null);
+    this.props.getDetail(live_uid);
+  }
+
+  getColorItemSchedule(index) {
+    if (index == 0) {
+      return '#50CCC3';
+    } else if (index == 1) {
+      return '#FC8D56';
+    }
+    return '#B969FF';
+  }
+
+  async handlePoke(e) {
+    const result = await DataRemote.pokeChannel(e?.live_uid, {
+      available: !e?.wish_available,
+    });
+    if (result.status == 200) {
+      this.getData();
+    }
+  }
+
+  generateItemSchedule(e, index) {
+    return (
+      <View style={{ padding: 10, width: (width - 300) / 3 }}>
+        <View
+          style={{
+            borderWidth: 3,
+            borderColor: this.getColorItemSchedule(index),
+            backgroundColor: e.wish_available
+              ? this.getColorItemSchedule(index)
+              : 'white',
+            borderRadius: 10,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingHorizontal: 10,
+            paddingVertical: 20,
+          }}>
+          <Text
+            style={{
+              color: e.wish_available ? 'white' : '#50CCC3',
+              fontSize: 14,
+            }}>
+            {e.startDate}
+          </Text>
+          <Text
+            style={{
+              color: e.wish_available ? 'white' : '#50CCC3',
+              fontSize: 14,
+            }}>
+            {e.startTime}
+          </Text>
+        </View>
+        <TouchableOpacity
+          style={{
+            width: 40,
+            height: 40,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+          onPress={() => this.handlePoke(e)}>
+          <Image
+            style={{ width: 40, height: 40 }}
+            source={
+              e.wish_available ? images2.imgIconAlamp : images2.imgIconAlampOff
+            }
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     const { width, isShowModal } = this.state;
-    const listSeries = [1, 2, 3, 4, 5, 6, 7];
+    const { detail, loadingProgram } = this.props;
     return (
       <Container>
         <Header style={Config.Styles.header}>
           <HeaderBase
             navigation={this.props.navigation}
-            title="Ten Little Indians"
+            title={detail?.title}
             showCalendar={() => this.setState({ isShowModal: true })}
           />
         </Header>
@@ -57,6 +137,7 @@ class index extends Component {
             showsVerticalScrollIndicator={false}
             style={Config.Styles.body}>
             <View onLayout={this.onLayout}>
+              <Spinner visible={loadingProgram} textStyle={{ color: '#fff' }} />
               <Text
                 style={{
                   textAlign: 'center',
@@ -76,7 +157,11 @@ class index extends Component {
                     paddingHorizontal: width / 4,
                     marginTop: 20,
                   }}>
-                  {listSeries.map((e) => {
+                  {detail?.activity_list.map((e, index) => {
+                    //only show 3 item -> this is requirement
+                    if (index > 2) {
+                      return null;
+                    }
                     return (
                       <View
                         style={{
@@ -85,8 +170,12 @@ class index extends Component {
                           justifyContent: 'flex-end',
                         }}>
                         <Image
-                          source={images2.imgItemHomeTest}
-                          style={{ width: width / 2, borderRadius: 10 }}
+                          source={{ uri: e.thumbnail }}
+                          style={{
+                            width: width / 2,
+                            height: ((width / 2) * 198) / 352,
+                            borderRadius: 10,
+                          }}
                         />
                         <Text
                           style={{
@@ -94,9 +183,9 @@ class index extends Component {
                             color: '#222222',
                             fontWeight: 'bold',
                             fontSize: 14,
-                            marginTop: 20,
+                            marginTop: 10,
                           }}>
-                          숫자세며 물건 줍기
+                          {e.title}
                         </Text>
                         <Text
                           style={{
@@ -105,8 +194,7 @@ class index extends Component {
                             fontWeight: '300',
                             fontSize: 14,
                           }}>
-                          인디언 친구들이 필요로 하는 물건을 수에 맞게
-                          찾아보아요.
+                          {e.subscript}
                         </Text>
                       </View>
                     );
@@ -130,17 +218,48 @@ class index extends Component {
               justifyContent: 'center',
               paddingRight: 50,
             }}>
-            <Image
+            <ImageBackground
               source={images2.imgPopup}
               style={{
+                width: width - 100,
                 height: height - 50,
-                width: ((height - 50) * 25) / 16,
               }}
-            />
+              resizeMethod={'contain'}>
+              <View
+                style={{
+                  paddingHorizontal: 100,
+                  paddingTop: 80,
+                }}>
+                <Text
+                  style={{
+                    color: '#333333',
+                    fontSize: 24,
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                  }}>
+                  다음 방송이 기다리고 있어요!
+                </Text>
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: width - 300,
+                  }}>
+                  {detail?.next_lives.map((e, index) => {
+                    return this.generateItemSchedule(e, index);
+                  })}
+                </View>
+              </View>
+            </ImageBackground>
             <TouchableOpacity
               onPress={() => this.setState({ isShowModal: false })}
-              style={{ position: 'absolute', top: 5, right: 20 }}>
-              <Image source={images2.imgClose} />
+              style={{ position: 'absolute', top: 5, right: 80 }}>
+              <Image
+                source={images2.imgClose}
+                style={{ width: 50, height: 50 }}
+              />
             </TouchableOpacity>
           </View>
         </Modal>
@@ -152,7 +271,7 @@ class index extends Component {
 const mapStateToProps = (state) => {
   return {
     detail: state.liveDetailReducer.detail,
-    loadingChannel: state.liveDetailReducer.loading,
+    loadingProgram: state.liveDetailReducer.loading,
     pokeLoading: state.pokeChannelReducer.loading,
     pokeSuccess: state.pokeChannelReducer.isSuccess,
     pokeAvailabe: state.pokeChannelReducer.pokeAvailabe,

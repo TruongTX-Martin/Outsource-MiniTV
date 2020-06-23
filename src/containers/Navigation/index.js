@@ -23,7 +23,7 @@ import ChannelDetail2 from '../Home/V2/ChannelDetail';
 import SettingV2 from '../Home/V2/Setting';
 import MyPageV2 from '../Home/V2/MyPage';
 import MyAlertList from '../Home/V2/MyALertList';
-import ProgramDetail from '../Home/ProgramDetail';
+import ProgramDetail from '../Home/V2/ProgramDetail';
 import WebCast from '../Home/WebCast';
 import Alert from '../Home/Alert';
 import Setting from '../Home/Setting';
