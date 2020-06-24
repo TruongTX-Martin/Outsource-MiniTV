@@ -79,8 +79,12 @@ class index extends Component {
     if (!validCertificateNumber) {
       return;
     }
+    let phone = phoneNumber;
+    if (phoneNumber.includes('-')) {
+      phone = phoneNumber.split('-').join('').trim();
+    }
     const param = {
-      phone_number: phoneNumber,
+      phone_number: phone,
     };
     this.setState({ loading: true });
     const results = await DataRemote.changePhoneNumber(param);
@@ -89,6 +93,28 @@ class index extends Component {
     } else {
       this.setState({ loading: false });
     }
+  }
+
+  onChangeTextPhoneNumber(phoneNumber) {
+    let phone = phoneNumber;
+    if (phoneNumber.includes('-')) {
+      phone = phoneNumber.split('-').join('').trim();
+    }
+    if (phone.length >= 4) {
+      phone = this.insertString(phone, 3, '-');
+    }
+    if (phone.length >= 9) {
+      phone = this.insertString(phone, 8, '-');
+    }
+    this.setState({
+      phoneNumber: phone,
+      validCertificateNumber: false,
+      certificateNumber: '',
+    });
+  }
+
+  insertString(str, index, value) {
+    return str.substr(0, index) + value + str.substr(index);
   }
 
   render() {
@@ -136,12 +162,9 @@ class index extends Component {
                     value={phoneNumber}
                     placeholder={'휴대전화 번호를 입력해주세요'}
                     onChangeText={(phoneNumber) =>
-                      this.setState({
-                        phoneNumber,
-                        validCertificateNumber: false,
-                        certificateNumber: '',
-                      })
+                      this.onChangeTextPhoneNumber(phoneNumber)
                     }
+                    maxLength={13}
                   />
                   <TouchableOpacity
                     disabled={!validPhone}

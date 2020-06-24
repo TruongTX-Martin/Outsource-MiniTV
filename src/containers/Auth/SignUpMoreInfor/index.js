@@ -43,11 +43,6 @@ class index extends Component {
     widthView = width - 40;
   }
 
-  componentDidMount() {
-    const params = this.props.navigation.getParam('params', null);
-    console.log('componentDidMount:', params);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSuccess) {
       if (this.isSnsSignUp) {
@@ -83,10 +78,9 @@ class index extends Component {
     this.setState({ loading: true });
     const result = await DataRemote.signUp(params);
     this.setState({ loading: false });
-    console.log('Result', result);
     if (result.status == 200) {
       if (this.isSnsSignUp) {
-        this.props.navigation.pop(4);
+        this.props.navigation.pop(2);
         EventRegister.emit(Constants.EVENT_SNS_SIGNIN_AGAIN);
       } else {
         this.showModal();

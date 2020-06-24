@@ -223,8 +223,7 @@ class index extends Component {
               style={{
                 width: width - 100,
                 height: height - 50,
-              }}
-              resizeMethod={'contain'}>
+              }}>
               <View
                 style={{
                   paddingHorizontal: 100,
@@ -244,7 +243,6 @@ class index extends Component {
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
                     width: width - 300,
                   }}>
                   {detail?.next_lives.map((e, index) => {

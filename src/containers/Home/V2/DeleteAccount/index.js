@@ -17,8 +17,9 @@ import Constants from '../../../../config/Constant';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modal';
 import * as myPageActions from '../../../../redux/actions/myPageActions';
-
-const { width, height } = Dimensions.get('window');
+import { getWidthScreen, getHeightScreen } from '../../../../utils';
+let width = 0;
+let height = 0;
 const listReasons = [
   '삭제하고 싶은 내용이 있어요',
   '광고가 너무 많아요',
@@ -34,6 +35,8 @@ class index extends Component {
       isShowModalConfirm: false,
       isShowModalSuccess: false,
     };
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   componentWillReceiveProps(nextProps) {

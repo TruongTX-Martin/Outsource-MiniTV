@@ -33,7 +33,7 @@ import { setWidthScreen, setHeightScreen } from '../../utils';
 
 const STATUS = {
   RESERVED: 'RESERVED',
-  DOING: 'DOING',
+  DOING: 'DOING', // => onair, in another case -> is comming soon
   FINISHED: 'FINISHED',
 };
 
@@ -157,6 +157,7 @@ class index extends Component {
         Orientation.lockToLandscape();
         this.checkPermission();
         this.props.getMainList();
+        this.props.getListChannel();
         this.props.getMe();
       },
     );
@@ -291,7 +292,7 @@ class index extends Component {
       <Container>
         <Body>
           <Content
-            style={{ backgroundColor: '#fefefe' }}
+            style={{ backgroundColor: '#FDF9ED' }}
             showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
@@ -313,16 +314,16 @@ class index extends Component {
                 <TouchableOpacity
                   style={{
                     backgroundColor: '#FFEDED',
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
+                    width: 60,
+                    height: 60,
+                    borderRadius: 30,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
                   onPress={() => this.props.navigation.navigate('MyPageV2')}>
                   <Image
-                    style={{ width: 50, height: 50 }}
+                    style={{ width: 60, height: 60 }}
                     source={Images2.imgIcMyPage}
                   />
                 </TouchableOpacity>
@@ -345,7 +346,7 @@ class index extends Component {
                         this.setState({ currentTab: TAB.TAB_ONAIR });
                       }
                     }}>
-                    {onAir?.status == STATUS.DOING && (
+                    {onAir?.status == STATUS.DOING ? (
                       <Image
                         style={{
                           width: currentTab == TAB.TAB_ONAIR ? 53 : 42,
@@ -357,20 +358,19 @@ class index extends Component {
                             : Images2.imgIcOnAirOff
                         }
                       />
-                    )}
-                    {onAir?.status != STATUS.DOING && (
-                      <Image
-                        style={{
-                          width: currentTab == TAB.TAB_ONAIR ? 53 : 44,
-                          height: 44,
-                        }}
-                        source={
-                          currentTab == TAB.TAB_ONAIR
-                            ? Images2.imgIcCommingSoonOn
-                            : Images2.imgIcCommingSoon
-                        }
-                      />
-                    )}
+                    ) : (
+                        <Image
+                          style={{
+                            width: currentTab == TAB.TAB_ONAIR ? 53 : 44,
+                            height: 44,
+                          }}
+                          source={
+                            currentTab == TAB.TAB_ONAIR
+                              ? Images2.imgIcCommingSoonOn
+                              : Images2.imgIcCommingSoon
+                          }
+                        />
+                      )}
                     <Text
                       style={{
                         fontWeight:
@@ -381,7 +381,7 @@ class index extends Component {
                         marginTop: 3,
                         fontSize: 13,
                       }}>
-                      온에어
+                      {onAir.status == STATUS.DOING ? '온에어' : '커밍순'}
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -446,16 +446,16 @@ class index extends Component {
                 <TouchableOpacity
                   style={{
                     backgroundColor: '#FFEDED',
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
+                    width: 60,
+                    height: 60,
+                    borderRadius: 30,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
                   onPress={() => this.props.navigation.navigate('MyAlertList')}>
                   <Image
-                    style={{ width: 50, height: 50 }}
+                    style={{ width: 60, height: 60 }}
                     source={Images2.imgIconAlamp}
                   />
                 </TouchableOpacity>
@@ -494,13 +494,23 @@ class index extends Component {
                           alignItems: 'center',
                           width: width * 0.3,
                         }}>
-                        <Image
-                          style={{
-                            width: width * 0.3 - 40,
-                            height: ((width * 0.3 - 40) * 171) / 150,
-                          }}
-                          source={Images2.imgHome1}
-                        />
+                        {onAir.status == STATUS.DOING ? (
+                          <Image
+                            style={{
+                              width: width * 0.3 - 40,
+                              height: ((width * 0.3 - 40) * 171) / 150,
+                            }}
+                            source={Images2.imgHome1}
+                          />
+                        ) : (
+                            <Image
+                              style={{
+                                width: width * 0.3 - 40,
+                                height: ((width * 0.3 - 40) * 157) / 150,
+                              }}
+                              source={Images2.imgHome1CMSoon}
+                            />
+                          )}
                       </View>
                       <View>
                         <View
@@ -513,7 +523,9 @@ class index extends Component {
                             <Image source={Images2.imgIcBtnLive} />
                           )}
                           <Text style={{ color: '#111111', marginLeft: 5 }}>
-                            {onAir?.title}
+                            {onAir.status == STATUS.DOING
+                              ? onAir?.title
+                              : '다음 방송은 무엇일까요?'}
                           </Text>
                         </View>
                         <View
@@ -577,13 +589,23 @@ class index extends Component {
                           alignItems: 'center',
                           width: width * 0.3 - 30,
                         }}>
-                        <Image
-                          style={{
-                            width: width * 0.3 - 60,
-                            height: ((width * 0.3 - 60) * 158) / 150,
-                          }}
-                          source={Images2.imgHome2}
-                        />
+                        {onAir.status == STATUS.DOING ? (
+                          <Image
+                            style={{
+                              width: width * 0.3 - 60,
+                              height: ((width * 0.3 - 60) * 158) / 150,
+                            }}
+                            source={Images2.imgHome2}
+                          />
+                        ) : (
+                            <Image
+                              style={{
+                                width: width * 0.3 - 60,
+                                height: ((width * 0.3 - 60) * 146) / 130,
+                              }}
+                              source={Images2.imgHome2CMSoon}
+                            />
+                          )}
                       </View>
                       {todayList.map((e) => {
                         return (

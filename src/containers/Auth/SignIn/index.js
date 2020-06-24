@@ -232,6 +232,7 @@ class index extends Component {
 
   getUserProfile = async (naverToken) => {
     const profileResult = await getProfile(naverToken.accessToken);
+    console.log('profileResult:', profileResult);
     if (profileResult.resultcode === '024') {
       Alert.alert('로그인 실패', profileResult.message);
       return;

@@ -75,12 +75,16 @@ class index extends Component {
     const { parrentName, phoneNumber } = this.state;
     if (this.isSnsSignUp && this.snsSignUpParams != null) {
       params = {
-        ...this.snsSignUpParams,
         email,
         password,
         member_name: parrentName,
         phone_number: phoneNumber,
+        ...this.snsSignUpParams,
       };
+      this.props.navigation.navigate('SignUpMoreInfor', {
+        params,
+        isSnsSignUp: true,
+      });
     } else {
       params = {
         email,
@@ -88,8 +92,8 @@ class index extends Component {
         member_name: parrentName,
         phone_number: phoneNumber,
       };
+      this.props.navigation.navigate('SignUpMoreInfor', { params });
     }
-    this.props.navigation.navigate('SignUpMoreInfor', { params });
   }
 
   async getCMS() {
@@ -219,6 +223,7 @@ class index extends Component {
                 <TextInputCustom
                   width={widthView - 80}
                   value={phoneNumber}
+                  keyboardType={'numeric'}
                   placeholder={'‘-‘를 제외한 숫자만 입력해주세요.'}
                   onChangeText={(phoneNumber) => this.setState({ phoneNumber })}
                 />
@@ -268,6 +273,7 @@ class index extends Component {
                 <TextInputCustom
                   width={widthView - 80}
                   value={confirmCode}
+                  keyboardType={'numeric'}
                   onChangeText={(confirmCode) =>
                     this.setState({
                       confirmCode,
