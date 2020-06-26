@@ -212,11 +212,14 @@ class index extends Component {
           }}>
           <View
             style={{
-              width,
+              width: width - 100,
+              height: height - 100,
+              marginLeft: 50,
+              paddingRight: 50,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              paddingRight: 50,
+              backgroundColor: 'gray',
             }}>
             <ImageBackground
               source={images2.imgPopup}
@@ -253,7 +256,7 @@ class index extends Component {
             </ImageBackground>
             <TouchableOpacity
               onPress={() => this.setState({ isShowModal: false })}
-              style={{ position: 'absolute', top: 5, right: 80 }}>
+              style={{ position: 'absolute', top: -10, right: 40 }}>
               <Image
                 source={images2.imgClose}
                 style={{ width: 50, height: 50 }}

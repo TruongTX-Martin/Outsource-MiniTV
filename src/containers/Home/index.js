@@ -264,6 +264,18 @@ class index extends Component {
     this.props.pokeChannel(liveId, params);
   }
 
+  getTimeNextLive(onAir) {
+    if (onAir) {
+      const currentTime = new Date().getTime();
+      const startDate = moment(onAir.start_datetime).toDate().getTime();
+      const timeSecondRemain = (startDate - currentTime) / 1000;
+      console.log('startDate:', currentTime);
+      console.log('startDate:', startDate);
+      console.log('timeRemain:', timeSecondRemain);
+    }
+    return '09:20:60';
+  }
+
   render() {
     const { loadingFirst, currentTab, width, height } = this.state;
     let {
@@ -381,7 +393,7 @@ class index extends Component {
                         marginTop: 3,
                         fontSize: 13,
                       }}>
-                      {onAir.status == STATUS.DOING ? '온에어' : '커밍순'}
+                      {onAir?.status == STATUS.DOING ? '온에어' : '커밍순'}
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -494,7 +506,7 @@ class index extends Component {
                           alignItems: 'center',
                           width: width * 0.3,
                         }}>
-                        {onAir.status == STATUS.DOING ? (
+                        {onAir?.status == STATUS.DOING ? (
                           <Image
                             style={{
                               width: width * 0.3 - 40,
@@ -517,15 +529,24 @@ class index extends Component {
                           style={{
                             display: 'flex',
                             flexDirection: 'row',
+                            justifyContent: 'space-between',
                             alignItems: 'center',
                           }}>
                           {onAir?.status == STATUS.DOING && (
                             <Image source={Images2.imgIcBtnLive} />
                           )}
                           <Text style={{ color: '#111111', marginLeft: 5 }}>
-                            {onAir.status == STATUS.DOING
+                            {onAir?.status == STATUS.DOING
                               ? onAir?.title
                               : '다음 방송은 무엇일까요?'}
+                          </Text>
+                          <Text
+                            style={{
+                              color: '#F7543F',
+                              paddingRight: 10,
+                              fontWeight: 'bold',
+                            }}>
+                            {this.getTimeNextLive(onAir)}
                           </Text>
                         </View>
                         <View
@@ -567,6 +588,50 @@ class index extends Component {
                                 />
                               </TouchableOpacity>
                             )}
+
+                            {onAir?.status != STATUS.DOING && (
+                              <View
+                                style={{
+                                  backgroundColor: onAir?.rgb_value,
+                                  position: 'absolute',
+                                  top: -5,
+                                  left: -5,
+                                  borderTopLeftRadius: 5,
+                                }}>
+                                <Text
+                                  style={{
+                                    color: '#59317C',
+                                    fontWeight: 'bold',
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 5,
+                                    fontSize: 15,
+                                  }}>
+                                  {onAir?.startDate}
+                                </Text>
+                              </View>
+                            )}
+
+                            {onAir?.status != STATUS.DOING && (
+                              <View
+                                style={{
+                                  backgroundColor: onAir?.rgb_value,
+                                  position: 'absolute',
+                                  right: -5,
+                                  bottom: -5,
+                                  borderTopLeftRadius: 5,
+                                }}>
+                                <Text
+                                  style={{
+                                    color: '#59317C',
+                                    fontWeight: 'bold',
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 5,
+                                    fontSize: 15,
+                                  }}>
+                                  {onAir?.startTime}
+                                </Text>
+                              </View>
+                            )}
                           </ImageBackground>
                         </View>
                         <Text
@@ -589,7 +654,7 @@ class index extends Component {
                           alignItems: 'center',
                           width: width * 0.3 - 30,
                         }}>
-                        {onAir.status == STATUS.DOING ? (
+                        {onAir?.status == STATUS.DOING ? (
                           <Image
                             style={{
                               width: width * 0.3 - 60,

@@ -78,6 +78,7 @@ class index extends Component {
                   display: 'flex',
                   flexDirection: 'row',
                   height: (width * 0.4 * 14) / 25 + 100,
+                  paddingRight: 50,
                 }}>
                 {list.map((e, index) => {
                   return (
