@@ -23,7 +23,10 @@ class index extends Component {
           <Text style={styles.textCenter}>{this.props.title}</Text>
         </View>
         <View style={styles.viewRight}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.onShare && this.props.onShare();
+            }}>
             <Image
               style={{ width: 50, height: 50 }}
               source={Images2.imgIcShare}

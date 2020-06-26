@@ -57,6 +57,7 @@ class index extends Component {
     };
     this.timeoutBackPress = null;
     this.onLayout = this.onLayout.bind(this);
+    this.timerInterval = null;
   }
 
   onLayout(e) {
@@ -76,6 +77,10 @@ class index extends Component {
     }, 2000);
     this.checkScreenAndLoadData();
     Orientation.lockToLandscape();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps:', nextProps);
   }
 
   async checkPermission() {
@@ -264,16 +269,46 @@ class index extends Component {
     this.props.pokeChannel(liveId, params);
   }
 
+  getTimeString(time) {
+    var minutes = '0' + Math.floor(time / 60);
+    var seconds = '0' + (time - minutes * 60);
+    return minutes.substr(-2) + ':' + seconds.substr(-2);
+  }
+
+  clearTimeInterval() {
+    if (this.timerInterval != null) {
+      this.clearTimeInterval(this.timerInterval);
+    }
+  }
+
+  getStringTime(time) {
+    if (parseInt(time) > 10) {
+      return time;
+    }
+    return '0' + time;
+  }
+
   getTimeNextLive(onAir) {
     if (onAir) {
+      const timeCheck = onAir.start_datetime;
       const currentTime = new Date().getTime();
-      const startDate = moment(onAir.start_datetime).toDate().getTime();
-      const timeSecondRemain = (startDate - currentTime) / 1000;
-      console.log('startDate:', currentTime);
-      console.log('startDate:', startDate);
-      console.log('timeRemain:', timeSecondRemain);
+      const startDate = moment(timeCheck).toDate().getTime();
+      let timeSecondRemain = (startDate - currentTime) / 1000;
+      if (timeSecondRemain > 0) {
+        const hour = parseInt(timeSecondRemain / (60 * 60));
+        const minues = parseInt((timeSecondRemain - hour * 60 * 60) / 60);
+        const seconds = parseInt(
+          timeSecondRemain - hour * 60 * 60 - minues * 60,
+        );
+        const timeLeftString =
+          this.getStringTime(hour) +
+          ':' +
+          this.getStringTime(minues) +
+          ':' +
+          this.getStringTime(seconds);
+        return timeLeftString;
+      }
     }
-    return '09:20:60';
   }
 
   render() {
@@ -480,6 +515,7 @@ class index extends Component {
                     fontSize: 17,
                     marginLeft: 10,
                     marginTop: 5,
+                    height: 20,
                   }}>
                   {this.getTitleWhenScroll()}
                 </Text>
@@ -594,8 +630,8 @@ class index extends Component {
                                 style={{
                                   backgroundColor: onAir?.rgb_value,
                                   position: 'absolute',
-                                  top: -5,
-                                  left: -5,
+                                  top: -7,
+                                  left: -10,
                                   borderTopLeftRadius: 5,
                                 }}>
                                 <Text
@@ -674,7 +710,13 @@ class index extends Component {
                       </View>
                       {todayList.map((e) => {
                         return (
-                          <View style={{ paddingLeft: 3 }}>
+                          <TouchableOpacity
+                            style={{ paddingLeft: 3 }}
+                            onPress={() =>
+                              this.props.navigation.navigate('ProgramDetail', {
+                                live_uid: e.live_uid,
+                              })
+                            }>
                             <View
                               style={{
                                 borderWidth: 5,
@@ -744,7 +786,7 @@ class index extends Component {
                                   )
                                 }>
                                 <Image
-                                  style={{ width: 30, height: 30 }}
+                                  style={{ width: 40, height: 40 }}
                                   source={
                                     e.wish_available
                                       ? Images2.imgIconAlamp
@@ -772,7 +814,7 @@ class index extends Component {
                                 {moment(e.start_datetime).format('MM월 DD일')}
                               </Text>
                             </View>
-                          </View>
+                          </TouchableOpacity>
                         );
                       })}
                       <View
@@ -792,7 +834,16 @@ class index extends Component {
                         {hotLists.length > 0 &&
                           hotLists.map((e) => {
                             return (
-                              <View style={{ paddingLeft: 3 }}>
+                              <TouchableOpacity
+                                style={{ paddingLeft: 3 }}
+                                onPress={() =>
+                                  this.props.navigation.navigate(
+                                    'ProgramDetail',
+                                    {
+                                      live_uid: e.live_uid,
+                                    },
+                                  )
+                                }>
                                 <View
                                   style={{
                                     borderWidth: 5,
@@ -862,7 +913,7 @@ class index extends Component {
                                     {e.start_datetime}
                                   </Text>
                                 </View>
-                              </View>
+                              </TouchableOpacity>
                             );
                           })}
                         {hotLists.length == 0 && (

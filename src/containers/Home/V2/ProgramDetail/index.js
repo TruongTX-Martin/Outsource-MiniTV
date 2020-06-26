@@ -120,6 +120,15 @@ class index extends Component {
     );
   }
 
+  handleShare(url) {
+    const shareOptions = {
+      title: '',
+      message: '',
+      url,
+    };
+    Share.open(shareOptions);
+  }
+
   render() {
     const { width, isShowModal } = this.state;
     const { detail, loadingProgram } = this.props;
@@ -129,6 +138,7 @@ class index extends Component {
           <HeaderBase
             navigation={this.props.navigation}
             title={detail?.title}
+            onShare={() => this.handleShare(detail?.share_link)}
             showCalendar={() => this.setState({ isShowModal: true })}
           />
         </Header>
@@ -210,59 +220,54 @@ class index extends Component {
             this.setState({ isShowModal: false });
             return true;
           }}>
-          <View
+          <ImageBackground
+            source={images2.imgPopup}
             style={{
               width: width - 100,
-              height: height - 100,
-              marginLeft: 50,
-              paddingRight: 50,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'gray',
+              height: height - 50,
+              marginLeft: 25,
             }}>
-            <ImageBackground
-              source={images2.imgPopup}
+            <View
               style={{
-                width: width - 100,
-                height: height - 50,
+                paddingHorizontal: 100,
+                paddingTop: 80,
               }}>
+              <Text
+                style={{
+                  color: '#333333',
+                  fontSize: 24,
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                }}>
+                다음 방송이 기다리고 있어요!
+              </Text>
               <View
                 style={{
-                  paddingHorizontal: 100,
-                  paddingTop: 80,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: width - 300,
                 }}>
-                <Text
-                  style={{
-                    color: '#333333',
-                    fontSize: 24,
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}>
-                  다음 방송이 기다리고 있어요!
-                </Text>
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    width: width - 300,
-                  }}>
-                  {detail?.next_lives.map((e, index) => {
-                    return this.generateItemSchedule(e, index);
-                  })}
-                </View>
+                {detail?.next_lives.map((e, index) => {
+                  return this.generateItemSchedule(e, index);
+                })}
               </View>
-            </ImageBackground>
-            <TouchableOpacity
-              onPress={() => this.setState({ isShowModal: false })}
-              style={{ position: 'absolute', top: -10, right: 40 }}>
-              <Image
-                source={images2.imgClose}
-                style={{ width: 50, height: 50 }}
-              />
-            </TouchableOpacity>
-          </View>
+            </View>
+            <View
+              style={{
+                position: 'absolute',
+                top: 20,
+                right: 20,
+              }}>
+              <TouchableOpacity
+                onPress={() => this.setState({ isShowModal: false })}>
+                <Image
+                  source={images2.imgClose}
+                  style={{ width: 50, height: 50 }}
+                />
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </Modal>
       </Container>
     );
