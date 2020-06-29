@@ -21,24 +21,18 @@ import images2 from '../../../../assets/images2';
 import Modal from 'react-native-modal';
 import DataRemote from '../../../../services/DataRemote';
 
-const { width, height } = Dimensions.get('window');
+import { getWidthScreen, getHeightScreen } from '../../../../utils';
+let width = 0;
+let height = 0;
 
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
       isShowModal: false,
     };
-    this.onLayout = this.onLayout.bind(this);
-  }
-
-  onLayout(e) {
-    this.setState({
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
-    });
+    width = getWidthScreen();
+    height = getHeightScreen();
   }
 
   componentDidMount() {
@@ -130,7 +124,7 @@ class index extends Component {
   }
 
   render() {
-    const { width, isShowModal } = this.state;
+    const { isShowModal } = this.state;
     const { detail, loadingProgram } = this.props;
     return (
       <Container>
@@ -226,7 +220,8 @@ class index extends Component {
               width: width - 100,
               height: height - 50,
               marginLeft: 25,
-            }}>
+            }}
+            resizeMode={'cover'}>
             <View
               style={{
                 paddingHorizontal: 100,
