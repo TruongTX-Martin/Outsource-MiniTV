@@ -30,6 +30,7 @@ import { showToast } from '../../utils';
 import { getCurrentRouter } from '../../helpers/routerHelper';
 import Orientation from 'react-native-orientation';
 import { setWidthScreen, setHeightScreen } from '../../utils';
+import CountDown from 'react-native-countdown-component';
 
 const STATUS = {
   RESERVED: 'RESERVED',
@@ -311,6 +312,16 @@ class index extends Component {
     }
   }
 
+  getUntilNextLive = (onAir) => {
+    if(onAir) {
+      // let start_time = moment(onAir.start_datetime);
+      let start_time = moment('2020-06-29 23:12:00');
+      let time_diff_seconds = start_time.diff(moment(), 'seconds');
+      return time_diff_seconds;
+    }
+    return 0;
+  }
+
   render() {
     const { loadingFirst, currentTab, width, height } = this.state;
     let {
@@ -576,14 +587,27 @@ class index extends Component {
                               ? onAir?.title
                               : '다음 방송은 무엇일까요?'}
                           </Text>
-                          <Text
+                          <CountDown
+                              size={13}
+                              digitStyle={{backgroundColor: 'transparent', width: 20, height: 10,
+                              borderWidth: 0, padding: 0, marginHorizontal: 0}}
+                              digitTxtStyle={{color: '#F7543F'}}
+                              separatorStyle={{color: '#F7543F'}}
+                              until={this.getUntilNextLive(onAir)}
+                              timeToShow={['H', 'M', 'S']}
+                              timeLabels={{h: null, m: null, s: null}}
+                              // onFinish={() => alert('finished')}
+                              // onPress={() => alert('hello')}
+                              showSeparator
+                            />
+                          {/* <Text
                             style={{
                               color: '#F7543F',
                               paddingRight: 10,
                               fontWeight: 'bold',
                             }}>
                             {this.getTimeNextLive(onAir)}
-                          </Text>
+                          </Text> */}
                         </View>
                         <View
                           style={{
