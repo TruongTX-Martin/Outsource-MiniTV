@@ -16,6 +16,7 @@ import { Container, Body, Header, Content } from 'native-base';
 import Config from '../../config';
 import { connect } from 'react-redux';
 import Images from '../../assets/images';
+import Modal from 'react-native-modal';
 import Images2 from '../../assets/images2';
 import * as authActions from '../../redux/actions/authActions';
 import * as liveActions from '../../redux/actions/liveActions';
@@ -54,6 +55,8 @@ class index extends Component {
       scrollPositionX: 0,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
+      isLogin: false,
+      isShowModalLogin: false,
     };
     this.timeoutBackPress = null;
     this.onLayout = this.onLayout.bind(this);
@@ -71,16 +74,13 @@ class index extends Component {
   }
 
   componentDidMount() {
+    this.props.generateAccessToken();
     const timeoutLoading = setTimeout(() => {
       this.setState({ loadingFirst: false });
       clearTimeout(timeoutLoading);
     }, 2000);
     this.checkScreenAndLoadData();
     Orientation.lockToLandscape();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps:', nextProps);
   }
 
   async checkPermission() {
@@ -125,13 +125,24 @@ class index extends Component {
     if (hasShowIntro == null) {
       this.props.navigation.navigate('Intro0');
     } else if (userToken == null || userToken == 'null') {
-      this.props.navigation.navigate('SignIn');
-    } else {
+      //   this.props.navigation.navigate('SignIn');
+      // } else {
+      this.setState({
+        isLogin: false,
+      });
       this.checkPermission();
       this.props.generateAccessToken();
-      this.props.getMainList();
-      this.props.getListChannel();
+      this.getData();
+    } else {
+      this.setState({
+        isLogin: true,
+      });
     }
+  }
+
+  getData() {
+    this.props.getMainList();
+    this.props.getListChannel();
   }
 
   renderItem({ item, index }) {
@@ -153,7 +164,9 @@ class index extends Component {
     this.listenerGoToSignIn = EventRegister.addEventListener(
       Config.Constant.EVENT_GOTO_SIGNIN,
       (data) => {
-        this.props.navigation.navigate('SignIn');
+        // this.props.navigation.navigate('SignIn');
+        Orientation.lockToLandscape();
+        this.getData();
       },
     );
     this.listenerSignInSuccess = EventRegister.addEventListener(
@@ -205,8 +218,8 @@ class index extends Component {
 
   onAndroidBackPress = () => {
     if (getCurrentRouter() == 'SignIn') {
-      BackHandler.exitApp();
-      return true;
+      Orientation.lockToLandscape();
+      return false;
     }
     if (getCurrentRouter() == 'Home') {
       const { countPressBack, isOpenSlideMenu } = this.state;
@@ -312,7 +325,14 @@ class index extends Component {
   }
 
   render() {
-    const { loadingFirst, currentTab, width, height } = this.state;
+    const {
+      loadingFirst,
+      currentTab,
+      width,
+      height,
+      isLogin,
+      isShowModalLogin,
+    } = this.state;
     let {
       loading,
       onAir,
@@ -368,7 +388,13 @@ class index extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
-                  onPress={() => this.props.navigation.navigate('MyPageV2')}>
+                  onPress={() => {
+                    if (isLogin) {
+                      this.props.navigation.navigate('MyPageV2');
+                    } else {
+                      this.setState({ isShowModalLogin: true });
+                    }
+                  }}>
                   <Image
                     style={{ width: 60, height: 60 }}
                     source={Images2.imgIcMyPage}
@@ -512,7 +538,13 @@ class index extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
-                  onPress={() => this.props.navigation.navigate('MyAlertList')}>
+                  onPress={() => {
+                    if (isLogin) {
+                      this.props.navigation.navigate('MyAlertList');
+                    } else {
+                      this.setState({ isShowModalLogin: true });
+                    }
+                  }}>
                   <Image
                     style={{ width: 60, height: 60 }}
                     source={Images2.imgIconAlamp}
@@ -578,7 +610,10 @@ class index extends Component {
                           style={{
                             display: 'flex',
                             flexDirection: 'row',
-                            justifyContent: 'space-between',
+                            justifyContent:
+                              onAir?.status == STATUS.DOING
+                                ? 'flex-start'
+                                : 'space-between',
                             alignItems: 'center',
                           }}>
                           {onAir?.status == STATUS.DOING && (
@@ -594,15 +629,17 @@ class index extends Component {
                               ? onAir?.title
                               : '다음 방송은 무엇일까요?'}
                           </Text>
-                          <Text
-                            style={{
-                              color: '#F7543F',
-                              paddingRight: 10,
-                              fontWeight: 'bold',
-                              fontFamily: 'Mono-ExtraBold',
-                            }}>
-                            {this.getTimeNextLive(onAir)}
-                          </Text>
+                          {onAir?.status != STATUS.DOING && (
+                            <Text
+                              style={{
+                                color: '#F7543F',
+                                paddingRight: 10,
+                                fontWeight: 'bold',
+                                fontFamily: 'Mono-ExtraBold',
+                              }}>
+                              {this.getTimeNextLive(onAir)}
+                            </Text>
+                          )}
                         </View>
                         <View
                           style={{
@@ -803,12 +840,16 @@ class index extends Component {
                                 {e.title}
                               </Text>
                               <TouchableOpacity
-                                onPress={() =>
-                                  this.handlePokeChannel(
-                                    e.live_uid,
-                                    !e.wish_available,
-                                  )
-                                }>
+                                onPress={() => {
+                                  if (isLogin) {
+                                    this.handlePokeChannel(
+                                      e.live_uid,
+                                      !e.wish_available,
+                                    );
+                                  } else {
+                                    this.setState({ isShowModalLogin: true });
+                                  }
+                                }}>
                                 <Image
                                   style={{ width: 40, height: 40 }}
                                   source={
@@ -1010,6 +1051,104 @@ class index extends Component {
             </View>
           </Content>
         </Body>
+        <Modal
+          isVisible={isShowModalLogin}
+          onBackButtonPress={() => {
+            this.setState({ isShowModalLogin: false });
+            return true;
+          }}>
+          <View
+            style={{
+              backgroundColor: 'transparent',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 5,
+              width,
+            }}>
+            <View
+              style={{
+                width: 300,
+                height: 200,
+                backgroundColor: 'white',
+                borderRadius: 10,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 18,
+                  paddingHorizontal: 50,
+                  paddingTop: 50,
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontFamily: 'Mono-Blod',
+                }}>
+                로그인이 필요한 페이지입니다. 로그인 하시겠습니까?
+              </Text>
+              <View
+                style={{
+                  width: 300,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#9A9A9A',
+                    width: 120,
+                    height: 45,
+                    display: 'flex',
+                    marginBottom: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 5,
+                    marginLeft: 20,
+                  }}
+                  onPress={() => {
+                    this.setState({ isShowModalLogin: false });
+                  }}>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 17,
+                      fontFamily: 'Mono-Blod',
+                    }}>
+                    취소
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#50CCC3',
+                    width: 120,
+                    height: 45,
+                    display: 'flex',
+                    marginBottom: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 5,
+                    marginRight: 20,
+                  }}
+                  onPress={() => {
+                    this.setState({ isShowModalLogin: false }, () => {
+                      this.props.navigation.navigate('SignIn');
+                    });
+                  }}>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 17,
+                      fontFamily: 'Mono-Blod',
+                    }}>
+                    확인
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </Container>
     );
   }

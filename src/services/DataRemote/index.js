@@ -22,7 +22,7 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.response.status == 401) {
-      EventRegister.emit(Constants.EVENT_SIGN_OUT);
+      // EventRegister.emit(Constants.EVENT_SIGN_OUT);
     }
     console.log('Interceptors error:', error);
     console.log('Interceptors error code:', error.response.status);
@@ -108,11 +108,11 @@ const findPassword = async (email) => {
 
 const getMainLive = async () => {
   const accessToken = await DataLocal.getAccessToken();
-  const userToken = await DataLocal.getUserToken();
+  // const userToken = await DataLocal.getUserToken();
   return await axios.get('/live/main', {
     headers: {
       'X-Access-Token': accessToken,
-      'X-User-Token': userToken,
+      // 'X-User-Token': userToken,
     },
   });
 };
@@ -262,11 +262,11 @@ const setTokenFirebase = (token) => {
 
 const getChannelList = async () => {
   const accessToken = await DataLocal.getAccessToken();
-  const userToken = await DataLocal.getUserToken();
+  // const userToken = await DataLocal.getUserToken();
   return await axios.get('/channel/list', {
     headers: {
       'X-Access-Token': accessToken,
-      'X-User-Token': userToken,
+      // 'X-User-Token': userToken,
     },
   });
 };
