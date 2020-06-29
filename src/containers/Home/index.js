@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Text,
   View,
@@ -12,9 +12,9 @@ import {
   BackHandler,
   Linking,
 } from 'react-native';
-import { Container, Body, Header, Content } from 'native-base';
+import {Container, Body, Header, Content} from 'native-base';
 import Config from '../../config';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Images from '../../assets/images';
 import Modal from 'react-native-modal';
 import Images2 from '../../assets/images2';
@@ -22,15 +22,15 @@ import * as authActions from '../../redux/actions/authActions';
 import * as liveActions from '../../redux/actions/liveActions';
 import * as myPageActions from '../../redux/actions/myPageActions';
 import ItemChannel from './Component/ItemChannel';
-import { EventRegister } from 'react-native-event-listeners';
+import {EventRegister} from 'react-native-event-listeners';
 import moment from 'moment';
 import DataLocal from '../../services/DataLocal';
 import DataRemote from '../../services/DataRemote';
 import firebase from 'react-native-firebase';
-import { showToast } from '../../utils';
-import { getCurrentRouter } from '../../helpers/routerHelper';
+import {showToast} from '../../utils';
+import {getCurrentRouter} from '../../helpers/routerHelper';
 import Orientation from 'react-native-orientation';
-import { setWidthScreen, setHeightScreen } from '../../utils';
+import {setWidthScreen, setHeightScreen} from '../../utils';
 
 const STATUS = {
   RESERVED: 'RESERVED',
@@ -64,7 +64,7 @@ class index extends Component {
   }
 
   onLayout(e) {
-    const { width, height } = Dimensions.get('window');
+    const {width, height} = Dimensions.get('window');
     setWidthScreen(width);
     setHeightScreen(height);
     this.setState({
@@ -76,7 +76,7 @@ class index extends Component {
   componentDidMount() {
     this.props.generateAccessToken();
     const timeoutLoading = setTimeout(() => {
-      this.setState({ loadingFirst: false });
+      this.setState({loadingFirst: false});
       clearTimeout(timeoutLoading);
     }, 2000);
     this.checkScreenAndLoadData();
@@ -145,7 +145,7 @@ class index extends Component {
     this.props.getListChannel();
   }
 
-  renderItem({ item, index }) {
+  renderItem({item, index}) {
     return (
       <TouchableOpacity
         style={{
@@ -153,7 +153,7 @@ class index extends Component {
           borderBottomWidth: 1,
           borderBottomColor: '#CACACA',
         }}>
-        <Text style={{ fontSize: 15, fontWeight: '600', marginLeft: 10 }}>
+        <Text style={{fontSize: 15, fontWeight: '600', marginLeft: 10}}>
           {item.title}
         </Text>
       </TouchableOpacity>
@@ -222,9 +222,9 @@ class index extends Component {
       return false;
     }
     if (getCurrentRouter() == 'Home') {
-      const { countPressBack, isOpenSlideMenu } = this.state;
+      const {countPressBack, isOpenSlideMenu} = this.state;
       if (isOpenSlideMenu) {
-        this.setState({ isOpenSlideMenu: false });
+        this.setState({isOpenSlideMenu: false});
         return;
       }
       this.setState(
@@ -245,7 +245,7 @@ class index extends Component {
         clearTimeout(this.timeoutBackPress);
       }
       this.timeoutBackPress = setTimeout(() => {
-        this.setState({ countPressBack: 0 });
+        this.setState({countPressBack: 0});
         clearTimeout(this.timeoutBackPress);
       }, 3000);
       return true;
@@ -261,8 +261,8 @@ class index extends Component {
   }
 
   getTitleWhenScroll() {
-    const { scrollPositionX, width } = this.state;
-    const { todayList } = this.props;
+    const {scrollPositionX, width} = this.state;
+    const {todayList} = this.props;
 
     if (
       scrollPositionX >=
@@ -359,7 +359,7 @@ class index extends Component {
       <Container>
         <Body>
           <Content
-            style={{ backgroundColor: '#FDF9ED' }}
+            style={{backgroundColor: '#FDF9ED'}}
             showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
@@ -367,7 +367,7 @@ class index extends Component {
                 onRefresh={() => this.props.getMainList()}
               />
             }>
-            <View onLayout={this.onLayout}>
+            <View onLayout={this.onLayout} style={{width, height}}>
               <View
                 style={{
                   display: 'flex',
@@ -392,11 +392,11 @@ class index extends Component {
                     if (isLogin) {
                       this.props.navigation.navigate('MyPageV2');
                     } else {
-                      this.setState({ isShowModalLogin: true });
+                      this.setState({isShowModalLogin: true});
                     }
                   }}>
                   <Image
-                    style={{ width: 60, height: 60 }}
+                    style={{width: 60, height: 60}}
                     source={Images2.imgIcMyPage}
                   />
                 </TouchableOpacity>
@@ -416,7 +416,7 @@ class index extends Component {
                     }}
                     onPress={() => {
                       if (currentTab != TAB.TAB_ONAIR) {
-                        this.setState({ currentTab: TAB.TAB_ONAIR });
+                        this.setState({currentTab: TAB.TAB_ONAIR});
                       }
                     }}>
                     {onAir?.status == STATUS.DOING ? (
@@ -432,18 +432,18 @@ class index extends Component {
                         }
                       />
                     ) : (
-                        <Image
-                          style={{
-                            width: currentTab == TAB.TAB_ONAIR ? 53 : 44,
-                            height: 44,
-                          }}
-                          source={
-                            currentTab == TAB.TAB_ONAIR
-                              ? Images2.imgIcCommingSoonOn
-                              : Images2.imgIcCommingSoon
-                          }
-                        />
-                      )}
+                      <Image
+                        style={{
+                          width: currentTab == TAB.TAB_ONAIR ? 53 : 44,
+                          height: 44,
+                        }}
+                        source={
+                          currentTab == TAB.TAB_ONAIR
+                            ? Images2.imgIcCommingSoonOn
+                            : Images2.imgIcCommingSoon
+                        }
+                      />
+                    )}
                     <Text
                       style={{
                         fontFamily:
@@ -468,11 +468,11 @@ class index extends Component {
                     }}
                     onPress={() => {
                       if (currentTab != TAB.TAB_CHANNEL) {
-                        this.setState({ currentTab: TAB.TAB_CHANNEL });
+                        this.setState({currentTab: TAB.TAB_CHANNEL});
                       }
                     }}>
                     <Image
-                      style={{ width: 40, height: 40 }}
+                      style={{width: 40, height: 40}}
                       source={
                         currentTab == TAB.TAB_CHANNEL
                           ? Images2.imgIcChannelOn
@@ -503,11 +503,11 @@ class index extends Component {
                     }}
                     onPress={() => {
                       if (currentTab != TAB.TAB_PLAY_ALONE) {
-                        this.setState({ currentTab: TAB.TAB_PLAY_ALONE });
+                        this.setState({currentTab: TAB.TAB_PLAY_ALONE});
                       }
                     }}>
                     <Image
-                      style={{ width: 42, height: 38 }}
+                      style={{width: 42, height: 38}}
                       source={Images2.imgIcPlayAlone}
                     />
                     <Text
@@ -542,16 +542,16 @@ class index extends Component {
                     if (isLogin) {
                       this.props.navigation.navigate('MyAlertList');
                     } else {
-                      this.setState({ isShowModalLogin: true });
+                      this.setState({isShowModalLogin: true});
                     }
                   }}>
                   <Image
-                    style={{ width: 60, height: 60 }}
+                    style={{width: 60, height: 60}}
                     source={Images2.imgIconAlamp}
                   />
                 </TouchableOpacity>
               </View>
-              <View>
+              <View style={{flex: 1}}>
                 <Text
                   style={{
                     fontFamily: 'Mono-ExtraBold',
@@ -565,6 +565,7 @@ class index extends Component {
                   {this.getTitleWhenScroll()}
                 </Text>
                 <ScrollView
+                  style={{flex: 1}}
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   scrollEventThrottle={100}
@@ -573,29 +574,30 @@ class index extends Component {
                       scrollPositionX: event.nativeEvent.contentOffset.x,
                     });
                   }}>
-                  {currentTab == TAB.TAB_ONAIR && (
-                    <View
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                      }}>
+                  <View style={{justifyContent: 'center', flex: 1}}>
+                    {currentTab == TAB.TAB_ONAIR && (
                       <View
                         style={{
                           display: 'flex',
-                          justifyContent: 'center',
+                          flexDirection: 'row',
                           alignItems: 'center',
-                          width: width * 0.3,
                         }}>
-                        {onAir?.status == STATUS.DOING ? (
-                          <Image
-                            style={{
-                              width: width * 0.3 - 40,
-                              height: ((width * 0.3 - 40) * 171) / 150,
-                            }}
-                            source={Images2.imgHome1}
-                          />
-                        ) : (
+                        <View
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: width * 0.3,
+                          }}>
+                          {onAir?.status == STATUS.DOING ? (
+                            <Image
+                              style={{
+                                width: width * 0.3 - 40,
+                                height: ((width * 0.3 - 40) * 171) / 150,
+                              }}
+                              source={Images2.imgHome1}
+                            />
+                          ) : (
                             <Image
                               style={{
                                 width: width * 0.3 - 40,
@@ -604,201 +606,90 @@ class index extends Component {
                               source={Images2.imgHome1CMSoon}
                             />
                           )}
-                      </View>
-                      <View>
-                        <View
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent:
-                              onAir?.status == STATUS.DOING
-                                ? 'flex-start'
-                                : 'space-between',
-                            alignItems: 'center',
-                          }}>
-                          {onAir?.status == STATUS.DOING && (
-                            <Image source={Images2.imgIcBtnLive} />
-                          )}
-                          <Text
+                        </View>
+                        <View>
+                          <View
                             style={{
-                              color: '#111111',
-                              marginLeft: 5,
-                              fontFamily: 'Mono-ExtraBold',
+                              display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent:
+                                onAir?.status == STATUS.DOING
+                                  ? 'flex-start'
+                                  : 'space-between',
+                              alignItems: 'center',
                             }}>
-                            {onAir?.status == STATUS.DOING
-                              ? onAir?.title
-                              : '다음 방송은 무엇일까요?'}
-                          </Text>
-                          {onAir?.status != STATUS.DOING && (
+                            {onAir?.status == STATUS.DOING && (
+                              <Image source={Images2.imgIcBtnLive} />
+                            )}
                             <Text
                               style={{
-                                color: '#F7543F',
-                                paddingRight: 10,
-                                fontWeight: 'bold',
+                                color: '#111111',
+                                marginLeft: 5,
                                 fontFamily: 'Mono-ExtraBold',
                               }}>
-                              {this.getTimeNextLive(onAir)}
+                              {onAir?.status == STATUS.DOING
+                                ? onAir?.title
+                                : '다음 방송은 무엇일까요?'}
                             </Text>
-                          )}
-                        </View>
-                        <View
-                          style={{
-                            borderWidth: 5,
-                            borderColor: '#50CCC3',
-                            borderRadius: 5,
-                            marginTop: 10,
-                          }}>
-                          <ImageBackground
+                            {onAir?.status != STATUS.DOING && (
+                              <Text
+                                style={{
+                                  color: '#F7543F',
+                                  paddingRight: 10,
+                                  fontWeight: 'bold',
+                                  fontFamily: 'Mono-ExtraBold',
+                                }}>
+                                {this.getTimeNextLive(onAir)}
+                              </Text>
+                            )}
+                          </View>
+                          <View
                             style={{
-                              width: width * 0.4,
-                              height: (width * 0.4 * 14) / 25,
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}
-                            source={{ uri: onAir?.thumbnail }}>
-                            <View
+                              borderWidth: 5,
+                              borderColor: '#50CCC3',
+                              borderRadius: 5,
+                              marginTop: 10,
+                            }}>
+                            <ImageBackground
                               style={{
                                 width: width * 0.4,
                                 height: (width * 0.4 * 14) / 25,
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                backgroundColor: '#000000',
-                                opacity: 0.5,
                               }}
-                            />
-                            {onAir?.status == STATUS.DOING && (
-                              <TouchableOpacity
-                                style={{
-                                  position: 'absolute',
-                                  top: (width * 0.4 * 14) / 50 - 25,
-                                }}>
-                                <Image
-                                  style={{ width: 50, height: 50 }}
-                                  source={Images2.imgIcBtnPlay}
-                                />
-                              </TouchableOpacity>
-                            )}
-
-                            {onAir?.status != STATUS.DOING && (
+                              source={{uri: onAir?.thumbnail}}>
                               <View
-                                style={{
-                                  backgroundColor: onAir?.rgb_value,
-                                  position: 'absolute',
-                                  top: -7,
-                                  left: -10,
-                                  borderTopLeftRadius: 5,
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#59317C',
-                                    fontWeight: 'bold',
-                                    paddingHorizontal: 10,
-                                    paddingVertical: 5,
-                                    fontSize: 15,
-                                    fontFamily: 'Mono-ExtraBold',
-                                  }}>
-                                  {onAir?.startDate}
-                                </Text>
-                              </View>
-                            )}
-
-                            {onAir?.status != STATUS.DOING && (
-                              <View
-                                style={{
-                                  backgroundColor: onAir?.rgb_value,
-                                  position: 'absolute',
-                                  right: -5,
-                                  bottom: -5,
-                                  borderTopLeftRadius: 5,
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#59317C',
-                                    fontWeight: 'bold',
-                                    paddingHorizontal: 10,
-                                    paddingVertical: 5,
-                                    fontSize: 15,
-                                    fontFamily: 'Mono-ExtraBold',
-                                  }}>
-                                  {onAir?.startTime}
-                                </Text>
-                              </View>
-                            )}
-                          </ImageBackground>
-                        </View>
-                        <Text
-                          style={{
-                            color: '#141414',
-                            fontSize: 13,
-                            width: 250,
-                            marginTop: 5,
-                            paddingLeft: 5,
-                            fontFamily: 'Mono-Regular',
-                          }}
-                          numberOfLines={1}
-                          ellipsizeMode="tail">
-                          {onAir?.subscript}
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          width: width * 0.3 - 30,
-                        }}>
-                        {onAir?.status == STATUS.DOING ? (
-                          <Image
-                            style={{
-                              width: width * 0.3 - 60,
-                              height: ((width * 0.3 - 60) * 158) / 150,
-                            }}
-                            source={Images2.imgHome2}
-                          />
-                        ) : (
-                            <Image
-                              style={{
-                                width: width * 0.3 - 60,
-                                height: ((width * 0.3 - 60) * 146) / 130,
-                              }}
-                              source={Images2.imgHome2CMSoon}
-                            />
-                          )}
-                      </View>
-                      {todayList.map((e) => {
-                        return (
-                          <TouchableOpacity
-                            style={{ paddingLeft: 3 }}
-                            onPress={() =>
-                              this.props.navigation.navigate('ProgramDetail', {
-                                live_uid: e.live_uid,
-                              })
-                            }>
-                            <View
-                              style={{
-                                borderWidth: 5,
-                                borderColor: e.rgb_value,
-                                borderRadius: 5,
-                                marginTop: 10,
-                                marginRight: 20,
-                              }}>
-                              <ImageBackground
                                 style={{
                                   width: width * 0.4,
                                   height: (width * 0.4 * 14) / 25,
                                   display: 'flex',
                                   justifyContent: 'center',
                                   alignItems: 'center',
+                                  backgroundColor: '#000000',
+                                  opacity: 0.5,
                                 }}
-                                source={{ uri: e.thumbnail }}>
+                              />
+                              {onAir?.status == STATUS.DOING && (
+                                <TouchableOpacity
+                                  style={{
+                                    position: 'absolute',
+                                    top: (width * 0.4 * 14) / 50 - 25,
+                                  }}>
+                                  <Image
+                                    style={{width: 50, height: 50}}
+                                    source={Images2.imgIcBtnPlay}
+                                  />
+                                </TouchableOpacity>
+                              )}
+
+                              {onAir?.status != STATUS.DOING && (
                                 <View
                                   style={{
-                                    backgroundColor: e.rgb_value,
+                                    backgroundColor: onAir?.rgb_value,
                                     position: 'absolute',
-                                    right: 0,
-                                    bottom: 0,
+                                    top: -7,
+                                    left: -10,
                                     borderTopLeftRadius: 5,
                                   }}>
                                   <Text
@@ -810,165 +701,19 @@ class index extends Component {
                                       fontSize: 15,
                                       fontFamily: 'Mono-ExtraBold',
                                     }}>
-                                    {moment(e.start_datetime).format(
-                                      ' 낮 hh시mm분',
-                                    )}
+                                    {onAir?.startDate}
                                   </Text>
                                 </View>
-                              </ImageBackground>
-                            </View>
-                            <View
-                              style={{
-                                width: width * 0.4 + 10,
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'flex-start',
-                                justifyContent: 'space-between',
-                                marginTop: 3,
-                              }}>
-                              <Text
-                                style={{
-                                  color: '#141414',
-                                  fontSize: 13,
-                                  width: width * 0.4 - 50,
-                                  marginTop: 5,
-                                  paddingLeft: 5,
-                                  fontFamily: 'Mono-Regular',
-                                }}
-                                numberOfLines={1}
-                                ellipsizeMode="tail">
-                                {e.title}
-                              </Text>
-                              <TouchableOpacity
-                                onPress={() => {
-                                  if (isLogin) {
-                                    this.handlePokeChannel(
-                                      e.live_uid,
-                                      !e.wish_available,
-                                    );
-                                  } else {
-                                    this.setState({ isShowModalLogin: true });
-                                  }
-                                }}>
-                                <Image
-                                  style={{ width: 40, height: 40 }}
-                                  source={
-                                    e.wish_available
-                                      ? Images2.imgIconAlamp
-                                      : Images2.imgIconAlampOff
-                                  }
-                                />
-                              </TouchableOpacity>
-                            </View>
-                            <View
-                              style={{
-                                backgroundColor: e.rgb_value,
-                                position: 'absolute',
-                                left: 0,
-                                top: 3,
-                                borderRadius: 5,
-                              }}>
-                              <Text
-                                style={{
-                                  color: '#59317C',
-                                  fontWeight: 'bold',
-                                  paddingHorizontal: 10,
-                                  paddingVertical: 5,
-                                  fontSize: 15,
-                                  fontFamily: 'Mono-ExtraBold',
-                                }}>
-                                {moment(e.start_datetime).format('MM월 DD일')}
-                              </Text>
-                            </View>
-                          </TouchableOpacity>
-                        );
-                      })}
-                      <View
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                        }}>
-                        <Image
-                          style={{
-                            width: width * 0.3 - 60,
-                            height: ((width * 0.3 - 60) * 133) / 161,
-                            marginHorizontal: 30,
-                          }}
-                          source={Images2.imgHome3}
-                        />
-                        {hotLists.length > 0 &&
-                          hotLists.map((e) => {
-                            return (
-                              <TouchableOpacity
-                                style={{ paddingLeft: 3 }}
-                                onPress={() =>
-                                  this.props.navigation.navigate(
-                                    'ProgramDetail',
-                                    {
-                                      live_uid: e.live_uid,
-                                    },
-                                  )
-                                }>
+                              )}
+
+                              {onAir?.status != STATUS.DOING && (
                                 <View
                                   style={{
-                                    borderWidth: 5,
-                                    borderColor: e.rgb_value,
-                                    borderRadius: 5,
-                                    marginTop: 10,
-                                    marginRight: 20,
-                                  }}>
-                                  <ImageBackground
-                                    style={{
-                                      width: width * 0.4,
-                                      height: (width * 0.4 * 14) / 25,
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      alignItems: 'center',
-                                    }}
-                                    source={Images2.imgItemHomeTest}>
-                                    <View
-                                      style={{
-                                        backgroundColor: e.rgb_value,
-                                        position: 'absolute',
-                                        right: 0,
-                                        bottom: 0,
-                                        borderTopLeftRadius: 5,
-                                      }}>
-                                      <Text
-                                        style={{
-                                          color: '#59317C',
-                                          fontWeight: 'bold',
-                                          paddingHorizontal: 10,
-                                          paddingVertical: 5,
-                                          fontSize: 15,
-                                          fontFamily: 'Mono-ExtraBold',
-                                        }}>
-                                        {e.end_datetime}
-                                      </Text>
-                                    </View>
-                                  </ImageBackground>
-                                </View>
-                                <Text
-                                  style={{
-                                    color: '#141414',
-                                    fontSize: 13,
-                                    width: 250,
-                                    marginTop: 5,
-                                    paddingLeft: 5,
-                                    fontFamily: 'Mono-Regular',
-                                  }}
-                                  numberOfLines={1}
-                                  ellipsizeMode="tail">
-                                  {e.title}
-                                </Text>
-                                <View
-                                  style={{
-                                    backgroundColor: e.rgb_value,
+                                    backgroundColor: onAir?.rgb_value,
                                     position: 'absolute',
-                                    left: 0,
-                                    top: 3,
-                                    borderRadius: 5,
+                                    right: -5,
+                                    bottom: -5,
+                                    borderTopLeftRadius: 5,
                                   }}>
                                   <Text
                                     style={{
@@ -979,73 +724,335 @@ class index extends Component {
                                       fontSize: 15,
                                       fontFamily: 'Mono-ExtraBold',
                                     }}>
-                                    {e.start_datetime}
+                                    {onAir?.startTime}
                                   </Text>
                                 </View>
-                              </TouchableOpacity>
-                            );
-                          })}
-                        {hotLists.length == 0 && (
-                          <Image
-                            source={Images2.imgMyImageEmpty}
-                            style={{ marginRight: 50 }}
-                          />
-                        )}
-                      </View>
-                    </View>
-                  )}
-                  {currentTab == TAB.TAB_CHANNEL && (
-                    <View
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        paddingLeft: 30,
-                      }}>
-                      {listChannel != null &&
-                        listChannel.map((e) => {
+                              )}
+                            </ImageBackground>
+                          </View>
+                          <Text
+                            style={{
+                              color: '#141414',
+                              fontSize: 13,
+                              width: 250,
+                              marginTop: 5,
+                              paddingLeft: 5,
+                              fontFamily: 'Mono-Regular',
+                            }}
+                            numberOfLines={1}
+                            ellipsizeMode="tail">
+                            {onAir?.subscript}
+                          </Text>
+                        </View>
+                        <View
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: width * 0.3 - 30,
+                          }}>
+                          {onAir?.status == STATUS.DOING ? (
+                            <Image
+                              style={{
+                                width: width * 0.3 - 60,
+                                height: ((width * 0.3 - 60) * 158) / 150,
+                              }}
+                              source={Images2.imgHome2}
+                            />
+                          ) : (
+                            <Image
+                              style={{
+                                width: width * 0.3 - 60,
+                                height: ((width * 0.3 - 60) * 146) / 130,
+                              }}
+                              source={Images2.imgHome2CMSoon}
+                            />
+                          )}
+                        </View>
+                        {todayList.map((e, id) => {
                           return (
                             <TouchableOpacity
-                              style={{ marginRight: 30 }}
+                              key={`item_${id}`}
+                              style={{paddingLeft: 3}}
                               onPress={() =>
                                 this.props.navigation.navigate(
-                                  'ChannelDetail2',
-                                  { id: e.channel_uid },
+                                  'ProgramDetail',
+                                  {
+                                    live_uid: e.live_uid,
+                                  },
                                 )
                               }>
-                              <Image
-                                source={{ uri: e.thumbnail }}
+                              <View
                                 style={{
-                                  width: width / 3 - 40,
-                                  height: ((width / 3 - 40) * 4) / 5,
-                                  borderRadius: 50,
-                                }}
-                              />
-                              <Text
-                                style={{
-                                  textAlign: 'center',
-                                  color: '#141414',
-                                  fontSize: 13,
+                                  borderWidth: 5,
+                                  borderColor: e.rgb_value,
+                                  borderRadius: 5,
                                   marginTop: 10,
-                                  fontFamily: 'Mono-Regular',
+                                  marginRight: 20,
                                 }}>
-                                {e.title}
-                              </Text>
+                                <ImageBackground
+                                  style={{
+                                    width: width * 0.4,
+                                    height: (width * 0.4 * 14) / 25,
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                  }}
+                                  source={{uri: e.thumbnail}}>
+                                  <View
+                                    style={{
+                                      backgroundColor: e.rgb_value,
+                                      position: 'absolute',
+                                      right: 0,
+                                      bottom: 0,
+                                      borderTopLeftRadius: 5,
+                                    }}>
+                                    <Text
+                                      style={{
+                                        color: '#59317C',
+                                        fontWeight: 'bold',
+                                        paddingHorizontal: 10,
+                                        paddingVertical: 5,
+                                        fontSize: 15,
+                                        fontFamily: 'Mono-ExtraBold',
+                                      }}>
+                                      {moment(e.start_datetime).format(
+                                        ' 낮 hh시mm분',
+                                      )}
+                                    </Text>
+                                  </View>
+                                </ImageBackground>
+                              </View>
+                              <View
+                                style={{
+                                  width: width * 0.4 + 10,
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  alignItems: 'flex-start',
+                                  justifyContent: 'space-between',
+                                  marginTop: 3,
+                                }}>
+                                <Text
+                                  style={{
+                                    color: '#141414',
+                                    fontSize: 13,
+                                    width: width * 0.4 - 50,
+                                    marginTop: 5,
+                                    paddingLeft: 5,
+                                    fontFamily: 'Mono-Regular',
+                                  }}
+                                  numberOfLines={1}
+                                  ellipsizeMode="tail">
+                                  {e.title}
+                                </Text>
+                                <TouchableOpacity
+                                  onPress={() => {
+                                    if (isLogin) {
+                                      this.handlePokeChannel(
+                                        e.live_uid,
+                                        !e.wish_available,
+                                      );
+                                    } else {
+                                      this.setState({isShowModalLogin: true});
+                                    }
+                                  }}>
+                                  <Image
+                                    style={{width: 40, height: 40}}
+                                    source={
+                                      e.wish_available
+                                        ? Images2.imgIconAlamp
+                                        : Images2.imgIconAlampOff
+                                    }
+                                  />
+                                </TouchableOpacity>
+                              </View>
+                              <View
+                                style={{
+                                  backgroundColor: e.rgb_value,
+                                  position: 'absolute',
+                                  left: 0,
+                                  top: 3,
+                                  borderRadius: 5,
+                                }}>
+                                <Text
+                                  style={{
+                                    color: '#59317C',
+                                    fontWeight: 'bold',
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 5,
+                                    fontSize: 15,
+                                    fontFamily: 'Mono-ExtraBold',
+                                  }}>
+                                  {moment(e.start_datetime).format('MM월 DD일')}
+                                </Text>
+                              </View>
                             </TouchableOpacity>
                           );
                         })}
-                    </View>
-                  )}
-                  {currentTab == TAB.TAB_PLAY_ALONE && (
-                    <View
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        paddingTop: 50,
-                        width,
-                      }}>
-                      <Image source={Images2.imgPlayAloneEmpty} />
-                    </View>
-                  )}
+                        <View
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                          }}>
+                          <Image
+                            style={{
+                              width: width * 0.3 - 60,
+                              height: ((width * 0.3 - 60) * 133) / 161,
+                              marginHorizontal: 30,
+                            }}
+                            source={Images2.imgHome3}
+                          />
+                          {hotLists.length > 0 &&
+                            hotLists.map((e) => {
+                              return (
+                                <TouchableOpacity
+                                  style={{paddingLeft: 3}}
+                                  onPress={() =>
+                                    this.props.navigation.navigate(
+                                      'ProgramDetail',
+                                      {
+                                        live_uid: e.live_uid,
+                                      },
+                                    )
+                                  }>
+                                  <View
+                                    style={{
+                                      borderWidth: 5,
+                                      borderColor: e.rgb_value,
+                                      borderRadius: 5,
+                                      marginTop: 10,
+                                      marginRight: 20,
+                                    }}>
+                                    <ImageBackground
+                                      style={{
+                                        width: width * 0.4,
+                                        height: (width * 0.4 * 14) / 25,
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                      }}
+                                      source={Images2.imgItemHomeTest}>
+                                      <View
+                                        style={{
+                                          backgroundColor: e.rgb_value,
+                                          position: 'absolute',
+                                          right: 0,
+                                          bottom: 0,
+                                          borderTopLeftRadius: 5,
+                                        }}>
+                                        <Text
+                                          style={{
+                                            color: '#59317C',
+                                            fontWeight: 'bold',
+                                            paddingHorizontal: 10,
+                                            paddingVertical: 5,
+                                            fontSize: 15,
+                                            fontFamily: 'Mono-ExtraBold',
+                                          }}>
+                                          {e.end_datetime}
+                                        </Text>
+                                      </View>
+                                    </ImageBackground>
+                                  </View>
+                                  <Text
+                                    style={{
+                                      color: '#141414',
+                                      fontSize: 13,
+                                      width: 250,
+                                      marginTop: 5,
+                                      paddingLeft: 5,
+                                      fontFamily: 'Mono-Regular',
+                                    }}
+                                    numberOfLines={1}
+                                    ellipsizeMode="tail">
+                                    {e.title}
+                                  </Text>
+                                  <View
+                                    style={{
+                                      backgroundColor: e.rgb_value,
+                                      position: 'absolute',
+                                      left: 0,
+                                      top: 3,
+                                      borderRadius: 5,
+                                    }}>
+                                    <Text
+                                      style={{
+                                        color: '#59317C',
+                                        fontWeight: 'bold',
+                                        paddingHorizontal: 10,
+                                        paddingVertical: 5,
+                                        fontSize: 15,
+                                        fontFamily: 'Mono-ExtraBold',
+                                      }}>
+                                      {e.start_datetime}
+                                    </Text>
+                                  </View>
+                                </TouchableOpacity>
+                              );
+                            })}
+                          {hotLists.length == 0 && (
+                            <Image
+                              source={Images2.imgMyImageEmpty}
+                              style={{marginRight: 50}}
+                            />
+                          )}
+                        </View>
+                      </View>
+                    )}
+                    {currentTab == TAB.TAB_CHANNEL && (
+                      <View
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          paddingLeft: 30,
+                        }}>
+                        {listChannel != null &&
+                          listChannel.map((e) => {
+                            return (
+                              <TouchableOpacity
+                                style={{marginRight: 30}}
+                                onPress={() =>
+                                  this.props.navigation.navigate(
+                                    'ChannelDetail2',
+                                    {id: e.channel_uid},
+                                  )
+                                }>
+                                <Image
+                                  source={{uri: e.thumbnail}}
+                                  style={{
+                                    width: width / 3 - 40,
+                                    height: ((width / 3 - 40) * 4) / 5,
+                                    borderRadius: 50,
+                                  }}
+                                />
+                                <Text
+                                  style={{
+                                    textAlign: 'center',
+                                    color: '#141414',
+                                    fontSize: 13,
+                                    marginTop: 10,
+                                    fontFamily: 'Mono-Regular',
+                                  }}>
+                                  {e.title}
+                                </Text>
+                              </TouchableOpacity>
+                            );
+                          })}
+                      </View>
+                    )}
+                    {currentTab == TAB.TAB_PLAY_ALONE && (
+                      <View
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          paddingTop: 50,
+                          width,
+                        }}>
+                        <Image source={Images2.imgPlayAloneEmpty} />
+                      </View>
+                    )}
+                  </View>
                 </ScrollView>
               </View>
             </View>
@@ -1054,7 +1061,7 @@ class index extends Component {
         <Modal
           isVisible={isShowModalLogin}
           onBackButtonPress={() => {
-            this.setState({ isShowModalLogin: false });
+            this.setState({isShowModalLogin: false});
             return true;
           }}>
           <View
@@ -1108,7 +1115,7 @@ class index extends Component {
                     marginLeft: 20,
                   }}
                   onPress={() => {
-                    this.setState({ isShowModalLogin: false });
+                    this.setState({isShowModalLogin: false});
                   }}>
                   <Text
                     style={{
@@ -1132,7 +1139,7 @@ class index extends Component {
                     marginRight: 20,
                   }}
                   onPress={() => {
-                    this.setState({ isShowModalLogin: false }, () => {
+                    this.setState({isShowModalLogin: false}, () => {
                       this.props.navigation.navigate('SignIn');
                     });
                   }}>
