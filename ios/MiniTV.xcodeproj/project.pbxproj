@@ -19,6 +19,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* MiniTVTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MiniTVTests.m */; };
 		314272B761E34CEC98F4E836 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CA98FD4F4914F40AFCE6545 /* Fontisto.ttf */; };
+		33AA6A0A1ABF488B9400FF5D /* Mono-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 812B65CE7DF14B5AABC9383C /* Mono-Regular.otf */; };
 		48C91953B83E4C78B2D80D30 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B10910A367A4684B6204F6A /* Ionicons.ttf */; };
 		658887B549F74FA696B7D7E2 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF471961C6ED4F43A472034C /* MaterialCommunityIcons.ttf */; };
 		694B2CEE817C4689A96F478B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4546325AF43BEBF786140 /* SimpleLineIcons.ttf */; };
@@ -27,6 +28,7 @@
 		703F23FE645E29A9DAD2012C /* libPods-MiniTV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F68E22DC6D729DE4CA01CDA /* libPods-MiniTV.a */; };
 		7AC5D09B7A0A42E5BE2F2EA6 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A28349935B36461FB8584234 /* FontAwesome5_Regular.ttf */; };
 		7F77A9615E1C443A93567101 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7461322E38524E37903C18EF /* FontAwesome.ttf */; };
+		8111E2C159EA4E4EBF3277C9 /* Mono-Blod.otf in Resources */ = {isa = PBXBuildFile; fileRef = 91FDAB4B028A47F280F45D76 /* Mono-Blod.otf */; };
 		8451AE06D893404993529908 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84912772E1C4B6589124908 /* AntDesign.ttf */; };
 		897E0FF00919474F92E4B0AE /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FB5FE5A44C547A88B42F550 /* Roboto_medium.ttf */; };
 		9A0E3599671E4961A4975191 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B77AE29A0D64CD280146483 /* Octicons.ttf */; };
@@ -45,6 +47,7 @@
 		E945A0119E664A08AF1BA3EF /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D59457ED4434084BC8BBEA1 /* EvilIcons.ttf */; };
 		EC92E8ABB3AE42DD83D77242 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73D73F55CC9B4A53B5C8E72F /* Entypo.ttf */; };
 		F1151098B82344CBAEFBB6D7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04243F2BD2244993B491A6C5 /* Zocial.ttf */; };
+		FF6AB973FA8B48B0A0D47DF3 /* Mono-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8A2BC4E12324500BE650F8F /* Mono-ExtraBold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +98,9 @@
 		7461322E38524E37903C18EF /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		7F68E22DC6D729DE4CA01CDA /* libPods-MiniTV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniTV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC8E0662B98DD6377DC7979 /* Pods-MiniTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV.release.xcconfig"; path = "Target Support Files/Pods-MiniTV/Pods-MiniTV.release.xcconfig"; sourceTree = "<group>"; };
+		812B65CE7DF14B5AABC9383C /* Mono-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mono-Regular.otf"; path = "../src/assets/fonts/Mono-Regular.otf"; sourceTree = "<group>"; };
 		8465ECDCC6D44EE0A25F5568 /* Pods-MiniTV-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-MiniTV-tvOSTests/Pods-MiniTV-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		91FDAB4B028A47F280F45D76 /* Mono-Blod.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mono-Blod.otf"; path = "../src/assets/fonts/Mono-Blod.otf"; sourceTree = "<group>"; };
 		9221A6891B199B9D035A4CEA /* Pods-MiniTV-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-MiniTV-tvOS/Pods-MiniTV-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		993AED29FBAC40CF86D761F6 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		9BB384614CED473044F9DC9C /* Pods-MiniTV-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniTV-tvOS.release.xcconfig"; path = "Target Support Files/Pods-MiniTV-tvOS/Pods-MiniTV-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +117,9 @@
 		C6323796247129CD006EAE11 /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C632379824712A6F006EAE11 /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C681C62A247133C200AAE07B /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6901C1624A99C68001F6B1D /* Mono-Blod.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Mono-Blod.otf"; path = "../../src/assets/fonts/Mono-Blod.otf"; sourceTree = "<group>"; };
+		C6901C1724A99C68001F6B1D /* Mono-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Mono-Regular.otf"; path = "../../src/assets/fonts/Mono-Regular.otf"; sourceTree = "<group>"; };
+		C6901C1824A99C68001F6B1D /* Mono-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Mono-ExtraBold.otf"; path = "../../src/assets/fonts/Mono-ExtraBold.otf"; sourceTree = "<group>"; };
 		C6A2B1CC246E653D007CA782 /* libFlipperKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFlipperKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B87B062476695800FCAA00 /* 미니TV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "미니TV.entitlements"; path = "MiniTV/미니TV.entitlements"; sourceTree = "<group>"; };
 		C6B87B112476799A00FCAA00 /* libreact-native-config.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-config.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +133,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F84912772E1C4B6589124908 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		F8A2BC4E12324500BE650F8F /* Mono-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mono-ExtraBold.otf"; path = "../src/assets/fonts/Mono-ExtraBold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +244,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				C6901C1524A99C40001F6B1D /* fonts */,
 				13B07FAE1A68108700A75B9A /* MiniTV */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MiniTVTests */,
@@ -281,6 +291,9 @@
 				06B1365935E3432A88BC5467 /* rubicon-icon-font.ttf */,
 				6EC4546325AF43BEBF786140 /* SimpleLineIcons.ttf */,
 				04243F2BD2244993B491A6C5 /* Zocial.ttf */,
+				91FDAB4B028A47F280F45D76 /* Mono-Blod.otf */,
+				F8A2BC4E12324500BE650F8F /* Mono-ExtraBold.otf */,
+				812B65CE7DF14B5AABC9383C /* Mono-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -298,6 +311,16 @@
 				8465ECDCC6D44EE0A25F5568 /* Pods-MiniTV-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6901C1524A99C40001F6B1D /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C6901C1624A99C68001F6B1D /* Mono-Blod.otf */,
+				C6901C1824A99C68001F6B1D /* Mono-ExtraBold.otf */,
+				C6901C1724A99C68001F6B1D /* Mono-Regular.otf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,6 +491,9 @@
 				C6D84FB62467F34100A84C8B /* GoogleService-Info.plist in Resources */,
 				694B2CEE817C4689A96F478B /* SimpleLineIcons.ttf in Resources */,
 				F1151098B82344CBAEFBB6D7 /* Zocial.ttf in Resources */,
+				8111E2C159EA4E4EBF3277C9 /* Mono-Blod.otf in Resources */,
+				FF6AB973FA8B48B0A0D47DF3 /* Mono-ExtraBold.otf in Resources */,
+				33AA6A0A1ABF488B9400FF5D /* Mono-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

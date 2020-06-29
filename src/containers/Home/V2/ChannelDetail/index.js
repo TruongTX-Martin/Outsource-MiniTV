@@ -52,7 +52,9 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#A15FDB' }}>{e}</Text>
+              <Text style={{ color: '#A15FDB', fontFamily: 'Mono-Regular' }}>
+                {e}
+              </Text>
             </TouchableOpacity>
           );
         case 1:
@@ -65,7 +67,9 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#28B5AD' }}>{e}</Text>
+              <Text style={{ color: '#28B5AD', fontFamily: 'Mono-Regular' }}>
+                {e}
+              </Text>
             </TouchableOpacity>
           );
         case 2:
@@ -78,7 +82,9 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#C7693A' }}>{e}</Text>
+              <Text style={{ color: '#C7693A', fontFamily: 'Mono-Regular' }}>
+                {e}
+              </Text>
             </TouchableOpacity>
           );
         case 3:
@@ -91,7 +97,9 @@ class index extends Component {
                 borderRadius: 20,
                 marginRight: 10,
               }}>
-              <Text style={{ color: '#C19E34' }}>{e}</Text>
+              <Text style={{ color: '#C19E34', fontFamily: 'Mono-Regular' }}>
+                {e}
+              </Text>
             </TouchableOpacity>
           );
       }
@@ -149,6 +157,10 @@ class index extends Component {
                         currentTab == TAB.TAB_INFOR ? 'bold' : 'normal',
                       color:
                         currentTab == TAB.TAB_INFOR ? '#333333' : '#757677',
+                      fontFamily:
+                        currentTab == TAB.TAB_INFOR
+                          ? 'Mono-ExtraBold'
+                          : 'Mono-Blod',
                     }}>
                     소개
                   </Text>
@@ -169,6 +181,10 @@ class index extends Component {
                         currentTab == TAB.TAB_SERI_LIST ? 'bold' : 'normal',
                       color:
                         currentTab == TAB.TAB_SERI_LIST ? '#333333' : '#757677',
+                      fontFamily:
+                        currentTab == TAB.TAB_SERI_LIST
+                          ? 'Mono-ExtraBold'
+                          : 'Mono-Blod',
                     }}>
                     방송
                   </Text>
@@ -201,7 +217,12 @@ class index extends Component {
                       justifyContent: 'space-between',
                     }}>
                     <View>
-                      <Text style={{ color: '#333333', fontWeight: '300' }}>
+                      <Text
+                        style={{
+                          color: '#333333',
+                          fontWeight: '300',
+                          fontFamily: 'Mono-Regular',
+                        }}>
                         {detail?.title}
                       </Text>
                       <View
@@ -283,6 +304,7 @@ class index extends Component {
                               style={{
                                 width: width / 3 - 20 - 50,
                                 textAlign: 'center',
+                                fontFamily: 'Mono-Regular',
                               }}>
                               {e.title}
                             </Text>

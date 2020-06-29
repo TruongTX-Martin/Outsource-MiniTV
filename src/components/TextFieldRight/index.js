@@ -36,7 +36,12 @@ class index extends Component {
             <Image source={this.props.icon} style={this.props.styleIcon} />
           )}
           {this.props.title && (
-            <Text style={{ color: '#333333', fontWeight: 'bold' }}>
+            <Text
+              style={{
+                color: '#333333',
+                fontWeight: 'bold',
+                fontFamily: 'Mono-ExtraBold',
+              }}>
               {this.props.title}
             </Text>
           )}
@@ -47,6 +52,7 @@ class index extends Component {
                 flex: 1,
                 textAlign: 'right',
                 paddingRight: 5,
+                fontFamily: 'Mono-Regular',
               },
             ]}
             value={this.props.value}

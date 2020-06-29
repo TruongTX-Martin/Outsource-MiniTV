@@ -59,6 +59,7 @@ class index extends Component {
               fontSize: 10,
               marginBottom: 5,
               paddingLeft: 5,
+              fontFamily: 'Mono-Regular',
             }}>
             {this.props.error}
           </Text>
@@ -84,5 +85,6 @@ const Styles = StyleSheet.create({
     paddingLeft: 5,
     width: width - 55,
     paddingTop: Platform.OS === 'android' ? 5 : 0,
+    fontFamily: 'Mono-Regular',
   },
 });

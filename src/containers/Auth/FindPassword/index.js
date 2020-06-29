@@ -96,8 +96,22 @@ class index extends Component {
                 justifyContent: 'space-between',
               }}>
               <View>
-                <Text style={{ marginTop: 50, fontSize: 30 }}>비밀번호 찾기</Text>
-                <Text style={{ marginTop: 50, fontSize: 20 }}>이메일</Text>
+                <Text
+                  style={{
+                    marginTop: 50,
+                    fontSize: 30,
+                    fontFamily: 'Mono-Blod',
+                  }}>
+                  비밀번호 찾기
+                </Text>
+                <Text
+                  style={{
+                    marginTop: 50,
+                    fontSize: 20,
+                    fontFamily: 'Mono-Blod',
+                  }}>
+                  이메일
+                </Text>
                 <TextInput
                   placeholder="이메일을 입력해주세요"
                   value={email}
@@ -109,11 +123,21 @@ class index extends Component {
               </View>
               <View>
                 <Text
-                  style={{ textAlign: 'center', color: '#555555', fontSize: 17 }}>
+                  style={{
+                    textAlign: 'center',
+                    color: '#555555',
+                    fontSize: 17,
+                    fontFamily: 'Mono-Regular',
+                  }}>
                   아직 문제가 있으신가요?
                 </Text>
                 <Text
-                  style={{ textAlign: 'center', color: '#555555', fontSize: 17 }}>
+                  style={{
+                    textAlign: 'center',
+                    color: '#555555',
+                    fontSize: 17,
+                    fontFamily: 'Mono-Blod',
+                  }}>
                   고객센터 : 02-123-2012
                 </Text>
               </View>

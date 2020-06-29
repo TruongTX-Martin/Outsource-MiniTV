@@ -261,6 +261,7 @@ class index extends Component {
                       <Text
                         style={{
                           color: gender == GENDER.MALE ? '#575757' : '#9A9A9A',
+                          fontFamily: 'Mono-Blod',
                         }}>
                         남자
                       </Text>
@@ -288,6 +289,7 @@ class index extends Component {
                         style={{
                           color:
                             gender == GENDER.FEMALE ? '#575757' : '#9A9A9A',
+                          fontFamily: 'Mono-Blod',
                         }}>
                         여자
                       </Text>
@@ -306,7 +308,12 @@ class index extends Component {
                     paddingBottom: 5,
                   }}
                   onPress={() => this.datePicker.onPressDate()}>
-                  <Text style={{ color: '#333333', fontWeight: 'bold' }}>
+                  <Text
+                    style={{
+                      color: '#333333',
+                      fontWeight: 'bold',
+                      fontFamily: 'Mono-ExtraBold',
+                    }}>
                     생년월일
                   </Text>
                   <DatePicker
@@ -330,6 +337,7 @@ class index extends Component {
                         fontSize: 15,
                         paddingRight: 10,
                         color: '#575757',
+                        fontFamily: 'Mono-Blod',
                       },
                     }}
                     onDateChange={(input) => {
@@ -366,7 +374,12 @@ class index extends Component {
                     alignItems: 'center',
                   }}
                   onPress={() => this.props.navigation.goBack()}>
-                  <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>
+                  <Text
+                    style={{
+                      color: '#9A9A9A',
+                      fontWeight: 'bold',
+                      fontFamily: 'Mono-Blod',
+                    }}>
                     취소
                   </Text>
                 </TouchableOpacity>
@@ -383,7 +396,14 @@ class index extends Component {
                     marginLeft: 5,
                   }}
                   onPress={() => this.onUpdateProfile()}>
-                  <Text style={{ color: 'white', fontWeight: 'bold' }}>취소</Text>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontWeight: 'bold',
+                      fontFamily: 'Mono-Blod',
+                    }}>
+                    취소
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>

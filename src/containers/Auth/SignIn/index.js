@@ -361,14 +361,20 @@ class index extends Component {
                           borderRightColor: '#333030',
                           paddingRight: 10,
                         }}>
-                        <Text style={{ color: '#333030' }}>회원가입</Text>
+                        <Text
+                          style={{ color: '#333030', fontFamily: 'Mono-Blod' }}>
+                          회원가입
+                        </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() =>
                           this.props.navigation.navigate('FindPassword')
                         }
                         style={{ paddingLeft: 10 }}>
-                        <Text style={{ color: '#333030' }}>비밀번호 찾기</Text>
+                        <Text
+                          style={{ color: '#333030', fontFamily: 'Mono-Blod' }}>
+                          비밀번호 찾기
+                        </Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -392,6 +398,7 @@ class index extends Component {
                     color: 'white',
                     fontWeight: 'bold',
                     marginHorizontal: 10,
+                    fontFamily: 'Mono-Blod',
                   }}>
                   N
                 </Text>

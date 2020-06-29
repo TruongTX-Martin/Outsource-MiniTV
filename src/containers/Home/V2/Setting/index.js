@@ -71,6 +71,7 @@ class index extends Component {
                         color: '#333333',
                         fontSize: 16,
                         fontWeight: 'bold',
+                        fontFamily: 'Mono-ExtraBold',
                       }}>
                       앱 알림 push
                     </Text>
@@ -86,6 +87,7 @@ class index extends Component {
                           marginRight: 10,
                           fontSize: 15,
                           fontWeight: 'bold',
+                          fontFamily: 'Mono-Blod',
                         }}>
                         {isEnabled ? 'On' : 'OFF'}
                       </Text>
@@ -118,6 +120,7 @@ class index extends Component {
                         color: '#333333',
                         fontSize: 16,
                         fontWeight: 'bold',
+                        fontFamily: 'Mono-ExtraBold',
                       }}>
                       내 정보 수정
                     </Text>
@@ -144,6 +147,7 @@ class index extends Component {
                         color: '#333333',
                         fontSize: 16,
                         fontWeight: 'bold',
+                        fontFamily: 'Mono-ExtraBold',
                       }}>
                       개인정보 처리방침
                     </Text>
@@ -167,6 +171,7 @@ class index extends Component {
                         color: '#333333',
                         fontSize: 16,
                         fontWeight: 'bold',
+                        fontFamily: 'Mono-Blod',
                       }}>
                       버전 정보
                     </Text>
@@ -175,6 +180,7 @@ class index extends Component {
                         color: '#333333',
                         fontSize: 16,
                         fontWeight: '300',
+                        fontFamily: 'Mono-Regular',
                       }}>
                       1.2.0
                     </Text>
@@ -200,7 +206,10 @@ class index extends Component {
                         onPress={() =>
                           this.props.navigation.navigate('DeleteAccountV2')
                         }>
-                        <Text style={{ color: '#9A9A9A' }}>회원 탈퇴</Text>
+                        <Text
+                          style={{ color: '#9A9A9A', fontFamily: 'Mono-Blod' }}>
+                          회원 탈퇴
+                        </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={{ paddingLeft: 10 }}
@@ -208,7 +217,10 @@ class index extends Component {
                           this.props.navigation.pop(2);
                           EventRegister.emit(Constants.EVENT_SIGN_OUT);
                         }}>
-                        <Text style={{ color: '#9A9A9A' }}>로그아웃</Text>
+                        <Text
+                          style={{ color: '#9A9A9A', fontFamily: 'Mono-Blod' }}>
+                          로그아웃
+                        </Text>
                       </TouchableOpacity>
                     </View>
                   </View>

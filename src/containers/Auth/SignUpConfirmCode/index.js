@@ -162,7 +162,13 @@ class index extends Component {
                 width,
               }}>
               <Spinner visible={loading} textStyle={{ color: '#fff' }} />
-              <Text style={{ color: '#222222', fontSize: 25, paddingTop: 50 }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 25,
+                  paddingTop: 50,
+                  fontFamily: 'Mono-Blod',
+                }}>
                 회원가입
               </Text>
               <View
@@ -196,6 +202,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 30,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 이름
               </Text>
@@ -210,6 +217,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 20,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 휴대전화
               </Text>
@@ -247,6 +255,7 @@ class index extends Component {
                       style={{
                         color: isValidPhone ? 'white' : '#222222',
                         fontWeight: 'bold',
+                        fontFamily: 'Mono-ExtraBold',
                       }}>
                       인증
                     </Text>
@@ -260,6 +269,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 20,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 인증번호
               </Text>
@@ -297,6 +307,7 @@ class index extends Component {
                     style={{
                       color: isValidCode ? 'white' : '#222222',
                       fontWeight: 'bold',
+                      fontFamily: 'Mono-ExtraBold',
                     }}>
                     확인
                   </Text>
@@ -304,7 +315,12 @@ class index extends Component {
               </View>
               {certificateStatus == CERTIFICATE_STATUS.FAILED && (
                 <Text
-                  style={{ fontSize: 13, color: '#F7543F', fontWeight: '300' }}>
+                  style={{
+                    fontSize: 13,
+                    color: '#F7543F',
+                    fontWeight: '300',
+                    fontFamily: 'Mono-Regular',
+                  }}>
                   인증번호를 다시 확인해주세요.
                 </Text>
               )}

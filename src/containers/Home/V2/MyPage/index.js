@@ -76,10 +76,21 @@ class index extends Component {
               </View>
               <View style={{ flex: 6, paddingLeft: 10, paddingTop: 30 }}>
                 <Text
-                  style={{ fontSize: 20, color: '#333333', fontWeight: 'bold' }}>
+                  style={{
+                    fontSize: 20,
+                    color: '#333333',
+                    fontWeight: 'bold',
+                    fontFamily: 'Mono-Blod',
+                  }}>
                   {meData?.student_name}
                 </Text>
-                <Text style={{ fontSize: 15, color: '#9A9A9A', paddingLeft: 1 }}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    color: '#9A9A9A',
+                    paddingLeft: 1,
+                    fontFamily: 'Mono-Blod',
+                  }}>
                   {meData?.email}
                 </Text>
                 <View
@@ -93,11 +104,22 @@ class index extends Component {
                     style={{ width: 15, height: 15 }}
                     source={Image2.imgIcBirthDay}
                   />
-                  <Text style={{ fontSize: 16, color: '#333333', marginLeft: 5 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: '#333333',
+                      marginLeft: 5,
+                      fontFamily: 'Mono-Blod',
+                    }}>
                     생년월일
                   </Text>
                   <Text
-                    style={{ fontSize: 16, color: '#333333', marginLeft: 15 }}>
+                    style={{
+                      fontSize: 16,
+                      color: '#333333',
+                      marginLeft: 15,
+                      fontFamily: 'Mono-Blod',
+                    }}>
                     {this.getBirthDay(meData?.birthday)}
                   </Text>
                 </View>
@@ -119,7 +141,9 @@ class index extends Component {
                   paddingVertical: 5,
                 }}
                 onPress={() => this.props.navigation.navigate('EditMyPageV2')}>
-                <Text style={{ color: '#50CCC3' }}>수정하기</Text>
+                <Text style={{ color: '#50CCC3', fontFamily: 'Mono-Blod' }}>
+                  수정하기
+                </Text>
               </TouchableOpacity>
             </View>
           </ImageBackground>

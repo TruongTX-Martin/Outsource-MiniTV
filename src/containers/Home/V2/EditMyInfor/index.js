@@ -62,6 +62,7 @@ class index extends Component {
                         color: '#333333',
                         fontSize: 16,
                         fontWeight: 'bold',
+                        fontFamily: 'Mono-ExtraBold',
                       }}>
                       내 정보 수정
                     </Text>
@@ -88,6 +89,7 @@ class index extends Component {
                         color: '#333333',
                         fontSize: 16,
                         fontWeight: 'bold',
+                        fontFamily: 'Mono-ExtraBold',
                       }}>
                       개인정보 처리방침
                     </Text>

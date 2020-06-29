@@ -45,7 +45,6 @@ class index extends Component {
 
   render() {
     const { loading, list } = this.props;
-    console.log('this.props:', this.props);
     return (
       <Container>
         <Header style={Config.Styles.header}>

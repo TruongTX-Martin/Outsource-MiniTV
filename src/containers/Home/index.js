@@ -420,6 +420,10 @@ class index extends Component {
                       )}
                     <Text
                       style={{
+                        fontFamily:
+                          currentTab == TAB.TAB_ONAIR
+                            ? 'Mono-ExtraBold'
+                            : 'Mono-Regular',
                         fontWeight:
                           currentTab == TAB.TAB_ONAIR ? 'bold' : 'normal',
                         paddingLeft: currentTab == TAB.TAB_ONAIR ? 13 : 5,
@@ -451,6 +455,10 @@ class index extends Component {
                     />
                     <Text
                       style={{
+                        fontFamily:
+                          currentTab == TAB.TAB_CHANNEL
+                            ? 'Mono-ExtraBold'
+                            : 'Mono-Regular',
                         fontWeight:
                           currentTab == TAB.TAB_CHANNEL ? 'bold' : 'normal',
                         textAlign: 'center',
@@ -478,6 +486,10 @@ class index extends Component {
                     />
                     <Text
                       style={{
+                        fontFamily:
+                          currentTab == TAB.TAB_PLAY_ALONE
+                            ? 'Mono-ExtraBold'
+                            : 'Mono-Regular',
                         fontWeight:
                           currentTab == TAB.TAB_PLAY_ALONE ? 'bold' : 'normal',
                         textAlign: 'center',
@@ -510,6 +522,7 @@ class index extends Component {
               <View>
                 <Text
                   style={{
+                    fontFamily: 'Mono-ExtraBold',
                     color: '#111111',
                     fontWeight: 'bold',
                     fontSize: 17,
@@ -571,7 +584,12 @@ class index extends Component {
                           {onAir?.status == STATUS.DOING && (
                             <Image source={Images2.imgIcBtnLive} />
                           )}
-                          <Text style={{ color: '#111111', marginLeft: 5 }}>
+                          <Text
+                            style={{
+                              color: '#111111',
+                              marginLeft: 5,
+                              fontFamily: 'Mono-ExtraBold',
+                            }}>
                             {onAir?.status == STATUS.DOING
                               ? onAir?.title
                               : '다음 방송은 무엇일까요?'}
@@ -581,6 +599,7 @@ class index extends Component {
                               color: '#F7543F',
                               paddingRight: 10,
                               fontWeight: 'bold',
+                              fontFamily: 'Mono-ExtraBold',
                             }}>
                             {this.getTimeNextLive(onAir)}
                           </Text>
@@ -641,6 +660,7 @@ class index extends Component {
                                     paddingHorizontal: 10,
                                     paddingVertical: 5,
                                     fontSize: 15,
+                                    fontFamily: 'Mono-ExtraBold',
                                   }}>
                                   {onAir?.startDate}
                                 </Text>
@@ -663,6 +683,7 @@ class index extends Component {
                                     paddingHorizontal: 10,
                                     paddingVertical: 5,
                                     fontSize: 15,
+                                    fontFamily: 'Mono-ExtraBold',
                                   }}>
                                   {onAir?.startTime}
                                 </Text>
@@ -677,6 +698,7 @@ class index extends Component {
                             width: 250,
                             marginTop: 5,
                             paddingLeft: 5,
+                            fontFamily: 'Mono-Regular',
                           }}
                           numberOfLines={1}
                           ellipsizeMode="tail">
@@ -749,6 +771,7 @@ class index extends Component {
                                       paddingHorizontal: 10,
                                       paddingVertical: 5,
                                       fontSize: 15,
+                                      fontFamily: 'Mono-ExtraBold',
                                     }}>
                                     {moment(e.start_datetime).format(
                                       ' 낮 hh시mm분',
@@ -773,6 +796,7 @@ class index extends Component {
                                   width: width * 0.4 - 50,
                                   marginTop: 5,
                                   paddingLeft: 5,
+                                  fontFamily: 'Mono-Regular',
                                 }}
                                 numberOfLines={1}
                                 ellipsizeMode="tail">
@@ -810,6 +834,7 @@ class index extends Component {
                                   paddingHorizontal: 10,
                                   paddingVertical: 5,
                                   fontSize: 15,
+                                  fontFamily: 'Mono-ExtraBold',
                                 }}>
                                 {moment(e.start_datetime).format('MM월 DD일')}
                               </Text>
@@ -876,6 +901,7 @@ class index extends Component {
                                           paddingHorizontal: 10,
                                           paddingVertical: 5,
                                           fontSize: 15,
+                                          fontFamily: 'Mono-ExtraBold',
                                         }}>
                                         {e.end_datetime}
                                       </Text>
@@ -889,6 +915,7 @@ class index extends Component {
                                     width: 250,
                                     marginTop: 5,
                                     paddingLeft: 5,
+                                    fontFamily: 'Mono-Regular',
                                   }}
                                   numberOfLines={1}
                                   ellipsizeMode="tail">
@@ -909,6 +936,7 @@ class index extends Component {
                                       paddingHorizontal: 10,
                                       paddingVertical: 5,
                                       fontSize: 15,
+                                      fontFamily: 'Mono-ExtraBold',
                                     }}>
                                     {e.start_datetime}
                                   </Text>
@@ -957,6 +985,7 @@ class index extends Component {
                                   color: '#141414',
                                   fontSize: 13,
                                   marginTop: 10,
+                                  fontFamily: 'Mono-Regular',
                                 }}>
                                 {e.title}
                               </Text>

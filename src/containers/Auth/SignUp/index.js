@@ -121,7 +121,13 @@ class index extends Component {
                 width,
               }}>
               <Spinner visible={loading} textStyle={{ color: '#fff' }} />
-              <Text style={{ color: '#222222', fontSize: 25, paddingTop: 50 }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 25,
+                  paddingTop: 50,
+                  fontFamily: 'Mono-Blod',
+                }}>
                 회원가입
               </Text>
               <View
@@ -155,6 +161,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 30,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 이메일
               </Text>
@@ -173,6 +180,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 20,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 비밀번호
               </Text>
@@ -192,6 +200,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 20,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 비밀번호 확인
               </Text>

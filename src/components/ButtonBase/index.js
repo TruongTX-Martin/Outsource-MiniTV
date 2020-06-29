@@ -28,7 +28,10 @@ class index extends Component {
           },
           this.props.style,
         ]}>
-        <Text style={{ color: 'white', fontSize: 18 }}>{this.props.text}</Text>
+        <Text
+          style={{ color: 'white', fontSize: 18, fontFamily: 'Mono-ExtraBold' }}>
+          {this.props.text}
+        </Text>
       </TouchableOpacity>
     );
   }

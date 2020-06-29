@@ -81,17 +81,33 @@ class index extends Component {
                         fontSize: 18,
                         fontWeight: 'bold',
                         marginRight: 3,
+                        fontFamily: 'Mono-ExtraBold',
                       }}>
                       김재이
                     </Text>
-                    <Text style={{ color: '#333333', fontSize: 16 }}>
+                    <Text
+                      style={{
+                        color: '#333333',
+                        fontSize: 16,
+                        fontFamily: 'Mono-Blod',
+                      }}>
                       님 안녕하세요!
                     </Text>
                   </View>
-                  <Text style={{ color: '#333333', fontSize: 16 }}>
+                  <Text
+                    style={{
+                      color: '#333333',
+                      fontSize: 16,
+                      fontFamily: 'Mono-Blod',
+                    }}>
                     계정을 삭제하신다니 너무 아쉽습니다.
                   </Text>
-                  <Text style={{ color: '#333333', fontSize: 16 }}>
+                  <Text
+                    style={{
+                      color: '#333333',
+                      fontSize: 16,
+                      fontFamily: 'Mono-Blod',
+                    }}>
                     삭제하는 이유를알려주시면 미니TV의 발전에 큰 도움이 될
                     거에요.
                   </Text>
@@ -123,6 +139,7 @@ class index extends Component {
                           style={{
                             color:
                               currentReasonIndex == 0 ? '#333333' : '#797979',
+                            fontFamily: 'Mono-Regular',
                           }}>
                           {listReasons[0]}
                         </Text>
@@ -148,6 +165,7 @@ class index extends Component {
                           style={{
                             color:
                               currentReasonIndex == 1 ? '#333333' : '#797979',
+                            fontFamily: 'Mono-Regular',
                           }}>
                           {listReasons[1]}
                         </Text>
@@ -180,6 +198,7 @@ class index extends Component {
                           style={{
                             color:
                               currentReasonIndex == 2 ? '#333333' : '#797979',
+                            fontFamily: 'Mono-Regular',
                           }}>
                           {listReasons[2]}
                         </Text>
@@ -205,6 +224,7 @@ class index extends Component {
                           style={{
                             color:
                               currentReasonIndex == 3 ? '#333333' : '#797979',
+                            fontFamily: 'Mono-Regular',
                           }}>
                           {listReasons[3]}
                         </Text>
@@ -233,6 +253,7 @@ class index extends Component {
                           color: 'white',
                           fontWeight: 'bold',
                           fontSize: 15,
+                          fontFamily: 'Mono-Blod',
                         }}>
                         계정 삭제
                       </Text>
@@ -277,6 +298,7 @@ class index extends Component {
                   paddingTop: 50,
                   textAlign: 'center',
                   fontWeight: 'bold',
+                  fontFamily: 'Mono-Blod',
                 }}>
                 미니TV 계정을 정말 삭제하시겠습니까?
               </Text>
@@ -302,7 +324,14 @@ class index extends Component {
                   onPress={() => {
                     this.setState({ isShowModalConfirm: false });
                   }}>
-                  <Text style={{ color: 'white', fontSize: 17 }}>취소</Text>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 17,
+                      fontFamily: 'Mono-Blod',
+                    }}>
+                    취소
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
@@ -325,7 +354,14 @@ class index extends Component {
                       this.props.deleteAccount(params);
                     });
                   }}>
-                  <Text style={{ color: 'white', fontSize: 17 }}>확인</Text>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 17,
+                      fontFamily: 'Mono-Blod',
+                    }}>
+                    확인
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -364,6 +400,7 @@ class index extends Component {
                   paddingTop: 50,
                   textAlign: 'center',
                   fontWeight: 'bold',
+                  fontFamily: 'Mono-Blod',
                 }}>
                 계정이 성공적으로 삭제 되었습니다.
               </Text>
@@ -391,7 +428,14 @@ class index extends Component {
                     this.props.navigation.pop(3);
                     EventRegister.emit(Constants.EVENT_SIGN_OUT);
                   }}>
-                  <Text style={{ color: 'white', fontSize: 17 }}>확인</Text>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 17,
+                      fontFamily: 'Mono-Blod',
+                    }}>
+                    확인
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>

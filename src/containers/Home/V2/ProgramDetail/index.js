@@ -83,6 +83,7 @@ class index extends Component {
             style={{
               color: e.wish_available ? 'white' : '#50CCC3',
               fontSize: 14,
+              fontFamily: 'Mono-ExtraBold',
             }}>
             {e.startDate}
           </Text>
@@ -90,6 +91,7 @@ class index extends Component {
             style={{
               color: e.wish_available ? 'white' : '#50CCC3',
               fontSize: 14,
+              fontFamily: 'Mono-ExtraBold',
             }}>
             {e.startTime}
           </Text>
@@ -188,6 +190,7 @@ class index extends Component {
                             fontWeight: 'bold',
                             fontSize: 14,
                             marginTop: 10,
+                            fontFamily: 'Mono-Regular',
                           }}>
                           {e.title}
                         </Text>
@@ -197,6 +200,7 @@ class index extends Component {
                             color: '#222222',
                             fontWeight: '300',
                             fontSize: 14,
+                            fontFamily: 'Mono-Regular',
                           }}>
                           {e.subscript}
                         </Text>
@@ -233,6 +237,7 @@ class index extends Component {
                   fontSize: 24,
                   fontWeight: 'bold',
                   textAlign: 'center',
+                  fontFamily: 'Mono-ExtraBold',
                 }}>
                 다음 방송이 기다리고 있어요!
               </Text>

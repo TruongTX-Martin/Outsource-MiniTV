@@ -211,7 +211,12 @@ class index extends Component {
                         alignItems: 'center',
                       }}
                       onPress={() => this.props.navigation.goBack()}>
-                      <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>
+                      <Text
+                        style={{
+                          color: '#9A9A9A',
+                          fontWeight: 'bold',
+                          fontFamily: 'Mono-Blod',
+                        }}>
                         취소
                       </Text>
                     </TouchableOpacity>
@@ -228,7 +233,12 @@ class index extends Component {
                         marginLeft: 5,
                       }}
                       onPress={() => this.onUpdatePassword()}>
-                      <Text style={{ color: 'white', fontWeight: 'bold' }}>
+                      <Text
+                        style={{
+                          color: 'white',
+                          fontWeight: 'bold',
+                          fontFamily: 'Mono-Blod',
+                        }}>
                         확인
                       </Text>
                     </TouchableOpacity>
@@ -272,6 +282,7 @@ class index extends Component {
                   paddingTop: 50,
                   textAlign: 'center',
                   fontWeight: 'bold',
+                  fontFamily: 'Mono-Blod',
                 }}>
                 비밀번호가 성공적으로 변경되었습니다.
               </Text>
@@ -290,7 +301,14 @@ class index extends Component {
                   this.setState({ isModalVisible: false });
                   this.props.navigation.goBack();
                 }}>
-                <Text style={{ color: 'white', fontSize: 17 }}>확인</Text>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 17,
+                    fontFamily: 'Mono-Blod',
+                  }}>
+                  확인
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

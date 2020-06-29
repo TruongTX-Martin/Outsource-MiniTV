@@ -157,6 +157,7 @@ class index extends Component {
                     style={{
                       paddingLeft: 5,
                       flex: 1,
+                      fontFamily: 'Mono-ExtraBold',
                     }}
                     keyboardType="numeric"
                     value={phoneNumber}
@@ -181,7 +182,11 @@ class index extends Component {
                     {checkingPhone ? (
                       <ActivityIndicator size="small" color="white" />
                     ) : (
-                        <Text style={{ color: validPhone ? 'white' : '#222222' }}>
+                        <Text
+                          style={{
+                            color: validPhone ? 'white' : '#222222',
+                            fontFamily: 'Mono-Blod',
+                          }}>
                           인증
                         </Text>
                       )}
@@ -202,6 +207,7 @@ class index extends Component {
                     style={{
                       paddingLeft: 5,
                       flex: 1,
+                      fontFamily: 'Mono-ExtraBold',
                     }}
                     keyboardType="numeric"
                     value={verifyCode}
@@ -225,7 +231,11 @@ class index extends Component {
                       alignItems: 'center',
                     }}
                     onPress={() => this.handleCompareCode()}>
-                    <Text style={{ color: validCode ? 'white' : '#222222' }}>
+                    <Text
+                      style={{
+                        color: validCode ? 'white' : '#222222',
+                        fontFamily: 'Mono-Blod',
+                      }}>
                       인증
                     </Text>
                   </TouchableOpacity>
@@ -237,6 +247,7 @@ class index extends Component {
                       fontSize: 13,
                       fontWeight: '300',
                       marginTop: 10,
+                      fontFamily: 'Mono-Regular',
                     }}>
                     인증되었습니다!
                   </Text>
@@ -266,7 +277,12 @@ class index extends Component {
                         alignItems: 'center',
                       }}
                       onPress={() => this.props.navigation.goBack()}>
-                      <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>
+                      <Text
+                        style={{
+                          color: '#9A9A9A',
+                          fontWeight: 'bold',
+                          fontFamily: 'Mono-Blod',
+                        }}>
                         취소
                       </Text>
                     </TouchableOpacity>
@@ -283,7 +299,12 @@ class index extends Component {
                         marginLeft: 5,
                       }}
                       onPress={() => this.handleUpdatePhone()}>
-                      <Text style={{ color: 'white', fontWeight: 'bold' }}>
+                      <Text
+                        style={{
+                          color: 'white',
+                          fontWeight: 'bold',
+                          fontFamily: 'Mono-Blod',
+                        }}>
                         확인
                       </Text>
                     </TouchableOpacity>

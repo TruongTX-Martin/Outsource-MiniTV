@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'ExTraBold',
   },
   viewRight: {
     flex: 0.5,

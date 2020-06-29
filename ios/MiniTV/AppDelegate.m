@@ -43,6 +43,15 @@
 //#if DEBUG && TARGET_OS_SIMULATOR
 //  InitializeFlipper(application);
 //#endif
+   
+  for (NSString* family in [UIFont familyNames])
+  {
+    NSLog(@"%@", family);
+    for (NSString* name in [UIFont fontNamesForFamilyName: family])
+    {
+      NSLog(@" %@", name);
+    }
+  }
 
   //Add these 3 lines
   [FIRApp configure];

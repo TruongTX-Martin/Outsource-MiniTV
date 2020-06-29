@@ -255,10 +255,12 @@ const styles = StyleSheet.create({
     color: '#555555',
     fontSize: 17,
     marginTop: 5,
+    fontFamily: 'Mono-Regular',
   },
   textStyle2: {
     color: '#555555',
     fontSize: 17,
     marginTop: 15,
+    fontFamily: 'Mono-Regular',
   },
 });

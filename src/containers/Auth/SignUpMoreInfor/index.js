@@ -115,6 +115,7 @@ class index extends Component {
                   fontSize: 25,
                   paddingTop: 50,
                   fontWeight: '700',
+                  fontFamily: 'Mono-Blod',
                 }}>
                 아이 정보
               </Text>
@@ -124,6 +125,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 30,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 아이 이름
               </Text>
@@ -140,6 +142,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 20,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 성별
               </Text>
@@ -174,6 +177,7 @@ class index extends Component {
                     style={{
                       fontSize: 17,
                       color: gender == GENDER.MALE ? '#50CCC3' : '#777777',
+                      fontFamily: 'Mono-Blod',
                     }}>
                     남자
                   </Text>
@@ -202,6 +206,7 @@ class index extends Component {
                     style={{
                       fontSize: 17,
                       color: gender == GENDER.FEMALE ? '#50CCC3' : '#777777',
+                      fontFamily: 'Mono-Blod',
                     }}>
                     여자
                   </Text>
@@ -213,6 +218,7 @@ class index extends Component {
                   fontSize: 17,
                   marginTop: 20,
                   marginBottom: 5,
+                  fontFamily: 'Mono-Blod',
                 }}>
                 생년월일
               </Text>

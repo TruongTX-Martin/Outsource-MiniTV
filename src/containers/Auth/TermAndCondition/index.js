@@ -114,10 +114,22 @@ class index extends Component {
                 paddingHorizontal: 20,
                 backgroundColor: '#ffffff',
               }}>
-              <Text style={{ color: '#222222', fontSize: 25, paddingTop: 80 }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 25,
+                  paddingTop: 80,
+                  fontFamily: 'Mono-Blod',
+                }}>
                 약관 동의
               </Text>
-              <Text style={{ color: '#222222', fontSize: 15, paddingTop: 10 }}>
+              <Text
+                style={{
+                  color: '#222222',
+                  fontSize: 15,
+                  paddingTop: 10,
+                  fontFamily: 'Mono-Regular',
+                }}>
                 {'원할한 서비스 이용을 위해 필수항목 동의가 필요합니다.'}
               </Text>
 
@@ -144,6 +156,7 @@ class index extends Component {
                   style={{
                     color: optionAll.isCheck ? '#318E87' : '#222222',
                     fontWeight: optionAll.isCheck ? 'bold' : 'normal',
+                    fontFamily: 'Mono-Blod',
                   }}>
                   {optionAll.title}
                 </Text>
@@ -183,7 +196,10 @@ class index extends Component {
                           style={{ width: 20, height: 20, marginRight: 10 }}
                         />
                         <Text
-                          style={{ color: e.isCheck ? '#222222' : '#555555' }}>
+                          style={{
+                            color: e.isCheck ? '#222222' : '#555555',
+                            fontFamily: 'Mono-Regular',
+                          }}>
                           {e.title}
                         </Text>
                       </TouchableOpacity>
